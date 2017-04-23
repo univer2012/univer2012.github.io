@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://univer2012.github.io"></form>
@@ -95,7 +95,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># 文章配置</div><div class="line"># 这个地方一般直接取默认值不用修改</div><div class="line"># Writing</div><div class="line">new_post_name: :title.md # File name of new posts # 新文章的文件名称</div><div class="line">default_layout: post # 预设布局</div><div class="line">titlecase: false # Transform title into titlecase # 把标题转换为 titlecase（titlecase指的是将每个单词首字母转换成大写）</div><div class="line">external_link: true # Open external links in new tab # 在新标签中打开链接</div><div class="line">filename_case: 0 # 把文件名称转换为 (1) 小写或 (2) 大写, 0表示不变</div><div class="line">render_drafts: false # 显示草稿</div><div class="line">post_asset_folder: true # 启动 Asset 文件夹</div><div class="line">relative_link: false # 启动 Asset 文件夹</div><div class="line">future: true # 显示未来的文章</div><div class="line">highlight: # 代码块的设置</div><div class="line">  enable: true</div><div class="line">  line_number: true # 是否显示行号</div><div class="line">  auto_detect: false # 是否自动监测</div><div class="line">  tab_replace: # 将 tab 替换成其他字符串</div></pre></td></tr></table></figure>
 <p>2、在你的hexo目录下执行这句话<code>npm install hexo-asset-image --save</code>，这是下载安装一个可以上传本地图片的插件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:hexo-blog huangaengoln$ npm install hexo-asset-image --save</div><div class="line">(node:59464) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.</div><div class="line">hexo-site@0.0.0 /Users/huangaengoln/Documents/hexo-blog</div><div class="line">└─┬ hexo-asset-image@0.0.3 </div><div class="line">  └─┬ cheerio@0.19.0 </div><div class="line">    ├─┬ css-select@1.0.0 </div><div class="line">    │ ├── css-what@1.0.0 </div><div class="line">    │ └── domutils@1.4.3 </div><div class="line">    └── lodash@3.10.1 </div><div class="line"></div><div class="line">huangsengolndeMacBook-Pro:hexo-blog huangaengoln$</div></pre></td></tr></table></figure>
-<p>3、下载完成后，下次再执行<code>hexo n &quot;1How-to-change-App-theme-color&quot;</code>来生成md博文时，<code>/source/_posts</code>文件夹内除了<code>1How-to-change-App-theme-color.md</code>文件，还有一个与之同名的文件夹；<br><img src="/2017/04/23/6how-to-insert-picture-in-hexo-blog/" alt=""></p>
+<p>3、下载完成后，下次再执行<code>hexo n &quot;1How-to-change-App-theme-color&quot;</code>来生成md博文时，<code>/source/_posts</code>文件夹内除了<code>1How-to-change-App-theme-color.md</code>文件，还有一个与之同名的文件夹；<br><img src="/2017/04/23/6how-to-insert-picture-in-hexo-blog/pic1.png" alt=""></p>
 <p>4、最后在<code>1How-to-change-App-theme-color.md</code>中想引入图片时，先把图片复制到<code>md</code>对应的文件夹<code>1How-to-change-App-theme-color</code>中，然后只需要<code>1How-to-change-App-theme-color.md</code>中按照markdown的格式引入图片：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![你想输入的替代文字](xxxx/图片名.jpg)</div></pre></td></tr></table></figure>
 <p>**注意：xxxx是这个md文件的名字，也是同名文件夹的名字，你想引入的图片就只需要放入xxxx这个文件夹内就好了，很像引用相对路径。</p>
@@ -107,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://univer2012.github.io/2017/04/23/6how-to-insert-picture-in-hexo-blog/" data-id="cj1tn2ti10008h7fch1gaacii" class="article-share-link">Partager</a>
+      <a data-url="https://univer2012.github.io/2017/04/23/6how-to-insert-picture-in-hexo-blog/" data-id="cj1tn2ti10008h7fch1gaacii" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://univer2012.github.io/2017/04/23/5how-to-issue-blog/" data-id="cj1tn2tgc0003h7fc3sgf3vos" class="article-share-link">Partager</a>
+      <a data-url="https://univer2012.github.io/2017/04/23/5how-to-issue-blog/" data-id="cj1tn2tgc0003h7fc3sgf3vos" class="article-share-link">Share</a>
       
       
     </footer>
@@ -211,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://univer2012.github.io/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/" data-id="cj1tn2ti4000ah7fcepm367t2" class="article-share-link">Partager</a>
+      <a data-url="https://univer2012.github.io/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/" data-id="cj1tn2ti4000ah7fcepm367t2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -300,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://univer2012.github.io/2017/04/23/3optimize-HuaAn-iOS-installation-package-size/" data-id="cj1tn2thx0007h7fc2w64bqq2" class="article-share-link">Partager</a>
+      <a data-url="https://univer2012.github.io/2017/04/23/3optimize-HuaAn-iOS-installation-package-size/" data-id="cj1tn2thx0007h7fc2w64bqq2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thinkive/">thinkive</a></li></ul>
@@ -393,7 +393,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://univer2012.github.io/2017/04/23/2install-or-update-gem-in-macOS-Sierra-in-edition10-12-2/" data-id="cj1tn2tg40001h7fc7v4e12p1" class="article-share-link">Partager</a>
+      <a data-url="https://univer2012.github.io/2017/04/23/2install-or-update-gem-in-macOS-Sierra-in-edition10-12-2/" data-id="cj1tn2tg40001h7fc7v4e12p1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -468,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://univer2012.github.io/2017/04/23/1How-to-change-App-theme-color/" data-id="cj1tn2tfz0000h7fcl5us1l26" class="article-share-link">Partager</a>
+      <a data-url="https://univer2012.github.io/2017/04/23/1How-to-change-App-theme-color/" data-id="cj1tn2tfz0000h7fcl5us1l26" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thinkive/">thinkive</a></li></ul>
@@ -515,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://univer2012.github.io/2017/04/22/hello-world/" data-id="cj1tn2ti6000bh7fc656zctu2" class="article-share-link">Partager</a>
+      <a data-url="https://univer2012.github.io/2017/04/22/hello-world/" data-id="cj1tn2ti6000bh7fc656zctu2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -532,7 +532,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/如何搭建个人博客/">如何搭建个人博客</a></li></ul>
     </div>
@@ -542,7 +542,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinkive/">thinkive</a></li></ul>
     </div>
@@ -552,7 +552,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/thinkive/" style="font-size: 10px;">thinkive</a>
     </div>
@@ -571,7 +571,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -608,7 +608,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 黄胜军<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
