@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在macOS Sierra(版本 10.12.2)安装/更新gem | SengolnHuang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天在学习LeanCloud时，需要获取SDK，官方推荐的方式是通过包依赖管理工具来下载最新版本。然后第一步是【包依赖管理工具安装】，于是就点进了CocoaPods安装和使用教程，在【如何下载和安装CocoaPods？】来安装和更新CocoaPods。但是发现执行 1$ gem sources -a http://ruby.taobao.org/ 这句时，终端一直没有出现huangsengolnd">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在macOS Sierra(版本 10.12.2)安装/更新gem">
+<meta property="og:url" content="https://univer2012.github.io/2017/04/23/2install-or-update-gem-in-macOS-Sierra-in-edition10-12-2/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="今天在学习LeanCloud时，需要获取SDK，官方推荐的方式是通过包依赖管理工具来下载最新版本。然后第一步是【包依赖管理工具安装】，于是就点进了CocoaPods安装和使用教程，在【如何下载和安装CocoaPods？】来安装和更新CocoaPods。但是发现执行 1$ gem sources -a http://ruby.taobao.org/ 这句时，终端一直没有出现huangsengolnd">
+<meta property="og:updated_time" content="2017-04-22T18:59:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在macOS Sierra(版本 10.12.2)安装/更新gem">
+<meta name="twitter:description" content="今天在学习LeanCloud时，需要获取SDK，官方推荐的方式是通过包依赖管理工具来下载最新版本。然后第一步是【包依赖管理工具安装】，于是就点进了CocoaPods安装和使用教程，在【如何下载和安装CocoaPods？】来安装和更新CocoaPods。但是发现执行 1$ gem sources -a http://ruby.taobao.org/ 这句时，终端一直没有出现huangsengolnd">
+  
+    <link rel="alternate" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SengolnHuang&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">关注技术，分享生活</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://univer2012.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2install-or-update-gem-in-macOS-Sierra-in-edition10-12-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/23/2install-or-update-gem-in-macOS-Sierra-in-edition10-12-2/" class="article-date">
+  <time datetime="2017-04-22T18:57:34.000Z" itemprop="datePublished">2017-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在macOS Sierra(版本 10.12.2)安装/更新gem
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在学习<a href="https://leancloud.cn/" target="_blank" rel="external">LeanCloud</a>时，需要获取SDK，官方推荐的方式是通过包依赖管理工具来下载最新版本。然后第一步是【包依赖管理工具安装】，于是就点进了<a href="http://code4app.com/article/cocoapods-install-usage" target="_blank" rel="external">CocoaPods安装和使用教程</a>，在【如何下载和安装CocoaPods？】来安装和更新CocoaPods。但是发现执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem sources -a http://ruby.taobao.org/</div></pre></td></tr></table></figure>
+<p>这句时，终端一直没有出现<code>huangsengolndeMacBook-Pro:Desktop huangaengoln$</code><br><strong>说明这个源也像<code>cocoapods.org</code>不能访问了</strong>。于是就百度，发现有个<a href="http://blog.163.com/chenchen..1986/blog/static/76063146201552911115400/" target="_blank" rel="external">博客网站</a>里面说:</p>
+<blockquote>
+<p>按照下面的顺序在终端中敲入依次敲入命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; $ gem sources --remove https://rubygems.org/</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>//等有反应之后再敲入以下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; $ gem sources -a http://ruby.taobao.org/</div><div class="line">&gt; //或者</div><div class="line">&gt; $ gem sources -a https://ruby.taobao.org/</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>于是就尝试键入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem sources -a https://ruby.taobao.org/</div></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$ gem sources -a https://ruby.taobao.org/</div><div class="line">https://ruby.taobao.org/ added to sources</div><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$</div></pre></td></tr></table></figure>
+<p>说明这个源才是正确的。</p>
+<p>接下来更新gem：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$ gem update --system</div><div class="line">Updating rubygems-update</div><div class="line">Fetching: rubygems-update-2.6.7.gem (100%)</div><div class="line">ERROR:  While executing gem ... (Gem::FilePermissionError)</div><div class="line">    You don&apos;t have write permissions for the /Library/Ruby/Gems/2.0.0 directory.</div><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$ sudo gem update --system</div><div class="line">Password:</div><div class="line">Updating rubygems-update</div><div class="line">Fetching: rubygems-update-2.6.7.gem (100%)</div><div class="line">ERROR:  While executing gem ... (Errno::EPERM)</div><div class="line">    Operation not permitted - /usr/bin/update_rubygems</div><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$</div></pre></td></tr></table></figure>
+<p><code>- /usr/bin/update_rubygems</code>操作不允许。百度下，在<a href="https://segmentfault.com/q/1010000002926243" target="_blank" rel="external">SegmentFault的一篇问答</a>中看到这么一个回答：</p>
+<blockquote>
+<p>这个问题在stackoverflow上面有过讨论：</p>
+<p><a href="http://stackoverflow.com/questions/32810808/can-not-perform-pod-install-under-el-capitan-15a279b" target="_blank" rel="external">Can not perform <code>pod install</code> under el capitan (15A279b)</a></p>
+<p>被采纳的答案为：<code>sudo gem install -n /usr/local/bin cocoapods</code></p>
+</blockquote>
+<p>于是将信将疑地继续在终端键入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$ sudo gem install -n /usr/local/bin</div><div class="line">ERROR:  While executing gem ... (Gem::CommandLineError)</div><div class="line">    Please specify at least one gem name (e.g. gem build GEMNAME)</div><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$ sudo gem install -n /usr/local/bin cocoapods</div><div class="line">Successfully installed xcodeproj-1.4.4</div><div class="line">Fetching: ruby-macho-1.1.0.gem (100%)</div><div class="line">Successfully installed ruby-macho-1.1.0</div><div class="line">Fetching: molinillo-0.5.7.gem (100%)</div><div class="line">Successfully installed molinillo-0.5.7</div><div class="line">Fetching: gh_inspector-1.0.3.gem (100%)</div><div class="line">Successfully installed gh_inspector-1.0.3</div><div class="line">Fetching: fourflusher-2.0.1.gem (100%)</div><div class="line">Successfully installed fourflusher-2.0.1</div><div class="line">Fetching: cocoapods-try-1.1.0.gem (100%)</div><div class="line">Successfully installed cocoapods-try-1.1.0</div><div class="line">Fetching: cocoapods-trunk-1.2.0.gem (100%)</div><div class="line">Successfully installed cocoapods-trunk-1.2.0</div><div class="line">Fetching: cocoapods-stats-1.0.0.gem (100%)</div><div class="line">Successfully installed cocoapods-stats-1.0.0</div><div class="line">Fetching: cocoapods-search-1.0.0.gem (100%)</div><div class="line">Successfully installed cocoapods-search-1.0.0</div><div class="line">Fetching: cocoapods-plugins-1.0.0.gem (100%)</div><div class="line">Successfully installed cocoapods-plugins-1.0.0</div><div class="line">Fetching: cocoapods-downloader-1.1.3.gem (100%)</div><div class="line">Successfully installed cocoapods-downloader-1.1.3</div><div class="line">Fetching: cocoapods-deintegrate-1.0.1.gem (100%)</div><div class="line">Successfully installed cocoapods-deintegrate-1.0.1</div><div class="line">Fetching: cocoapods-core-1.2.1.gem (100%)</div><div class="line">Successfully installed cocoapods-core-1.2.1</div><div class="line">Fetching: cocoapods-1.2.1.gem (100%)</div><div class="line">Successfully installed cocoapods-1.2.1</div><div class="line">Parsing documentation for xcodeproj-1.4.4</div><div class="line">Installing ri documentation for xcodeproj-1.4.4</div><div class="line">Parsing documentation for ruby-macho-1.1.0</div><div class="line">Installing ri documentation for ruby-macho-1.1.0</div><div class="line">Parsing documentation for molinillo-0.5.7</div><div class="line">Installing ri documentation for molinillo-0.5.7</div><div class="line">Parsing documentation for gh_inspector-1.0.3</div><div class="line">Installing ri documentation for gh_inspector-1.0.3</div><div class="line">Parsing documentation for fourflusher-2.0.1</div><div class="line">Installing ri documentation for fourflusher-2.0.1</div><div class="line">Parsing documentation for cocoapods-try-1.1.0</div><div class="line">Installing ri documentation for cocoapods-try-1.1.0</div><div class="line">Parsing documentation for cocoapods-trunk-1.2.0</div><div class="line">Installing ri documentation for cocoapods-trunk-1.2.0</div><div class="line">Parsing documentation for cocoapods-stats-1.0.0</div><div class="line">Installing ri documentation for cocoapods-stats-1.0.0</div><div class="line">Parsing documentation for cocoapods-search-1.0.0</div><div class="line">Installing ri documentation for cocoapods-search-1.0.0</div><div class="line">Parsing documentation for cocoapods-plugins-1.0.0</div><div class="line">Installing ri documentation for cocoapods-plugins-1.0.0</div><div class="line">Parsing documentation for cocoapods-downloader-1.1.3</div><div class="line">Installing ri documentation for cocoapods-downloader-1.1.3</div><div class="line">Parsing documentation for cocoapods-deintegrate-1.0.1</div><div class="line">Installing ri documentation for cocoapods-deintegrate-1.0.1</div><div class="line">Parsing documentation for cocoapods-core-1.2.1</div><div class="line">Installing ri documentation for cocoapods-core-1.2.1</div><div class="line">Parsing documentation for cocoapods-1.2.1</div><div class="line">Installing ri documentation for cocoapods-1.2.1</div><div class="line">14 gems installed</div><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$</div></pre></td></tr></table></figure>
+<p>终于到达了<code>xx gems installed</code>的提示了。</p>
+<p>接着安装cocoapods：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$ sudo gem install cocoapods</div><div class="line">Password:</div><div class="line">ERROR:  While executing gem ... (Errno::EPERM)</div><div class="line">    Operation not permitted - /usr/bin/pod</div><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$</div></pre></td></tr></table></figure>
+<p>操作不允许<code>- /usr/bin/pod</code>。继续复制<code>Operation not permitted - /usr/bin/pod</code>百度。在<a href="http://blog.csdn.net/leaf8742/article/details/50466619" target="_blank" rel="external">这篇博客</a>找到了解决方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$ sudo gem install -n /usr/local/bin cocoapods</div><div class="line">Successfully installed cocoapods-1.2.1</div><div class="line">Parsing documentation for cocoapods-1.2.1</div><div class="line">1 gem installed</div><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$</div></pre></td></tr></table></figure>
+<p>总算安装完成了。</p>
+<p>最后测试下第三方库的管理。</p>
+<p>查询<code>Parse</code>是否可以用cocoaPods管理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:Desktop huangaengoln$ pod search Parse</div><div class="line"></div><div class="line">-&gt; Parse (1.14.2)</div><div class="line">   A library that gives you access to the powerful Parse cloud platform from your</div><div class="line">   iOS/OS X/watchOS/tvOS app.</div><div class="line">   pod &apos;Parse&apos;, &apos;~&gt; 1.14.2&apos;</div><div class="line">   - Homepage: https://www.parse.com/</div><div class="line">   - Source:   https://github.com/ParsePlatform/Parse-SDK-iOS-OSX.git</div><div class="line">   - Versions: 1.14.2, 1.14.1, 1.14.0, 1.13.0, 1.12.0, 1.11.0, 1.10.0, 1.9.1, 1.9.0,</div><div class="line">   1.8.5, 1.8.4, 1.8.3, 1.8.2, 1.8.1, 1.8.0, 1.7.5.3, 1.7.5.2, 1.7.5.1, 1.7.5, 1.7.4,</div><div class="line">   1.7.3, 1.7.2.2, 1.7.2.1, 1.7.2, 1.7.1, 1.7.0, 1.6.5, 1.6.4, 1.6.3, 1.6.2, 1.6.1,</div><div class="line">   1.6.0, 1.5.0, 1.4.2, 1.4.1, 1.4.0, 1.3.0.1, 1.3.0, 1.2.21, 1.2.20, 1.2.19, 1.2.18,</div><div class="line">   1.2.17, 1.2.16, 1.2.15, 1.2.13, 1.2.12, 1.2.11, 1.2.10, 1.2.9, 1.2.8, 1.2.7, 1.2.6,</div><div class="line">   1.2.5, 1.2.4, 1.2.3, 1.2.2, 1.2.1, 1.2.0, 1.1.33, 1.1.32, 1.1.31, 1.1.30, 1.1.29,</div><div class="line">   1.1.27, 1.1.25, 1.1.24, 1.1.23, 1.1.10, 1.0.39, 1.0.36 [master repo]</div><div class="line"></div><div class="line">-&gt; Parse+NSCoding (0.1.4)</div><div class="line">   iOS library for serializing Parse objects</div><div class="line">   pod &apos;Parse+NSCoding&apos;, &apos;~&gt; 0.1.4&apos;</div><div class="line">   - Homepage: https://github.com/martinrybak/Parse-NSCoding</div><div class="line">   - Source:   https://github.com/martinrybak/Parse-NSCoding.git</div><div class="line">   - Versions: 0.1.4, 0.1.3, 0.1.2, 0.1.1, 0.1.0, 0.0.2, 0.0.1 [master repo]</div><div class="line"></div><div class="line">-&gt; Parse+PromiseKit (0.9.2)</div><div class="line">   A PromiseKit category for the Parse SDK.</div><div class="line">   pod &apos;Parse+PromiseKit&apos;, &apos;~&gt; 0.9.2&apos;</div><div class="line">//... ...</div><div class="line">:</div></pre></td></tr></table></figure>
+<p>新建<code>podfile</code>,并加入<code>Parse</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim podfile</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//podfile</div><div class="line">pod &apos;Parse&apos;</div></pre></td></tr></table></figure>
+<p>下载<code>Parse</code>库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:MyParse huangaengoln$ pod install</div><div class="line">Analyzing dependencies</div><div class="line">[!] The dependency `Parse (~&gt; 1.14.2)` is not used in any concrete target.</div><div class="line"></div><div class="line">[!] Smart quotes were detected and ignored in your Podfile. To avoid issues in the future, you should not use TextEdit for editing it. If you are not using TextEdit, you should turn off smart quotes in your editor of choice.</div><div class="line">huangsengolndeMacBook-Pro:MyParse huangaengoln$ sudo pod install</div><div class="line">Password:</div><div class="line">/Library/Ruby/Gems/2.0.0/gems/claide-1.0.1/lib/claide/command.rb:439:in `help!&apos;: [!] You cannot run CocoaPods as root. (CLAide::Help)</div><div class="line"></div><div class="line">Usage:</div><div class="line"></div><div class="line">    $ pod COMMAND</div><div class="line"></div><div class="line">      CocoaPods, the Cocoa library package manager.</div><div class="line"></div><div class="line">Commands:</div><div class="line"></div><div class="line">    + cache      Manipulate the CocoaPods cache</div><div class="line">    + env        Display pod environment</div><div class="line">    + init       Generate a Podfile for the current directory</div><div class="line">    + install    Install project dependencies according to versions from a</div><div class="line">                 Podfile.lock</div><div class="line">    + ipc        Inter-process communication</div><div class="line">    + lib        Develop pods</div><div class="line">    + list       List pods</div><div class="line">    + outdated   Show outdated project dependencies</div><div class="line">    + repo       Manage spec-repositories</div><div class="line">    + setup      Setup the CocoaPods environment</div><div class="line">    + spec       Manage pod specs</div><div class="line">    + update     Update outdated project dependencies and create new Podfile.lock</div><div class="line"></div><div class="line">Options:</div><div class="line"></div><div class="line">    --silent     Show nothing</div><div class="line">    --version    Show the version of the tool</div><div class="line">    --verbose    Show more debugging information</div><div class="line">    --no-ansi    Show output without ANSI codes</div><div class="line">    --help       Show help banner of specified command</div><div class="line">	from /Library/Ruby/Gems/2.0.0/gems/cocoapods-1.2.1/lib/cocoapods/command.rb:47:in `run&apos;</div><div class="line">	from /Library/Ruby/Gems/2.0.0/gems/cocoapods-1.2.1/bin/pod:55:in `&lt;top (required)&gt;&apos;</div><div class="line">	from /usr/local/bin/pod:23:in `load&apos;</div><div class="line">	from /usr/local/bin/pod:23:in `&lt;main&gt;&apos;</div></pre></td></tr></table></figure>
+<p>发现红色的文字提示<code>[!] The dependency</code>Parse (~&gt; 1.14.2)<code>is not used in any concrete target.</code>。复制该句百度，找到<a href="http://blog.sina.com.cn/s/blog_6ff6523d0102x86c.html" target="_blank" rel="external">一篇博客</a>的解决方法：</p>
+<blockquote>
+<p>我的Podfile的内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; platform:ios,&apos;7.0&apos;</div><div class="line">&gt; pod &apos;Masonry&apos;, &apos;~&gt; 1.0.1&apos;</div><div class="line">&gt; pod &apos;MJRefresh&apos;, &apos;~&gt; 3.1.12&apos;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>结果执行：<code>pod install</code> 后出现错误The dependency `` is not used in any concrete target</p>
+<p>3）修复这个错误只需要修改成如下即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;platform:ios,&apos;7.0&apos;</div><div class="line">&gt;target &quot;KYVedioPlayer&quot; do</div><div class="line">&gt;pod &apos;Masonry&apos;, &apos;~&gt; 1.0.1&apos;</div><div class="line">&gt;pod &apos;MJRefresh&apos;, &apos;~&gt; 3.1.12&apos;</div><div class="line">&gt;end</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>要明确指出所用第三方库的target</p>
+<p>这样再运行 <code>pod install --verbose --no-repo-update</code>，就会成功了。</p>
+</blockquote>
+<p>然后修改podfile文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//podfile</div><div class="line">target &quot;MyParse&quot; do</div><div class="line">pod &apos;Parse’</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>再运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:MyParse huangaengoln$ pod install</div><div class="line">Analyzing dependencies</div><div class="line">Downloading dependencies</div><div class="line">Installing Bolts (1.8.4)</div><div class="line">Installing Parse (1.14.2)</div><div class="line">Generating Pods project</div><div class="line">Integrating client project</div><div class="line"></div><div class="line">[!] Please close any current Xcode sessions and use `MyParse.xcworkspace` for this project from now on.</div><div class="line">Sending stats</div><div class="line">Pod installation complete! There is 1 dependency from the Podfile and 2 total pods installed.</div><div class="line"></div><div class="line">[!] Smart quotes were detected and ignored in your Podfile. To avoid issues in the future, you should not use TextEdit for editing it. If you are not using TextEdit, you should turn off smart quotes in your editor of choice.</div><div class="line"></div><div class="line">[!] Automatically assigning platform ios with version 10.2 on target MyParse because no platform was specified. Please specify a platform for this target in your Podfile. See `https://guides.cocoapods.org/syntax/podfile.html#platform`.</div><div class="line">huangsengolndeMacBook-Pro:MyParse huangaengoln$</div></pre></td></tr></table></figure>
+<p>再看看目录，果真下载好了第三方库。</p>
+<hr>
+<p>来自：<a href="http://blog.163.com/chenchen..1986/blog/static/76063146201552911115400/" target="_blank" rel="external">Mac安装gem、cocoapods（转）</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://univer2012.github.io/2017/04/23/2install-or-update-gem-in-macOS-Sierra-in-edition10-12-2/" data-id="cj1tn2tg40001h7fc7v4e12p1" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/23/1How-to-change-App-theme-color/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          如何切换App主体颜色
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/23/3optimize-HuaAn-iOS-installation-package-size/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">华安iOS安装包大小的优化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categorieën</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/如何搭建个人博客/">如何搭建个人博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinkive/">thinkive</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/thinkive/" style="font-size: 10px;">thinkive</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/23/6how-to-insert-picture-in-hexo-blog/">hexo博客中如何插入图片</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/23/5how-to-issue-blog/">怎样发布博客</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/">UITableViewHeaderFooterView分组头部的重用机制ism</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/23/3optimize-HuaAn-iOS-installation-package-size/">华安iOS安装包大小的优化</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/23/2install-or-update-gem-in-macOS-Sierra-in-edition10-12-2/">在macOS Sierra(版本 10.12.2)安装/更新gem</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 黄胜军<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
