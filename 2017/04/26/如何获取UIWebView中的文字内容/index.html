@@ -1,0 +1,543 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>如何获取UIWebView中的文字内容 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="业务场景：  项目的资讯详情页面有一个分享，分享中要传的字段有一个content的字段，但是详情的内容使用UIWebView加载的，这就需要从UIWebView中拿到展示的文字内容。  索引到UIWebView的.h文件中，发现没有直接获取内容的方法或者属性，看来只能执行js代码来拿到那些文字了。  1234567891011121314151617181920212223242526272829">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何获取UIWebView中的文字内容">
+<meta property="og:url" content="https://univer2012.github.io/2017/04/26/如何获取UIWebView中的文字内容/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="业务场景：  项目的资讯详情页面有一个分享，分享中要传的字段有一个content的字段，但是详情的内容使用UIWebView加载的，这就需要从UIWebView中拿到展示的文字内容。  索引到UIWebView的.h文件中，发现没有直接获取内容的方法或者属性，看来只能执行js代码来拿到那些文字了。  1234567891011121314151617181920212223242526272829">
+<meta property="og:updated_time" content="2017-04-26T09:00:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何获取UIWebView中的文字内容">
+<meta name="twitter:description" content="业务场景：  项目的资讯详情页面有一个分享，分享中要传的字段有一个content的字段，但是详情的内容使用UIWebView加载的，这就需要从UIWebView中拿到展示的文字内容。  索引到UIWebView的.h文件中，发现没有直接获取内容的方法或者属性，看来只能执行js代码来拿到那些文字了。  1234567891011121314151617181920212223242526272829">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/26/如何获取UIWebView中的文字内容/" title="如何获取UIWebView中的文字内容" itemprop="url">如何获取UIWebView中的文字内容</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-26T08:39:31.000Z" itemprop="datePublished"> 发表于 2017-04-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>业务场景：</p>
+<p> 项目的资讯详情页面有一个分享，分享中要传的字段有一个<code>content</code>的字段，但是详情的内容使用<code>UIWebView</code>加载的，这就需要从<code>UIWebView</code>中拿到展示的文字内容。</p>
+<p> 索引到<code>UIWebView</code>的<code>.h</code>文件中，发现没有直接获取内容的方法或者属性，看来只能执行js代码来拿到那些文字了。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"> //</div><div class="line">//  UIWebView.h</div><div class="line">//  UIKit</div><div class="line">//</div><div class="line">//  Copyright (c) 2007-2015 Apple Inc. All rights reserved.</div><div class="line">//</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &lt;UIKit/UIView.h&gt;</div><div class="line">#import &lt;UIKit/UIKitDefines.h&gt;</div><div class="line">#import &lt;UIKit/UIDataDetectors.h&gt;</div><div class="line">#import &lt;UIKit/UIScrollView.h&gt;</div><div class="line"></div><div class="line">NS_ASSUME_NONNULL_BEGIN</div><div class="line"></div><div class="line">typedef NS_ENUM(NSInteger, UIWebViewNavigationType) &#123;</div><div class="line">    UIWebViewNavigationTypeLinkClicked,</div><div class="line">    UIWebViewNavigationTypeFormSubmitted,</div><div class="line">    UIWebViewNavigationTypeBackForward,</div><div class="line">    UIWebViewNavigationTypeReload,</div><div class="line">    UIWebViewNavigationTypeFormResubmitted,</div><div class="line">    UIWebViewNavigationTypeOther</div><div class="line">&#125; __TVOS_PROHIBITED;</div><div class="line"></div><div class="line">typedef NS_ENUM(NSInteger, UIWebPaginationMode) &#123;</div><div class="line">    UIWebPaginationModeUnpaginated,</div><div class="line">    UIWebPaginationModeLeftToRight,</div><div class="line">    UIWebPaginationModeTopToBottom,</div><div class="line">    UIWebPaginationModeBottomToTop,</div><div class="line">    UIWebPaginationModeRightToLeft</div><div class="line">&#125; __TVOS_PROHIBITED;</div><div class="line"></div><div class="line">typedef NS_ENUM(NSInteger, UIWebPaginationBreakingMode) &#123;</div><div class="line">    UIWebPaginationBreakingModePage,</div><div class="line">    UIWebPaginationBreakingModeColumn</div><div class="line">&#125; __TVOS_PROHIBITED;</div><div class="line"></div><div class="line">@class UIWebViewInternal;</div><div class="line">@protocol UIWebViewDelegate;</div><div class="line"></div><div class="line">NS_CLASS_AVAILABLE_IOS(2_0) __TVOS_PROHIBITED @interface UIWebView : UIView &lt;NSCoding, UIScrollViewDelegate&gt; </div><div class="line"></div><div class="line">@property (nullable, nonatomic, assign) id &lt;UIWebViewDelegate&gt; delegate;</div><div class="line"></div><div class="line">@property (nonatomic, readonly, strong) UIScrollView *scrollView NS_AVAILABLE_IOS(5_0);</div><div class="line"></div><div class="line">- (void)loadRequest:(NSURLRequest *)request;</div><div class="line">- (void)loadHTMLString:(NSString *)string baseURL:(nullable NSURL *)baseURL;</div><div class="line">- (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)textEncodingName baseURL:(NSURL *)baseURL;</div><div class="line"></div><div class="line">@property (nullable, nonatomic, readonly, strong) NSURLRequest *request;</div><div class="line"></div><div class="line">- (void)reload;</div><div class="line">- (void)stopLoading;</div><div class="line"></div><div class="line">- (void)goBack;</div><div class="line">- (void)goForward;</div><div class="line"></div><div class="line">@property (nonatomic, readonly, getter=canGoBack) BOOL canGoBack;</div><div class="line">@property (nonatomic, readonly, getter=canGoForward) BOOL canGoForward;</div><div class="line">@property (nonatomic, readonly, getter=isLoading) BOOL loading;</div><div class="line"></div><div class="line">- (nullable NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script;</div><div class="line"></div><div class="line">@property (nonatomic) BOOL scalesPageToFit;</div><div class="line"></div><div class="line">@property (nonatomic) BOOL detectsPhoneNumbers NS_DEPRECATED_IOS(2_0, 3_0);</div><div class="line">@property (nonatomic) UIDataDetectorTypes dataDetectorTypes NS_AVAILABLE_IOS(3_0);</div><div class="line"></div><div class="line">@property (nonatomic) BOOL allowsInlineMediaPlayback NS_AVAILABLE_IOS(4_0); // iPhone Safari defaults to NO. iPad Safari defaults to YES</div><div class="line">@property (nonatomic) BOOL mediaPlaybackRequiresUserAction NS_AVAILABLE_IOS(4_0); // iPhone and iPad Safari both default to YES</div><div class="line"></div><div class="line">@property (nonatomic) BOOL mediaPlaybackAllowsAirPlay NS_AVAILABLE_IOS(5_0); // iPhone and iPad Safari both default to YES</div><div class="line"></div><div class="line">@property (nonatomic) BOOL suppressesIncrementalRendering NS_AVAILABLE_IOS(6_0); // iPhone and iPad Safari both default to NO</div><div class="line"></div><div class="line">@property (nonatomic) BOOL keyboardDisplayRequiresUserAction NS_AVAILABLE_IOS(6_0); // default is YES</div><div class="line"></div><div class="line">@property (nonatomic) UIWebPaginationMode paginationMode NS_AVAILABLE_IOS(7_0);</div><div class="line">@property (nonatomic) UIWebPaginationBreakingMode paginationBreakingMode NS_AVAILABLE_IOS(7_0);</div><div class="line">@property (nonatomic) CGFloat pageLength NS_AVAILABLE_IOS(7_0);</div><div class="line">@property (nonatomic) CGFloat gapBetweenPages NS_AVAILABLE_IOS(7_0);</div><div class="line">@property (nonatomic, readonly) NSUInteger pageCount NS_AVAILABLE_IOS(7_0);</div><div class="line"></div><div class="line">@property (nonatomic) BOOL allowsPictureInPictureMediaPlayback NS_AVAILABLE_IOS(9_0);</div><div class="line"></div><div class="line">@property (nonatomic) BOOL allowsLinkPreview NS_AVAILABLE_IOS(9_0); // default is NO</div><div class="line">@end</div><div class="line"></div><div class="line">__TVOS_PROHIBITED @protocol UIWebViewDelegate &lt;NSObject&gt;</div><div class="line"></div><div class="line">@optional</div><div class="line">- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;</div><div class="line">- (void)webViewDidStartLoad:(UIWebView *)webView;</div><div class="line">- (void)webViewDidFinishLoad:(UIWebView *)webView;</div><div class="line">- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">NS_ASSUME_NONNULL_END</div></pre></td></tr></table></figure>
+<p> 但是自己又不懂js代码怎么写，只剩下网上查找了。百度中输入<code>iOS 获取UIWebView中的文字内容 2016</code>，找到了一篇博客:<a href="http://blog.sina.com.cn/s/blog_13bc6705b0102wp8v.html" target="_blank" rel="external">ios通过UIWebView加载word文档，并获取word文档内容</a><br> ，看到其中有一段是这样写的：</p>
+<blockquote>
+<p>另外，通过webView的 loadData: MIMEType: textEncodingName: baseURL:这个方法也可以加载出来。<br>此外，我想拿到word显示的文字内容，可以通过执行js代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; -(void)webViewDidFinishLoad:(UIWebView *)webView</div><div class="line">&#123;</div><div class="line">    NSString *strings = [webView stringByEvaluatingJavaScriptFromString:@&quot;document.body.innerText&quot;];</div><div class="line">    NSLog(@&quot;%@&quot;,strings);</div><div class="line">｝</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>这里的strings就是word文档文字内容。<br>另外，通过<code>NSString *strings = [webView stringByEvaluatingJavaScriptFromString:@&quot;document.body.innerHTML&quot;];</code>这里获得的strings为word文档内容的html格式。</p>
+</blockquote>
+<p>也就是说，可以通过这句代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *strings = [webView stringByEvaluatingJavaScriptFromString:@&quot;document.body.innerText&quot;];</div></pre></td></tr></table></figure>
+<p>拿到<code>UIWebView</code>中的文字内容。测试结果也证明了这一点。</p>
+<p>另外，分享的内容是由长度限制的，不然就会报</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">2017-04-26 16:00:03.959998 SGHApp[699:389332] 分享失败,错误码:204,错误描述:Error Domain=ShareSDKErrorDomain Code=204 &quot;(null)&quot; UserInfo=&#123;user_data=&#123;</div><div class="line">    error = &quot; Text too long, please input text less than 140 characters!&quot;;</div><div class="line">    &quot;error_code&quot; = 20012;</div><div class="line">    request = &quot;/2/statuses/upload.json&quot;;</div><div class="line">&#125;&#125;</div></pre></td></tr></table></figure>
+<p>的错误。所以还要对拿到的内容做截取。</p>
+<p>最终的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//... ...</div><div class="line">//获取UIWebView中的内容</div><div class="line">    NSString *contentWebString = [_detailView.contentWebView stringByEvaluatingJavaScriptFromString:@&quot;document.body.innerText&quot;];</div><div class="line">    if (contentWebString.length &lt;= 0) &#123;</div><div class="line">        contentWebString = @&quot;&quot;;</div><div class="line">    &#125;</div><div class="line">    //截取80个字段</div><div class="line">    NSInteger contentSubLength = contentWebString.length;</div><div class="line">    contentWebString = [contentWebString substringWithRange:NSMakeRange(0, (contentSubLength &gt; 80 ? 80 : contentSubLength))];</div><div class="line">    //过滤字符串前后的空格</div><div class="line">    contentWebString = [contentWebString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];</div><div class="line">    contentWebString = [contentWebString stringByAppendingString:@&quot;... ...&quot;];</div><div class="line">    NSDictionary *data=@&#123;@&quot;requestId&quot;:(self.requestId == nil ? @&quot;&quot; : self.requestId),</div><div class="line">                         @&quot;title&quot; : [self.detailView.titleLabel.attributedText string] ? : @&quot;&quot;,</div><div class="line">                         @&quot;type&quot; : type,</div><div class="line">                         @&quot;content&quot; : contentWebString&#125;;</div><div class="line">                         </div><div class="line">//... ...</div></pre></td></tr></table></figure>
+<p>其中的过滤字符串空格，还参考了这篇博客:<a href="http://www.jianshu.com/p/623c87407365" target="_blank" rel="external">iOS 字符串过滤空格</a>。关键代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//过滤空格</div><div class="line">NSString * urlStr = @&quot;  A as    dd  dmm &quot;;</div><div class="line">NSLog(@&quot;urlStr = %@&quot;,urlStr);</div><div class="line"></div><div class="line">//过滤字符串前后的空格</div><div class="line">urlStr = [urlStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];</div><div class="line">NSLog(@&quot;urlStr = %@&quot;,urlStr);</div><div class="line"></div><div class="line">//过滤中间空格</div><div class="line">urlStr = [urlStr stringByReplacingOccurrencesOfString:@&quot; &quot; withString:@&quot;&quot;];</div><div class="line">NSLog(@&quot;urlStr = %@&quot;,urlStr);</div></pre></td></tr></table></figure>
+<p>– Over</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/04/26/如何获取UIWebView中的文字内容/" data-title="如何获取UIWebView中的文字内容 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/04/23/6how-to-insert-picture-in-hexo-blog/" title="hexo博客中如何插入图片">
+  <strong>上一篇：</strong><br/>
+  <span>
+  hexo博客中如何插入图片</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
