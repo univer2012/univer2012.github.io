@@ -4,24 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>UITableViewHeaderFooterView分组头部的重用机制ism | SengolnHuang&#39;s blog</title>
+    <title>一个使用Time Profiler的问题 | SengolnHuang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="黄胜军">
     
 
     
-    <meta name="description" content="我们都知道对UITableViewCell的重用，但是却很少人知道，对UITableView的header和footer，也是可以重用的。下面就来看看UITableView的header和footer的重用例子：  首先声明一个全局静态变量：  1static NSString *headerIdentifier = @&amp;quot;tableViewHeaderIdentifier&amp;quot;;">
+    <meta name="description" content="项目经理反馈了个app启动后操作卡顿的问题，首先想到的是主线程卡住了，于是就想用Instruments的Time Profiler来查看下哪个方法把主线程卡住了。 真机安装上app后，Time Profiler中开始记录，总是如下框： 百思不得其解。于是百度一下。找到了这篇博客，说是在Edit Scheme...的Profile中，Build Configuration没有设置成Debug。如图：">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UITableViewHeaderFooterView分组头部的重用机制ism">
-<meta property="og:url" content="https://univer2012.github.io/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/index.html">
+<meta property="og:title" content="一个使用Time Profiler的问题">
+<meta property="og:url" content="https://univer2012.github.io/2017/04/28/a-problem-using-time-profiler/index.html">
 <meta property="og:site_name" content="SengolnHuang's blog">
-<meta property="og:description" content="我们都知道对UITableViewCell的重用，但是却很少人知道，对UITableView的header和footer，也是可以重用的。下面就来看看UITableView的header和footer的重用例子：  首先声明一个全局静态变量：  1static NSString *headerIdentifier = @&amp;quot;tableViewHeaderIdentifier&amp;quot;;">
-<meta property="og:updated_time" content="2017-04-22T19:05:28.000Z">
+<meta property="og:description" content="项目经理反馈了个app启动后操作卡顿的问题，首先想到的是主线程卡住了，于是就想用Instruments的Time Profiler来查看下哪个方法把主线程卡住了。 真机安装上app后，Time Profiler中开始记录，总是如下框： 百思不得其解。于是百度一下。找到了这篇博客，说是在Edit Scheme...的Profile中，Build Configuration没有设置成Debug。如图：">
+<meta property="og:image" content="https://univer2012.github.io/2017/04/28/a-problem-using-time-profiler/pic1.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/04/28/a-problem-using-time-profiler/pic2.png">
+<meta property="og:updated_time" content="2017-04-28T13:09:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UITableViewHeaderFooterView分组头部的重用机制ism">
-<meta name="twitter:description" content="我们都知道对UITableViewCell的重用，但是却很少人知道，对UITableView的header和footer，也是可以重用的。下面就来看看UITableView的header和footer的重用例子：  首先声明一个全局静态变量：  1static NSString *headerIdentifier = @&amp;quot;tableViewHeaderIdentifier&amp;quot;;">
+<meta name="twitter:title" content="一个使用Time Profiler的问题">
+<meta name="twitter:description" content="项目经理反馈了个app启动后操作卡顿的问题，首先想到的是主线程卡住了，于是就想用Instruments的Time Profiler来查看下哪个方法把主线程卡住了。 真机安装上app后，Time Profiler中开始记录，总是如下框： 百思不得其解。于是百度一下。找到了这篇博客，说是在Edit Scheme...的Profile中，Build Configuration没有设置成Debug。如图：">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/04/28/a-problem-using-time-profiler/pic1.png">
 
     
     <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
@@ -81,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/" title="UITableViewHeaderFooterView分组头部的重用机制ism" itemprop="url">UITableViewHeaderFooterView分组头部的重用机制ism</a>
+      <a href="/2017/04/28/a-problem-using-time-profiler/" title="一个使用Time Profiler的问题" itemprop="url">一个使用Time Profiler的问题</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-22T19:04:48.000Z" itemprop="datePublished"> Published 2017-04-23</time>
+    <time datetime="2017-04-28T12:57:34.000Z" itemprop="datePublished"> Published 2017-04-28</time>
     
   </p>
 </header>
@@ -101,20 +104,10 @@
 		
 		</div>
 		
-		<p>我们都知道对<code>UITableViewCell</code>的重用，但是却很少人知道，对<code>UITableView</code>的header和footer，也是可以重用的。下面就来看看<code>UITableView</code>的header和footer的重用例子：</p>
-<ul>
-<li>首先声明一个全局静态变量：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">static NSString *headerIdentifier = @&quot;tableViewHeaderIdentifier&quot;;</div></pre></td></tr></table></figure>
-<ul>
-<li>然后在<code>viewDidLoad</code>里面注册<code>UITableViewHeaderFooterView</code>或者其子类：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];</div><div class="line">    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:headerIdentifier];</div></pre></td></tr></table></figure>
-<ul>
-<li>接下来就在<code>UITableViewDelegate</code>的方法<code>-tableView:viewForHeaderInSection:</code>或者<code>-tableView:viewForFooterInSection:</code>里面用identifer来或者可重用的header或者footer：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section &#123;</div><div class="line">    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];</div><div class="line">    headerView.textLabel.text = self.yearArray[section];</div><div class="line">    headerView.contentView.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.3];</div><div class="line">    headerView.detailTextLabel.text = @&quot;detailTextLabel&quot;;</div><div class="line">    return headerView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的例子用的是类<code>UITableViewHeaderFooterView</code>本身，我们可以通过继承<code>UITableViewHeaderFooterView</code>来达到自定义<code>UITableView</code>的header和footer的目的。</p>
+		<p>项目经理反馈了个app启动后操作卡顿的问题，首先想到的是主线程卡住了，于是就想用<code>Instruments</code>的<code>Time Profiler</code>来查看下哪个方法把主线程卡住了。</p>
+<p>真机安装上app后，<code>Time Profiler</code>中开始记录，总是如下框：<br><img src="/2017/04/28/a-problem-using-time-profiler/pic1.png" alt=""></p>
+<p>百思不得其解。于是百度一下。找到了<a href="http://blog.csdn.net/reims2046/article/details/40857601" target="_blank" rel="external">这篇博客</a>，说是在<code>Edit Scheme...</code>的<code>Profile</code>中，<code>Build Configuration</code>没有设置成<code>Debug</code>。如图：<br><img src="/2017/04/28/a-problem-using-time-profiler/pic2.png" alt=""></p>
+<p>后来按照如上设置，真机果然可以记录调试了。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -127,7 +120,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://univer2012.github.io/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/" data-title="UITableViewHeaderFooterView分组头部的重用机制ism | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  <div data-url="https://univer2012.github.io/2017/04/28/a-problem-using-time-profiler/" data-title="一个使用Time Profiler的问题 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -141,21 +134,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/23/3optimize-HuaAn-iOS-installation-package-size/" title="华安iOS安装包大小的优化">
+ <a href="/2017/04/28/how-to-install-webstorm-2017/" title="如何安装webStorm 2017">
   <strong>上一篇：</strong><br/>
   <span>
-  华安iOS安装包大小的优化</span>
+  如何安装webStorm 2017</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2017/04/23/5how-to-issue-blog/"  title="怎样发布博客">
- <strong>下一篇：</strong><br/> 
- <span>怎样发布博客
-</span>
-</a>
-</div>
 
 </nav>
 

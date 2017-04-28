@@ -4,24 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>UITableViewHeaderFooterView分组头部的重用机制ism | SengolnHuang&#39;s blog</title>
+    <title>如何安装webStorm 2017 | SengolnHuang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="黄胜军">
     
 
     
-    <meta name="description" content="我们都知道对UITableViewCell的重用，但是却很少人知道，对UITableView的header和footer，也是可以重用的。下面就来看看UITableView的header和footer的重用例子：  首先声明一个全局静态变量：  1static NSString *headerIdentifier = @&amp;quot;tableViewHeaderIdentifier&amp;quot;;">
+    <meta name="description" content="webStorm软件是一个收费软件。但是我们在学习时可以安装一个破解版的。于是在百度搜索webstorm 破解。得到的结果如下：于是点击第一个博客进去，按照步骤操作下去后，发现不能启动webstorm了。 于是继续看第二篇博客。前面都已经去官网下载好了webstorm，于是就启动安装好的webstorm软件，选择“license server” 输入：http://idea.imsxm.com/，">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UITableViewHeaderFooterView分组头部的重用机制ism">
-<meta property="og:url" content="https://univer2012.github.io/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/index.html">
+<meta property="og:title" content="如何安装webStorm 2017">
+<meta property="og:url" content="https://univer2012.github.io/2017/04/28/how-to-install-webstorm-2017/index.html">
 <meta property="og:site_name" content="SengolnHuang's blog">
-<meta property="og:description" content="我们都知道对UITableViewCell的重用，但是却很少人知道，对UITableView的header和footer，也是可以重用的。下面就来看看UITableView的header和footer的重用例子：  首先声明一个全局静态变量：  1static NSString *headerIdentifier = @&amp;quot;tableViewHeaderIdentifier&amp;quot;;">
-<meta property="og:updated_time" content="2017-04-22T19:05:28.000Z">
+<meta property="og:description" content="webStorm软件是一个收费软件。但是我们在学习时可以安装一个破解版的。于是在百度搜索webstorm 破解。得到的结果如下：于是点击第一个博客进去，按照步骤操作下去后，发现不能启动webstorm了。 于是继续看第二篇博客。前面都已经去官网下载好了webstorm，于是就启动安装好的webstorm软件，选择“license server” 输入：http://idea.imsxm.com/，">
+<meta property="og:image" content="https://univer2012.github.io/2017/04/28/how-to-install-webstorm-2017/pic1.png">
+<meta property="og:updated_time" content="2017-04-28T12:53:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UITableViewHeaderFooterView分组头部的重用机制ism">
-<meta name="twitter:description" content="我们都知道对UITableViewCell的重用，但是却很少人知道，对UITableView的header和footer，也是可以重用的。下面就来看看UITableView的header和footer的重用例子：  首先声明一个全局静态变量：  1static NSString *headerIdentifier = @&amp;quot;tableViewHeaderIdentifier&amp;quot;;">
+<meta name="twitter:title" content="如何安装webStorm 2017">
+<meta name="twitter:description" content="webStorm软件是一个收费软件。但是我们在学习时可以安装一个破解版的。于是在百度搜索webstorm 破解。得到的结果如下：于是点击第一个博客进去，按照步骤操作下去后，发现不能启动webstorm了。 于是继续看第二篇博客。前面都已经去官网下载好了webstorm，于是就启动安装好的webstorm软件，选择“license server” 输入：http://idea.imsxm.com/，">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/04/28/how-to-install-webstorm-2017/pic1.png">
 
     
     <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
@@ -81,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/" title="UITableViewHeaderFooterView分组头部的重用机制ism" itemprop="url">UITableViewHeaderFooterView分组头部的重用机制ism</a>
+      <a href="/2017/04/28/how-to-install-webstorm-2017/" title="如何安装webStorm 2017" itemprop="url">如何安装webStorm 2017</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-22T19:04:48.000Z" itemprop="datePublished"> Published 2017-04-23</time>
+    <time datetime="2017-04-28T12:38:28.000Z" itemprop="datePublished"> Published 2017-04-28</time>
     
   </p>
 </header>
@@ -101,20 +103,8 @@
 		
 		</div>
 		
-		<p>我们都知道对<code>UITableViewCell</code>的重用，但是却很少人知道，对<code>UITableView</code>的header和footer，也是可以重用的。下面就来看看<code>UITableView</code>的header和footer的重用例子：</p>
-<ul>
-<li>首先声明一个全局静态变量：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">static NSString *headerIdentifier = @&quot;tableViewHeaderIdentifier&quot;;</div></pre></td></tr></table></figure>
-<ul>
-<li>然后在<code>viewDidLoad</code>里面注册<code>UITableViewHeaderFooterView</code>或者其子类：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];</div><div class="line">    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:headerIdentifier];</div></pre></td></tr></table></figure>
-<ul>
-<li>接下来就在<code>UITableViewDelegate</code>的方法<code>-tableView:viewForHeaderInSection:</code>或者<code>-tableView:viewForFooterInSection:</code>里面用identifer来或者可重用的header或者footer：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section &#123;</div><div class="line">    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];</div><div class="line">    headerView.textLabel.text = self.yearArray[section];</div><div class="line">    headerView.contentView.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.3];</div><div class="line">    headerView.detailTextLabel.text = @&quot;detailTextLabel&quot;;</div><div class="line">    return headerView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的例子用的是类<code>UITableViewHeaderFooterView</code>本身，我们可以通过继承<code>UITableViewHeaderFooterView</code>来达到自定义<code>UITableView</code>的header和footer的目的。</p>
+		<p><code>webStorm</code>软件是一个收费软件。但是我们在学习时可以安装一个破解版的。于是在百度搜索<code>webstorm 破解</code>。得到的结果如下：<br><img src="/2017/04/28/how-to-install-webstorm-2017/pic1.png" alt="搜索结果"><br>于是点击<a href="http://www.cnblogs.com/gavin007/p/6379384.html" target="_blank" rel="external">第一个博客</a>进去，按照步骤操作下去后，发现不能启动<code>webstorm</code>了。</p>
+<p>于是继续看<a href="http://blog.csdn.net/it_talk/article/details/52448597" target="_blank" rel="external">第二篇博客</a>。前面都已经去<a href="http://www.jetbrains.com/webstorm/" target="_blank" rel="external">官网</a>下载好了<code>webstorm</code>，于是就启动安装好的<code>webstorm</code>软件，选择“license server” 输入：<code>http://idea.imsxm.com/</code>，点击下一步，竟然就通过了！</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -127,7 +117,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://univer2012.github.io/2017/04/23/4UITableViewHeaderFooterView-section-header-reuse-mechanism/" data-title="UITableViewHeaderFooterView分组头部的重用机制ism | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  <div data-url="https://univer2012.github.io/2017/04/28/how-to-install-webstorm-2017/" data-title="如何安装webStorm 2017 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -141,18 +131,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/23/3optimize-HuaAn-iOS-installation-package-size/" title="华安iOS安装包大小的优化">
+ <a href="/2017/04/27/why-do-I-feel-so-tired/" title="why_do_I_feel_so_tired">
   <strong>上一篇：</strong><br/>
   <span>
-  华安iOS安装包大小的优化</span>
+  why_do_I_feel_so_tired</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/04/23/5how-to-issue-blog/"  title="怎样发布博客">
+<a href="/2017/04/28/a-problem-using-time-profiler/"  title="一个使用Time Profiler的问题">
  <strong>下一篇：</strong><br/> 
- <span>怎样发布博客
+ <span>一个使用Time Profiler的问题
 </span>
 </a>
 </div>
