@@ -4,27 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>7如何在xib或者storyboard中设置button的圆角 | SengolnHuang&#39;s blog</title>
+    <title>开发中的一些小技巧(持续更新中) | SengolnHuang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="黄胜军">
     
 
     
-    <meta name="description" content="在xib或者storyboard中，可以给button设置圆角。具体操作步骤如下： 1、切换到xib或者storyboard，选中UIButton对象，打开右侧栏Hide or show the Utilities的Show the Identity inspector，在User Defined Runtime Attributtes中添加2个Key Path:  layer.cornerRad">
+    <meta name="description" content="一、获取手机系统版本，并把json字符串转换成字典12345678910NSString *msgText = @&amp;quot;&amp;#123;\&amp;quot;isshowdialog\&amp;quot;:\&amp;quot;0\&amp;quot;,\&amp;quot;title\&amp;quot;:\&amp;quot;精选资讯\&amp;quot;,\&amp;quot;description\&amp;quot;:\&amp;quot;【精选资讯】测试消息中心资讯来源">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="7如何在xib或者storyboard中设置button的圆角">
-<meta property="og:url" content="https://univer2012.github.io/2017/04/29/7如何在xib或者storyboard中设置button的圆角/index.html">
+<meta property="og:title" content="开发中的一些小技巧(持续更新中)">
+<meta property="og:url" content="https://univer2012.github.io/2017/05/11/9some-tips-in-development/index.html">
 <meta property="og:site_name" content="SengolnHuang's blog">
-<meta property="og:description" content="在xib或者storyboard中，可以给button设置圆角。具体操作步骤如下： 1、切换到xib或者storyboard，选中UIButton对象，打开右侧栏Hide or show the Utilities的Show the Identity inspector，在User Defined Runtime Attributtes中添加2个Key Path:  layer.cornerRad">
-<meta property="og:image" content="https://univer2012.github.io/2017/04/29/7如何在xib或者storyboard中设置button的圆角/pic1.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/04/29/7如何在xib或者storyboard中设置button的圆角/pic2.png">
-<meta property="og:updated_time" content="2017-04-29T06:36:19.000Z">
+<meta property="og:description" content="一、获取手机系统版本，并把json字符串转换成字典12345678910NSString *msgText = @&amp;quot;&amp;#123;\&amp;quot;isshowdialog\&amp;quot;:\&amp;quot;0\&amp;quot;,\&amp;quot;title\&amp;quot;:\&amp;quot;精选资讯\&amp;quot;,\&amp;quot;description\&amp;quot;:\&amp;quot;【精选资讯】测试消息中心资讯来源">
+<meta property="og:image" content="https://univer2012.github.io/2017/05/11/9some-tips-in-development/pic1.png">
+<meta property="og:updated_time" content="2017-05-11T09:38:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="7如何在xib或者storyboard中设置button的圆角">
-<meta name="twitter:description" content="在xib或者storyboard中，可以给button设置圆角。具体操作步骤如下： 1、切换到xib或者storyboard，选中UIButton对象，打开右侧栏Hide or show the Utilities的Show the Identity inspector，在User Defined Runtime Attributtes中添加2个Key Path:  layer.cornerRad">
-<meta name="twitter:image" content="https://univer2012.github.io/2017/04/29/7如何在xib或者storyboard中设置button的圆角/pic1.png">
+<meta name="twitter:title" content="开发中的一些小技巧(持续更新中)">
+<meta name="twitter:description" content="一、获取手机系统版本，并把json字符串转换成字典12345678910NSString *msgText = @&amp;quot;&amp;#123;\&amp;quot;isshowdialog\&amp;quot;:\&amp;quot;0\&amp;quot;,\&amp;quot;title\&amp;quot;:\&amp;quot;精选资讯\&amp;quot;,\&amp;quot;description\&amp;quot;:\&amp;quot;【精选资讯】测试消息中心资讯来源">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/05/11/9some-tips-in-development/pic1.png">
 
     
     <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
@@ -84,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/" title="7如何在xib或者storyboard中设置button的圆角" itemprop="url">7如何在xib或者storyboard中设置button的圆角</a>
+      <a href="/2017/05/11/9some-tips-in-development/" title="开发中的一些小技巧(持续更新中)" itemprop="url">开发中的一些小技巧(持续更新中)</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-29T06:27:50.000Z" itemprop="datePublished"> 发表于 2017-04-29</time>
+    <time datetime="2017-05-11T08:30:35.000Z" itemprop="datePublished"> 发表于 2017-05-11</time>
     
   </p>
 </header>
@@ -100,18 +99,19 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、获取手机系统版本，并把json字符串转换成字典"><span class="toc-number">1.</span> <span class="toc-text">一、获取手机系统版本，并把json字符串转换成字典</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所以对获取到的版本号，用-UIDevice-currentDevice-systemVersion-获取的才是准确的。"><span class="toc-number"></span> <span class="toc-text">所以对获取到的版本号，用[[UIDevice currentDevice] systemVersion]获取的才是准确的。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#二、设置MRC文件在ARC工程中使用"><span class="toc-number">1.</span> <span class="toc-text">二、设置MRC文件在ARC工程中使用</span></a></li></ol>
 		
 		</div>
 		
-		<p>在xib或者storyboard中，可以给button设置圆角。具体操作步骤如下：</p>
-<p>1、切换到<code>xib</code>或者<code>storyboard</code>，选中<code>UIButton</code>对象，打开右侧栏<code>Hide or show the Utilities</code>的<code>Show the Identity inspector</code>，在<code>User Defined Runtime Attributtes</code>中添加2个<code>Key Path</code>:</p>
-<ul>
-<li><code>layer.cornerRadius</code>，<code>Type</code>是<code>Number</code>；</li>
-<li>和<code>layer.masksToBounds</code>，<code>Type</code>是<code>Boolean</code>；</li>
-</ul>
-<p>如图：<br><img src="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/pic1.png" alt=""></p>
-<p>运行后效果如下：<br><img src="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/pic2.png" alt=""></p>
+		<h3 id="一、获取手机系统版本，并把json字符串转换成字典"><a href="#一、获取手机系统版本，并把json字符串转换成字典" class="headerlink" title="一、获取手机系统版本，并把json字符串转换成字典"></a>一、获取手机系统版本，并把json字符串转换成字典</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSString *msgText = @&quot;&#123;\&quot;isshowdialog\&quot;:\&quot;0\&quot;,\&quot;title\&quot;:\&quot;精选资讯\&quot;,\&quot;description\&quot;:\&quot;【精选资讯】测试消息中心资讯来源201705042045\&quot;,\&quot;action_type\&quot;:\&quot;1\&quot;,\&quot;action_description\&quot;:\&quot;不跳转(这里使用来描述消息点击后的功能其实没啥用)\&quot;,\&quot;activity\&quot;:\&quot;com.thinkive.infor.ui.activitys.WebNewDetailActivityInformation\&quot;,\&quot;extra\&quot;:&#123;\&quot;id\&quot;:\&quot;488\&quot;,\&quot;title\&quot;:\&quot;测试消息中心资讯来源201705042045\&quot;,\&quot;media\&quot;:\&quot;华安资讯\&quot;,\&quot;updateTime\&quot;:\&quot;2017-05-04 20:39:24\&quot;,\&quot;huaAn\&quot;:\&quot;200030\&quot;,\&quot;information\&quot;:\&quot;精选\&quot;&#125;&#125;&quot;;</div><div class="line">    NSString *systemVersion = [[UIDevice currentDevice] systemVersion];</div><div class="line">    CGFloat systemVersionFloat = [systemVersion floatValue];</div><div class="line">    if (systemVersionFloat &lt; 8.0) &#123;</div><div class="line">        NSDictionary *messageTextDict = [NSJSONSerialization JSONObjectWithData:[msgText dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];</div><div class="line">        NSString *msgDescription = messageTextDict[@&quot;description&quot;];</div><div class="line">        if (msgDescription.length &gt; 0) &#123;</div><div class="line">            msgText = msgDescription;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>注意：上面的<code>[[[UIDevice currentDevice] systemVersion] floatValue]</code>只是粗略判断，因为这样判断是有问题的。如图：<br><img src="/2017/05/11/9some-tips-in-development/pic1.png" alt=""></p>
+<h2 id="所以对获取到的版本号，用-UIDevice-currentDevice-systemVersion-获取的才是准确的。"><a href="#所以对获取到的版本号，用-UIDevice-currentDevice-systemVersion-获取的才是准确的。" class="headerlink" title="所以对获取到的版本号，用[[UIDevice currentDevice] systemVersion]获取的才是准确的。"></a>所以对获取到的版本号，用<code>[[UIDevice currentDevice] systemVersion]</code>获取的才是准确的。</h2><p>来自：<a href="http://www.jianshu.com/p/528897755dc8" target="_blank" rel="external">获取iOS系统版本，谨慎使用[[[UIDevice currentDevice] systemVersion] floatValue]</a></p>
+<h3 id="二、设置MRC文件在ARC工程中使用"><a href="#二、设置MRC文件在ARC工程中使用" class="headerlink" title="二、设置MRC文件在ARC工程中使用"></a>二、设置MRC文件在ARC工程中使用</h3><ol>
+<li>选择项目中的Targets，选中你所要操作的Target，  </li>
+<li>选Build Phases，在其中Complie Sources中选择需要ARC的文件双击，<br>  并在输入框中输入：<code>-fobjc-arc</code>，如果不要ARC则输入：<code>-fno-objc-arc</code>  </li>
+</ol>
+<hr>
+<p>来自：<a href="http://blog.csdn.net/zhibudefeng/article/details/8463289" target="_blank" rel="external">IOS ARC 和 非ARC 之间的转换方法</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -124,7 +124,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://univer2012.github.io/2017/04/29/7如何在xib或者storyboard中设置button的圆角/" data-title="7如何在xib或者storyboard中设置button的圆角 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  <div data-url="https://univer2012.github.io/2017/05/11/9some-tips-in-development/" data-title="开发中的一些小技巧(持续更新中) | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -138,18 +138,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/28/a-problem-using-time-profiler/" title="一个使用Time Profiler的问题">
+ <a href="/2017/05/11/8Objective-C-Runtime-Three/" title="读《Objective-C Runtime 运行时之三：方法与消息》摘录">
   <strong>上一篇：</strong><br/>
   <span>
-  一个使用Time Profiler的问题</span>
+  读《Objective-C Runtime 运行时之三：方法与消息》摘录</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/05/05/About-Xcode-error-alert/"  title="About_Xcode_error_alert">
+<a href="/2017/05/12/10Objective-C-Runtime-Four/"  title="读《Objective-C Runtime 运行时之四：Method Swizzling》摘录">
  <strong>下一篇：</strong><br/> 
- <span>About_Xcode_error_alert
+ <span>读《Objective-C Runtime 运行时之四：Method Swizzling》摘录
 </span>
 </a>
 </div>
@@ -170,7 +170,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、获取手机系统版本，并把json字符串转换成字典"><span class="toc-number">1.</span> <span class="toc-text">一、获取手机系统版本，并把json字符串转换成字典</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所以对获取到的版本号，用-UIDevice-currentDevice-systemVersion-获取的才是准确的。"><span class="toc-number"></span> <span class="toc-text">所以对获取到的版本号，用[[UIDevice currentDevice] systemVersion]获取的才是准确的。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#二、设置MRC文件在ARC工程中使用"><span class="toc-number">1.</span> <span class="toc-text">二、设置MRC文件在ARC工程中使用</span></a></li></ol>
  
   </div>
 
