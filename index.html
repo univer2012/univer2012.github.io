@@ -44,7 +44,7 @@
 				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
 				<h2 class="blog-motto">关注技术，分享生活</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -60,7 +60,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:univer2012.github.io">
 					</form>
 					
@@ -71,6 +71,160 @@
     </header>
     <div id="container">
       <div id="main">
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/22/19Development-crash-statistics-and-analysis/" title="奔溃统计和分析" itemprop="url">
+  
+    <h1 itemprop="name">奔溃统计和分析</h1>
+    
+     
+           <p itemprop="description" >1、[__NSArrayM insertObject:atIndex:]
+iOS崩溃日志中[__NSSetM addObject:]和[__NSArrayM insertObject:atIndex:]的解决办法
+12[__NSSetM addObject:] object ca</p>
+        
+    
+    <time datetime="2017-05-22T03:36:21.000Z" itemprop="datePublished">2017-05-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/18/18A-Question-about-using-CocoaPods-to-add-third-party-libraries/" title="使用CocoaPods来添加第三方类库遇到的问题" itemprop="url">
+  
+    <h1 itemprop="name">使用CocoaPods来添加第三方类库遇到的问题</h1>
+    
+     
+           <p itemprop="description" >今天使用CocoaPods来添加第三方类库XMPPFramework时，无论是执行pod install还是pod update都卡在了Analyzing dependencies不动:
+
+原因在于当执行以上两个命令的时候会升级CocoaPods的spec仓库，加一个参数可以省略</p>
+        
+    
+    <time datetime="2017-05-18T08:31:03.000Z" itemprop="datePublished">2017-05-18</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/18/17Implementation-of-UITableviewCell-reuse-mechanism/" title="读《 iOS亲测UITableView重用机制，用事实说话。》摘录" itemprop="url">
+  
+    <h1 itemprop="name">读《 iOS亲测UITableView重用机制，用事实说话。》摘录</h1>
+    
+     
+           <p itemprop="description" >本文来自： iOS亲测UITableView重用机制，用事实说话。
+UITableView重用机制主要是依靠reuseIdentifier来辨别，以此来建立一个队列，将建好的Cell放入队列中，之后直接使用队列中的Cell,不再新建，极大的提升了UITableView的重用性，同</p>
+        
+    
+    <time datetime="2017-05-18T03:19:33.000Z" itemprop="datePublished">2017-05-18</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/18/16Runtime-method-usage-all/" title="Runtime方法的使用" itemprop="url">
+  
+    <h1 itemprop="name">Runtime方法的使用</h1>
+    
+     
+           <p itemprop="description" >这是一个系列，包含：
+Runtime方法的使用—Class篇
+Runtime方法的使用—Object篇
+Runtime方法的使用—Method、Ivar、Property篇
+Runtime方法的使用—Protocol、SEL篇
+所有最终的代码，放在了这里</p>
+        
+    
+    <time datetime="2017-05-17T16:00:54.000Z" itemprop="datePublished">2017-05-18</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/15/15method-invoke-error-Too-many-arguments-to-function-call-expected0-have2/" title="15method_invoke_error:Too-many-arguments-to-function-call,expected0,have2" itemprop="url">
+  
+    <h1 itemprop="name">15method_invoke_error:Too-many-arguments-to-function-call,expected0,have2</h1>
+    
+     
+           <p itemprop="description" >新建一个工程，输入method_invoke(receiver,method);时报错：
+百度之，找到来原因：
+
+原来在 LLVM 6.0 中增加了一个 OBJC_OLD_DISPATCH_PROTOTYPES，默认配置在 Apple LLVM 6.0 - Preprocessi</p>
+        
+    
+    <time datetime="2017-05-15T14:58:51.000Z" itemprop="datePublished">2017-05-15</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/15/14NSAttributedString-initWithData-blocking-App-problem/" title="NSAttributedString initWithData 阻塞App问题" itemprop="url">
+  
+    <h1 itemprop="name">NSAttributedString initWithData 阻塞App问题</h1>
+    
+     
+           <p itemprop="description" >在上架华安项目前，测试人员反馈，点击app会莫名的闪退。于是查看崩溃手机的View Device Logs，找到对应项目最接近崩溃的时间的日志，发现了这么一段：
+于是把这断复制，百度了下，说NSAttributedString的操作很耗时，需要放在异步线程，于是自己在demo中实</p>
+        
+    
+    <time datetime="2017-05-15T08:17:15.000Z" itemprop="datePublished">2017-05-15</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/15/13Xcode-cleaning-junk-files/" title="清理MacOS中的垃圾文件" itemprop="url">
+  
+    <h1 itemprop="name">清理MacOS中的垃圾文件</h1>
+    
+     
+           <p itemprop="description" >一、Xcode清理垃圾文件1. ~/Library/Developer/Xcode/DerivedData/这个文件夹中保存的是Xcode的缓存文件，曾经在Xcode跑过的所有项目的索引、build的信息等都会保存在这里。删除后在下次打开项目编译的时候将会重新生成。由于这里包含了</p>
+        
+    
+    <time datetime="2017-05-15T07:47:07.000Z" itemprop="datePublished">2017-05-15</time>
+  </a>
+</section>
+
+
+
+
+
 
   
 <section class="post" itemscope itemprop="blogitem">
@@ -139,173 +293,21 @@ Objective</p>
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/11/9some-tips-in-development/" title="开发中的一些小技巧(持续更新中)" itemprop="url">
-  
-    <h1 itemprop="name">开发中的一些小技巧(持续更新中)</h1>
-    
-     
-           <p itemprop="description" >一、获取手机系统版本，并把json字符串转换成字典12345678910NSString *msgText = @&amp;quot;&amp;#123;\&amp;quot;isshowdialog\&amp;quot;:\&amp;quot;0\&amp;quot;,\&amp;quot;title\&amp;quot;:\&amp;quot;精</p>
-        
-    
-    <time datetime="2017-05-11T08:30:35.000Z" itemprop="datePublished">2017-05-11</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/11/8Objective-C-Runtime-Three/" title="读《Objective-C Runtime 运行时之三：方法与消息》摘录" itemprop="url">
-  
-    <h1 itemprop="name">读《Objective-C Runtime 运行时之三：方法与消息》摘录</h1>
-    
-     
-           <p itemprop="description" >本文出处：Objective-C Runtime 运行时之三：方法与消息原文出处： 南峰子的技术博客 
-前面我们讨论了Runtime中对类和对象的处理，及对成员变量与属性的处理。这一章，我们就要开始讨论Runtime中最有意思的一部分：消息处理机制。我们将详细讨论消息的发送及消息</p>
-        
-    
-    <time datetime="2017-05-11T01:44:10.000Z" itemprop="datePublished">2017-05-11</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/10/Objective-C-Runtime-Two/" title="读《Objective-C Runtime 运行时之二：成员变量与属性》摘录" itemprop="url">
-  
-    <h1 itemprop="name">读《Objective-C Runtime 运行时之二：成员变量与属性》摘录</h1>
-    
-     
-           <p itemprop="description" >在前面一篇文章中，我们介绍了Runtime中与类和对象相关的内容，从这章开始，我们将讨论类实现细节相关的内容，主要包括类中成员变量，属性，方法，协议与分类的实现。
-本章的主要内容将聚集在Runtime对成员变量与属性的处理。在讨论之前，我们先介绍一个重要的概念：类型编码。
-类型编</p>
-        
-    
-    <time datetime="2017-05-10T13:38:03.000Z" itemprop="datePublished">2017-05-10</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/06/运行时之一：类与对象》笔记/" title="运行时之一：类与对象》摘录" itemprop="url">
-  
-    <h1 itemprop="name">运行时之一：类与对象》摘录</h1>
-    
-     
-           <p itemprop="description" >本文出处：Objective-C Runtime 运行时之一：类与对象
-原文出处： 南峰子的技术博客   
-Objective-C语言是一门动态语言，它将很多静态语言在编译和链接时期做的事放到了运行时来处理。这种动态语言的优势在于：我们写代码时更具灵活性，如我们可以把消息转发给我</p>
-        
-    
-    <time datetime="2017-05-06T01:20:36.000Z" itemprop="datePublished">2017-05-06</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/05/About-Xcode-error-alert/" title="About_Xcode_error_alert" itemprop="url">
-  
-    <h1 itemprop="name">About_Xcode_error_alert</h1>
-    
-     
-           <p itemprop="description" >1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。
-
-2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。
-
-3</p>
-        
-    
-    <time datetime="2017-05-05T03:00:21.000Z" itemprop="datePublished">2017-05-05</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/" title="7如何在xib或者storyboard中设置button的圆角" itemprop="url">
-  
-    <h1 itemprop="name">7如何在xib或者storyboard中设置button的圆角</h1>
-    
-     
-           <p itemprop="description" >在xib或者storyboard中，可以给button设置圆角。具体操作步骤如下：
-1、切换到xib或者storyboard，选中UIButton对象，打开右侧栏Hide or show the Utilities的Show the Identity inspector，在Use</p>
-        
-    
-    <time datetime="2017-04-29T06:27:50.000Z" itemprop="datePublished">2017-04-29</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/04/28/a-problem-using-time-profiler/" title="一个使用Time Profiler的问题" itemprop="url">
-  
-    <h1 itemprop="name">一个使用Time Profiler的问题</h1>
-    
-     
-           <p itemprop="description" >项目经理反馈了个app启动后操作卡顿的问题，首先想到的是主线程卡住了，于是就想用Instruments的Time Profiler来查看下哪个方法把主线程卡住了。
-真机安装上app后，Time Profiler中开始记录，总是如下框：
-百思不得其解。于是百度一下。找到了这篇博客，</p>
-        
-    
-    <time datetime="2017-04-28T12:57:34.000Z" itemprop="datePublished">2017-04-28</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="github-card">
-<p class="asidetitle">Github 名片</p>
+<p class="asidetitle">Github Card</p>
 <div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
 <script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
 </div>
@@ -315,7 +317,7 @@ Objective-C语言是一门动态语言，它将很多静态语言在编译和链
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分类</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -328,7 +330,7 @@ Objective-C语言是一门动态语言，它将很多静态语言在编译和链
 
   
 <div class="tagslist">
-	<p class="asidetitle">标签</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			
@@ -340,7 +342,7 @@ Objective-C语言是一门动态语言，它将很多静态语言在编译和链
 
 
   <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -362,11 +364,11 @@ Objective-C语言是一门动态语言，它将很多静态语言在编译和链
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
   <div class="weiboshow">
-  <p class="asidetitle">新浪微博</p>
+  <p class="asidetitle">Weibo</p>
     <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
 </div>
 
@@ -520,7 +522,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

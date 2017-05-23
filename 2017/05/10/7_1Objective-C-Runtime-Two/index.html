@@ -1,0 +1,602 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《Objective-C Runtime 运行时之二：成员变量与属性》摘录 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="在前面一篇文章中，我们介绍了Runtime中与类和对象相关的内容，从这章开始，我们将讨论类实现细节相关的内容，主要包括类中成员变量，属性，方法，协议与分类的实现。 本章的主要内容将聚集在Runtime对成员变量与属性的处理。在讨论之前，我们先介绍一个重要的概念：类型编码。 类型编码(Type Encoding)作为对Runtime的补充，编译器将每个方法的返回值和参数类型编码为一个字符串，并将其与">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《Objective-C Runtime 运行时之二：成员变量与属性》摘录">
+<meta property="og:url" content="https://univer2012.github.io/2017/05/10/7_1Objective-C-Runtime-Two/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="在前面一篇文章中，我们介绍了Runtime中与类和对象相关的内容，从这章开始，我们将讨论类实现细节相关的内容，主要包括类中成员变量，属性，方法，协议与分类的实现。 本章的主要内容将聚集在Runtime对成员变量与属性的处理。在讨论之前，我们先介绍一个重要的概念：类型编码。 类型编码(Type Encoding)作为对Runtime的补充，编译器将每个方法的返回值和参数类型编码为一个字符串，并将其与">
+<meta property="og:image" content="https://univer2012.github.io/2017/05/10/7_1Objective-C-Runtime-Two/Objective-C-Runtime-Two/pic1.png">
+<meta property="og:updated_time" content="2017-05-11T00:13:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《Objective-C Runtime 运行时之二：成员变量与属性》摘录">
+<meta name="twitter:description" content="在前面一篇文章中，我们介绍了Runtime中与类和对象相关的内容，从这章开始，我们将讨论类实现细节相关的内容，主要包括类中成员变量，属性，方法，协议与分类的实现。 本章的主要内容将聚集在Runtime对成员变量与属性的处理。在讨论之前，我们先介绍一个重要的概念：类型编码。 类型编码(Type Encoding)作为对Runtime的补充，编译器将每个方法的返回值和参数类型编码为一个字符串，并将其与">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/05/10/7_1Objective-C-Runtime-Two/Objective-C-Runtime-Two/pic1.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/05/10/7_1Objective-C-Runtime-Two/" title="读《Objective-C Runtime 运行时之二：成员变量与属性》摘录" itemprop="url">读《Objective-C Runtime 运行时之二：成员变量与属性》摘录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-05-10T13:38:03.000Z" itemprop="datePublished"> Published 2017-05-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#类型编码-Type-Encoding"><span class="toc-number">1.</span> <span class="toc-text">类型编码(Type Encoding)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#成员变量、属性"><span class="toc-number">2.</span> <span class="toc-text">成员变量、属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、基础数据类型"><span class="toc-number">2.1.</span> <span class="toc-text">一、基础数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Ivar"><span class="toc-number">2.1.1.</span> <span class="toc-text">1、Ivar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、objc-property-t"><span class="toc-number">2.1.2.</span> <span class="toc-text">2、objc_property_t</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、objc-property-attribute-t"><span class="toc-number">2.1.3.</span> <span class="toc-text">3、objc_property_attribute_t</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、关联对象-Associated-Object"><span class="toc-number">2.2.</span> <span class="toc-text">二、关联对象(Associated Object)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、成员变量、属性的操作方法"><span class="toc-number">2.3.</span> <span class="toc-text">三、成员变量、属性的操作方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、成员变量"><span class="toc-number">2.3.1.</span> <span class="toc-text">1、成员变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、关联对象"><span class="toc-number">2.3.2.</span> <span class="toc-text">2、关联对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、属性"><span class="toc-number">2.3.3.</span> <span class="toc-text">3、属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
+		
+		</div>
+		
+		<p><a href="http://blog.jobbole.com/79566/" target="_blank" rel="external">在前面一篇文章中</a>，我们介绍了Runtime中与类和对象相关的内容，从这章开始，我们将讨论类实现细节相关的内容，<strong>主要包括类中成员变量，属性，方法，协议与分类的实现</strong>。</p>
+<p>本章的主要内容将聚集在Runtime对成员变量与属性的处理。在讨论之前，我们先介绍一个重要的概念：<strong>类型编码</strong>。</p>
+<h1 id="类型编码-Type-Encoding"><a href="#类型编码-Type-Encoding" class="headerlink" title="类型编码(Type Encoding)"></a>类型编码(Type Encoding)</h1><p>作为对Runtime的补充，编译器将每个方法的返回值和参数类型编码为一个字符串，并将其与方法的selector关联在一起。这种编码方案在其它情况下也是非常有用的，<strong>因此我们可以使用@encode编译器指令来获取它</strong>。当给定一个类型时，@encode返回这个类型的字符串编码。这些类型可以是诸如int、指针这样的基本类型，也可以是结构体、类等类型。<strong>事实上，任何可以作为sizeof()操作参数的类型都可以用于@encode()。</strong></p>
+<p>在Objective-C Runtime Programming Guide中的<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html#//apple_ref/doc/uid/TP40008048-CH100-SW1" target="_blank" rel="external">Type Encoding</a>一节中，列出了Objective-C中所有的类型编码。需要注意的是这些类型很多是与我们用于存档和分发的编码类型是相同的。但有一些不能在存档时使用。</p>
+<blockquote>
+<p>注：Objective-C不支持long double类型。@encode(long double)返回d，与double是一样的。</p>
+</blockquote>
+<p>一个数组的类型编码位于方括号中；其中包含数组元素的个数及元素类型。如以下示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(void)p_testEncode &#123;</div><div class="line">    float a[] = &#123;1.0, 2.0, 3.0&#125;;</div><div class="line">    NSLog(@&quot;array encoding type: %s&quot;, @encode(typeof(a)));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2017-05-10 21:53:33.832 ObjectiveCDemo160728[49441:1200205] array encoding type: [3f]</div></pre></td></tr></table></figure></p>
+<p>其它类型可参考<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html#//apple_ref/doc/uid/TP40008048-CH100-SW1" target="_blank" rel="external">Type Encoding</a>，在此不细说。</p>
+<p>另外，还有些编码类型，@encode虽然不会直接返回它们，但它们可以作为协议中声明的方法的类型限定符。可以参考<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html#//apple_ref/doc/uid/TP40008048-CH100-SW1" target="_blank" rel="external">Type Encoding</a>。</p>
+<p>对于属性而言，还会有一些特殊的类型编码，以表明属性是只读、拷贝、retain等等，详情可以参考<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html#//apple_ref/doc/uid/TP40008048-CH101-SW6" target="_blank" rel="external">Property Type String</a>。</p>
+<h1 id="成员变量、属性"><a href="#成员变量、属性" class="headerlink" title="成员变量、属性"></a>成员变量、属性</h1><p>Runtime中关于成员变量和属性的相关数据结构并不多，只有三个，并且都很简单。不过还有个非常实用但可能经常被忽视的特性，即<strong>关联对象</strong>，我们将在这小节中详细讨论。</p>
+<h2 id="一、基础数据类型"><a href="#一、基础数据类型" class="headerlink" title="一、基础数据类型"></a>一、基础数据类型</h2><h3 id="1、Ivar"><a href="#1、Ivar" class="headerlink" title="1、Ivar"></a>1、Ivar</h3><p>Ivar是表示实例变量的类型，其实际是一个指向objc_ivar结构体的指针，其定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_ivar *Ivar;</div><div class="line"> </div><div class="line">struct objc_ivar &#123;</div><div class="line">    char *ivar_name                 OBJC2_UNAVAILABLE;  // 变量名</div><div class="line">    char *ivar_type                 OBJC2_UNAVAILABLE;  // 变量类型</div><div class="line">    int ivar_offset                 OBJC2_UNAVAILABLE;  // 基地址偏移字节</div><div class="line">#ifdef __LP64__</div><div class="line">    int space                       OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、objc-property-t"><a href="#2、objc-property-t" class="headerlink" title="2、objc_property_t"></a>2、objc_property_t</h3><p>objc_property_t是表示Objective-C声明的属性的类型，其实际是指向objc_property结构体的指针，其定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_property *objc_property_t;</div></pre></td></tr></table></figure>
+<h3 id="3、objc-property-attribute-t"><a href="#3、objc-property-attribute-t" class="headerlink" title="3、objc_property_attribute_t"></a>3、objc_property_attribute_t</h3><p>objc_property_attribute_t定义了属性的特性(attribute)，它是一个结构体，定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">typedef struct &#123;</div><div class="line">    const char *name;           // 特性名</div><div class="line">    const char *value;          // 特性值</div><div class="line">&#125; objc_property_attribute_t;</div></pre></td></tr></table></figure>
+<h2 id="二、关联对象-Associated-Object"><a href="#二、关联对象-Associated-Object" class="headerlink" title="二、关联对象(Associated Object)"></a>二、关联对象(Associated Object)</h2><p>关联对象是Runtime中一个非常实用的特性，不过可能很容易被忽视。</p>
+<p><em>关联对象类似于成员变量，不过是在运行时添加的。我们通常会把成员变量(Ivar)放在类声明的头文件中，或者放在类实现的@implementation后面。</em>但这有一个缺点，我们不能在分类中添加成员变量。如果我们尝试在分类中添加新的成员变量，编译器会报错。</p>
+<p>我们可能希望通过使用(甚至是滥用)全局变量来解决这个问题。但这些都不是Ivar，因为他们不会连接到一个单独的实例。因此，这种方法很少使用。</p>
+<p><strong>Objective-C针对这一问题，提供了一个解决方案：即关联对象(Associated Object)。</strong></p>
+<p>我们可以把关联对象想象成一个Objective-C对象(如字典)，这个对象通过给定的key连接到类的一个实例上。不过由于使用的是C接口，所以key是一个void指针(const void <em>)。我们还需要指定一个 <em>*内存管理策略</em></em>，以告诉Runtime如何管理这个对象的内存。这个内存管理的策略可以由以下值指定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OBJC_ASSOCIATION_ASSIGN</div><div class="line">OBJC_ASSOCIATION_RETAIN_NONATOMIC</div><div class="line">OBJC_ASSOCIATION_COPY_NONATOMIC</div><div class="line">OBJC_ASSOCIATION_RETAIN</div><div class="line">OBJC_ASSOCIATION_COPY</div></pre></td></tr></table></figure>
+<p>当宿主对象被释放时，会根据指定的内存管理策略来处理关联对象。</p>
+<ul>
+<li>如果指定的策略是assign，则宿主释放时，关联对象不会被释放；</li>
+<li>而如果指定的是retain或者是copy，则宿主释放时，关联对象会被释放。</li>
+<li>我们甚至可以选择是否是自动retain/copy。</li>
+</ul>
+<p>当我们需要在多个线程中处理访问关联对象的多线程代码时，这就非常有用了。</p>
+<p>我们将一个对象连接到其它对象所需要做的就是下面两行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">static char myKey;</div><div class="line"> </div><div class="line">objc_setAssociatedObject(self, &amp;myKey, anObject, OBJC_ASSOCIATION_RETAIN);</div></pre></td></tr></table></figure>
+<p>在这种情况下，self对象将获取一个新的关联的对象anObject，且内存管理策略是自动retain关联对象，当self对象释放时，会自动release关联对象。另外，如果我们使用同一个key来关联另外一个对象时，也会自动释放之前关联的对象，这种情况下，先前的关联对象会被妥善地处理掉，并且新的对象会使用它的内存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id anObject = objc_getAssociatedObject(self, &amp;myKey);</div></pre></td></tr></table></figure>
+<p>我们可以使用<code>objc_removeAssociatedObjects</code>函数来移除一个关联对象，或者使用<code>objc_setAssociatedObject</code>函数将key指定的关联对象设置为nil。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line">static NSString *kDTActionHandlerTapGestureKey = @&quot;kDTActionHandlerTapGestureKey&quot;;</div><div class="line">static NSString *kDTActionHandlerTapBlockKey = @&quot;kDTActionHandlerTapBlockKey&quot;;</div><div class="line"></div><div class="line">@implementation UIView (SGHTapGesture)</div><div class="line"></div><div class="line">-(void)setTapActionWithBlock:(void (^)(void))block &#123;</div><div class="line">    UITapGestureRecognizer *gesture = objc_getAssociatedObject(self, &amp;kDTActionHandlerTapGestureKey);</div><div class="line">    if (!gesture) &#123;</div><div class="line">        gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(__handleActionForTapGesture:)];</div><div class="line">        [self addGestureRecognizer:gesture];</div><div class="line">        objc_setAssociatedObject(self, &amp;kDTActionHandlerTapGestureKey, gesture, OBJC_ASSOCIATION_RETAIN);</div><div class="line">    &#125;</div><div class="line">    objc_setAssociatedObject(self, &amp;kDTActionHandlerTapBlockKey, block, OBJC_ASSOCIATION_COPY);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码检测了手势识别的关联对象。如果没有，则创建并建立关联关系。同时，将传入的块对象连接到指定的key上。注意block对象的关联内存管理策略。</p>
+<p>手势识别对象需要一个target和action，所以接下来我们定义处理方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-(void)__handleActionForTapGesture:(UITapGestureRecognizer *)gesture &#123;</div><div class="line">    if (gesture.state == UIGestureRecognizerStateRecognized) &#123;</div><div class="line">        void(^action)(void) = objc_getAssociatedObject(self, &amp;kDTActionHandlerTapBlockKey);</div><div class="line">        if (action) &#123;</div><div class="line">            action();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们需要检测手势识别对象的状态，因为我们只需要在点击手势被识别出来时才执行操作。</p>
+<p>从上面的例子我们可以看到，关联对象使用起来并不复杂。它让我们<strong>可以动态地增强类现有的功能。我们可以在实际编码中灵活地运用这一特性。</strong></p>
+<h2 id="三、成员变量、属性的操作方法"><a href="#三、成员变量、属性的操作方法" class="headerlink" title="三、成员变量、属性的操作方法"></a>三、成员变量、属性的操作方法</h2><h3 id="1、成员变量"><a href="#1、成员变量" class="headerlink" title="1、成员变量"></a>1、成员变量</h3><p>成员变量操作包含以下函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 获取成员变量名</div><div class="line">const char * ivar_getName ( Ivar v );</div><div class="line"> </div><div class="line">// 获取成员变量类型编码</div><div class="line">const char * ivar_getTypeEncoding ( Ivar v );</div><div class="line"> </div><div class="line">// 获取成员变量的偏移量</div><div class="line">ptrdiff_t ivar_getOffset ( Ivar v );</div></pre></td></tr></table></figure>
+<ul>
+<li>ivar_getOffset函数，对于类型id或其它对象类型的实例变量，可以调用object_getIvar和object_setIvar来直接访问成员变量，而不使用偏移量。</li>
+</ul>
+<h3 id="2、关联对象"><a href="#2、关联对象" class="headerlink" title="2、关联对象"></a>2、关联对象</h3><p>关联对象操作函数包括以下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 设置关联对象</div><div class="line">void objc_setAssociatedObject ( id object, const void *key, id value, objc_AssociationPolicy policy );</div><div class="line"> </div><div class="line">// 获取关联对象</div><div class="line">id objc_getAssociatedObject ( id object, const void *key );</div><div class="line"> </div><div class="line">// 移除关联对象</div><div class="line">void objc_removeAssociatedObjects ( id object );</div></pre></td></tr></table></figure>
+<p>关联对象及相关实例已经在前面讨论过了，在此不再重复。</p>
+<h3 id="3、属性"><a href="#3、属性" class="headerlink" title="3、属性"></a>3、属性</h3><p>属性操作相关函数包括以下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 获取属性名</div><div class="line">const char * property_getName ( objc_property_t property );</div><div class="line"> </div><div class="line">// 获取属性特性描述字符串</div><div class="line">const char * property_getAttributes ( objc_property_t property );</div><div class="line"> </div><div class="line">// 获取属性中指定的特性</div><div class="line">char * property_copyAttributeValue ( objc_property_t property, const char *attributeName );</div><div class="line"> </div><div class="line">// 获取属性的特性列表</div><div class="line">objc_property_attribute_t * property_copyAttributeList ( objc_property_t property, unsigned int *outCount );</div></pre></td></tr></table></figure>
+<ul>
+<li>property_copyAttributeValue函数，返回的char *在使用完后需要调用free()释放。 </li>
+<li>property_copyAttributeList函数，返回值在使用完后需要调用free()释放。</li>
+</ul>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>假定这样一个场景，我们从服务端两个不同的接口获取相同的字典数据，但这两个接口是由两个人写的，相同的信息使用了不同的字段表示。我们在接收到数据时，可将这些数据保存在相同的对象中。对象类如下定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@interface SGH0510MyObject : NSObject</div><div class="line"></div><div class="line">@property(nonatomic,copy)NSString *name;</div><div class="line"></div><div class="line">@property(nonatomic,copy)NSString *status;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>接口A、B返回的字典数据如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@&#123;@&quot;name1&quot;: &quot;张三&quot;, @&quot;status1&quot;: @&quot;start&quot;&#125;</div><div class="line"> </div><div class="line">@&#123;@&quot;name2&quot;: &quot;张三&quot;, @&quot;status2&quot;: @&quot;end&quot;&#125;</div></pre></td></tr></table></figure>
+<p>通常的方法是写两个方法分别做转换，不过如果能灵活地运用Runtime的话，可以只实现一个转换方法，为此，我们需要先定义一个映射字典(全局变量)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">static NSMutableDictionary *map = nil;</div><div class="line">@implementation SGH0510MyObject</div><div class="line"></div><div class="line">+(void)load &#123;</div><div class="line">    map = [NSMutableDictionary dictionary];</div><div class="line">    map[@&quot;name1&quot;] = @&quot;name&quot;;</div><div class="line">    map[@&quot;status1&quot;] = @&quot;status&quot;;</div><div class="line">    map[@&quot;name2&quot;] = @&quot;name&quot;;</div><div class="line">    map[@&quot;status2&quot;] = @&quot;status&quot;;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>上面的代码将两个字典中不同的字段映射到MyObject中相同的属性上，这样，转换方法可如下处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">-(void)setDataWithDic:(NSDictionary *)dic &#123;</div><div class="line">    [dic enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) &#123;</div><div class="line">        NSString *propertyKey = [self propertyForKey:key];</div><div class="line">        if (propertyKey) &#123;</div><div class="line">            objc_property_t property = class_getProperty([self class], [propertyKey UTF8String]);</div><div class="line">            //TODO: 针对特殊数据类型做处理</div><div class="line">            NSString *attributeString = [NSString stringWithCString:property_getAttributes((__bridge objc_property_t)(propertyKey)) encoding:NSUTF8StringEncoding];</div><div class="line">            //...</div><div class="line">            [self setValue:obj forKey:propertyKey];</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>没有<code>propertyForKey:</code>方法：<br><img src="/2017/05/10/7_1Objective-C-Runtime-Two/Objective-C-Runtime-Two/pic1.png" alt=""></p>
+</blockquote>
+<p>当然，一个属性能否通过上面这种方式来处理的前提是其支持KVC。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本章中我们讨论了Runtime中与成员变量和属性相关的内容。成员变量与属性是类的数据基础，合理地使用Runtime中的相关操作能让我们更加灵活地来处理与类数据相关的工作。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/05/10/7_1Objective-C-Runtime-Two/" data-title="读《Objective-C Runtime 运行时之二：成员变量与属性》摘录 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/05/06/7_0Objective-C-Runtime-One/" title="运行时之一：类与对象》摘录">
+  <strong>上一篇：</strong><br/>
+  <span>
+  运行时之一：类与对象》摘录</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/05/11/8Objective-C-Runtime-Three/"  title="读《Objective-C Runtime 运行时之三：方法与消息》摘录">
+ <strong>下一篇：</strong><br/> 
+ <span>读《Objective-C Runtime 运行时之三：方法与消息》摘录
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#类型编码-Type-Encoding"><span class="toc-number">1.</span> <span class="toc-text">类型编码(Type Encoding)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#成员变量、属性"><span class="toc-number">2.</span> <span class="toc-text">成员变量、属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、基础数据类型"><span class="toc-number">2.1.</span> <span class="toc-text">一、基础数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Ivar"><span class="toc-number">2.1.1.</span> <span class="toc-text">1、Ivar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、objc-property-t"><span class="toc-number">2.1.2.</span> <span class="toc-text">2、objc_property_t</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、objc-property-attribute-t"><span class="toc-number">2.1.3.</span> <span class="toc-text">3、objc_property_attribute_t</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、关联对象-Associated-Object"><span class="toc-number">2.2.</span> <span class="toc-text">二、关联对象(Associated Object)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、成员变量、属性的操作方法"><span class="toc-number">2.3.</span> <span class="toc-text">三、成员变量、属性的操作方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、成员变量"><span class="toc-number">2.3.1.</span> <span class="toc-text">1、成员变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、关联对象"><span class="toc-number">2.3.2.</span> <span class="toc-text">2、关联对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、属性"><span class="toc-number">2.3.3.</span> <span class="toc-text">3、属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

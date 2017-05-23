@@ -1,0 +1,653 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>运行时之一：类与对象》摘录 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="本文出处：Objective-C Runtime 运行时之一：类与对象 原文出处： 南峰子的技术博客    Objective-C语言是一门动态语言，它将很多静态语言在编译和链接时期做的事放到了运行时来处理。这种动态语言的优势在于：我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。 这种特性意味着Objective-C不仅需要一个编译器，还需要一个运行时系">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运行时之一：类与对象》摘录">
+<meta property="og:url" content="https://univer2012.github.io/2017/05/06/7_0Objective-C-Runtime-One/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="本文出处：Objective-C Runtime 运行时之一：类与对象 原文出处： 南峰子的技术博客    Objective-C语言是一门动态语言，它将很多静态语言在编译和链接时期做的事放到了运行时来处理。这种动态语言的优势在于：我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。 这种特性意味着Objective-C不仅需要一个编译器，还需要一个运行时系">
+<meta property="og:image" content="https://univer2012.github.io/2017/05/06/7_0Objective-C-Runtime-One/7-1Objective-C-Runtime-One/pic1.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/05/06/7_0Objective-C-Runtime-One/7-1Objective-C-Runtime-One/pic2.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/05/06/7_0Objective-C-Runtime-One/7-1Objective-C-Runtime-One/pic3.png">
+<meta property="og:updated_time" content="2017-05-15T08:19:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="运行时之一：类与对象》摘录">
+<meta name="twitter:description" content="本文出处：Objective-C Runtime 运行时之一：类与对象 原文出处： 南峰子的技术博客    Objective-C语言是一门动态语言，它将很多静态语言在编译和链接时期做的事放到了运行时来处理。这种动态语言的优势在于：我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。 这种特性意味着Objective-C不仅需要一个编译器，还需要一个运行时系">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/05/06/7_0Objective-C-Runtime-One/7-1Objective-C-Runtime-One/pic1.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="读《objective-c" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/05/06/7_0Objective-C-Runtime-One/" title="运行时之一：类与对象》摘录" itemprop="url">运行时之一：类与对象》摘录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-05-06T01:20:36.000Z" itemprop="datePublished"> Published 2017-05-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#类与对象基础数据结构"><span class="toc-number">1.</span> <span class="toc-text">类与对象基础数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Class"><span class="toc-number">1.1.</span> <span class="toc-text">Class</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#objc-object与id"><span class="toc-number">1.1.1.</span> <span class="toc-text">objc_object与id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#objc-cache"><span class="toc-number">1.1.2.</span> <span class="toc-text">objc_cache</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元类-Meta-Class"><span class="toc-number">1.2.</span> <span class="toc-text">元类(Meta Class)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类与对象操作函数"><span class="toc-number">2.</span> <span class="toc-text">类与对象操作函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类相关操作函数"><span class="toc-number">2.1.</span> <span class="toc-text">类相关操作函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、类名-name"><span class="toc-number">2.1.1.</span> <span class="toc-text">一、类名(name)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、父类-super-class-和元类-meta-class"><span class="toc-number">2.1.2.</span> <span class="toc-text">二、父类(super_class)和元类(meta-class)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、实例变量大小-instance-size"><span class="toc-number">2.1.3.</span> <span class="toc-text">三、实例变量大小(instance_size)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、成员变量-ivars-及属性"><span class="toc-number">2.1.4.</span> <span class="toc-text">四、成员变量(ivars)及属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-成员变量操作函数，主要包含以下函数："><span class="toc-number">2.1.4.1.</span> <span class="toc-text">1.成员变量操作函数，主要包含以下函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-属性操作函数，主要包含以下函数："><span class="toc-number">2.1.4.2.</span> <span class="toc-text">2.属性操作函数，主要包含以下函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-在MAC-OS-X系统中，我们可以使用垃圾回收器。runtime提供了几个函数来确定一个对象的内存区域是否可以被垃圾回收器扫描，以处理strong-weak引用。"><span class="toc-number">2.1.4.3.</span> <span class="toc-text">3.在MAC OS X系统中，我们可以使用垃圾回收器。runtime提供了几个函数来确定一个对象的内存区域是否可以被垃圾回收器扫描，以处理strong/weak引用。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、方法-methodLists"><span class="toc-number">2.1.5.</span> <span class="toc-text">五、方法(methodLists)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、协议-objc-protocol-list"><span class="toc-number">2.1.6.</span> <span class="toc-text">六、协议(objc_protocol_list)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、版本-version"><span class="toc-number">2.1.7.</span> <span class="toc-text">七、版本(version)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、其它"><span class="toc-number">2.1.8.</span> <span class="toc-text">八、其它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#九、实例-Example"><span class="toc-number">2.1.9.</span> <span class="toc-text">九、实例(Example)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十、动态创建类和对象"><span class="toc-number">2.1.10.</span> <span class="toc-text">十、动态创建类和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、动态创建类"><span class="toc-number">2.1.10.1.</span> <span class="toc-text">1、动态创建类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、动态创建对象"><span class="toc-number">2.1.10.2.</span> <span class="toc-text">2、动态创建对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十一、实例操作函数"><span class="toc-number">2.1.11.</span> <span class="toc-text">十一、实例操作函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-针对整个对象进行操作的函数，这类函数包含"><span class="toc-number">2.1.11.1.</span> <span class="toc-text">1.针对整个对象进行操作的函数，这类函数包含</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-针对对象实例变量进行操作的函数，这类函数包含："><span class="toc-number">2.1.11.2.</span> <span class="toc-text">2.针对对象实例变量进行操作的函数，这类函数包含：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-针对对象的类进行操作的函数，这类函数包含："><span class="toc-number">2.1.11.3.</span> <span class="toc-text">3.针对对象的类进行操作的函数，这类函数包含：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十二、获取类定义"><span class="toc-number">2.1.12.</span> <span class="toc-text">十二、获取类定义</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<p>本文出处：<a href="http://blog.jobbole.com/79566/" target="_blank" rel="external">Objective-C Runtime 运行时之一：类与对象</a></p>
+<p>原文出处： 南峰子的技术博客   </p>
+<p>Objective-C语言是一门动态语言，它将很多静态语言在编译和链接时期做的事放到了运行时来处理。这种动态语言的优势在于：我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。</p>
+<p>这种特性意味着Objective-C不仅需要一个编译器，还需要一个运行时系统来执行编译的代码。对于Objective-C来说，这个运行时系统就像一个操作系统一样：它让所有的工作可以正常的运行。这个运行时系统即Objc Runtime。Objc Runtime其实是一个Runtime库，它基本上是用C和汇编写的，这个库使得C语言有了面向对象的能力。</p>
+<p>Runtime库主要做下面几件事：</p>
+<ol>
+<li>封装：在这个库中，对象可以用C语言中的结构体表示，而方法可以用C函数来实现，另外再加上了一些额外的特性。这些结构体和函数被runtime函数封装后，我们就可以在程序运行时创建，检查，修改类、对象和它们的方法了。</li>
+<li>找出方法的最终执行代码：当程序执行[object doSomething]时，会向消息接收者(object)发送一条消息(doSomething)，runtime会根据消息接收者是否能响应该消息而做出不同的反应。这将在后面详细介绍。</li>
+</ol>
+<p>Objective-C runtime目前有两个版本：Modern runtime和Legacy runtime。Modern Runtime 覆盖了64位的Mac OS X Apps，还有 iOS Apps，Legacy Runtime 是早期用来给32位 Mac OS X Apps 用的，也就是可以不用管就是了。</p>
+<h1 id="类与对象基础数据结构"><a href="#类与对象基础数据结构" class="headerlink" title="类与对象基础数据结构"></a>类与对象基础数据结构</h1><h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>Objective-C类是由Class类型来表示的，它实际上是一个指向objc_class结构体的指针。它的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_class *Class;</div></pre></td></tr></table></figure>
+<p>查看objc/runtime.h中objc_class结构体的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">struct objc_class &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line"> </div><div class="line">#if !__OBJC2__</div><div class="line">    Class super_class                       OBJC2_UNAVAILABLE;  // 父类</div><div class="line">    const char *name                        OBJC2_UNAVAILABLE;  // 类名</div><div class="line">    long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0</div><div class="line">    long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识</div><div class="line">    long instance_size                      OBJC2_UNAVAILABLE;  // 该类的实例变量大小</div><div class="line">    struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 该类的成员变量链表</div><div class="line">    struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法定义的链表</div><div class="line">    struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存</div><div class="line">    struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议链表</div><div class="line">#endif</div><div class="line"> </div><div class="line">&#125; OBJC2_UNAVAILABLE;</div><div class="line">/* Use `Class` instead of `struct objc_class *` */</div></pre></td></tr></table></figure>
+<p>在这个定义中，下面几个字段是我们感兴趣的</p>
+<ol>
+<li>isa：需要注意的是在Objective-C中，所有的类自身也是一个对象，这个对象的Class里面也有一个isa指针，它指向metaClass(元类)，我们会在后面介绍它。</li>
+<li>super_class：指向该类的父类，如果该类已经是最顶层的根类(如NSObject或NSProxy)，则super_class为NULL。</li>
+<li>cache：用于缓存最近使用的方法。一个接收者对象接收到一个消息时，它会根据isa指针去查找能够响应这个消息的对象。在实际使用中，这个对象只有一部分方法是常用的，很多方法其实很少用或者根本用不上。这种情况下，如果每次消息来时，我们都是methodLists中遍历一遍，性能势必很差。这时，cache就派上用场了。在我们每次调用过一个方法后，这个方法就会被缓存到cache列表中，下次调用的时候runtime就会优先去cache中查找，如果cache没有，才去methodLists中查找方法。这样，对于那些经常用到的方法的调用，但提高了调用的效率。</li>
+<li>version：我们可以使用这个字段来提供类的版本信息。这对于对象的序列化非常有用，它可是让我们识别出不同类定义版本中实例变量布局的改变。</li>
+</ol>
+<p>针对cache，我们用下面例子来说明其执行过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSArray *array = [[NSArray alloc] init];</div></pre></td></tr></table></figure>
+<p>其流程是：</p>
+<ol>
+<li>[NSArray alloc]先被执行。因为NSArray没有+alloc方法，于是去父类NSObject去查找。</li>
+<li>检测NSObject是否响应+alloc方法，发现响应，于是检测NSArray类，并根据其所需的内存空间大小开始分配内存空间，然后把isa指针指向NSArray类。同时，+alloc也被加进cache列表里面。</li>
+<li>接着，执行-init方法，如果NSArray响应该方法，则直接将其加入cache；如果不响应，则去父类查找。</li>
+<li>在后期的操作中，如果再以[[NSArray alloc] init]这种方式来创建数组，则会直接从cache中取出相应的方法，直接调用。</li>
+</ol>
+<h3 id="objc-object与id"><a href="#objc-object与id" class="headerlink" title="objc_object与id"></a>objc_object与id</h3><p>objc_object是表示一个类的实例的结构体，它的定义如下(objc/objc.h)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct objc_object &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">typedef struct objc_object *id;</div></pre></td></tr></table></figure>
+<p>可以看到，这个结构体只有一个字体，即指向其类的isa指针。这样，当我们向一个Objective-C对象发送消息时，运行时库会根据实例对象的isa指针找到这个实例对象所属的类。Runtime库会在类的方法列表及父类的方法列表中去寻找与消息对应的selector指向的方法。找到后即运行这个方法。</p>
+<p>当创建一个特定类的实例对象时，分配的内存包含一个objc_object数据结构，然后是类的实例变量的数据。NSObject类的alloc和allocWithZone:方法使用函数class_createInstance来创建objc_object数据结构。</p>
+<p>另外还有我们常见的id，它是一个objc_object结构类型的指针。它的存在可以让我们实现类似于C++中泛型的一些操作。该类型的对象可以转换为任何一种对象，有点类似于C语言中void *指针类型的作用。</p>
+<h3 id="objc-cache"><a href="#objc-cache" class="headerlink" title="objc_cache"></a>objc_cache</h3><p>上面提到了objc_class结构体中的cache字段，它用于缓存调用过的方法。这个字段是一个指向objc_cache结构体的指针，其定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct objc_cache &#123;</div><div class="line">    unsigned int mask /* total = mask + 1 */                 OBJC2_UNAVAILABLE;</div><div class="line">    unsigned int occupied                                    OBJC2_UNAVAILABLE;</div><div class="line">    Method buckets[1]                                        OBJC2_UNAVAILABLE;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>该结构体的字段描述如下：</p>
+<ol>
+<li>mask：一个整数，指定分配的缓存bucket的总数。在方法查找过程中，Objective-C runtime使用这个字段来确定开始线性查找数组的索引位置。指向方法selector的指针与该字段做一个AND位操作(index = (mask &amp; selector))。这可以作为一个简单的hash散列算法。</li>
+<li>occupied：一个整数，指定实际占用的缓存bucket的总数。</li>
+<li>buckets：指向Method数据结构指针的数组。这个数组可能包含不超过mask+1个元素。需要注意的是，指针可能是NULL，表示这个缓存bucket没有被占用，另外被占用的bucket可能是不连续的。这个数组可能会随着时间而增长。</li>
+</ol>
+<h2 id="元类-Meta-Class"><a href="#元类-Meta-Class" class="headerlink" title="元类(Meta Class)"></a>元类(Meta Class)</h2><p>在上面我们提到，所有的类自身也是一个对象，我们可以向这个对象发送消息(即调用类方法)。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSArray *array = [NSArray array];</div></pre></td></tr></table></figure>
+<p>这个例子中，<code>+array</code>消息发送给了NSArray类，而这个NSArray也是一个对象。既然是对象，那么它也是一个<code>objc_object</code>指针，它包含一个指向其类的一个isa指针。那么这些就有一个问题了，这个isa指针指向什么呢？为了调用<code>+array</code>方法，这个类的isa指针必须指向一个包含这些类方法的一个<code>objc_class</code>结构体。这就引出了meta-class的概念</p>
+<blockquote>
+<p>meta-class是一个类对象的类。</p>
+</blockquote>
+<p>当我们向一个对象发送消息时，runtime会在这个对象所属的这个类的方法列表中查找方法；而向一个类发送消息时，会在这个类的meta-class的方法列表中查找。</p>
+<p><strong>meta-class之所以重要，是因为它存储着一个类的所有类方法。每个类都会有一个单独的meta-class，因为每个类的类方法基本不可能完全相同。</strong></p>
+<p>再深入一下，meta-class也是一个类，也可以向它发送一个消息，那么它的isa又是指向什么呢？为了不让这种结构无限延伸下去，Objective-C的设计者让所有的meta-class的isa指向基类的meta-class，以此作为它们的所属类。即，任何NSObject继承体系下的meta-class都使用NSObject的meta-class作为自己的所属类，而基类的meta-class的isa指针是指向它自己。这样就形成了一个完美的闭环。</p>
+<p>通过上面的描述，再加上对objc_class结构体中super_class指针的分析，我们就可以描绘出类及相应meta-class类的一个继承体系了，如下图所示：</p>
+<p><img src="/2017/05/06/7_0Objective-C-Runtime-One/7-1Objective-C-Runtime-One/pic1.png" alt="类及相应meta-class类的继承体系"></p>
+<p><strong>对于NSObject继承体系来说，其实例方法对体系中的所有实例、类和meta-class都是有效的；而类方法对于体系内的所有类和meta-class都是有效的。</strong></p>
+<p>讲了这么多，我们还是来写个例子吧：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">void TestMetaClass(id self, SEL _cmd) &#123;</div><div class="line"> </div><div class="line">    NSLog(@&quot;This objcet is %p&quot;, self);</div><div class="line">    NSLog(@&quot;Class is %@, super class is %@&quot;, [self class], [self superclass]);</div><div class="line"> </div><div class="line">    Class currentClass = [self class];</div><div class="line">    for (int i = 0; i &lt; 4; i++) &#123;</div><div class="line">        NSLog(@&quot;Following the isa pointer %d times gives %p&quot;, i, currentClass);</div><div class="line">        currentClass = objc_getClass((__bridge void *)currentClass);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    NSLog(@&quot;NSObject&apos;s class is %p&quot;, [NSObject class]);</div><div class="line">    NSLog(@&quot;NSObject&apos;s meta class is %p&quot;, objc_getClass((__bridge void *)[NSObject class]));</div><div class="line">&#125;</div><div class="line"> </div><div class="line">#pragma mark -</div><div class="line"> </div><div class="line">@implementation Test</div><div class="line"> </div><div class="line">- (void)ex_registerClassPair &#123;</div><div class="line"> </div><div class="line">    Class newClass = objc_allocateClassPair([NSError class], &quot;TestClass&quot;, 0);</div><div class="line">    class_addMethod(newClass, @selector(testMetaClass), (IMP)TestMetaClass, &quot;v@:&quot;);</div><div class="line">    objc_registerClassPair(newClass);</div><div class="line"> </div><div class="line">    id instance = [[newClass alloc] initWithDomain:@&quot;some domain&quot; code:0 userInfo:nil];</div><div class="line">    [instance performSelector:@selector(testMetaClass)];</div><div class="line">&#125;</div><div class="line"> </div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>这个例子是在运行时创建了一个NSError的子类TestClass，然后为这个子类添加一个方法testMetaClass，这个方法的实现是TestMetaClass函数。</p>
+<p>运行后，打印结果是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">2017-05-06 09:16:02.210 ObjectiveCDemo160728[6892:5692761] This object is 0x60000024bee0</div><div class="line">2017-05-06 09:16:02.211 ObjectiveCDemo160728[6892:5692761] Class id TestClass, super class is NSError</div><div class="line">2017-05-06 09:16:02.211 ObjectiveCDemo160728[6892:5692761] Following the isa pointer 0 times gives 0x6000002443e0</div><div class="line">2017-05-06 09:16:02.211 ObjectiveCDemo160728[6892:5692761] Following the isa pointer 1 times gives 0x0</div><div class="line">2017-05-06 09:16:02.212 ObjectiveCDemo160728[6892:5692761] Following the isa pointer 2 times gives 0x0</div><div class="line">2017-05-06 09:16:02.212 ObjectiveCDemo160728[6892:5692761] Following the isa pointer 3 times gives 0x0</div><div class="line">2017-05-06 09:16:02.212 ObjectiveCDemo160728[6892:5692761] NSObject&apos;s class is 0x10a54fe58</div><div class="line">2017-05-06 09:16:02.212 ObjectiveCDemo160728[6892:5692761] NSObject&apos;s meta class is 0x0</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这里需要注意的是：我们在一个类对象调用class方法是无法获取meta-class，它只是返回类而已。</p>
+</blockquote>
+<h1 id="类与对象操作函数"><a href="#类与对象操作函数" class="headerlink" title="类与对象操作函数"></a>类与对象操作函数</h1><p>runtime提供了大量的函数来操作类与对象。<strong>类的操作方法大部分是以class为前缀的，而对象的操作方法大部分是以objc或object_为前缀。</strong>下面我们将根据这些方法的用途来分类讨论这些方法的使用。</p>
+<h2 id="类相关操作函数"><a href="#类相关操作函数" class="headerlink" title="类相关操作函数"></a>类相关操作函数</h2><p>我们可以回过头去看看objc_class的定义，runtime提供的操作类的方法主要就是针对这个结构体中的各个字段的。下面我们分别介绍这一些的函数。并在最后以实例来演示这些函数的具体用法。</p>
+<h3 id="一、类名-name"><a href="#一、类名-name" class="headerlink" title="一、类名(name)"></a>一、类名(name)</h3><p>类名操作的函数主要有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 获取类的类名</div><div class="line">const char * class_getName ( Class cls );</div></pre></td></tr></table></figure>
+<ul>
+<li>对于class_getName函数，如果传入的cls为Nil，则返回一个字字符串。</li>
+</ul>
+<h3 id="二、父类-super-class-和元类-meta-class"><a href="#二、父类-super-class-和元类-meta-class" class="headerlink" title="二、父类(super_class)和元类(meta-class)"></a>二、父类(super_class)和元类(meta-class)</h3><p>父类和元类操作的函数主要有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 获取类的父类</div><div class="line">Class class_getSuperclass ( Class cls );</div><div class="line"> </div><div class="line">// 判断给定的Class是否是一个元类</div><div class="line">BOOL class_isMetaClass ( Class cls );</div></pre></td></tr></table></figure>
+<ul>
+<li><code>class_getSuperclass</code>函数，当cls为Nil或者cls为根类时，返回Nil。不过通常我们可以使用NSObject类的superclass方法来达到同样的目的。</li>
+<li><code>class_isMetaClass</code>函数，如果是cls是元类，则返回YES；如果否或者传入的cls为Nil，则返回NO。</li>
+</ul>
+<h3 id="三、实例变量大小-instance-size"><a href="#三、实例变量大小-instance-size" class="headerlink" title="三、实例变量大小(instance_size)"></a>三、实例变量大小(instance_size)</h3><p>实例变量大小操作的函数有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 获取实例大小</div><div class="line">size_t class_getInstanceSize ( Class cls );</div></pre></td></tr></table></figure>
+<h3 id="四、成员变量-ivars-及属性"><a href="#四、成员变量-ivars-及属性" class="headerlink" title="四、成员变量(ivars)及属性"></a>四、成员变量(ivars)及属性</h3><p>在objc_class中，所有的成员变量、属性的信息是放在链表ivars中的。ivars是一个数组，数组中每个元素是指向Ivar(变量信息)的指针。runtime提供了丰富的函数来操作这一字段。大体上可以分为以下几类：</p>
+<h4 id="1-成员变量操作函数，主要包含以下函数："><a href="#1-成员变量操作函数，主要包含以下函数：" class="headerlink" title="1.成员变量操作函数，主要包含以下函数："></a>1.成员变量操作函数，主要包含以下函数：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 获取类中指定名称实例成员变量的信息</div><div class="line">Ivar class_getInstanceVariable ( Class cls, const char *name );</div><div class="line"> </div><div class="line">// 获取类成员变量的信息</div><div class="line">Ivar class_getClassVariable ( Class cls, const char *name );</div><div class="line"> </div><div class="line">// 添加成员变量</div><div class="line">BOOL class_addIvar ( Class cls, const char *name, size_t size, uint8_t alignment, const char *types );</div><div class="line"> </div><div class="line">// 获取整个成员变量列表</div><div class="line">Ivar * class_copyIvarList ( Class cls, unsigned int *outCount );</div></pre></td></tr></table></figure>
+<ul>
+<li><code>class_getInstanceVariable</code>函数，它返回一个指向包含name指定的成员变量信息的objc_ivar结构体的指针(Ivar)。</li>
+<li><code>class_getClassVariable</code>函数，目前没有找到关于Objective-C中类变量的信息，一般认为Objective-C不支持类变量。<strong>注意，返回的列表不包含父类的成员变量和属性。</strong></li>
+<li><strong>Objective-C不支持往已存在的类中添加实例变量，因此不管是系统库提供的类，还是我们自定义的类，都无法动态添加成员变量。</strong>但如果我们通过运行时来创建一个类的话，又应该如何给它添加成员变量呢？这时我们就可以使用<code>class_addIvar</code>函数了。不过需要注意的是，这个方法只能在<code>objc_allocateClassPair</code>函数与<code>objc_registerClassPair</code>之间调用。另外，这个类也不能是元类。成员变量的按字节最小对齐量是1&lt;&lt;alignment。这取决于ivar的类型和机器的架构。如果变量的类型是指针类型，则传递log2(sizeof(pointer_type))。</li>
+<li><code>class_copyIvarList</code>函数，它返回一个指向成员变量信息的数组，数组中每个元素是指向该成员变量信息的objc_ivar结构体的指针。<strong>这个数组不包含在父类中声明的变量。outCount指针返回数组的大小。需要注意的是，我们必须使用free()来释放这个数组。</strong></li>
+</ul>
+<h4 id="2-属性操作函数，主要包含以下函数："><a href="#2-属性操作函数，主要包含以下函数：" class="headerlink" title="2.属性操作函数，主要包含以下函数："></a>2.属性操作函数，主要包含以下函数：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 获取指定的属性</div><div class="line">objc_property_t class_getProperty ( Class cls, const char *name );</div><div class="line"> </div><div class="line">// 获取属性列表</div><div class="line">objc_property_t * class_copyPropertyList ( Class cls, unsigned int *outCount );</div><div class="line"> </div><div class="line">// 为类添加属性</div><div class="line">BOOL class_addProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount );</div><div class="line"> </div><div class="line">// 替换类的属性</div><div class="line">void class_replaceProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount );</div></pre></td></tr></table></figure>
+<p>这一种方法也是针对ivars来操作，不过只操作那些是属性的值。我们在后面介绍属性时会再遇到这些函数。</p>
+<h4 id="3-在MAC-OS-X系统中，我们可以使用垃圾回收器。runtime提供了几个函数来确定一个对象的内存区域是否可以被垃圾回收器扫描，以处理strong-weak引用。"><a href="#3-在MAC-OS-X系统中，我们可以使用垃圾回收器。runtime提供了几个函数来确定一个对象的内存区域是否可以被垃圾回收器扫描，以处理strong-weak引用。" class="headerlink" title="3.在MAC OS X系统中，我们可以使用垃圾回收器。runtime提供了几个函数来确定一个对象的内存区域是否可以被垃圾回收器扫描，以处理strong/weak引用。"></a>3.在MAC OS X系统中，我们可以使用垃圾回收器。runtime提供了几个函数来确定一个对象的内存区域是否可以被垃圾回收器扫描，以处理strong/weak引用。</h4><p>这几个函数定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const uint8_t * class_getIvarLayout ( Class cls );</div><div class="line">void class_setIvarLayout ( Class cls, const uint8_t *layout );</div><div class="line">const uint8_t * class_getWeakIvarLayout ( Class cls );</div><div class="line">void class_setWeakIvarLayout ( Class cls, const uint8_t *layout );</div></pre></td></tr></table></figure>
+<p>但通常情况下，我们不需要去主动调用这些方法；在调用<code>objc_registerClassPair</code>时，会生成合理的布局。在此不详细介绍这些函数。</p>
+<h3 id="五、方法-methodLists"><a href="#五、方法-methodLists" class="headerlink" title="五、方法(methodLists)"></a>五、方法(methodLists)</h3><p>方法操作主要有以下函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// 添加方法</div><div class="line">BOOL class_addMethod ( Class cls, SEL name, IMP imp, const char *types );</div><div class="line"> </div><div class="line">// 获取实例方法</div><div class="line">Method class_getInstanceMethod ( Class cls, SEL name );</div><div class="line"> </div><div class="line">// 获取类方法</div><div class="line">Method class_getClassMethod ( Class cls, SEL name );</div><div class="line"> </div><div class="line">// 获取所有方法的数组</div><div class="line">Method * class_copyMethodList ( Class cls, unsigned int *outCount );</div><div class="line"> </div><div class="line">// 替代方法的实现</div><div class="line">IMP class_replaceMethod ( Class cls, SEL name, IMP imp, const char *types );</div><div class="line"> </div><div class="line">// 返回方法的具体实现</div><div class="line">IMP class_getMethodImplementation ( Class cls, SEL name );</div><div class="line">IMP class_getMethodImplementation_stret ( Class cls, SEL name );</div><div class="line"> </div><div class="line">// 类实例是否响应指定的selector</div><div class="line">BOOL class_respondsToSelector ( Class cls, SEL sel );</div></pre></td></tr></table></figure>
+<ul>
+<li><code>**class_addMethod**</code><strong>的实现会覆盖父类的方法实现，但不会取代本类中已存在的实现，如果本类中包含一个同名的实现，则函数会返回NO</strong>。如果要修改已存在实现，可以使用<code>method_setImplementation</code>。</li>
+</ul>
+<p>一个Objective-C方法是一个简单的C函数，它至少包含两个参数—self和_cmd。所以，我们的实现函数(IMP参数指向的函数)至少需要两个参数，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">void myMethodIMP(id self, SEL _cmd) &#123;</div><div class="line">    // implementation ....</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>与成员变量不同的是，我们可以为类动态添加方法，不管这个类是否已存在。</strong></p>
+<p>另外，参数types是一个描述传递给方法的参数类型的字符数组，这就涉及到类型编码，我们将在后面介绍。</p>
+<ul>
+<li><p><code>**class_getInstanceMethod**</code><strong>、<code>class_getClassMethod</code>函数，与class_copyMethodList不同的是，这两个函数都会去搜索父类的实现。</strong></p>
+</li>
+<li><p><code>**class_copyMethodList**</code><strong>函数，返回包含所有实例方法的数组，如果需要获取类方法，则可以使用<code>class_copyMethodList(object_getClass(cls), &amp;count)</code>(一个类的实例方法是定义在元类里面)。该列表不包含父类实现的方法。</strong> outCount参数返回方法的个数。在获取到列表后，我们需要使用free()方法来释放它。</p>
+</li>
+<li><p><code>class_replaceMethod</code>函数，该函数的行为可以分为两种：<strong>如果类中不存在name指定的方法，则类似于class_addMethod函数一样会添加方法；如果类中已存在name指定的方法，则类似于method_setImplementation一样替代原方法的实现。</strong></p>
+</li>
+<li><p><code>class_getMethodImplementation</code>函数，该函数在向类实例发送消息时会被调用，并返回一个指向方法实现函数的指针。这个函数会比<code>method_getImplementation(class_getInstanceMethod(cls, name))</code>更快。返回的函数指针可能是一个指向runtime内部的函数，而不一定是方法的实际实现。例如，如果类实例无法响应selector，则返回的函数指针将是运行时消息转发机制的一部分。</p>
+</li>
+<li><code>class_respondsToSelector</code>函数，我们通常使用NSObject类的<code>respondsToSelector:</code>或<code>instancesRespondToSelector:</code>方法来达到相同目的。</li>
+</ul>
+<h3 id="六、协议-objc-protocol-list"><a href="#六、协议-objc-protocol-list" class="headerlink" title="六、协议(objc_protocol_list)"></a>六、协议(objc_protocol_list)</h3><p>协议相关的操作包含以下函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 添加协议</div><div class="line">BOOL class_addProtocol ( Class cls, Protocol *protocol );</div><div class="line"> </div><div class="line">// 返回类是否实现指定的协议</div><div class="line">BOOL class_conformsToProtocol ( Class cls, Protocol *protocol );</div><div class="line"> </div><div class="line">// 返回类实现的协议列表</div><div class="line">Protocol * class_copyProtocolList ( Class cls, unsigned int *outCount );</div></pre></td></tr></table></figure>
+<ul>
+<li>class_conformsToProtocol函数可以使用NSObject类的conformsToProtocol:方法来替代。</li>
+<li>class_copyProtocolList函数返回的是一个数组，在使用后我们需要使用free()手动释放。</li>
+</ul>
+<h3 id="七、版本-version"><a href="#七、版本-version" class="headerlink" title="七、版本(version)"></a>七、版本(version)</h3><p>版本相关的操作包含以下函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 获取版本号</div><div class="line">int class_getVersion ( Class cls );</div><div class="line"> </div><div class="line">// 设置版本号</div><div class="line">void class_setVersion ( Class cls, int version );</div></pre></td></tr></table></figure>
+<h3 id="八、其它"><a href="#八、其它" class="headerlink" title="八、其它"></a>八、其它</h3><p>runtime还提供了两个函数来供CoreFoundation的tool-free bridging使用，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Class objc_getFutureClass ( const char *name );</div><div class="line">void objc_setFutureClass ( Class cls, const char *name );</div></pre></td></tr></table></figure>
+<p>通常我们不直接使用这两个函数。</p>
+<h3 id="九、实例-Example"><a href="#九、实例-Example" class="headerlink" title="九、实例(Example)"></a><strong>九、实例(Example)</strong></h3><p>上面列举了大量类操作的函数，下面我们写个实例，来看看这些函数的实例效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div></pre></td><td class="code"><pre><div class="line">//-------------------------------------------------</div><div class="line">//SGH170506MyClass.h</div><div class="line">@interface SGH170506MyClass : NSObject&lt;NSCopying, NSCoding&gt;</div><div class="line"></div><div class="line">@property(nonatomic,strong)NSArray *array;</div><div class="line"></div><div class="line">@property(nonatomic, copy)NSString *string;</div><div class="line">-(void)method1;</div><div class="line">-(void)method2;</div><div class="line">+(void)classMethod1;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">//-------------------------------------------------</div><div class="line">//SGH170506MyClass.m</div><div class="line">#import &quot;SGH170506MyClass.h&quot;</div><div class="line"></div><div class="line">@interface SGH170506MyClass () &#123;</div><div class="line">    NSInteger _instance1;</div><div class="line">    NSString *_instance2;</div><div class="line">&#125;</div><div class="line">@property(nonatomic,assign) NSUInteger integer;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation SGH170506MyClass</div><div class="line"></div><div class="line">+(void)classMethod1 &#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)method1 &#123;</div><div class="line">    NSLog(@&quot;call method method1&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)method2 &#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)method3WithArg1:(NSInteger)arg1 arg2:(NSString *)arg2 &#123;</div><div class="line">    NSLog(@&quot;arg1: %ld, arg2: %@&quot;, arg1, arg2);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">//-------------------------------------------------</div><div class="line">//SGH0506OCRuntime1ViewController.m</div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view.</div><div class="line">    </div><div class="line">    [self p_testMyClass];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//MARK:</div><div class="line">-(void)p_testMyClass &#123;</div><div class="line">    SGH170506MyClass *myClass = [[SGH170506MyClass alloc]init];</div><div class="line">    unsigned int outCount = 0;</div><div class="line">    Class cls = myClass.class;</div><div class="line">    </div><div class="line">    //类名</div><div class="line">    NSLog(@&quot;class name: %s&quot;, class_getName(cls));</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">    </div><div class="line">    //父类</div><div class="line">    NSLog(@&quot;super class name: %s&quot;, class_getName(class_getSuperclass(cls)));</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">    </div><div class="line">    //是否是元类</div><div class="line">    NSLog(@&quot;MyClass is %@ a meta-class&quot;, (class_isMetaClass(cls) ? @&quot;&quot;: @&quot;not&quot;) );</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">    </div><div class="line">    Class meta_class = objc_getMetaClass(class_getName(cls));</div><div class="line">    NSLog(@&quot;%s&apos;s meta-class is %s&quot;, class_getName(cls), class_getName(meta_class) );</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">    </div><div class="line">    //变量实例大小</div><div class="line">    NSLog(@&quot;instance size: %zu&quot;, class_getInstanceSize(cls) );</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">    </div><div class="line">    //成员变量</div><div class="line">    Ivar *ivars = class_copyIvarList(cls, &amp;outCount);</div><div class="line">    for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">        Ivar ivar = ivars[i];</div><div class="line">        NSLog(@&quot;instance variable&apos;s name: %s at index: %d&quot;, ivar_getName(ivar), i );</div><div class="line">    &#125;</div><div class="line">    free(ivars);</div><div class="line">    //获取类中指定名称实例成员变量</div><div class="line">    Ivar string = class_getInstanceVariable(cls, &quot;_string&quot;);</div><div class="line">    if (string != NULL) &#123;</div><div class="line">        NSLog(@&quot;instance variable %s&quot;, ivar_getName(string) );</div><div class="line">    &#125;</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">    </div><div class="line">    //属性操作</div><div class="line">    objc_property_t *properties = class_copyPropertyList(cls, &amp;outCount);</div><div class="line">    for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">        objc_property_t property = properties[i];</div><div class="line">        NSLog(@&quot;property&apos;s name: %s&quot;, property_getName(property) );</div><div class="line">    &#125;</div><div class="line">    free(properties);</div><div class="line">    //获取指定的属性</div><div class="line">    objc_property_t array = class_getProperty(cls, &quot;array&quot;);</div><div class="line">    if (array != NULL) &#123;</div><div class="line">        NSLog(@&quot;property %s&quot;, property_getName(array) );</div><div class="line">    &#125;</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">    </div><div class="line">    //方法操作</div><div class="line">    Method *methods = class_copyMethodList(cls, &amp;outCount);</div><div class="line">    for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">        Method method = methods[i];</div><div class="line">        NSLog(@&quot;method&apos;s signature: %s&quot;, method_getName(method));</div><div class="line">    &#125;</div><div class="line">    free(methods);</div><div class="line">    </div><div class="line">    Method method1 = class_getInstanceMethod(cls, @selector(method1));</div><div class="line">    if (method1 != NULL) &#123;</div><div class="line">        NSLog(@&quot;method %s&quot;, method_getName(method1));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    Method classMethod = class_getClassMethod(cls, @selector(classMethod1));</div><div class="line">    if (classMethod != NULL) &#123;</div><div class="line">        NSLog(@&quot;class method: %p&quot;, method_getName(classMethod) );</div><div class="line">    &#125;</div><div class="line">    BOOL isResponds = class_respondsToSelector(cls, @selector(method3WithArg1:arg2:));</div><div class="line">    NSLog(@&quot;MyClass is %@response to selector: method3WithArg1:arg2:&quot;, (isResponds ? @&quot;&quot; : @&quot;not&quot;));</div><div class="line">    </div><div class="line">    IMP imp = class_getMethodImplementation(cls, @selector(method1));</div><div class="line">    imp();</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">    </div><div class="line">    //协议</div><div class="line">    Protocol * __unsafe_unretained * protocols = class_copyProtocolList(cls, &amp;outCount);</div><div class="line">    Protocol *protocol;</div><div class="line">    for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">        protocol = protocols[i];</div><div class="line">        NSLog(@&quot;protocol name : %s&quot;, protocol_getName(protocol));</div><div class="line">    &#125;</div><div class="line">    BOOL isConforms = class_conformsToProtocol(cls, protocol);</div><div class="line">    NSLog(@&quot;MyClass is %@ responsed to protocol %s&quot;,(isConforms ? @&quot;&quot; : @&quot;not&quot;), protocol_getName(protocol));</div><div class="line">    NSLog(@&quot;===============================================&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段程序的输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">2017-05-06 10:50:15.863 ObjectiveCDemo160728[8721:5749009] class name: SGH170506MyClass</div><div class="line">2017-05-06 10:50:15.863 ObjectiveCDemo160728[8721:5749009] ===============================================</div><div class="line">2017-05-06 10:50:15.863 ObjectiveCDemo160728[8721:5749009] super class name: NSObject</div><div class="line">2017-05-06 10:50:15.864 ObjectiveCDemo160728[8721:5749009] ===============================================</div><div class="line">2017-05-06 10:50:15.864 ObjectiveCDemo160728[8721:5749009] MyClass is not a meta-class</div><div class="line">2017-05-06 10:50:15.864 ObjectiveCDemo160728[8721:5749009] ===============================================</div><div class="line">2017-05-06 10:50:15.864 ObjectiveCDemo160728[8721:5749009] SGH170506MyClass&apos;s meta-class is SGH170506MyClass</div><div class="line">2017-05-06 10:50:15.864 ObjectiveCDemo160728[8721:5749009] ===============================================</div><div class="line">2017-05-06 10:50:15.865 ObjectiveCDemo160728[8721:5749009] instance size: 48</div><div class="line">2017-05-06 10:50:15.865 ObjectiveCDemo160728[8721:5749009] ===============================================</div><div class="line">2017-05-06 10:50:15.865 ObjectiveCDemo160728[8721:5749009] instance variable&apos;s name: _instance1 at index: 0</div><div class="line">2017-05-06 10:50:15.865 ObjectiveCDemo160728[8721:5749009] instance variable&apos;s name: _instance2 at index: 1</div><div class="line">2017-05-06 10:50:15.866 ObjectiveCDemo160728[8721:5749009] instance variable&apos;s name: _array at index: 2</div><div class="line">2017-05-06 10:50:15.866 ObjectiveCDemo160728[8721:5749009] instance variable&apos;s name: _string at index: 3</div><div class="line">2017-05-06 10:50:15.866 ObjectiveCDemo160728[8721:5749009] instance variable&apos;s name: _integer at index: 4</div><div class="line">2017-05-06 10:50:15.866 ObjectiveCDemo160728[8721:5749009] instance variable _string</div><div class="line">2017-05-06 10:50:15.867 ObjectiveCDemo160728[8721:5749009] ===============================================</div><div class="line">2017-05-06 10:50:15.867 ObjectiveCDemo160728[8721:5749009] property&apos;s name: integer</div><div class="line">2017-05-06 10:50:15.867 ObjectiveCDemo160728[8721:5749009] property&apos;s name: array</div><div class="line">2017-05-06 10:50:15.867 ObjectiveCDemo160728[8721:5749009] property&apos;s name: string</div><div class="line">2017-05-06 10:50:15.867 ObjectiveCDemo160728[8721:5749009] property array</div><div class="line">2017-05-06 10:50:15.868 ObjectiveCDemo160728[8721:5749009] ===============================================</div><div class="line">2017-05-06 10:50:15.868 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: method1</div><div class="line">2017-05-06 10:50:15.868 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: method2</div><div class="line">2017-05-06 10:50:15.868 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: method3WithArg1:arg2:</div><div class="line">2017-05-06 10:50:15.869 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: integer</div><div class="line">2017-05-06 10:50:15.869 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: setInteger:</div><div class="line">2017-05-06 10:50:15.869 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: setArray:</div><div class="line">2017-05-06 10:50:15.869 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: .cxx_destruct</div><div class="line">2017-05-06 10:50:15.869 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: setString:</div><div class="line">2017-05-06 10:50:15.869 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: array</div><div class="line">2017-05-06 10:50:15.869 ObjectiveCDemo160728[8721:5749009] method&apos;s signature: string</div><div class="line">2017-05-06 10:50:15.870 ObjectiveCDemo160728[8721:5749009] method method1</div><div class="line">2017-05-06 10:50:15.871 ObjectiveCDemo160728[8721:5749009] class method: 0x10512e23f</div><div class="line">2017-05-06 10:50:15.871 ObjectiveCDemo160728[8721:5749009] MyClass is  response to selector: method3WithArg1:arg2:</div><div class="line">2017-05-06 10:50:15.871 ObjectiveCDemo160728[8721:5749009] call method method1</div><div class="line">2017-05-06 10:50:15.872 ObjectiveCDemo160728[8721:5749009] ===============================================</div><div class="line">2017-05-06 10:50:15.872 ObjectiveCDemo160728[8721:5749009] protocol name : NSCopying</div><div class="line">2017-05-06 10:50:15.872 ObjectiveCDemo160728[8721:5749009] protocol name : NSCoding</div><div class="line">2017-05-06 10:50:15.872 ObjectiveCDemo160728[8721:5749009] MyClass is  responsed to protocol NSCoding</div><div class="line">2017-05-06 10:50:15.872 ObjectiveCDemo160728[8721:5749009] ===============================================</div></pre></td></tr></table></figure>
+<h3 id="十、动态创建类和对象"><a href="#十、动态创建类和对象" class="headerlink" title="十、动态创建类和对象"></a>十、动态创建类和对象</h3><p>runtime的强大之处在于它能在运行时创建类和对象。</p>
+<h4 id="1、动态创建类"><a href="#1、动态创建类" class="headerlink" title="1、动态创建类"></a>1、动态创建类</h4><p>动态创建类涉及到以下几个函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 创建一个新类和元类</div><div class="line">Class objc_allocateClassPair ( Class superclass, const char *name, size_t extraBytes );</div><div class="line"> </div><div class="line">// 销毁一个类及其相关联的类</div><div class="line">void objc_disposeClassPair ( Class cls );</div><div class="line"> </div><div class="line">// 在应用中注册由objc_allocateClassPair创建的类</div><div class="line">void objc_registerClassPair ( Class cls );</div></pre></td></tr></table></figure>
+<ul>
+<li><code>objc_allocateClassPair</code>函数：如果我们要创建一个根类，则superclass指定为Nil。extraBytes通常指定为0，该参数是分配给类和元类对象尾部的索引ivars的字节数。</li>
+</ul>
+<p>为了创建一个新类，我们需要调用<code>objc_allocateClassPair</code>。然后使用诸如<code>class_addMethod</code>，<code>class_addIvar</code>等函数来为新创建的类添加方法、实例变量和属性等。完成这些后，我们需要调用<code>objc_registerClassPair</code>函数来注册类，之后这个新类就可以在程序中使用了。</p>
+<p><strong>实例方法和实例变量应该添加到类自身上，而类方法应该添加到类的元类上。</strong></p>
+<ul>
+<li><code>objc_disposeClassPair</code>函数用于销毁一个类，不过需要注意的是，如果程序运行中还存在类或其子类的实例，则不能针对类调用该方法。</li>
+</ul>
+<p>在前面介绍元类时，我们已经有接触到这几个函数了，在此我们再举个实例来看看这几个函数的使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">//-------------------------------------------------</div><div class="line">//SGH0506OCRuntime1ViewController.m</div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    </div><div class="line">    [self p_testRuntimeCreateAClass];</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">void imp_submethod1(id self, SEL _cmd) &#123;</div><div class="line">    NSLog(@&quot;run sub method 1&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//-(void)submethod1 &#123;</div><div class="line">//    </div><div class="line">//&#125;</div><div class="line"></div><div class="line">-(void)p_testRuntimeCreateAClass &#123;</div><div class="line">    Class cls = objc_allocateClassPair(SGH170506MyClass.class, &quot;SGH170506MySubClass&quot;, 0);</div><div class="line">    class_addMethod(cls, @selector(submethod1), (IMP)imp_submethod1, &quot;v@:&quot;);</div><div class="line">    class_replaceMethod(cls, @selector(method1), (IMP)imp_submethod1, &quot;v@:&quot;);</div><div class="line">    class_addIvar(cls, &quot;_ivar1&quot;, sizeof(NSString *), log(sizeof(NSString *)), &quot;i&quot;);</div><div class="line">    </div><div class="line">    objc_property_attribute_t type = &#123;&quot;T&quot;, &quot;@\&quot;NSString\&quot;&quot;&#125;;</div><div class="line">    objc_property_attribute_t ownership = &#123;&quot;C&quot;, &quot;&quot;&#125;;</div><div class="line">    objc_property_attribute_t backingivar = &#123;&quot;V&quot;, &quot;_ivar1&quot;&#125;;</div><div class="line">    objc_property_attribute_t attrs[] = &#123;type, ownership, backingivar&#125;;</div><div class="line">    </div><div class="line">    class_addProperty(cls, &quot;property2&quot;, attrs, 3);</div><div class="line">    objc_registerClassPair(cls);</div><div class="line">    </div><div class="line">    id instance = [[cls alloc]init];</div><div class="line">    [instance performSelector:@selector(submethod1)];</div><div class="line">    [instance performSelector:@selector(method1)];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>程序的输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2017-05-06 14:04:22.667 ObjectiveCDemo160728[11636:5823369] run sub method 1</div><div class="line">2017-05-06 14:04:22.668 ObjectiveCDemo160728[11636:5823369] run sub method 1</div></pre></td></tr></table></figure>
+<h4 id="2、动态创建对象"><a href="#2、动态创建对象" class="headerlink" title="2、动态创建对象"></a>2、动态创建对象</h4><p>动态创建对象的函数如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 创建类实例</div><div class="line">id class_createInstance ( Class cls, size_t extraBytes );</div><div class="line"> </div><div class="line">// 在指定位置创建类实例</div><div class="line">id objc_constructInstance ( Class cls, void *bytes );</div><div class="line"> </div><div class="line">// 销毁类实例</div><div class="line">void * objc_destructInstance ( id obj );</div></pre></td></tr></table></figure></p>
+<ul>
+<li><code>class_createInstance</code>函数：创建实例时，会在默认的内存区域为类分配内存。extraBytes参数表示分配的额外字节数。这些额外的字节可用于存储在类定义中所定义的实例变量之外的实例变量。该函数在ARC环境下无法使用。</li>
+</ul>
+<p>调用class_createInstance的效果与+alloc方法类似。不过在使用class_createInstance时，我们需要确切的知道我们要用它来做什么。在下面的例子中，我们用NSString来测试一下该函数的实际效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-(void)p_testAlloc &#123;</div><div class="line">    id theObject = class_createInstance(NSString.class, sizeof(unsigned));</div><div class="line">    id str1 = [theObject init];</div><div class="line">    NSLog(@&quot;%@&quot;, [str1 class]);</div><div class="line">    </div><div class="line">    id str2 = [[NSString alloc]initWithString:@&quot;test&quot;];</div><div class="line">    NSLog(@&quot;%@&quot;, [str2 class]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2017-05-10 21:21:34.233 ObjectiveCDemo160728[48691:1177615] NSString</div><div class="line">2017-05-10 21:21:34.233 ObjectiveCDemo160728[48691:1177615] __NSCFConstantString</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在默认的ARC下报错了：<br><img src="/2017/05/06/7_0Objective-C-Runtime-One/7-1Objective-C-Runtime-One/pic2.png" alt=""></p>
+</blockquote>
+<p>可以看到，使用class_createInstance函数获取的是NSString实例，而不是类簇中的默认占位符类__NSCFConstantString。</p>
+<ul>
+<li><code>objc_constructInstance</code>函数：在指定的位置(bytes)创建类实例。</li>
+<li><code>objc_destructInstance</code>函数：销毁一个类的实例，但不会释放并移除任何与其相关的引用。</li>
+</ul>
+<h3 id="十一、实例操作函数"><a href="#十一、实例操作函数" class="headerlink" title="十一、实例操作函数"></a>十一、实例操作函数</h3><p>实例操作函数主要是针对我们创建的实例对象的一系列操作函数，我们可以使用这组函数来从实例对象中获取我们想要的一些信息，如实例对象中变量的值。这组函数可以分为三小类：</p>
+<h4 id="1-针对整个对象进行操作的函数，这类函数包含"><a href="#1-针对整个对象进行操作的函数，这类函数包含" class="headerlink" title="1.针对整个对象进行操作的函数，这类函数包含"></a>1.针对整个对象进行操作的函数，这类函数包含</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 返回指定对象的一份拷贝</div><div class="line">id object_copy ( id obj, size_t size );</div><div class="line"> </div><div class="line">// 释放指定对象占用的内存</div><div class="line">id object_dispose ( id obj );</div></pre></td></tr></table></figure>
+<p>有这样一种场景，假设我们有类A和类B，且类B是类A的子类。类B通过添加一些额外的属性来扩展类A。现在我们创建了一个A类的实例对象，并希望在运行时将这个对象转换为B类的实例对象，这样可以添加数据到B类的属性中。这种情况下，我们没有办法直接转换，因为B类的实例会比A类的实例更大，没有足够的空间来放置对象。此时，我们就要以使用以上几个函数来处理这种情况，如下代码所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSObject *a = [[NSObject alloc] init];</div><div class="line">id newB = object_copy(a, class_getInstanceSize(MyClass.class));</div><div class="line">object_setClass(newB, MyClass.class);</div><div class="line">object_dispose(a);</div></pre></td></tr></table></figure>
+<p><img src="/2017/05/06/7_0Objective-C-Runtime-One/7-1Objective-C-Runtime-One/pic3.png" alt=""></p>
+<h4 id="2-针对对象实例变量进行操作的函数，这类函数包含："><a href="#2-针对对象实例变量进行操作的函数，这类函数包含：" class="headerlink" title="2.针对对象实例变量进行操作的函数，这类函数包含："></a>2.针对对象实例变量进行操作的函数，这类函数包含：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 修改类实例的实例变量的值</div><div class="line">Ivar object_setInstanceVariable ( id obj, const char *name, void *value );</div><div class="line"> </div><div class="line">// 获取对象实例变量的值</div><div class="line">Ivar object_getInstanceVariable ( id obj, const char *name, void **outValue );</div><div class="line"> </div><div class="line">// 返回指向给定对象分配的任何额外字节的指针</div><div class="line">void * object_getIndexedIvars ( id obj );</div><div class="line"> </div><div class="line">// 返回对象中实例变量的值</div><div class="line">id object_getIvar ( id obj, Ivar ivar );</div><div class="line"> </div><div class="line">// 设置对象中实例变量的值</div><div class="line">void object_setIvar ( id obj, Ivar ivar, id value );</div></pre></td></tr></table></figure>
+<p>如果实例变量的Ivar已经知道，那么调用<code>object_getIvar</code>会比<code>object_getInstanceVariable</code>函数快，相同情况下，<code>object_setIvar</code>也比<code>object_setInstanceVariable</code>快。</p>
+<h4 id="3-针对对象的类进行操作的函数，这类函数包含："><a href="#3-针对对象的类进行操作的函数，这类函数包含：" class="headerlink" title="3.针对对象的类进行操作的函数，这类函数包含："></a>3.针对对象的类进行操作的函数，这类函数包含：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 返回给定对象的类名</div><div class="line">const char * object_getClassName ( id obj );</div><div class="line"> </div><div class="line">// 返回对象的类</div><div class="line">Class object_getClass ( id obj );</div><div class="line"> </div><div class="line">// 设置对象的类</div><div class="line">Class object_setClass ( id obj, Class cls );</div></pre></td></tr></table></figure>
+<h3 id="十二、获取类定义"><a href="#十二、获取类定义" class="headerlink" title="十二、获取类定义"></a>十二、获取类定义</h3><p>Objective-C动态运行库会自动注册我们代码中定义的所有的类。我们也可以在运行时创建类定义并使用objc_addClass函数来注册它们。runtime提供了一系列函数来获取类定义相关的信息，这些函数主要包括：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 获取已注册的类定义的列表</div><div class="line">int objc_getClassList ( Class *buffer, int bufferCount );</div><div class="line"> </div><div class="line">// 创建并返回一个指向所有已注册类的指针列表</div><div class="line">Class * objc_copyClassList ( unsigned int *outCount );</div><div class="line"> </div><div class="line">// 返回指定类的类定义</div><div class="line">Class objc_lookUpClass ( const char *name );</div><div class="line">Class objc_getClass ( const char *name );</div><div class="line">Class objc_getRequiredClass ( const char *name );</div><div class="line"> </div><div class="line">// 返回指定类的元类</div><div class="line">Class objc_getMetaClass ( const char *name );</div></pre></td></tr></table></figure></p>
+<ul>
+<li>objc_getClassList函数：获取已注册的类定义的列表。我们不能假设从该函数中获取的类对象是继承自NSObject体系的，所以在这些类上调用方法时，都应该先检测一下这个方法是否在这个类中实现。</li>
+</ul>
+<p>下面代码演示了该函数的用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//Objective-C</div><div class="line">//MRC</div><div class="line">-(void)p_testGetClassList &#123;</div><div class="line">    int numClasses;</div><div class="line">    Class *classes = NULL;</div><div class="line">    numClasses = objc_getClassList(NULL, 0);</div><div class="line">    if (numClasses &gt; 0) &#123;</div><div class="line">        classes = malloc(sizeof(Class) * numClasses);</div><div class="line">        numClasses = objc_getClassList(classes, numClasses);</div><div class="line">        </div><div class="line">        NSLog(@&quot;number of classes: %d&quot;, numClasses);</div><div class="line">        </div><div class="line">        for (int i = 0; i &lt; numClasses; i++) &#123;</div><div class="line">            Class cls = classes[i];</div><div class="line">            NSLog(@&quot;class name: %s&quot;, class_getName(cls));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    free(classes);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">2017-05-10 19:08:23.433 ObjectiveCDemoMRC170510[30821:1107770] number of classes: 10549</div><div class="line">2017-05-10 19:08:23.434 ObjectiveCDemoMRC170510[30821:1107770] class name: JSExport</div><div class="line">2017-05-10 19:08:23.434 ObjectiveCDemoMRC170510[30821:1107770] class name: NSLeafProxy</div><div class="line">2017-05-10 19:08:23.434 ObjectiveCDemoMRC170510[30821:1107770] class name: NSProxy</div><div class="line">2017-05-10 19:08:23.434 ObjectiveCDemoMRC170510[30821:1107770] class name: _UITargetedProxy</div><div class="line">2017-05-10 19:08:23.434 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIViewServiceReplyControlTrampoline</div><div class="line">2017-05-10 19:08:23.435 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIViewServiceReplyAwaitingTrampoline</div><div class="line">2017-05-10 19:08:23.435 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIViewServiceUIBehaviorProxy</div><div class="line">2017-05-10 19:08:23.435 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIViewServiceImplicitAnimationDecodingProxy</div><div class="line">2017-05-10 19:08:23.435 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIViewServiceImplicitAnimationEncodingProxy</div><div class="line">2017-05-10 19:08:23.436 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIUserNotificationRestrictedAlertViewProxy</div><div class="line">2017-05-10 19:08:23.445 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIUserNotificationAlertViewRestrictedTextField</div><div class="line">2017-05-10 19:08:23.445 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIQueueingProxy</div><div class="line">2017-05-10 19:08:23.445 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIViewServiceFencingControlProxy</div><div class="line">2017-05-10 19:08:23.446 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIViewControllerControlMessageDeputy</div><div class="line">2017-05-10 19:08:23.446 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIViewServiceViewControllerDeputy</div><div class="line">2017-05-10 19:08:23.447 ObjectiveCDemoMRC170510[30821:1107770] class name: _UIActivityPlaceholderItemProxy</div><div class="line">2017-05-10 19:08:23.447 ObjectiveCDemoMRC170510[30821:1107770] class name: WebMainThreadInvoker</div><div class="line">2017-05-10 19:08:23.447 ObjectiveCDemoMRC170510[30821:1107770] class name: BSZeroingWeakReferenceProxy</div><div class="line">2017-05-10 19:08:23.448 ObjectiveCDemoMRC170510[30821:1107770] class name: NSUndoManagerProxy</div><div class="line">2017-05-10 19:08:23.448 ObjectiveCDemoMRC170510[30821:1107770] class name: NSDistantObject</div><div class="line">2017-05-10 19:08:23.458 ObjectiveCDemoMRC170510[30821:1107770] class name: NSMutableStringProxy</div><div class="line">//......还有大量输出</div></pre></td></tr></table></figure>
+<p>获取类定义的方法有三个：<code>objc_lookUpClass</code>, <code>objc_getClass</code>和<code>objc_getRequiredClass</code>。如果类在运行时未注册，则<code>objc_lookUpClass</code>会返回nil，而<code>objc_getClass</code>会调用类处理回调，并再次确认类是否注册，如果确认未注册，再返回nil。而<code>objc_getRequiredClass</code>函数的操作与<code>objc_getClass</code>相同，只不过如果没有找到类，则会杀死进程。</p>
+<ul>
+<li><code>objc_getMetaClass</code>函数：如果指定的类没有注册，则该函数会调用类处理回调，并再次确认类是否注册，如果确认未注册，再返回nil。不过，每个类定义都必须有一个有效的元类定义，所以这个函数总是会返回一个元类定义，不管它是否有效。</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/05/06/7_0Objective-C-Runtime-One/" data-title="运行时之一：类与对象》摘录 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/05/05/7_2About-Xcode-error-alert/" title="About_Xcode_error_alert">
+  <strong>上一篇：</strong><br/>
+  <span>
+  About_Xcode_error_alert</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/05/10/7_1Objective-C-Runtime-Two/"  title="读《Objective-C Runtime 运行时之二：成员变量与属性》摘录">
+ <strong>下一篇：</strong><br/> 
+ <span>读《Objective-C Runtime 运行时之二：成员变量与属性》摘录
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
