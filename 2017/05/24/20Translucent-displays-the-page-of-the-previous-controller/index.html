@@ -4,29 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>About_Xcode_error_alert | SengolnHuang&#39;s blog</title>
+    <title>弹出的控制器，半透明显示上一个控制器的页面 | SengolnHuang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="黄胜军">
     
 
     
-    <meta name="description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
+    <meta name="description" content="最近项目中有个需求：要画一个页面，页面的顶部是半透明显示上一个控制器的页面。类似下面这张图：  之前在寻找泡泡效果的弹框时，遇见过，所以知道这个是可以实现的。于是百度了一番，写出来如下代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About_Xcode_error_alert">
-<meta property="og:url" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/index.html">
+<meta property="og:title" content="弹出的控制器，半透明显示上一个控制器的页面">
+<meta property="og:url" content="https://univer2012.github.io/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/index.html">
 <meta property="og:site_name" content="SengolnHuang's blog">
-<meta property="og:description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic1.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic2.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic3.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic4.png">
-<meta property="og:updated_time" content="2017-05-24T12:21:16.000Z">
+<meta property="og:description" content="最近项目中有个需求：要画一个页面，页面的顶部是半透明显示上一个控制器的页面。类似下面这张图：  之前在寻找泡泡效果的弹框时，遇见过，所以知道这个是可以实现的。于是百度了一番，写出来如下代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565">
+<meta property="og:image" content="https://univer2012.github.io/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/pic1.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/pic2.gif">
+<meta property="og:updated_time" content="2017-05-27T13:50:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About_Xcode_error_alert">
-<meta name="twitter:description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
-<meta name="twitter:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic1.png">
+<meta name="twitter:title" content="弹出的控制器，半透明显示上一个控制器的页面">
+<meta name="twitter:description" content="最近项目中有个需求：要画一个页面，页面的顶部是半透明显示上一个控制器的页面。类似下面这张图：  之前在寻找泡泡效果的弹框时，遇见过，所以知道这个是可以实现的。于是百度了一番，写出来如下代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/pic1.png">
 
     
     <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
@@ -86,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/05/7_2About-Xcode-error-alert/" title="About_Xcode_error_alert" itemprop="url">About_Xcode_error_alert</a>
+      <a href="/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/" title="弹出的控制器，半透明显示上一个控制器的页面" itemprop="url">弹出的控制器，半透明显示上一个控制器的页面</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-05T03:00:21.000Z" itemprop="datePublished"> Published 2017-05-05</time>
+    <time datetime="2017-05-24T12:10:59.000Z" itemprop="datePublished"> Published 2017-05-24</time>
     
   </p>
 </header>
@@ -106,17 +104,12 @@
 		
 		</div>
 		
-		<ul>
-<li><p>1<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic1.png" alt=""><br>当<code>Signing(Debug)</code>的<code>Provisioning Profile</code>配置成了<code>Signing(Debug)</code>的<code>Provisioning Profile</code>时，跑真机就会出现这个弹框，并且没有连着真机在跑。</p>
-</li>
-<li><p>2<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic2.png" alt=""><br>连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。</p>
-</li>
-<li><p>3<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic3.png" alt=""><br>在<code>TKIMSDKAssets.bundle</code>中不能包含<code>CFBundleExecutable</code>这个key和value。意思是第三方组件的<code>plist</code>文件里面不能包含<code>CFBundleExecutable</code>这个可以。</p>
-</li>
-</ul>
-<ul>
-<li>4<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic4.png" alt=""><br>更新完Xcode后，重新打开，就会弹出这个提示，要求安装Xcode要求的组件。</li>
-</ul>
+		<p>最近项目中有个需求：要画一个页面，页面的顶部是半透明显示上一个控制器的页面。类似下面这张图：</p>
+<p><img src="/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/pic1.png" alt=""></p>
+<p>之前在寻找泡泡效果的弹框时，遇见过，所以知道这个是可以实现的。于是百度了一番，写出来如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">//--------------------------------------------</div><div class="line">//SGH0524PresentAViewController.m</div><div class="line">#import &quot;SGH0524PresentAViewController.h&quot;</div><div class="line"></div><div class="line">#import &lt;Masonry.h&gt;</div><div class="line"></div><div class="line">#import &quot;SGH0524PresentBViewController.h&quot;</div><div class="line"></div><div class="line">@interface SGH0524PresentAViewController ()</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation SGH0524PresentAViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view.</div><div class="line">    UIButton *button = (&#123;</div><div class="line">        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];</div><div class="line">        button.titleLabel.font = [UIFont systemFontOfSize:16];</div><div class="line">        button.layer.cornerRadius = 3;</div><div class="line">        button.clipsToBounds = YES;</div><div class="line">        button.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];</div><div class="line">        button.tag = 104;</div><div class="line">        [button setTitle:@&quot;A Controller Button&quot; forState:UIControlStateNormal];</div><div class="line">        button.titleLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">        [button addTarget:self action:@selector(p_presentClick) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">        [self.view addSubview:button];</div><div class="line">        button;</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    [button mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.centerX.equalTo(self.view);</div><div class="line">        make.top.equalTo(self.view).offset( 100 );</div><div class="line">    &#125;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)p_presentClick &#123;</div><div class="line">    SGH0524PresentBViewController *vc = [[SGH0524PresentBViewController alloc]init];</div><div class="line">    </div><div class="line">    //self.definesPresentationContext = YES;</div><div class="line">    //大于等于 iOS8.0</div><div class="line">    if ([[[UIDevice currentDevice] systemVersion] compare:@&quot;8.0&quot; options:NSNumericSearch] != NSOrderedAscending) &#123;</div><div class="line">        vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        vc.modalPresentationStyle = UIModalPresentationCurrentContext;</div><div class="line">        vc.navigationController.modalPresentationStyle = UIModalPresentationCurrentContext;</div><div class="line">    &#125;</div><div class="line">    [self presentViewController:vc animated:YES completion:^&#123; &#125;];</div><div class="line">&#125;</div><div class="line">@end</div><div class="line"></div><div class="line"></div><div class="line">//--------------------------------------------</div><div class="line">//SGH0524PresentBViewController.m</div><div class="line">#import &quot;SGH0524PresentBViewController.h&quot;</div><div class="line"></div><div class="line">#import &lt;Masonry.h&gt;</div><div class="line"></div><div class="line">@interface SGH0524PresentBViewController ()</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation SGH0524PresentBViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view.</div><div class="line">    self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];</div><div class="line">    </div><div class="line">    UIButton *button = (&#123;</div><div class="line">        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];</div><div class="line">        button.titleLabel.font = [UIFont systemFontOfSize:16];</div><div class="line">        button.layer.cornerRadius = 3;</div><div class="line">        button.clipsToBounds = YES;</div><div class="line">        button.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];</div><div class="line">        button.tag = 104;</div><div class="line">        [button setTitle:@&quot;B Controller Button&quot; forState:UIControlStateNormal];</div><div class="line">        button.titleLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">        [self.view addSubview:button];</div><div class="line">        button;</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    [button mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.centerX.equalTo(self.view);</div><div class="line">        make.top.equalTo(self.view).offset( 150 );</div><div class="line">    &#125;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event &#123;</div><div class="line">    [self dismissViewControllerAnimated:YES completion:nil];</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>效果如下：<br><img src="/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/pic2.gif" alt=""></p>
+<p>来自：<a href="http://www.jianshu.com/p/4d51c819016a" target="_blank" rel="external">iOS学习笔记05 可以看到上一层内容的半透明的界面</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -129,7 +122,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/" data-title="About_Xcode_error_alert | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  <div data-url="https://univer2012.github.io/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/" data-title="弹出的控制器，半透明显示上一个控制器的页面 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -143,18 +136,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/" title="7如何在xib或者storyboard中设置button的圆角">
+ <a href="/2017/05/22/19Development-crash-statistics-and-analysis/" title="奔溃统计和分析">
   <strong>上一篇：</strong><br/>
   <span>
-  7如何在xib或者storyboard中设置button的圆角</span>
+  奔溃统计和分析</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/05/06/7_0Objective-C-Runtime-One/"  title="运行时之一：类与对象》摘录">
+<a href="/2017/05/25/21Automatic-packing-using-terminals/"  title="使用终端自动打包">
  <strong>下一篇：</strong><br/> 
- <span>运行时之一：类与对象》摘录
+ <span>使用终端自动打包
 </span>
 </a>
 </div>

@@ -4,29 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>About_Xcode_error_alert | SengolnHuang&#39;s blog</title>
+    <title>使用终端自动打包 | SengolnHuang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="黄胜军">
     
 
     
-    <meta name="description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
+    <meta name="description" content="使用终端打包的旧方法1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About_Xcode_error_alert">
-<meta property="og:url" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/index.html">
+<meta property="og:title" content="使用终端自动打包">
+<meta property="og:url" content="https://univer2012.github.io/2017/05/25/21Automatic-packing-using-terminals/index.html">
 <meta property="og:site_name" content="SengolnHuang's blog">
-<meta property="og:description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic1.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic2.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic3.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic4.png">
-<meta property="og:updated_time" content="2017-05-24T12:21:16.000Z">
+<meta property="og:description" content="使用终端打包的旧方法1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release">
+<meta property="og:updated_time" content="2017-05-27T07:00:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About_Xcode_error_alert">
-<meta name="twitter:description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
-<meta name="twitter:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic1.png">
+<meta name="twitter:title" content="使用终端自动打包">
+<meta name="twitter:description" content="使用终端打包的旧方法1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release">
 
     
     <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
@@ -86,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/05/7_2About-Xcode-error-alert/" title="About_Xcode_error_alert" itemprop="url">About_Xcode_error_alert</a>
+      <a href="/2017/05/25/21Automatic-packing-using-terminals/" title="使用终端自动打包" itemprop="url">使用终端自动打包</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-05T03:00:21.000Z" itemprop="datePublished"> Published 2017-05-05</time>
+    <time datetime="2017-05-25T02:54:08.000Z" itemprop="datePublished"> Published 2017-05-25</time>
     
   </p>
 </header>
@@ -102,21 +97,34 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用终端打包的旧方法"><span class="toc-number">1.</span> <span class="toc-text">使用终端打包的旧方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用终端打包的新方法"><span class="toc-number">2.</span> <span class="toc-text">使用终端打包的新方法</span></a></li></ol>
 		
 		</div>
 		
-		<ul>
-<li><p>1<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic1.png" alt=""><br>当<code>Signing(Debug)</code>的<code>Provisioning Profile</code>配置成了<code>Signing(Debug)</code>的<code>Provisioning Profile</code>时，跑真机就会出现这个弹框，并且没有连着真机在跑。</p>
-</li>
-<li><p>2<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic2.png" alt=""><br>连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。</p>
-</li>
-<li><p>3<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic3.png" alt=""><br>在<code>TKIMSDKAssets.bundle</code>中不能包含<code>CFBundleExecutable</code>这个key和value。意思是第三方组件的<code>plist</code>文件里面不能包含<code>CFBundleExecutable</code>这个可以。</p>
-</li>
-</ul>
-<ul>
-<li>4<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic4.png" alt=""><br>更新完Xcode后，重新打开，就会弹出这个提示，要求安装Xcode要求的组件。</li>
-</ul>
+		<h3 id="使用终端打包的旧方法"><a href="#使用终端打包的旧方法" class="headerlink" title="使用终端打包的旧方法"></a>使用终端打包的旧方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07</div><div class="line"></div><div class="line">$ xcodebuild -list</div><div class="line"></div><div class="line">$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release</div><div class="line"></div><div class="line">$ xcrun -sdk iphoneos -v PackageApplication ./build/Release-iphoneos/TKApp_XDTX_invest.app -o ~/Desktop/TKApp_XDTX_invest.ipa</div></pre></td></tr></table></figure>
+<h3 id="使用终端打包的新方法"><a href="#使用终端打包的新方法" class="headerlink" title="使用终端打包的新方法"></a>使用终端打包的新方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//信达 TKApp_XDTX_invest</div><div class="line">$ cd /Users/huangaengoln/Desktop/信达IOS_APP_for_2.1.0 </div><div class="line"></div><div class="line">$ xcodebuild archive -workspace TKApp_XDTX.xcodeproj/project.xcworkspace -scheme TKApp_XDTX_invest -archivePath ~/Documents/xcarchive/TKApp_XDTX_invest.xcarchive</div><div class="line"></div><div class="line">$ xcodebuild -exportArchive -archivePath ~/Documents/xcarchive/TKApp_XDTX_invest.xcarchive -exportPath ~/Desktop/TKApp_XDTX_invest -exportOptionsPlist TKApp/TKApp_XDTX_invest-Info.plist</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//华安</div><div class="line">$ cd /Users/huangaengoln/Documents/华安TKApp_HAZH2017 </div><div class="line"></div><div class="line">$ xcodebuild archive -workspace TKApp_HAZH.xcodeproj/project.xcworkspace -scheme TKApp_HAZH_Dev -archivePath ~/Documents/xcarchive/TKApp_HAZH_Dev.xcarchive</div><div class="line"></div><div class="line">$ xcodebuild -exportArchive -archivePath ~/Documents/xcarchive/TKApp_HAZH_Dev.xcarchive -exportPath ~/Desktop/TKApp_HAZH_Dev -exportOptionsPlist TKApp/TKApp_HAZH_Dev-Info.plist</div></pre></td></tr></table></figure>
+<hr>
+<p>构建fir.im的自动上传：</p>
+<p>参考自：<a href="http://blog.csdn.net/wang631106979/article/details/52299083" target="_blank" rel="external">iOS开发进阶 - 使用shell脚本自动打包上传到fir.im上</a></p>
+<p>Mac OS X 10.11 以后的版本, 由于10.11引入了 rootless, 无法直接安装 fir-cli, 有以下三种解决办法:</p>
+<p>//… …</p>
+<p>我选的是第三种方法：重写 Ruby Gem 的 bindir</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;gem: --bindir /usr/local/bin&apos; &gt;&gt; ~/.gemrc</div><div class="line">$ gem install fir-cli</div></pre></td></tr></table></figure>
+<p>然后再网页登录你的fir.im账号，拿到API Token（比如：你拿到的token是fa46398ca7dcf2ba25487be28ae68d75），接着在终端登录你的fir.im</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ fir login fa46398ca7dcf2ba25487be28ae68d75</div><div class="line">$ fir me</div></pre></td></tr></table></figure>
+<p>如果出现以下类似的情况，说明鞥路成功了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:~ huangaengoln$ fir me</div><div class="line">Ignoring RedCloth-4.2.9 because its extensions are not built.  Try: gem pristine RedCloth --version 4.2.9</div><div class="line">Ignoring fast-stemmer-1.0.2 because its extensions are not built.  Try: gem pristine fast-stemmer --version 1.0.2</div><div class="line">Ignoring ffi-1.9.10 because its extensions are not built.  Try: gem pristine ffi --version 1.9.10</div><div class="line">Ignoring posix-spawn-0.3.11 because its extensions are not built.  Try: gem pristine posix-spawn --version 0.3.11</div><div class="line">Ignoring rdiscount-2.1.8 because its extensions are not built.  Try: gem pristine rdiscount --version 2.1.8</div><div class="line">Ignoring rdiscount-2.1.7 because its extensions are not built.  Try: gem pristine rdiscount --version 2.1.7</div><div class="line">Ignoring redcarpet-3.3.3 because its extensions are not built.  Try: gem pristine redcarpet --version 3.3.3</div><div class="line">Ignoring redcarpet-3.3.2 because its extensions are not built.  Try: gem pristine redcarpet --version 3.3.2</div><div class="line">Ignoring yajl-ruby-1.2.1 because its extensions are not built.  Try: gem pristine yajl-ruby --version 1.2.1</div><div class="line">I, [2017-05-27T11:34:43.203861 #80585]  INFO -- : Login succeed, current user&apos;s email: huangsj@thinkive.com</div><div class="line">I, [2017-05-27T11:34:43.204139 #80585]  INFO -- : Login succeed, current user&apos;s name:  huangsj</div><div class="line">I, [2017-05-27T11:34:43.204221 #80585]  INFO -- : </div><div class="line">huangsengolndeMacBook-Pro:~ huangaengoln$</div></pre></td></tr></table></figure>
+<p>1、<code>.ipa</code>的名字加上日期和时间(时、分)；XX</p>
+<p>2、显示打包花了多少时间；VV</p>
+<p>3、修改bundleId、version和build号；</p>
+<p>4、添加是否上传蒲公英(fir.im);</p>
+<p>5、实验：在打包的时候，修改工程，是否对打包有影响；</p>
+<p>6、把所有要配置的内容，集中放在一个地方；</p>
+<p>7、添加【选择打包方式】(<code>Ad Hoc Delopment</code>/<code>Enterprise Delopment</code>/<code>App Store Delopment</code>)；</p>
+<p>参考资料来自：</p>
+<p><a href="http://www.jianshu.com/p/4cf4e45a4411" target="_blank" rel="external">关于 iOS 批量打包的总结</a></p>
+<p><a href="http://www.jianshu.com/p/5d59966eaecc?from=timeline" target="_blank" rel="external">使用xcodebuild打包 导出ipa 上传蒲公英或者提交AppStore</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -129,7 +137,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/" data-title="About_Xcode_error_alert | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  <div data-url="https://univer2012.github.io/2017/05/25/21Automatic-packing-using-terminals/" data-title="使用终端自动打包 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -143,21 +151,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/" title="7如何在xib或者storyboard中设置button的圆角">
+ <a href="/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/" title="弹出的控制器，半透明显示上一个控制器的页面">
   <strong>上一篇：</strong><br/>
   <span>
-  7如何在xib或者storyboard中设置button的圆角</span>
+  弹出的控制器，半透明显示上一个控制器的页面</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2017/05/06/7_0Objective-C-Runtime-One/"  title="运行时之一：类与对象》摘录">
- <strong>下一篇：</strong><br/> 
- <span>运行时之一：类与对象》摘录
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -175,7 +175,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用终端打包的旧方法"><span class="toc-number">1.</span> <span class="toc-text">使用终端打包的旧方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用终端打包的新方法"><span class="toc-number">2.</span> <span class="toc-text">使用终端打包的新方法</span></a></li></ol>
  
   </div>
 

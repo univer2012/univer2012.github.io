@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="SengolnHuang's blog">
 <meta property="og:description" content="1、[__NSArrayM insertObject:atIndex:] iOS崩溃日志中[__NSSetM addObject:]和[__NSArrayM insertObject:atIndex:]的解决办法 12[__NSSetM addObject:] object cannot be nil[__NSArrayM insertObject:atIndex:] object cannot">
 <meta property="og:image" content="https://univer2012.github.io/2017/05/22/19Development-crash-statistics-and-analysis/pic1.png">
-<meta property="og:updated_time" content="2017-05-23T07:16:47.000Z">
+<meta property="og:updated_time" content="2017-05-25T02:55:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="奔溃统计和分析">
 <meta name="twitter:description" content="1、[__NSArrayM insertObject:atIndex:] iOS崩溃日志中[__NSSetM addObject:]和[__NSArrayM insertObject:atIndex:]的解决办法 12[__NSSetM addObject:] object cannot be nil[__NSArrayM insertObject:atIndex:] object cannot">
@@ -99,7 +99,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、-NSArrayM-insertObject-atIndex"><span class="toc-number">1.</span> <span class="toc-text">1、[__NSArrayM insertObject:atIndex:]</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、-NSArrayM-insertObject-atIndex"><span class="toc-number">1.</span> <span class="toc-text">1、[__NSArrayM insertObject:atIndex:]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、关于50113的说明"><span class="toc-number">2.</span> <span class="toc-text">3、关于50113的说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、关于获取当前控制器"><span class="toc-number">3.</span> <span class="toc-text">4、关于获取当前控制器</span></a></li></ol>
 		
 		</div>
 		
@@ -107,11 +107,11 @@
 <p>iOS崩溃日志中<code>[__NSSetM addObject:]</code>和<code>[__NSArrayM insertObject:atIndex:]</code>的解决办法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[__NSSetM addObject:] object cannot be nil</div><div class="line">[__NSArrayM insertObject:atIndex:] object cannot be nil</div></pre></td></tr></table></figure>
 <p>使用这两个方法的时候一定要确保object不能是nil，否则程序就会崩溃，在调用之前一定要检查object是不是nil,如果是nil就不能进行add或者insert操作。</p>
-<p>第一次h5初始化方法，不会发50113方法。以后才会发50113。</p>
+<h3 id="3、关于50113的说明"><a href="#3、关于50113的说明" class="headerlink" title="3、关于50113的说明"></a>3、关于50113的说明</h3><p>第一次h5初始化方法，不会发50113方法。以后才会发50113。</p>
 <p>预加载完成后，再显示，相当于不是第一次了，才会发50113。</p>
 <p>初始化的地方逻辑执行一遍，在50113的地方再执行一遍。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//ytg的激活</div><div class="line">static dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">    </div><div class="line">&#125;);</div><div class="line">TKYtgActivateViewController *ytgActivateViewController = [[TKYtgActivateViewController alloc]initWithName:@&quot;activate&quot;];</div><div class="line">//ytgActivateViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;</div><div class="line">//UIModalPresentationCurrentContext;</div><div class="line">//UIViewController *currentViewController = [[TKAppEngine shareInstance].rootViewCtr currentViewCtrl];</div><div class="line">UIViewController *ytgViewController = [[TKAppEngine shareInstance].rootViewCtr getViewCtrlByName:@&quot;ytg&quot;];</div><div class="line">//ytgViewController.definesPresentationContext = YES;</div><div class="line">[ytgViewController presentViewController:ytgActivateViewController animated:YES completion:^&#123;</div><div class="line">    //ytgActivateViewController.view.superview.backgroundColor = [UIColor clearColor];</div><div class="line">&#125;];</div><div class="line">//SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@&quot;8.0&quot;);</div><div class="line">//[currentViewController.navigationController pushViewController:_ytgActivateViewController animated:YES];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)//用来获取手机的系统，判断系统是多少</div><div class="line"></div><div class="line">// ios6以下，调用google map</div><div class="line">if (SYSTEM_VERSION_LESS_THAN(@&quot;6.0&quot;)) &#123; </div><div class="line">	//... ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4、关于获取当前控制器"><a href="#4、关于获取当前控制器" class="headerlink" title="4、关于获取当前控制器"></a>4、关于获取当前控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UIViewController *currentViewController = [[TKAppEngine shareInstance].rootViewCtr currentViewCtrl];</div></pre></td></tr></table></figure>
+<p>这个方法只有在执行了生命周期中的<code>viewDidAppear:</code>方法时，才会执行并生效，否则就不会生效。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -146,6 +146,14 @@
 </div>
 
 
+<div class="next">
+<a href="/2017/05/24/20Translucent-displays-the-page-of-the-previous-controller/"  title="弹出的控制器，半透明显示上一个控制器的页面">
+ <strong>下一篇：</strong><br/> 
+ <span>弹出的控制器，半透明显示上一个控制器的页面
+</span>
+</a>
+</div>
+
 </nav>
 
 	
@@ -162,7 +170,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、-NSArrayM-insertObject-atIndex"><span class="toc-number">1.</span> <span class="toc-text">1、[__NSArrayM insertObject:atIndex:]</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、-NSArrayM-insertObject-atIndex"><span class="toc-number">1.</span> <span class="toc-text">1、[__NSArrayM insertObject:atIndex:]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、关于50113的说明"><span class="toc-number">2.</span> <span class="toc-text">3、关于50113的说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、关于获取当前控制器"><span class="toc-number">3.</span> <span class="toc-text">4、关于获取当前控制器</span></a></li></ol>
  
   </div>
 
