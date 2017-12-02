@@ -1,0 +1,565 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>思迪信息技术问题与解决 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="一、控制器找不到的一种情况一、情况描述：tabbar有个商城，它的控制器是个全局变量，名字是mall。 123456789101112131415161718//-------------------------------------------//TKViewController.m@implementation TKViewController&amp;#123;	//... ...    TKSh">
+<meta name="keywords" content="thinkive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="思迪信息技术问题与解决">
+<meta property="og:url" content="https://univer2012.github.io/2017/06/01/23Thinkive_Information_technology_problems_and_Solutions/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="一、控制器找不到的一种情况一、情况描述：tabbar有个商城，它的控制器是个全局变量，名字是mall。 123456789101112131415161718//-------------------------------------------//TKViewController.m@implementation TKViewController&amp;#123;	//... ...    TKSh">
+<meta property="og:updated_time" content="2017-06-07T02:38:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="思迪信息技术问题与解决">
+<meta name="twitter:description" content="一、控制器找不到的一种情况一、情况描述：tabbar有个商城，它的控制器是个全局变量，名字是mall。 123456789101112131415161718//-------------------------------------------//TKViewController.m@implementation TKViewController&amp;#123;	//... ...    TKSh">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/06/01/23Thinkive_Information_technology_problems_and_Solutions/" title="思迪信息技术问题与解决" itemprop="url">思迪信息技术问题与解决</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-06-01T11:27:12.000Z" itemprop="datePublished"> 发表于 2017-06-01</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、控制器找不到的一种情况"><span class="toc-number">1.</span> <span class="toc-text">一、控制器找不到的一种情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、情况描述："><span class="toc-number">1.1.</span> <span class="toc-text">一、情况描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、问题出现与描述："><span class="toc-number">1.2.</span> <span class="toc-text">二、问题出现与描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、宝哥释疑"><span class="toc-number">1.3.</span> <span class="toc-text">三、宝哥释疑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、加载本地h5文件的二级页面，第一次白屏，后面就是正常的-2017-06-06"><span class="toc-number">2.</span> <span class="toc-text">二、加载本地h5文件的二级页面，第一次白屏，后面就是正常的 2017-06-06</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、问题描述"><span class="toc-number">2.1.</span> <span class="toc-text">一、问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、分析与解决"><span class="toc-number">2.2.</span> <span class="toc-text">二、分析与解决</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、在Xcode8-以后-中跑iOS7系列真机"><span class="toc-number">3.</span> <span class="toc-text">三、在Xcode8(以后)中跑iOS7系列真机</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="一、控制器找不到的一种情况"><a href="#一、控制器找不到的一种情况" class="headerlink" title="一、控制器找不到的一种情况"></a>一、控制器找不到的一种情况</h2><h3 id="一、情况描述："><a href="#一、情况描述：" class="headerlink" title="一、情况描述："></a>一、情况描述：</h3><p>tabbar有个商城，它的控制器是个全局变量，名字是mall。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//-------------------------------------------</div><div class="line">//TKViewController.m</div><div class="line">@implementation TKViewController&#123;</div><div class="line">	//... ...</div><div class="line">    TKShoppingMallViewController *_shoppingMallViewController; //商城</div><div class="line"></div><div class="line">&#125;</div><div class="line">-(void)viewDidLoad&#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    //... ...</div><div class="line">	//商城</div><div class="line">    _shoppingMallViewController = [[TKShoppingMallViewController alloc]initWithName:@&quot;mall&quot;];</div><div class="line">    _shoppingMallViewController.webViewUrl = [[TKNetworkManager shareInstance] getFlastHost:@&quot;MALL_HOME_URL&quot;];</div><div class="line">    _shoppingMallViewController.statusBarBgColor = [[TKThemeManager shareInstance]getCssRulesetByCssKey:@&quot;Navbar&quot;].navStateBarColor;</div><div class="line">    //... ...    </div><div class="line">    self.viewControllers = @[navigationCtrlHome, navigationCtrlHq, _tradeMainViewController, _shoppingMallViewController, account];</div><div class="line">    //... ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在首页的一个section要展示商城的列表，点击列表的cell进入商城的二级页面。在这个点击中，我实例化的商城控制器也是mall，是局部变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">//-------------------------------------------</div><div class="line">//TKHomeTodayHotViewController.m</div><div class="line">-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    //点击后马上还原</div><div class="line">    [tableView deselectRowAtIndexPath:indexPath animated:YES];</div><div class="line"></div><div class="line">    TKShoppingMallViewController *shoppingMallViewController = [[TKShoppingMallViewController alloc]initWithName:@&quot;mall&quot;];</div><div class="line">    </div><div class="line">    NSString *mallHomeUrl = [[TKNetworkManager shareInstance] getFlastHost:@&quot;MALL_HOME_URL&quot;];</div><div class="line">    NSArray *mallHomeArray = [mallHomeUrl componentsSeparatedByString:@&quot;#!&quot;];</div><div class="line">    if (mallHomeArray.count &gt;= 2) &#123;</div><div class="line">        if (_dataArray.count &gt; indexPath.row) &#123;</div><div class="line">            TKHomeTodayHotModel *model = _dataArray[indexPath.row];</div><div class="line">            NSString *productType = [NSString string];</div><div class="line">            switch ([model.product_sub_type integerValue]) &#123;</div><div class="line">                    //银行理财</div><div class="line">                case 0:</div><div class="line">                    productType = @&quot;bank/detail&quot;;</div><div class="line">                    break;</div><div class="line">                    // 资管产品</div><div class="line">                case 2:</div><div class="line">                    productType = @&quot;capital/detail&quot;;</div><div class="line">                    break;</div><div class="line">                    //基金</div><div class="line">                case 3:</div><div class="line">                    productType = @&quot;fund/detail&quot;;</div><div class="line">                    break;</div><div class="line">                default:</div><div class="line">                    productType = model.product_sub_type;</div><div class="line">                    break;</div><div class="line">            &#125;</div><div class="line">            NSString *detailUrl = [NSString stringWithFormat:@&quot;%@#!/%@.html?product_id=%@&quot;,mallHomeArray[0], productType, model.product_id];</div><div class="line">            shoppingMallViewController.webViewUrl = detailUrl;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //设置状态栏颜色</div><div class="line">    shoppingMallViewController.statusBarBgColor = [[TKThemeManager shareInstance]getCssRulesetByCssKey:@&quot;Navbar&quot;].navStateBarColor;</div><div class="line">    shoppingMallViewController.hidesBottomBarWhenPushed = YES;</div><div class="line">    [self.navigationController pushViewController:shoppingMallViewController animated:YES]; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在这个section的header右侧的【更多】按钮，要切换到tabbar的商城页面。使用的是公司框架的跳转方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-(void)p_moreButtonClick:(UIButton *)button &#123;</div><div class="line">    [[TKAppEngine shareInstance] invokeSwitchPage:@&quot;system/mall&quot; param:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="二、问题出现与描述："><a href="#二、问题出现与描述：" class="headerlink" title="二、问题出现与描述："></a>二、问题出现与描述：</h3><p>先点击首页商城section的cell，进去后返回到首页，然后再点击【更多】，切换没反应。日志如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">2017-06-01 19:05:32:584 TKApp_XDTX_invest[14552:3367791] [DEBUG] 路径:模块从[(null)]切换到[system/mall],参数为:(null)</div><div class="line">2017-06-01 19:05:32:586 TKApp_XDTX_invest[14552:3367791] [DEBUG] 控制器:模块从[(null)]切换到[&lt;null&gt;],参数为:(null)</div><div class="line">2017-06-01 19:05:32:588 TKApp_XDTX_invest[14552:3367791] [ERROR] 控制器模块[mall],尚未初始化！,请查看跳转的路径是否完整和正确。</div><div class="line">2017-06-01 19:05:32:588 TKApp_XDTX_invest[14552:3367791] [DEBUG] 路径:模块从[(null)]切换到[system/mall]完成</div><div class="line">2017-06-01 19:05:32:767 TKApp_XDTX_invest[14552:3367791] [INFO] TKQuotePushASClient(tianxia.cindasc.com:9606)----&gt;sendHeart</div><div class="line">2017-06-01 19:05:32:768 TKApp_XDTX_invest[14552:3367791] [INFO] TKQuotePushASClient(tianxia.cindasc.com:9606)----&gt;didWriteDataWithTag:0</div><div class="line">//... ...</div></pre></td></tr></table></figure>
+<p>但是启动app后直接点击【更多】，是好的。日志如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">2017-06-01 19:07:51:530 TKApp_XDTX_invest[15737:3371732] [DEBUG] 路径:模块从[(null)]切换到[system/mall],参数为:(null)</div><div class="line">2017-06-01 19:07:51:531 TKApp_XDTX_invest[15737:3371732] [DEBUG] 控制器:模块从[(null)]切换到[&lt;TKShoppingMallViewController: 0x7ffd7c01a000&gt;],参数为:(null)</div><div class="line">2017-06-01 19:07:51:533 TKApp_XDTX_invest[15737:3371732] [DEBUG] 监听系统键盘弹出..........</div><div class="line">2017-06-01 19:07:51:534 TKApp_XDTX_invest[15737:3371732] [DEBUG] 取消监听重置键盘.........</div><div class="line">2017-06-01 19:07:51:541 TKApp_XDTX_invest[15737:3371732] [DEBUG] itemSelected:fromItemIndex:0toItemIndex:3............</div><div class="line">//... ...</div></pre></td></tr></table></figure>
+<p>对这个框架导致的问题，就得咨询宝哥了。</p>
+<h3 id="三、宝哥释疑"><a href="#三、宝哥释疑" class="headerlink" title="三、宝哥释疑"></a>三、宝哥释疑</h3><p>出现这个bug，是因为这2个控制器重名导致的。当点击首页【商城】section的cell时，实例化的局部变量、名字同为mall的商城控制器，其实是在内存中拿到了tabbar中的商城控制器，但是变为局部变量了。然后在push时被放进了push栈中；返回后就把这个控制器出栈给释放掉了，导致在用方法<code>[[TKAppEngine shareInstance] invokeSwitchPage:@&quot;system/mall&quot; param:nil];</code>根据名字去拿这个控制器时，找不到这个控制器了。所以就会有上面的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">控制器模块[mall],尚未初始化！,请查看跳转的路径是否完整和正确</div></pre></td></tr></table></figure>
+<p>日志错误。</p>
+<p>最新的框架是支持uuid的了，但是日志中没有找到有关uuid的字段，说明是h5还没有升级，所以只能根据控制器名字去找对象。如果有uuid，则会首先根据uuid去找到这个控制器对象。</p>
+<p>所以暂时的解决方法是用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.tabBarController.selectedIndex = 3;</div></pre></td></tr></table></figure>
+<p>来实现切到tabbar的商城控制器去。</p>
+<p>或者还有一种解决方案，就是对这个局部商城控制器取另外一个名字。但是这个(信达)项目因为在后续需要调用一些交互的插件，需要传当前h5控制器名字，并判断是否是对应的h5模块，所以这个方案不适合。</p>
+<p>以后升级到有uuid的框架了，遇到这种情况，还是会出现控制器名字找不到的情况，<strong>所以即使是相同的h5模块，也不能取同样的名字，只能取另外一个名字。但是有了uuid，框架就会优先用uuid去找到对应的控制器，到那时控制器名字就会显得不那么重要了。</strong></p>
+<h2 id="二、加载本地h5文件的二级页面，第一次白屏，后面就是正常的-2017-06-06"><a href="#二、加载本地h5文件的二级页面，第一次白屏，后面就是正常的-2017-06-06" class="headerlink" title="二、加载本地h5文件的二级页面，第一次白屏，后面就是正常的 2017-06-06"></a>二、加载本地h5文件的二级页面，第一次白屏，后面就是正常的 2017-06-06</h2><h3 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h3><p>首页广告图，点击后要加载<code>www/m/tj/index.html#!/haxt/haxthabb</code>，其中，传过来的字段是<code>m/tj/index.html#!/haxt/haxthabb</code>。会出现第一次进去后是白屏，退出后，第二次以及以后进去都是好的。</p>
+<h3 id="二、分析与解决"><a href="#二、分析与解决" class="headerlink" title="二、分析与解决"></a>二、分析与解决</h3><p>用<code>Safari</code>查看h5的页面，页面元素都没有，目测是页面文件都没有加载到。后来找刘权同学不小心说了一句，“这个url后面不是要加.html么？”，一言点醒梦中人，加上去之后就正常了。所以最终的代码改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">if ([model.jump_url hasPrefix:@&quot;m/tj/index.html&quot;]) &#123;</div><div class="line">    TKHAWebViewController *tjViewController = [[TKHAWebViewController alloc]initWithName:@&quot;tj&quot;];</div><div class="line">    NSLog(@&quot;tjViewController: %@&quot;,tjViewController);</div><div class="line">    tjViewController.title = model.image_name;</div><div class="line">    tjViewController.statusBarBgColor = [[TKThemeManager shareInstance]getCssRulesetByCssKey:@&quot;Navbar&quot;].backgroundColor;</div><div class="line">    //解决加载www/m/tj/index.html#!/haxt/haxthabb这个地址时，第一次是白屏，后面才能正常加载的问题 hsj-2017-06-05</div><div class="line">    NSString *url = @&quot;&quot;;</div><div class="line">    if ([model.jump_url hasSuffix:@&quot;.html&quot;]) &#123;</div><div class="line">        url = [NSString stringWithFormat:@&quot;www/%@&quot;,model.jump_url];</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        url = [NSString stringWithFormat:@&quot;www/%@.html&quot;,model.jump_url];</div><div class="line">    &#125;</div><div class="line">    tjViewController.webViewUrl = url;</div><div class="line">    tjViewController.webView.frame = [UIScreen mainScreen].applicationFrame;</div><div class="line">    </div><div class="line">    tjViewController.hidesBottomBarWhenPushed = YES;</div><div class="line">    [currentViewController.navigationController pushViewController:tjViewController animated:YES];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="三、在Xcode8-以后-中跑iOS7系列真机"><a href="#三、在Xcode8-以后-中跑iOS7系列真机" class="headerlink" title="三、在Xcode8(以后)中跑iOS7系列真机"></a>三、在Xcode8(以后)中跑iOS7系列真机</h2><p>有些项目还需要支持iOS7系列系统，当项目在这个系统出现问题时，就需要调试，之前又没有下载iOS7的模拟器，所以只能考虑真机了。</p>
+<p>在Xcode8以后的<code>Xcode</code>中跑iOS7，会弹出一个框提示不支持iOS7，可通过一下步骤解决：</p>
+<p>1、下载(<a href="https://pan.baidu.com/s/1nv7bUNR" target="_blank" rel="external">传送门</a>)或者从低版本中找到iOS7的支持文件；</p>
+<p>2、把支持文件拖到目录<code>~/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</code>中；</p>
+<p>3、重启Xcode，即可跑iOS7的真机了。</p>
+<p>参考自：<a href="http://blog.csdn.net/guofengios/article/details/52836851" target="_blank" rel="external">Xcode8兼容iOS7的解决方法</a></p>
+<p><a href="http://blog.csdn.net/u012265444/article/details/53160755" target="_blank" rel="external">http://blog.csdn.net/u012265444/article/details/53160755</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/thinkive/">thinkive</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/06/01/23Thinkive_Information_technology_problems_and_Solutions/" data-title="思迪信息技术问题与解决 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/06/01/22The-adaptation-problem-of-iOS-10/" title="读《iOS 10的适配问题》摘录">
+  <strong>上一篇：</strong><br/>
+  <span>
+  读《iOS 10的适配问题》摘录</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/06/06/24Add-CoreData-in-Xcode8-1etc/"  title="在Xcode8.1中添加CoreData">
+ <strong>下一篇：</strong><br/> 
+ <span>在Xcode8.1中添加CoreData
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、控制器找不到的一种情况"><span class="toc-number">1.</span> <span class="toc-text">一、控制器找不到的一种情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、情况描述："><span class="toc-number">1.1.</span> <span class="toc-text">一、情况描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、问题出现与描述："><span class="toc-number">1.2.</span> <span class="toc-text">二、问题出现与描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、宝哥释疑"><span class="toc-number">1.3.</span> <span class="toc-text">三、宝哥释疑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、加载本地h5文件的二级页面，第一次白屏，后面就是正常的-2017-06-06"><span class="toc-number">2.</span> <span class="toc-text">二、加载本地h5文件的二级页面，第一次白屏，后面就是正常的 2017-06-06</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、问题描述"><span class="toc-number">2.1.</span> <span class="toc-text">一、问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、分析与解决"><span class="toc-number">2.2.</span> <span class="toc-text">二、分析与解决</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、在Xcode8-以后-中跑iOS7系列真机"><span class="toc-number">3.</span> <span class="toc-text">三、在Xcode8(以后)中跑iOS7系列真机</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

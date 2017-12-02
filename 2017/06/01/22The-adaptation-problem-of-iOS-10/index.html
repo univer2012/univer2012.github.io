@@ -4,33 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>About_Xcode_error_alert | SengolnHuang&#39;s blog</title>
+    <title>读《iOS 10的适配问题》摘录 | SengolnHuang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="黄胜军">
     
 
     
-    <meta name="description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
+    <meta name="description" content="随着iOS10发布的临近,大家的App都需要适配iOS10,下面是我总结的一些关于iOS10适配方面的问题,如果有错误,欢迎指出. 一、系统判断方法失效来到iOS10时代后，很多文章都说原来的系统判断方法不能用了。自己一直没注意过这个问题，所以看到这部分的时候，还是一脸懵逼。 不过看到过一篇文章，说[[[UIDevice currentDevice] systemVersion] floatVal">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About_Xcode_error_alert">
-<meta property="og:url" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/index.html">
+<meta property="og:title" content="读《iOS 10的适配问题》摘录">
+<meta property="og:url" content="https://univer2012.github.io/2017/06/01/22The-adaptation-problem-of-iOS-10/index.html">
 <meta property="og:site_name" content="SengolnHuang's blog">
-<meta property="og:description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic1.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic2.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic3.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic4.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic5.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic6.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic7.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic8.png">
-<meta property="og:updated_time" content="2017-06-06T08:53:26.000Z">
+<meta property="og:description" content="随着iOS10发布的临近,大家的App都需要适配iOS10,下面是我总结的一些关于iOS10适配方面的问题,如果有错误,欢迎指出. 一、系统判断方法失效来到iOS10时代后，很多文章都说原来的系统判断方法不能用了。自己一直没注意过这个问题，所以看到这部分的时候，还是一脸懵逼。 不过看到过一篇文章，说[[[UIDevice currentDevice] systemVersion] floatVal">
+<meta property="og:updated_time" content="2017-06-01T11:30:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About_Xcode_error_alert">
-<meta name="twitter:description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
-<meta name="twitter:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic1.png">
+<meta name="twitter:title" content="读《iOS 10的适配问题》摘录">
+<meta name="twitter:description" content="随着iOS10发布的临近,大家的App都需要适配iOS10,下面是我总结的一些关于iOS10适配方面的问题,如果有错误,欢迎指出. 一、系统判断方法失效来到iOS10时代后，很多文章都说原来的系统判断方法不能用了。自己一直没注意过这个问题，所以看到这部分的时候，还是一脸懵逼。 不过看到过一篇文章，说[[[UIDevice currentDevice] systemVersion] floatVal">
 
     
     <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
@@ -90,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/05/7_2About-Xcode-error-alert/" title="About_Xcode_error_alert" itemprop="url">About_Xcode_error_alert</a>
+      <a href="/2017/06/01/22The-adaptation-problem-of-iOS-10/" title="读《iOS 10的适配问题》摘录" itemprop="url">读《iOS 10的适配问题》摘录</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-05T03:00:21.000Z" itemprop="datePublished"> 发表于 2017-05-05</time>
+    <time datetime="2017-06-01T10:04:20.000Z" itemprop="datePublished"> 发表于 2017-06-01</time>
     
   </p>
 </header>
@@ -106,31 +97,27 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、系统判断方法失效"><span class="toc-number">1.</span> <span class="toc-text">一、系统判断方法失效</span></a></li></ol>
 		
 		</div>
 		
-		<ul>
-<li><p>1<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic1.png" alt=""><br>当<code>Signing(Debug)</code>的<code>Provisioning Profile</code>配置成了<code>Signing(Debug)</code>的<code>Provisioning Profile</code>时，跑真机就会出现这个弹框，并且没有连着真机在跑。</p>
-</li>
-<li><p>2<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic2.png" alt=""><br>连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。</p>
-</li>
-<li><p>3<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic3.png" alt=""><br>在<code>TKIMSDKAssets.bundle</code>中不能包含<code>CFBundleExecutable</code>这个key和value。意思是第三方组件的<code>plist</code>文件里面不能包含<code>CFBundleExecutable</code>这个可以。</p>
-</li>
-</ul>
-<ul>
-<li><p>4<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic4.png" alt=""><br>更新完Xcode后，重新打开，就会弹出这个提示，要求安装Xcode要求的组件。</p>
-</li>
-<li><p>5<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic5.png" alt=""></p>
-</li>
-</ul>
-<p>不能加载svn的日志就会弹出这个，解决方法：</p>
-<ul>
-<li>6</li>
-</ul>
-<p>发现<code>Xcode Version 8.3.2 (8E2002)</code>有一个bug：</p>
-<p>1、新建一个工程，选择<code>iOS</code>–&gt; <code>Single View Application</code>，</p>
-<p>2、使用CoreData，新建一个<code>Data Model</code>，此时编译，没有问题，OK；<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic6.png" alt=""><br>3、添加一张表，此时再build，就报错了：<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic7.png" alt=""><br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic8.png" alt=""></p>
+		<p>随着iOS10发布的临近,大家的App都需要适配iOS10,下面是我总结的一些关于iOS10适配方面的问题,如果有错误,欢迎指出.</p>
+<h3 id="一、系统判断方法失效"><a href="#一、系统判断方法失效" class="headerlink" title="一、系统判断方法失效"></a>一、系统判断方法失效</h3><p>来到iOS10时代后，很多文章都说原来的系统判断方法不能用了。自己一直没注意过这个问题，所以看到这部分的时候，还是一脸懵逼。</p>
+<p>不过看到过一篇文章，说<code>[[[UIDevice currentDevice] systemVersion] floatValue]</code>是有问题的，具体在我的<a href="https://univer2012.github.io/2017/05/11/9some-tips-in-development/">开发中的一些小技巧</a>有说明。但是想不到还有很多实现方法，下面为大家一一介绍：</p>
+<p>方案一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">//等于</div><div class="line">#define SYSTEM_VERSION_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)</div><div class="line">//大于</div><div class="line">#define SYSTEM_VERSION_GREATER_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)</div><div class="line">//大于等于</div><div class="line">#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)</div><div class="line">//小于</div><div class="line">#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)</div><div class="line">//小于等于</div><div class="line">#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)</div><div class="line"></div><div class="line">//... ...</div><div class="line"></div><div class="line">if (SYSTEM_VERSION_EQUAL_TO(@&quot;10.3&quot;)) &#123;</div><div class="line">    NSLog(@&quot;当前系统是iOS 10.3&quot;);</div><div class="line">&#125;</div><div class="line">if (SYSTEM_VERSION_GREATER_THAN(@&quot;10.3&quot;)) &#123;</div><div class="line">    NSLog(@&quot;当前系统大于iOS 10.3&quot;);</div><div class="line">&#125;</div><div class="line">if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@&quot;10.3&quot;)) &#123;</div><div class="line">    NSLog(@&quot;当前系统大于或等于iOS 10.3&quot;);</div><div class="line">&#125;</div><div class="line">if (SYSTEM_VERSION_LESS_THAN(@&quot;10.3&quot;)) &#123;</div><div class="line">    NSLog(@&quot;当前系统小于iOS 10.3&quot;);</div><div class="line">&#125;</div><div class="line">if (SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(@&quot;10.3&quot;)) &#123;</div><div class="line">    NSLog(@&quot;当前系统小于或等于iOS 10.3&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>方案二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion)&#123;.majorVersion = 9, .minorVersion = 1, .patchVersion = 0&#125;]) &#123;</div><div class="line">    NSLog(@&quot;Hello from &gt; iOS 9.1&quot;);</div><div class="line">&#125;</div><div class="line">if ([NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion)&#123;9,3,0&#125;]) &#123; NSLog(@&quot;Hello from &gt; iOS 9.3&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>方案三：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if (NSFoundationVersionNumber &gt; NSFoundationVersionNumber_iOS_8_4) &#123;</div><div class="line">    // do stuff for iOS 9 and newer</div><div class="line">    NSLog(@&quot;当前系统大于iOS 8.4&quot;);</div><div class="line">&#125;</div><div class="line">else &#123;</div><div class="line">    NSLog(@&quot;当前系统为小于或登录iOS 8.4&quot;);</div><div class="line">    // do stuff for older versions than iOS 9</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于方案三：</p>
+<p>有时候会缺少一些常量,<code>NSFoundationVersionNumber</code>是在<code>NSObjCRuntime.h</code>中定义的,作为Xcode7.3.1的一部分,我们设定常熟范围从iPhone OS 2到<code>#define NSFoundationVersionNumber_iOS_8_4 1144.17</code>,在iOS 10(Xcode 8)中,苹果补充了缺少的数字,设置有未来的版本.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#define NSFoundationVersionNumber_iOS_8_x_Max 1199</div><div class="line">#define NSFoundationVersionNumber_iOS_9_0 1240.1</div><div class="line">#define NSFoundationVersionNumber_iOS_9_1 1241.14</div><div class="line">#define NSFoundationVersionNumber_iOS_9_2 1242.12</div><div class="line">#define NSFoundationVersionNumber_iOS_9_3 1242.12</div><div class="line">#define NSFoundationVersionNumber_iOS_9_4 1280.25</div><div class="line">#define NSFoundationVersionNumber_iOS_9_x_Max 1299</div></pre></td></tr></table></figure>
+<p>在Swift中，可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<hr>
+<p>阅读文章：</p>
+<p><a href="http://www.jianshu.com/p/f8151d556930" target="_blank" rel="external">iOS 10 的适配问题</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -143,7 +130,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/" data-title="About_Xcode_error_alert | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  <div data-url="https://univer2012.github.io/2017/06/01/22The-adaptation-problem-of-iOS-10/" data-title="读《iOS 10的适配问题》摘录 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -157,18 +144,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/" title="7如何在xib或者storyboard中设置button的圆角">
+ <a href="/2017/05/25/21Automatic-packing-using-terminals/" title="使用终端自动打包">
   <strong>上一篇：</strong><br/>
   <span>
-  7如何在xib或者storyboard中设置button的圆角</span>
+  使用终端自动打包</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/05/06/7_0Objective-C-Runtime-One/"  title="运行时之一：类与对象》摘录">
+<a href="/2017/06/01/23Thinkive_Information_technology_problems_and_Solutions/"  title="思迪信息技术问题与解决">
  <strong>下一篇：</strong><br/> 
- <span>运行时之一：类与对象》摘录
+ <span>思迪信息技术问题与解决
 </span>
 </a>
 </div>
@@ -189,7 +176,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、系统判断方法失效"><span class="toc-number">1.</span> <span class="toc-text">一、系统判断方法失效</span></a></li></ol>
  
   </div>
 

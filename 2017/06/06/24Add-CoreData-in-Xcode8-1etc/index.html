@@ -4,33 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>About_Xcode_error_alert | SengolnHuang&#39;s blog</title>
+    <title>在Xcode8.1中添加CoreData | SengolnHuang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="黄胜军">
     
 
     
-    <meta name="description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
+    <meta name="description" content="1、有关iOS10的适配问题： iOS 10 的适配问题 2、CoreData在Xcode8.1以后的使用： xcode 8.3.2 coredata使用 (Xcode 8.1 )CoreData 的使用 IOS之分析网易新闻存储数据(CoreData的使用，增删改查) UITableView，UICollectionView和CoreData完美结合进行增删改操作，如何导入大量数据，如何利用NS">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About_Xcode_error_alert">
-<meta property="og:url" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/index.html">
+<meta property="og:title" content="在Xcode8.1中添加CoreData">
+<meta property="og:url" content="https://univer2012.github.io/2017/06/06/24Add-CoreData-in-Xcode8-1etc/index.html">
 <meta property="og:site_name" content="SengolnHuang's blog">
-<meta property="og:description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic1.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic2.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic3.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic4.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic5.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic6.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic7.png">
-<meta property="og:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic8.png">
-<meta property="og:updated_time" content="2017-06-06T08:53:26.000Z">
+<meta property="og:description" content="1、有关iOS10的适配问题： iOS 10 的适配问题 2、CoreData在Xcode8.1以后的使用： xcode 8.3.2 coredata使用 (Xcode 8.1 )CoreData 的使用 IOS之分析网易新闻存储数据(CoreData的使用，增删改查) UITableView，UICollectionView和CoreData完美结合进行增删改操作，如何导入大量数据，如何利用NS">
+<meta property="og:updated_time" content="2017-06-08T09:51:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About_Xcode_error_alert">
-<meta name="twitter:description" content="1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。  2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。  3在TKIMSDKAssets.bundle中不能包含CFBundleExecutable这个key和value。意思是第三">
-<meta name="twitter:image" content="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/pic1.png">
+<meta name="twitter:title" content="在Xcode8.1中添加CoreData">
+<meta name="twitter:description" content="1、有关iOS10的适配问题： iOS 10 的适配问题 2、CoreData在Xcode8.1以后的使用： xcode 8.3.2 coredata使用 (Xcode 8.1 )CoreData 的使用 IOS之分析网易新闻存储数据(CoreData的使用，增删改查) UITableView，UICollectionView和CoreData完美结合进行增删改操作，如何导入大量数据，如何利用NS">
 
     
     <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
@@ -90,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/05/7_2About-Xcode-error-alert/" title="About_Xcode_error_alert" itemprop="url">About_Xcode_error_alert</a>
+      <a href="/2017/06/06/24Add-CoreData-in-Xcode8-1etc/" title="在Xcode8.1中添加CoreData" itemprop="url">在Xcode8.1中添加CoreData</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-05T03:00:21.000Z" itemprop="datePublished"> 发表于 2017-05-05</time>
+    <time datetime="2017-06-06T14:19:40.000Z" itemprop="datePublished"> 发表于 2017-06-06</time>
     
   </p>
 </header>
@@ -110,27 +101,32 @@
 		
 		</div>
 		
-		<ul>
-<li><p>1<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic1.png" alt=""><br>当<code>Signing(Debug)</code>的<code>Provisioning Profile</code>配置成了<code>Signing(Debug)</code>的<code>Provisioning Profile</code>时，跑真机就会出现这个弹框，并且没有连着真机在跑。</p>
-</li>
-<li><p>2<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic2.png" alt=""><br>连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。</p>
-</li>
-<li><p>3<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic3.png" alt=""><br>在<code>TKIMSDKAssets.bundle</code>中不能包含<code>CFBundleExecutable</code>这个key和value。意思是第三方组件的<code>plist</code>文件里面不能包含<code>CFBundleExecutable</code>这个可以。</p>
-</li>
-</ul>
-<ul>
-<li><p>4<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic4.png" alt=""><br>更新完Xcode后，重新打开，就会弹出这个提示，要求安装Xcode要求的组件。</p>
-</li>
-<li><p>5<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic5.png" alt=""></p>
-</li>
-</ul>
-<p>不能加载svn的日志就会弹出这个，解决方法：</p>
-<ul>
-<li>6</li>
-</ul>
-<p>发现<code>Xcode Version 8.3.2 (8E2002)</code>有一个bug：</p>
-<p>1、新建一个工程，选择<code>iOS</code>–&gt; <code>Single View Application</code>，</p>
-<p>2、使用CoreData，新建一个<code>Data Model</code>，此时编译，没有问题，OK；<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic6.png" alt=""><br>3、添加一张表，此时再build，就报错了：<br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic7.png" alt=""><br><img src="/2017/05/05/7_2About-Xcode-error-alert/pic8.png" alt=""></p>
+		<p>1、有关iOS10的适配问题：</p>
+<p><a href="http://www.jianshu.com/p/f8151d556930" target="_blank" rel="external">iOS 10 的适配问题</a></p>
+<p>2、CoreData在Xcode8.1以后的使用：</p>
+<p><a href="http://www.bubuko.com/infodetail-2090175.html" target="_blank" rel="external">xcode 8.3.2 coredata使用</a></p>
+<p><a href="http://www.jianshu.com/p/43ba1bb0c5bc" target="_blank" rel="external">(Xcode 8.1 )CoreData 的使用</a></p>
+<p><a href="http://blog.csdn.net/rhljiayou/article/details/18037729/" target="_blank" rel="external">IOS之分析网易新闻存储数据(CoreData的使用，增删改查)</a></p>
+<p><a href="http://blog.csdn.net/jeffasd/article/details/50949495" target="_blank" rel="external">UITableView，UICollectionView和CoreData完美结合进行增删改操作，如何导入大量数据，如何利用NSEntityMigrationPol</a></p>
+<p><a href="http://www.cocoachina.com/ios/20110504/2832.html" target="_blank" rel="external">iOS 里查找中文首字母的类库</a></p>
+<p>3、字符串的处理：</p>
+<p><a href="http://blog.csdn.net/xietao3/article/details/8986850" target="_blank" rel="external">NSString里有中文跟英文 怎么把里面的英文去掉？</a></p>
+<p><a href="http://blog.csdn.net/vkooy/article/details/56844175" target="_blank" rel="external">iOS开发技巧之：截取字符串中两个指定字符串中间的字符串</a></p>
+<p>4、需要重点学习的博客：</p>
+<p><a href="http://blog.csdn.net/xietao3/article/details/51316530" target="_blank" rel="external">iOS_学习代码混淆</a></p>
+<p>5、正则表达式的学习，并且要做好笔记:</p>
+<p><a href="https://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="external">正则表达式30分钟入门教程</a></p>
+<p>6、快捷键的使用，并做好笔记</p>
+<p><a href="http://www.cocoachina.com/ios/20141224/10752.html" target="_blank" rel="external">14个Xcode中常用的快捷键操作</a></p>
+<p>7、UIPageViewController的学习笔记</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">NSString *mobileNum = @&quot;www/m/ygt/index.html&quot;;</div><div class="line">NSString *MOBILE = @&quot;\\w*&quot;;</div><div class="line">//是可以的</div><div class="line"></div><div class="line"></div><div class="line">NSString *mobileNum = @&quot;www/m/ygt/index.html&quot;;</div><div class="line">NSString *MOBILE = @&quot;(www/)?m/ygt/index.html&quot;;</div><div class="line">//是可以的</div><div class="line"></div><div class="line">NSString *mobileNum = @&quot;www/m/ygt/index.html&quot;;</div><div class="line">NSString *MOBILE = @&quot;(www/)?m/\\w+/index.html&quot;;</div><div class="line"></div><div class="line">NSString *mobileNum = @&quot;www/m/ygt/index.html&quot;;</div><div class="line">NSString *MOBILE = @&quot;\\w*(www/)?m/\\w+/index.html\\w*&quot;;</div></pre></td></tr></table></figure>
+<p><a href="http://blog.sina.com.cn/s/blog_14ecbe90d0102wgi3.html" target="_blank" rel="external">ios如何获取两个已知字符串之间的未知字符串</a></p>
+<p><a href="http://blog.csdn.net/zcl369369/article/details/7181807" target="_blank" rel="external">iPhone开发–正则表达式获取字符串中的内容</a></p>
+<p>1、可以设置顶部collectionView的整体的宽和高，和背景色；</p>
+<p>2、可以设置collectionViewCell中的文字大小、字体选中和非选中颜色、文字的size，和上下左右边距；</p>
+<p>3、添加底部横线，可以设置高度和颜色；</p>
+<p>4、可以设置指示器的高度和颜色；</p>
+<p>5、</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -143,7 +139,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://univer2012.github.io/2017/05/05/7_2About-Xcode-error-alert/" data-title="About_Xcode_error_alert | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  <div data-url="https://univer2012.github.io/2017/06/06/24Add-CoreData-in-Xcode8-1etc/" data-title="在Xcode8.1中添加CoreData | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -157,18 +153,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/" title="7如何在xib或者storyboard中设置button的圆角">
+ <a href="/2017/06/01/23Thinkive_Information_technology_problems_and_Solutions/" title="思迪信息技术问题与解决">
   <strong>上一篇：</strong><br/>
   <span>
-  7如何在xib或者storyboard中设置button的圆角</span>
+  思迪信息技术问题与解决</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/05/06/7_0Objective-C-Runtime-One/"  title="运行时之一：类与对象》摘录">
+<a href="/2017/12/02/27多线程/"  title="27多线程">
  <strong>下一篇：</strong><br/> 
- <span>运行时之一：类与对象》摘录
+ <span>27多线程
 </span>
 </a>
 </div>

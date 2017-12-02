@@ -1,0 +1,720 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>27多线程 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="来自：iOS开发之多线程(GCD与NSOperation) 1 概述&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;iOS开发中，多线程是必然碰到的，自己这两天有空稍微总结了一下。简单的概念如线程/进程等就不说了。 1.1 何为多线程？&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;多线程其实针对单核的CPU来设计的，CPPU同一时间只能执行一条线程，耳朵线程就是让CPU快速的在多个线">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="27多线程">
+<meta property="og:url" content="https://univer2012.github.io/2017/12/02/27多线程/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="来自：iOS开发之多线程(GCD与NSOperation) 1 概述&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;iOS开发中，多线程是必然碰到的，自己这两天有空稍微总结了一下。简单的概念如线程/进程等就不说了。 1.1 何为多线程？&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;多线程其实针对单核的CPU来设计的，CPPU同一时间只能执行一条线程，耳朵线程就是让CPU快速的在多个线">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/02/27多线程/1641067-0e090034c2322402.png">
+<meta property="og:updated_time" content="2017-12-02T09:14:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="27多线程">
+<meta name="twitter:description" content="来自：iOS开发之多线程(GCD与NSOperation) 1 概述&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;iOS开发中，多线程是必然碰到的，自己这两天有空稍微总结了一下。简单的概念如线程/进程等就不说了。 1.1 何为多线程？&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;多线程其实针对单核的CPU来设计的，CPPU同一时间只能执行一条线程，耳朵线程就是让CPU快速的在多个线">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/12/02/27多线程/1641067-0e090034c2322402.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/02/27多线程/" title="27多线程" itemprop="url">27多线程</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-02T04:39:32.000Z" itemprop="datePublished"> 发表于 2017-12-02</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-何为多线程？"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 何为多线程？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-GCD简介"><span class="toc-number">2.</span> <span class="toc-text">2 GCD简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-GCD死锁问题"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 GCD死锁问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-理论分析"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 理论分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-解决方案"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-GCD任务组"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 GCD任务组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-dispatch-group-wait"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 dispatch_group_wait</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-dispatch-after"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 dispatch_after</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-GCD进阶"><span class="toc-number">3.</span> <span class="toc-text">3 GCD进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-dispatch-once"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 dispatch_once</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-dispatch-barrier-async"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 dispatch_barrier_async</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-dispatch-semaphore"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 dispatch_semaphore</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-NSOperation"><span class="toc-number">4.</span> <span class="toc-text">4 NSOperation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-NSOperationQueue"><span class="toc-number">5.</span> <span class="toc-text">5 NSOperationQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-取消任务"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 取消任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-设置依赖"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 设置依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-NSOperationQueue暂停与恢复"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 NSOperationQueue暂停与恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-NSOperation优先级"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 NSOperation优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-进程间通信"><span class="toc-number">5.5.</span> <span class="toc-text">5.5 进程间通信</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-小结"><span class="toc-number">6.</span> <span class="toc-text">6 小结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-NSOperation和GCD如何选择"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 NSOperation和GCD如何选择</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>来自：<a href="http://www.jianshu.com/p/5593af00c597" target="_blank" rel="external">iOS开发之多线程(GCD与NSOperation)</a></p>
+<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h1><p>&nbsp; &nbsp; &nbsp; &nbsp;iOS开发中，多线程是必然碰到的，自己这两天有空稍微总结了一下。简单的概念如线程/进程等就不说了。</p>
+<h2 id="1-1-何为多线程？"><a href="#1-1-何为多线程？" class="headerlink" title="1.1 何为多线程？"></a>1.1 何为多线程？</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;多线程其实针对单核的CPU来设计的，CPPU同一时间只能执行一条线程，耳朵线程就是让CPU快速的在多个线程之间进行调度。</p>
+<p><br><br>多线程优点：</p>
+<ul>
+<li>能够适当提高资源利用率</li>
+<li>能够适当提高资源利用率</li>
+</ul>
+<p><br><br>缺点：</p>
+<ul>
+<li>开线程需要一定的内存空间，默认一条线程占用栈区间512KB</li>
+<li>线程过多会导致COU在线程上调度的开销比较大</li>
+<li>程序设计比较复杂，比如线程间通信，多线程的数据共享</li>
+</ul>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;在iOS中其实有4套多线程方案，它们分别是：</p>
+<ul>
+<li>pthread</li>
+<li>NSThread</li>
+<li>GCD</li>
+<li>NSOperation</li>
+</ul>
+<p>四种方案对比如下：<br><img src="/2017/12/02/27多线程/1641067-0e090034c2322402.png" alt=""><br>&nbsp; &nbsp; &nbsp; &nbsp;由于平时大多数只用到GCD和NSOperation，下面就主要讨论这两种多线程方案实现。</p>
+<h1 id="2-GCD简介"><a href="#2-GCD简介" class="headerlink" title="2 GCD简介"></a>2 GCD简介</h1><p>&nbsp; &nbsp; &nbsp; &nbsp;GCD以block为基本单位，一个block中的代码可以为一个任务。下文中提到 任务 ，可以理解为执行某个block</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;GCD有两大重要概念，分别是<code>队列</code>和<code>执行方式</code>；使用block的过程，概括来说就是把block放进合适的队列，并选择合适的执行方式去执行block的过程。</p>
+<p>GCD有三种队列：</p>
+<ol>
+<li>串行队列（先进入队列的任务先出队列，每次只执行一个任务）</li>
+<li>并发队列 (依然是先进先出，不过可以形成多个任务并发)</li>
+<li>主队列 (这是一个特殊的串行队列，而且队列中的任务 一定会在主线程中执行)</li>
+</ol>
+<p>两种执行方式：</p>
+<ol>
+<li>同步执行</li>
+<li>异步执行</li>
+</ol>
+<p>关于同步异步、串行并行和线程的关系，如下表格所示</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>同步</th>
+<th>异步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主队列</td>
+<td>在主线程中执行</td>
+<td>在主线程中执行</td>
+</tr>
+<tr>
+<td>串行队列</td>
+<td>在当前线程中执行</td>
+<td>新建线程执行</td>
+</tr>
+<tr>
+<td>并发队列</td>
+<td>在当前线程中执行</td>
+<td>新建线程执行</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;可以看到，同步方法不一定在本线程，异步方法亦不一定新开线程(主队列)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;所以，我们在编程时考虑的是<code>同步</code>Or<code>异步</code> 以及 <code>串行</code>Or <code>并行</code>，而不是仅仅考虑是否新开线程。</p>
+<h2 id="2-1-GCD死锁问题"><a href="#2-1-GCD死锁问题" class="headerlink" title="2.1 GCD死锁问题"></a>2.1 GCD死锁问题</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;在<strong>使用GCD的过程中，如果向当前串行队列中同步派发一个任务，就会导致死锁</strong>，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    NSLog(@&quot;1&quot;); //任务1</div><div class="line">    dispatch_sync(dispatch_get_main_queue(), ^&#123;</div><div class="line">        NSLog(@&quot;2&quot;); //任务2</div><div class="line">    &#125;);</div><div class="line">    NSLog(@&quot;3&quot;); //任务3    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;以上代码就发生了死锁，控制台只能打印1。因为我们目前在主队列中，又将要同步地添加一个block到主队列(串行)中。</p>
+<h3 id="2-1-1-理论分析"><a href="#2-1-1-理论分析" class="headerlink" title="2.1.1 理论分析"></a>2.1.1 理论分析</h3><p>&nbsp; &nbsp; &nbsp; &nbsp;<code>dispatch_sync</code>表示同步的执行任务，也就是说执行<code>dispatch_sync</code>后，当前队列会阻塞。而<code>dispatch_sync</code>中的block如果要在当前队列中执行，就得等待当前队列执行完成。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;上面例子中，首先主队列执行任务1，然后执行<code>dispatch_sync</code>，随后在队列中新增一个任务2。<strong><span style="border-bottom:2px dashed red;">因为主队列是同步队列，所以任务2要等<code>dispatch_sync</code>执行完才能执行，但是<code>dispatch_sync</code>是同步派发 ，要等任务2执行完才算是结束。在主队列中的两个任务互相等待，导致了死锁&lt;\span&gt;</span></strong>。当然，由于死锁，后面添加的任务3也不会执行了。</p>
+<h3 id="2-1-2-解决方案"><a href="#2-1-2-解决方案" class="headerlink" title="2.1.2 解决方案"></a>2.1.2 解决方案</h3><p>&nbsp; &nbsp; &nbsp; &nbsp;通常情况下我们不必要用<code>dispatch_sync</code>，<strong>因为<code>dispatch_async</code>能够更好地利用CPU，提升程序运行速度</strong>。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;只有当我们需要去把队列中的任务必须顺序执行时，才考虑使用<code>dispatch_sync</code>。在使用<code>dispatch_sync</code>的时候应该分析当前处于哪个队列，以及任务会提交到哪个队列。</p>
+<h2 id="2-2-GCD任务组"><a href="#2-2-GCD任务组" class="headerlink" title="2.2 GCD任务组"></a>2.2 GCD任务组</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;<strong>在开发中有这个需求，在A,B,C,D这四个任务全部结束后进行一些处理，那么我们怎么知道四个任务都已经执行完了呢？</strong> 这时候我们就需要用到dispatch_group了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t dispatchQueue = dispatch_queue_create(&quot;sgh.queue.next&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">    dispatch_group_t dispatchGroup = dispatch_group_create();</div><div class="line"></div><div class="line">    dispatch_group_async(dispatchGroup, dispatchQueue, ^&#123;</div><div class="line">        NSLog(@&quot;任务A&quot;);</div><div class="line">    &#125;);</div><div class="line">    dispatch_group_async(dispatchGroup, dispatchQueue, ^&#123;</div><div class="line">        NSLog(@&quot;任务B&quot;);</div><div class="line">    &#125;);</div><div class="line">    dispatch_group_async(dispatchGroup, dispatchQueue, ^&#123;</div><div class="line">        NSLog(@&quot;任务C&quot;);</div><div class="line">    &#125;);</div><div class="line">    dispatch_group_async(dispatchGroup, dispatchQueue, ^&#123;</div><div class="line">        NSLog(@&quot;任务D&quot;);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    dispatch_group_notify(dispatchGroup, dispatchQueue, ^&#123;</div><div class="line">        NSLog(@&quot;end&quot;);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
+<p>执行3次的打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//执行第1次</div><div class="line"> 任务A</div><div class="line"> 任务B</div><div class="line"> 任务C</div><div class="line"> 任务D</div><div class="line"> end</div><div class="line">//执行第2次</div><div class="line"> 任务B</div><div class="line"> 任务A</div><div class="line"> 任务C</div><div class="line"> 任务D</div><div class="line"> end</div><div class="line">//执行第3次</div><div class="line"> 任务A</div><div class="line"> 任务B</div><div class="line"> 任务D</div><div class="line"> 任务C</div><div class="line"> end</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;首先我们要通过<code>dispatch_group_create</code>方法生成一个组然后我们把<code>dispatch_async</code>方法换成<code>dispatch_group_async</code>。这个方法多了一个参数，第一个参数填刚创建的分组。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;最后调用<code>dispatch_group_notify</code>方法。<strong>这个方法表示把第三个参数block传入第二个参数队列中去。而且可以保证第三个参数block执行时，group中所有任务已经全部完成</strong>。</p>
+<h3 id="2-2-1-dispatch-group-wait"><a href="#2-2-1-dispatch-group-wait" class="headerlink" title="2.2.1 dispatch_group_wait"></a>2.2.1 dispatch_group_wait</h3><p><code>dispatch_group_wait</code> 的完整定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">long dispatch_group_wait(dispatch_group_t group, dispatch_time_t timeout);</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;第一个参数表示要等待的group,第二个则表示等待时间。<strong>返回值表示，经过指定的等待时间，属于这个group的任务是否已经全部执行完。如果是则返回0，否则返回非0</strong>。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;第二个参数<code>dispatch_time_t</code>类型的参数还有两个特殊值：<code>DISPATCH_TIME_NOW</code>和<code>DISPATCH_TIME_FOREVER</code>，<strong>前者表示立刻检查这个group的任务是否已经完成，后者则表示一直到属于这个group的任务全部完成</strong>。</p>
+<h3 id="2-2-2-dispatch-after"><a href="#2-2-2-dispatch-after" class="headerlink" title="2.2.2 dispatch_after"></a>2.2.2 dispatch_after</h3><p>通过GCD还<strong>可以进行简单的定时的操作，比如在1秒后执行某个block</strong>。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSLog(@&quot;前&quot;);</div><div class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">        NSLog(@&quot;1秒后执行&quot;);</div><div class="line">    &#125;);</div><div class="line">    NSLog(@&quot;后&quot;);</div></pre></td></tr></table></figure></p>
+<p>输出为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2017-12-02 08:26:46.741331+0800 iOSSingleViewApp[4435:3113889] 前</div><div class="line">2017-12-02 08:26:46.741533+0800 iOSSingleViewApp[4435:3113889] 后</div><div class="line">2017-12-02 08:26:47.741596+0800 iOSSingleViewApp[4435:3113889] 1秒后执行</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<strong><code>dispatch_after</code>有三个参数。第一个表示时间，也就是从现在起往后1秒钟。第二个参数表示提交到哪个队列</strong>，第三个参数表示要提交的任务。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<strong>需要注意的是，<code>dispatch_after</code>仅表示在指定时间后提交任务 ，而非执行任务</strong>。如果任务提交到主队列，它将在main runloop中执行，对于每隔1/60秒执行一个的RunLoop1，任务最多可能在1+1/60秒后执行。</p>
+<h1 id="3-GCD进阶"><a href="#3-GCD进阶" class="headerlink" title="3 GCD进阶"></a>3 GCD进阶</h1><p>GCD也有一些强大的特性。接下来我们主要讨论以下几个部分：</p>
+<ul>
+<li><code>dispatch_suspend</code> 和 <code>dispatch_resume</code></li>
+<li><code>dispatch_once</code></li>
+<li><code>dispatch_barrier_async</code></li>
+<li><code>dispatch_semaphore</code></li>
+</ul>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;我们知道<code>NSOperationQueue</code>有暂停<code>suspend</code>和恢复<code>resume</code>。其实GCD中的队列也有类似的功能。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//延缓,推迟，暂停</div><div class="line">void dispatch_suspend(dispatch_object_t object);</div><div class="line">//恢复</div><div class="line">void dispatch_resume(dispatch_object_t object);</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;这些函数不会影响到队列中已经执行的任务。<strong>队列暂停后，已经添加到队列中但是还没有执行的任务，不会执行，直到队列被恢复</strong>。</p>
+<h2 id="3-1-dispatch-once"><a href="#3-1-dispatch-once" class="headerlink" title="3.1 dispatch_once"></a>3.1 dispatch_once</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;<code>dispatch_once</code>在单例模式被广泛使用。<strong><code>dispatch_once</code>函数可以确保某个block在应用程序执行过程中只被处理一次，而且它是线程安全的</strong>。所以单例模式可以很简单的实现，代码实现如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+(instancetype)shareInstance &#123;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    static TKBeginnerGuideHelper * shareInstance;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        shareInstance = [self new];</div><div class="line">    &#125;);</div><div class="line">    return shareInstance;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;这段代码中我们创建一个值为nil的 shareInstance 静态对象，然后把它的初始化代码放到dispatch_once中完成。这样，只有第一次调用sharedInstance方法时才会进行对象的初始化，以后每次只是返回 shareInstance 而已。</p>
+<h2 id="3-2-dispatch-barrier-async"><a href="#3-2-dispatch-barrier-async" class="headerlink" title="3.2 dispatch_barrier_async"></a>3.2 dispatch_barrier_async</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;我们知道在写入时，不能再其他线程读取或写入。但是多个线程同时读取数据是没有问题的。所以我们可以把读取任务放入并行队列，把写入任务放入串行队列，并且保证写入任务执行过程中没有读取任务可以执行。这样的需求就比较常见，GCD提供了一个非常简单的解决方法  <code>dispatch_barrier_async</code> 。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;假设我们有四个读取任务，在第二、三个任务之间有一个写入任务，代码大概如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t dispatchQueue = dispatch_queue_create(&quot;sgh.queue.next&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">    dispatch_block_t block1_for_reading, block2_for_reading, block_for_writing;</div><div class="line">    dispatch_block_t block3_for_reading, block4_for_reading;</div><div class="line"></div><div class="line">    dispatch_async(dispatchQueue, block1_for_reading);</div><div class="line">    dispatch_async(dispatchQueue, block2_for_reading);</div><div class="line">    /*这里插入写入任务，比如：</div><div class="line">    dispatch_async(dispatchQueue, block_for_writing);</div><div class="line">     */</div><div class="line"></div><div class="line">    dispatch_async(dispatchQueue, block3_for_reading);</div><div class="line">    dispatch_async(dispatchQueue, block4_for_reading);</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;如果代码这样写，<strong>由于几个block是并发执行，就有可能在前两个block中读取到已经修改了的数据。如果是有多写入任务，那问题更严重，可能会有数据竞争</strong>。</p>
+<p>如果使用 <code>dispatch_barrier_async</code> 函数，代码就可以这么写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t dispatchQueue = dispatch_queue_create(&quot;sgh.queue.next&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">    dispatch_block_t block1_for_reading, block2_for_reading, block_for_writing;</div><div class="line">    dispatch_block_t block3_for_reading, block4_for_reading;</div><div class="line"></div><div class="line">    dispatch_async(dispatchQueue, block1_for_reading);</div><div class="line">    dispatch_async(dispatchQueue, block2_for_reading);</div><div class="line"></div><div class="line">    dispatch_barrier_async(dispatchQueue, block_for_writing);</div><div class="line"></div><div class="line">    dispatch_async(dispatchQueue, block3_for_reading);</div><div class="line">    dispatch_async(dispatchQueue, block4_for_reading);</div></pre></td></tr></table></figure></p>
+<p>dispatch_barrier_async会把队列的运行周期分为这三个过程：</p>
+<ol>
+<li>首先等目前追加到并行队列中所有任务都执行完成。</li>
+<li><strong>开始执行 <code>dispatch_barrier_async</code> 中的任务时，即便向并行队列提交任务，也不会执行</strong>。</li>
+<li><code>dispatch_barrier_async</code> 中任务执行完成后，并行队列恢复正常。</li>
+</ol>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;总的来说，<strong><code>dispatch_barrier_async</code>起到了承上启下的作用。它保证此前的任务都先于自己执行，此后的任务也迟于自己执行</strong>。正如barrier的含义一样，它起到一个栅栏或者分水岭的作用。</p>
+<p>使用并行队列和 <code>diapatch_barrier_async</code> 方法，就可以高效的进行数据和文件读写了。</p>
+<h2 id="3-3-dispatch-semaphore"><a href="#3-3-dispatch-semaphore" class="headerlink" title="3.3 dispatch_semaphore"></a>3.3 dispatch_semaphore</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;首先介绍一下信号量(semaphore)的概念。<strong>信号量是持有计数的信号</strong>，举个生活中的例子来看：</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;假设有一个房子，它对应进程的概念，房子里的人就对应着线程。一个进程可以包括多个线程。这个房子(进程)有很多资源，比如花园、客厅灯，是所有人(线程)共享的。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;但是有些地方，比如卧室，最多只有两个人进去睡觉。怎么办呢？在卧室门口挂上两把钥匙。进去的人(线程)就拿着钥匙进去，没有钥匙就不能进去，出来的时候把钥匙放回门口。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;这时候，<strong>门口的钥匙数量就称为信号量(Semaphore)</strong>。很明显，信号量为0时需要等待，信号量不为零时，减去1而且不等待。</p>
+<p>在GCD中，创建信号量的代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dispatch_semaphore_t semaphore = dispatch_semaphore_create(3);</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;这句代码通过<code>diapatch_semaphore_create</code>方法创建一个信号量初始值为3。然后就可以调用<code>dispatch_semaphore_wait</code>方法了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">long hasSemaphore = dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<code>dispatch_semaphore_wait</code>方法<strong>表示一直等待直到信号量的值大于等于1，当这个方法执行后，会把第一个信号量参数的值减1。第二个参数是一个<code>dispatch_time_t</code>类型的时间，它表示这个方法最大的等待时间</strong>。</p>
+<p>返回值也和dispatch_group_wait方法一样，<strong>返回0表示在规定的时间内 第一个参数信号量的值已经大于等于1，否则表示已超过规定等待时间，但信号量的值还是0。</strong></p>
+<p>dispatch_semaphore_wait方法返回0，因为此时的信号量的值大于等于1，任务获得了可以执行的权限。<strong>这时候我们就可以安全的执行需要进行排他控制的任务了</strong>。</p>
+<p><strong>任务结束时还需要调用dispatch_semaphore_signal()方法，将信号量的值加1</strong>。这类似于之前所说的，从卧室出来要把锁放回门上，否则后来的人就无法进入了。示例代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);</div><div class="line">    dispatch_queue_t dispatchQueue = dispatch_queue_create(&quot;sgh.gcd.next&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">    NSMutableArray *array;</div><div class="line">    for (int i = 0; i &lt; 10000; i++) &#123;</div><div class="line">        dispatch_async(dispatchQueue, ^&#123;</div><div class="line">            /* 某个线程执行到这里，如果信号量为1，那么wait方法返回1，开始执行接下来的操作。与此同时，因为信号量</div><div class="line">             变为0，其他执行到这里的线程必须等待  *****/</div><div class="line">            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</div><div class="line"></div><div class="line">            /* 执行了wait方法后，信号量变成了0，可以进行接下来的操作。这时候其他线程都得等待wait方法返回。</div><div class="line">             对array修改的线程在任意时刻都只有一个，可以安全的修改array *****/</div><div class="line">            [array addObject:@(i)];</div><div class="line"></div><div class="line">/** 排他操作执行结束，记得要调用signal方法，把信号量的值加1。这样，如果有别的线程在等待wait函数返回，就由最先等待的线程执行  ****/</div><div class="line">            dispatch_semaphore_signal(semaphore);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h1 id="4-NSOperation"><a href="#4-NSOperation" class="headerlink" title="4 NSOperation"></a>4 NSOperation</h1><p><code>NSOperation</code> 和 <code>NSOperationQueue</code> 主要介绍以下几个方面：</p>
+<ol>
+<li><code>NSOperation</code>和 <code>NSOperationQueue</code>的用法介绍</li>
+<li><code>NSOperation</code>的暂停、恢复和取消</li>
+<li>通过KVO对<code>NSOperation</code>的状态进行检测</li>
+<li>多个<code>NSOperation</code>之间的依赖关系</li>
+<li>进程间通信</li>
+</ol>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<code>NSOperation</code>是对GCD中的block进行的封装，它也表示一个要被执行的任务。和GCD的block类似，<code>NSOperation</code>对象有一个<code>start()</code>方法表示开始执行这个任务。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;不仅如此，NSOperation表示的任务还可以被取消。它还有三种状态<code>isExecuted</code>、<code>isFinished</code>和<code>isCancelled</code>以方便我们通过KVC对它的状态进行监听。</p>
+<p>想要<strong>开始执行一个任务</strong>可以这么写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^&#123;</div><div class="line">				//要执行的任务，这个任务主线程中执行</div><div class="line">        NSLog(@&quot;task----%@&quot;,[NSThread currentThread]);</div><div class="line">    &#125;];</div><div class="line">    [op start];</div></pre></td></tr></table></figure></p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">task----&lt;NSThread: 0x600000262b80&gt;&#123;number = 1, name = main&#125;</div></pre></td></tr></table></figure></p>
+<p>我们创建了一个NSBlockOperation,<strong>并且设置好它的block，也就是要执行的任务。这个任务就会在主线程中执行</strong>。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;为什么不直接使用NSOperation呢？<strong>因为NSOperation本身是一个抽象类</strong>，要使用可以通过以下几个方法：</p>
+<ul>
+<li>使用<code>NSInvocationOperation</code></li>
+<li>使用<code>NSBlockOperation</code></li>
+<li>自定义<code>NSOperation</code>的子类</li>
+</ul>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<code>NSBlockOperation</code>可以用来封装一个或多个block。同时，还可以<strong>调用addExecutionBlock方法追加几个任务，这些任务会并行执行</strong>(也就是说很有可能运行在别的线程里)。最后，<strong>调用start方法让NSOperation方法运行起来。start是一个同步方法</strong>。</p>
+<h1 id="5-NSOperationQueue"><a href="#5-NSOperationQueue" class="headerlink" title="5 NSOperationQueue"></a>5 NSOperationQueue</h1><p>&nbsp; &nbsp; &nbsp; &nbsp;从上面我们知道，<strong>默认的NSOperation是同步执行的。简单的看一下NSOperation类的定义会发现它只有一个只读属性<code>asynchronous</code>。这意味着如果想要异步执行，就需要自定义<code>NSOperation</code>的子类。或者使用<code>NSOperationQueue</code></strong>。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<code>NSOperationQueue</code>类似于GCD中的队列。我们知道 <u><strong>GCD中的队列有三种：主队列、串行队列和并行队列。<code>NSOperationQueue</code>更简单，只有两种：主队列和非主队列</strong></u> 。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<strong>我们自己生成的<code>NSOperationQueue</code>对象都是非主队列，主队列可以用<code>[NSOperationQueue mainQueue]</code>取得。<code>NSOperationQueue</code>的主队列是串行队列，而且其中所有<code>NSOperation</code>都会在主线程中执行</strong>。</p>
+<p>对于非主队列来说，一旦一个<code>NSOperation</code>被放入其中，那这个<code>NSOperation</code>一定是并发执行的。因为<code>NSOperationQueue</code>会为每一个NSOperation创建线程并调用它的start方法。</p>
+<p><strong><code>NSOperationQueue</code>有一个属性叫<code>maxConcurrentOperationCount</code>，它表示最多支持多少个<code>NSOperation</code>并发执行</strong>。如果<code>maxConCurrentOperationCount</code>被设置为1，就以为这个队列是串行队列。因此，NSOperationQueue和GCD中的队列有这样的对应关系：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>NSOperation</th>
+<th>GCD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>  主队列</td>
+<td>[NSOperationQueue mainQueue]</td>
+<td>dispatch_get_mian_queue()</td>
+</tr>
+<tr>
+<td>  串行队列</td>
+<td>自建队列 maxConcurrentOperationCount为1</td>
+<td>dispatch_queue_create(“”,DISPATCH_QUEUE_SERIAL)</td>
+</tr>
+<tr>
+<td>  并发队列</td>
+<td>自建队列 maxConcurrentOperationCount大于1</td>
+<td>dispatch_queue_create(“”,DISPATCH_QUEUE_CONCURRENT)</td>
+</tr>
+</tbody>
+</table>
+<p>  如何利用NSOperationQueue实现异步操作？代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//自建队列</div><div class="line">    NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">    NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^&#123;</div><div class="line">        NSLog(@&quot;task0 :%@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;];</div><div class="line">    [op addExecutionBlock:^&#123;</div><div class="line">        NSLog(@&quot;task1: %@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;];</div><div class="line">    [op addExecutionBlock:^&#123;</div><div class="line">        NSLog(@&quot;task2: %@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;];</div><div class="line">    [op addExecutionBlock:^&#123;</div><div class="line">        NSLog(@&quot;task3: %@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;];</div><div class="line">    [queue addOperation:op];</div><div class="line">    NSLog(@&quot;操作结束&quot;);</div></pre></td></tr></table></figure></p>
+<p>执行3次结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//第1次</div><div class="line"> 操作结束</div><div class="line"> task0 :&lt;NSThread: 0x60400046db00&gt;&#123;number = 3, name = (null)&#125;</div><div class="line"> task3: &lt;NSThread: 0x60400046dc00&gt;&#123;number = 6, name = (null)&#125;</div><div class="line"> task2: &lt;NSThread: 0x6000004668c0&gt;&#123;number = 5, name = (null)&#125;</div><div class="line"> task1: &lt;NSThread: 0x60400046db40&gt;&#123;number = 4, name = (null)&#125;</div><div class="line"> //第2次</div><div class="line">  操作结束</div><div class="line"> task0 :&lt;NSThread: 0x60400006d240&gt;&#123;number = 3, name = (null)&#125;</div><div class="line"> task2: &lt;NSThread: 0x604000274740&gt;&#123;number = 5, name = (null)&#125;</div><div class="line"> task3: &lt;NSThread: 0x600000276180&gt;&#123;number = 6, name = (null)&#125;</div><div class="line"> task1: &lt;NSThread: 0x600000276080&gt;&#123;number = 4, name = (null)&#125;</div><div class="line"> //第3次</div><div class="line">  操作结束</div><div class="line"> task1: &lt;NSThread: 0x604000461800&gt;&#123;number = 4, name = (null)&#125;</div><div class="line"> task0 :&lt;NSThread: 0x6040004617c0&gt;&#123;number = 3, name = (null)&#125;</div><div class="line"> task3: &lt;NSThread: 0x600000460600&gt;&#123;number = 6, name = (null)&#125;</div><div class="line"> task2: &lt;NSThread: 0x6040004618c0&gt;&#123;number = 5, name = (null)&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;使用<code>NSOperationQueue</code>来执行任务与之前的区别在于，<strong>首先创建一个非主队列。然后用<code>addOperation</code>方法替换之前的<code>start</code>方法。刚刚已经说过，<code>NSOperationQueue</code>会为每一个<code>NSOperation</code>创建线程并调用它们的<code>start</code>方法</strong>。</p>
+<p>观察一下运行结果 ，<strong><u>所有的NSOperation都没有在主线程执行，从而成功的实现了异步、并行处理</u></strong>。</p>
+<h2 id="5-1-取消任务"><a href="#5-1-取消任务" class="headerlink" title="5.1 取消任务"></a>5.1 取消任务</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;如果我们有两次网络请求，第二次请求会用到第一次的数据。假设此时网络情况不好，第一次请求超时了，那么第二次请求也没有必要发送了。当然，用户也有可能人为地取消某个<code>NSOperation</code>。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;当某个<code>NSOperation</code>被取消时，我们应该尽可能的清除<code>NSOperation</code>内部的数据并且把<code>cancel</code>和<code>finished</code>设为true，把<code>executing</code>设为false。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//取消某个NSOperation</div><div class="line">    [operation cancel];</div><div class="line">    //取消某个NSOperationQueue剩余的NSOperation</div><div class="line">    [queue cancelAllOperations];</div></pre></td></tr></table></figure></p>
+<h2 id="5-2-设置依赖"><a href="#5-2-设置依赖" class="headerlink" title="5.2 设置依赖"></a>5.2 设置依赖</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;有时候一个网络请求是用到另一个网络请求获得的数据，这时候我们要确保第二次请求时，第一个请求已经执行完。但是我们同时还希望用到<code>NSOperationQueue</code>的并发特性(因为可能不止这两个任务)</p>
+<p>这时候我们<strong>可以设置<code>NSOperation</code>之间的依赖关系</strong>，很简单，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[operation1 addDependency: operation2];</div></pre></td></tr></table></figure></p>
+<p>需要注意的是，<strong><u><code>NSOperation</code>之间的相互依赖会导致死锁</u>。</strong></p>
+<h2 id="5-3-NSOperationQueue暂停与恢复"><a href="#5-3-NSOperationQueue暂停与恢复" class="headerlink" title="5.3 NSOperationQueue暂停与恢复"></a>5.3 NSOperationQueue暂停与恢复</h2><p>这个也很简单，只要修改<code>suspended</code>属性即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">queue.suspended = true; //暂停queue中所有operation</div><div class="line">queue.suspended = false; //恢复queue中所有operation</div></pre></td></tr></table></figure></p>
+<h2 id="5-4-NSOperation优先级"><a href="#5-4-NSOperation优先级" class="headerlink" title="5.4 NSOperation优先级"></a>5.4 NSOperation优先级</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;<strong><em>GCD中，任务(block)是没有优先级的，而队列具有优先级。和GCD相反，我们一般考虑NSOperation的优先级</em></strong>。</p>
+<p><code>NSOperation</code>有一个<code>NSOperationQueuePriority</code>枚举类型的属性<code>queuePriority</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, NSOperationQueuePriority) &#123;</div><div class="line">    NSOperationQueuePriorityVeryLow = -8L,</div><div class="line">    NSOperationQueuePriorityLow = -4L,</div><div class="line">    NSOperationQueuePriorityNormal = 0,</div><div class="line">    NSOperationQueuePriorityHigh = 4,</div><div class="line">    NSOperationQueuePriorityVeryHigh = 8</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>需要注意的是，<strong><code>NSOperationQueue</code>也不能完全保证优先级高的任务 一定先执行</strong>。</p>
+<h2 id="5-5-进程间通信"><a href="#5-5-进程间通信" class="headerlink" title="5.5 进程间通信"></a>5.5 进程间通信</h2><p>有时候我们在子线程中执行完一些操作的时候，需要回到主线程做一些事情(如进行UI操作)，因此需要从当前线程回到主线程，以下载并显示图片为例，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">// 子线程下载图片</div><div class="line">[queue addOperationWithBlock:^&#123;</div><div class="line">    NSURL * url = [NSURL URLWithString:@&quot;http://img.pconline.com.cn/images/photoblog/9/9/8/1/9981681/200910/11/1255259355826.jpg&quot;];</div><div class="line">    NSData * data = [NSData dataWithContentsOfURL:url];</div><div class="line">    UIImage * image = [[UIImage alloc] initWithData:data];</div><div class="line">    //回到主线程进行显示</div><div class="line">    [[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;</div><div class="line">        self.imageView.image = image;</div><div class="line">    &#125;];</div><div class="line">&#125;];</div></pre></td></tr></table></figure></p>
+<h1 id="6-小结"><a href="#6-小结" class="headerlink" title="6 小结"></a>6 小结</h1><h2 id="6-1-NSOperation和GCD如何选择"><a href="#6-1-NSOperation和GCD如何选择" class="headerlink" title="6.1 NSOperation和GCD如何选择"></a>6.1 NSOperation和GCD如何选择</h2><ol>
+<li><p>GCD以block为单位，代码简洁。同时GCD中的队列、组、信号量、source、barriers都是组成并行编程的基本原语。对于一次性的计算，或者仅仅为了加快现有方法的运行速度，选择轻量化的GCD就更加方便。</p>
+</li>
+<li><p><code>NSOperation</code>可以用来规划一组任务之间的依赖关系，设置它们的优先级，任务能被取消。队列可以暂停、恢复。<code>NSOperation</code>还可以自定义子类。这些都是GCD没有具备的。</p>
+</li>
+<li><p>可以根据情况有效结合<code>NSOperation</code>和GCD一起使用。</p>
+</li>
+</ol>
+<p>最后，有个很经典的面试题，<strong>GCD和NSOperation有什么区别？</strong></p>
+<p>答案基本就是对上面所说的的总结：</p>
+<ol>
+<li>GCD是纯C语言的API,<code>NSOperation</code>是基于GCD的OC版本封装。</li>
+<li><strong>GCD只支持FIFO的队列，<code>NSOperation</code>可以很方便地调整执行顺序，设置最大并发数量</strong>。</li>
+<li><code>NSOperationQueue</code>可以轻松在operation间设置依赖关系，而GCD需要写很多代码才能实现。</li>
+<li><strong><code>NSOperationQueue</code>支持KVO，可以检测operation是否正在执5.行(isExecuted)，是否结束(isFinisn),是否取消(isCancel)</strong>。</li>
+<li>GCD的执行速度比<code>NSOperation</code>快。</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/12/02/27多线程/" data-title="27多线程 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/06/06/24Add-CoreData-in-Xcode8-1etc/" title="在Xcode8.1中添加CoreData">
+  <strong>上一篇：</strong><br/>
+  <span>
+  在Xcode8.1中添加CoreData</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-何为多线程？"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 何为多线程？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-GCD简介"><span class="toc-number">2.</span> <span class="toc-text">2 GCD简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-GCD死锁问题"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 GCD死锁问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-理论分析"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 理论分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-解决方案"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-GCD任务组"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 GCD任务组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-dispatch-group-wait"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 dispatch_group_wait</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-dispatch-after"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 dispatch_after</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-GCD进阶"><span class="toc-number">3.</span> <span class="toc-text">3 GCD进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-dispatch-once"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 dispatch_once</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-dispatch-barrier-async"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 dispatch_barrier_async</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-dispatch-semaphore"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 dispatch_semaphore</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-NSOperation"><span class="toc-number">4.</span> <span class="toc-text">4 NSOperation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-NSOperationQueue"><span class="toc-number">5.</span> <span class="toc-text">5 NSOperationQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-取消任务"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 取消任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-设置依赖"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 设置依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-NSOperationQueue暂停与恢复"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 NSOperationQueue暂停与恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-NSOperation优先级"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 NSOperation优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-进程间通信"><span class="toc-number">5.5.</span> <span class="toc-text">5.5 进程间通信</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-小结"><span class="toc-number">6.</span> <span class="toc-text">6 小结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-NSOperation和GCD如何选择"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 NSOperation和GCD如何选择</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

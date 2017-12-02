@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="使用终端打包的旧方法1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release">
+    <meta name="description" content="最近把Xcode升级到了Version 8.3.2(8E2002)，发现原来的终端打包方式已经打不了.ipa包了。 一、使用终端打包的旧方法原来的终端代码如下： 1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -projec">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用终端自动打包">
 <meta property="og:url" content="https://univer2012.github.io/2017/05/25/21Automatic-packing-using-terminals/index.html">
 <meta property="og:site_name" content="SengolnHuang's blog">
-<meta property="og:description" content="使用终端打包的旧方法1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release">
-<meta property="og:updated_time" content="2017-05-27T07:00:15.000Z">
+<meta property="og:description" content="最近把Xcode升级到了Version 8.3.2(8E2002)，发现原来的终端打包方式已经打不了.ipa包了。 一、使用终端打包的旧方法原来的终端代码如下： 1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -projec">
+<meta property="og:updated_time" content="2017-06-01T09:35:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用终端自动打包">
-<meta name="twitter:description" content="使用终端打包的旧方法1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release">
+<meta name="twitter:description" content="最近把Xcode升级到了Version 8.3.2(8E2002)，发现原来的终端打包方式已经打不了.ipa包了。 一、使用终端打包的旧方法原来的终端代码如下： 1234567$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07$ xcodebuild -list$ xcodebuild -projec">
 
     
     <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
 				<h2 class="blog-motto">关注技术，分享生活</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -65,7 +65,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:univer2012.github.io">
 					</form>
 					
@@ -88,23 +88,51 @@
 		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-25T02:54:08.000Z" itemprop="datePublished"> Published 2017-05-25</time>
+    <time datetime="2017-05-25T02:54:08.000Z" itemprop="datePublished"> 发表于 2017-05-25</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
+			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用终端打包的旧方法"><span class="toc-number">1.</span> <span class="toc-text">使用终端打包的旧方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用终端打包的新方法"><span class="toc-number">2.</span> <span class="toc-text">使用终端打包的新方法</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、使用终端打包的旧方法"><span class="toc-number">1.</span> <span class="toc-text">一、使用终端打包的旧方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、使用终端打包的新方法"><span class="toc-number">2.</span> <span class="toc-text">二、使用终端打包的新方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、给打出来的-ipa包名字后面加上日期和时间-时、分"><span class="toc-number">3.</span> <span class="toc-text">三、给打出来的.ipa包名字后面加上日期和时间(时、分)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、显示打包花了多少时间"><span class="toc-number">4.</span> <span class="toc-text">四、显示打包花了多少时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、修改bundleId、version和build号"><span class="toc-number">5.</span> <span class="toc-text">五、修改bundleId、version和build号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、在打包的时候，修改工程，是否对打包有影响？"><span class="toc-number">6.</span> <span class="toc-text">六、在打包的时候，修改工程，是否对打包有影响？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、把所有要配置的内容，集中放在一个地方"><span class="toc-number">7.</span> <span class="toc-text">七、把所有要配置的内容，集中放在一个地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、添加是否上传蒲公英或fir-im"><span class="toc-number">8.</span> <span class="toc-text">八、添加是否上传蒲公英或fir.im</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="使用终端打包的旧方法"><a href="#使用终端打包的旧方法" class="headerlink" title="使用终端打包的旧方法"></a>使用终端打包的旧方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07</div><div class="line"></div><div class="line">$ xcodebuild -list</div><div class="line"></div><div class="line">$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release</div><div class="line"></div><div class="line">$ xcrun -sdk iphoneos -v PackageApplication ./build/Release-iphoneos/TKApp_XDTX_invest.app -o ~/Desktop/TKApp_XDTX_invest.ipa</div></pre></td></tr></table></figure>
-<h3 id="使用终端打包的新方法"><a href="#使用终端打包的新方法" class="headerlink" title="使用终端打包的新方法"></a>使用终端打包的新方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//信达 TKApp_XDTX_invest</div><div class="line">$ cd /Users/huangaengoln/Desktop/信达IOS_APP_for_2.1.0 </div><div class="line"></div><div class="line">$ xcodebuild archive -workspace TKApp_XDTX.xcodeproj/project.xcworkspace -scheme TKApp_XDTX_invest -archivePath ~/Documents/xcarchive/TKApp_XDTX_invest.xcarchive</div><div class="line"></div><div class="line">$ xcodebuild -exportArchive -archivePath ~/Documents/xcarchive/TKApp_XDTX_invest.xcarchive -exportPath ~/Desktop/TKApp_XDTX_invest -exportOptionsPlist TKApp/TKApp_XDTX_invest-Info.plist</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//华安</div><div class="line">$ cd /Users/huangaengoln/Documents/华安TKApp_HAZH2017 </div><div class="line"></div><div class="line">$ xcodebuild archive -workspace TKApp_HAZH.xcodeproj/project.xcworkspace -scheme TKApp_HAZH_Dev -archivePath ~/Documents/xcarchive/TKApp_HAZH_Dev.xcarchive</div><div class="line"></div><div class="line">$ xcodebuild -exportArchive -archivePath ~/Documents/xcarchive/TKApp_HAZH_Dev.xcarchive -exportPath ~/Desktop/TKApp_HAZH_Dev -exportOptionsPlist TKApp/TKApp_HAZH_Dev-Info.plist</div></pre></td></tr></table></figure>
-<hr>
+		<p>最近把Xcode升级到了<code>Version 8.3.2(8E2002)</code>，发现原来的终端打包方式已经打不了<code>.ipa</code>包了。</p>
+<h3 id="一、使用终端打包的旧方法"><a href="#一、使用终端打包的旧方法" class="headerlink" title="一、使用终端打包的旧方法"></a>一、使用终端打包的旧方法</h3><p>原来的终端代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ cd /Users/huangaengoln/Desktop/TKAPP_XDTX_branch_for_RZRQ_1.5.0-16-04-07</div><div class="line"></div><div class="line">$ xcodebuild -list</div><div class="line"></div><div class="line">$ xcodebuild -project TKApp_XDTX.xcodeproj -target TKApp_XDTX_invest -configuration Release</div><div class="line"></div><div class="line">$ xcrun -sdk iphoneos -v PackageApplication ./build/Release-iphoneos/TKApp_XDTX_invest.app -o ~/Desktop/TKApp_XDTX_invest.ipa</div></pre></td></tr></table></figure>
+<p>于是只能重新寻找新的终端打包方式了。</p>
+<p>关于打包，我们需要建立一个这样的观念：只要可以成功操作的功能，都是可以通过终端来实现的，特别是提供电脑系统的公司开发提供或推荐的软件。</p>
+<p>在网上寻找一番后，找到了这2篇文章：</p>
+<p><a href="http://www.jianshu.com/p/4cf4e45a4411" target="_blank" rel="external">关于 iOS 批量打包的总结</a></p>
+<p><a href="http://www.jianshu.com/p/5d59966eaecc?from=timeline" target="_blank" rel="external">使用xcodebuild打包 导出ipa 上传蒲公英或者提交AppStore</a></p>
+<p>参考着第一篇文章，写出了新的行之有效的打包代码：</p>
+<h3 id="二、使用终端打包的新方法"><a href="#二、使用终端打包的新方法" class="headerlink" title="二、使用终端打包的新方法"></a>二、使用终端打包的新方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//信达 TKApp_XDTX_invest</div><div class="line">$ cd /Users/huangaengoln/Desktop/信达IOS_APP_for_2.1.0 </div><div class="line"></div><div class="line">$ xcodebuild archive -workspace TKApp_XDTX.xcodeproj/project.xcworkspace -scheme TKApp_XDTX_invest -archivePath ~/Documents/xcarchive/TKApp_XDTX_invest.xcarchive</div><div class="line"></div><div class="line">$ xcodebuild -exportArchive -archivePath ~/Documents/xcarchive/TKApp_XDTX_invest.xcarchive -exportPath ~/Desktop/TKApp_XDTX_invest -exportOptionsPlist TKApp/TKApp_XDTX_invest-Info.plist</div></pre></td></tr></table></figure>
+<p>接着又寻思着，能不能把这些代码都写在一个可执行文件中，打包时直接拖进终端就可以执行这几句代码。因为打包时这几句就是配置好后简单的复制到终端，回车后等待，纯粹是体力活。</p>
+<p>于是把上面的代码，写在了<code>.sh</code>文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">#去到对应的工程目录</div><div class="line">echo &quot;~~~~~~~~~~~~~~~~去到对应的工程目录~~~~~~~~~~~~~~~~~~~&quot;</div><div class="line">cd ~/Desktop/信达IOS_APP_for_2.1.0</div><div class="line">#工程路径</div><div class="line">ProjectCurrentPath=`pwd`</div><div class="line"></div><div class="line">#工程名称(Project的名字)</div><div class="line">ProjectName=&quot;TKApp_XDTX&quot;  ###</div><div class="line">#scheme名字 -可以点击Product-&gt;Scheme-&gt;Manager	Schemes...查看</div><div class="line">Scheme=&quot;TKApp_XDTX_invest&quot;  ###</div><div class="line">#需要编译的 targetName</div><div class="line">TARGET_NAME=&quot;TKApp_XDTX_invest&quot;  ###</div><div class="line">#导出ipa 所需plist</div><div class="line">ExportOptionsPlist=$&#123;ProjectCurrentPath&#125;/TKApp/TKApp_XDTX_invest-Info.plist  ###</div><div class="line"># .xcworkspace 的路径</div><div class="line">Workspace=$&#123;ProjectCurrentPath&#125;/$&#123;ProjectName&#125;.xcodeproj/project.xcworkspace  ###</div><div class="line"></div><div class="line">#编译路径</div><div class="line">BUILDPATH=~/Desktop/xcarchive/$&#123;TARGET_NAME&#125;_$&#123;Date&#125;</div><div class="line">#archivePath</div><div class="line">ARCHIVEPATH=$&#123;BUILDPATH&#125;/$&#123;TARGET_NAME&#125;_$&#123;Date&#125;.xcarchive</div><div class="line">#输出的ipa目录</div><div class="line">IPAPATH=$&#123;BUILDPATH&#125;</div><div class="line">#Release还是Debug</div><div class="line">Configuration=&quot;Release&quot;</div><div class="line"></div><div class="line"></div><div class="line">echo &quot;~~~~~~~~~~~~~~~~清除工程~~~~~~~~~~~~~~~~~~~&quot;</div><div class="line"># 清理 避免出现一些莫名的错误</div><div class="line">xcodebuild clean -project $&#123;PROJECTNAME&#125;.xcodeproj</div><div class="line"></div><div class="line">#构建</div><div class="line">echo &quot;~~~~~~~~~~~~~~~~开始编译~~~~~~~~~~~~~~~~~~~&quot;</div><div class="line">xcodebuild archive \</div><div class="line">-workspace $&#123;Workspace&#125; \</div><div class="line">-scheme $&#123;Scheme&#125; \</div><div class="line">-configuration $&#123;Configuration&#125; \</div><div class="line">-archivePath $&#123;ARCHIVEPATH&#125;</div><div class="line"></div><div class="line">echo &quot;~~~~~~~~~~~~~~~~检查是否构建成功~~~~~~~~~~~~~~~~~~~&quot;</div><div class="line"># xcarchive 实际是一个文件夹不是一个文件所以使用 -d 判断</div><div class="line">if [ -d &quot;$ARCHIVEPATH&quot; ]</div><div class="line">then</div><div class="line">echo &quot;构建成功......&quot;</div><div class="line">else</div><div class="line">echo &quot;构建失败......&quot;</div><div class="line">rm -rf $BUILDPATH</div><div class="line">exit 1</div><div class="line">fi</div><div class="line"></div><div class="line">#生成ipa</div><div class="line">echo &quot;~~~~~~~~~~~~~~~~导出ipa~~~~~~~~~~~~~~~~~~~&quot;</div><div class="line"></div><div class="line">beginTime=`date +%s`</div><div class="line"></div><div class="line">xcodebuild -exportArchive \</div><div class="line">-archivePath $&#123;ARCHIVEPATH&#125; \</div><div class="line">-exportPath $&#123;IPAPATH&#125; \</div><div class="line">-exportOptionsPlist $&#123;ExportOptionsPlist&#125;</div><div class="line"></div><div class="line">echo &quot;~~~~~~~~~~~~~~~~检查是否成功导出ipa~~~~~~~~~~~~~~~~~~~&quot;</div><div class="line">IPAPATH=$&#123;IPAPATH&#125;/$&#123;TARGET_NAME&#125;.ipa</div><div class="line">if [ -f &quot;$IPAPATH&quot; ]</div><div class="line">then</div><div class="line">    echo &quot;导出ipa成功......&quot;</div><div class="line">    #打开ipa所在文件夹</div><div class="line">    open $BUILDPATH</div><div class="line">else</div><div class="line">    echo &quot;导出ipa失败......&quot;</div><div class="line">    # 结束时间</div><div class="line">    endTime=`date +%s`</div><div class="line">    echo &quot;$ArchiveTime&quot;</div><div class="line">    echo &quot;导出ipa时间$[ endTime - beginTime ]秒&quot;</div><div class="line">exit 1</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h3 id="三、给打出来的-ipa包名字后面加上日期和时间-时、分"><a href="#三、给打出来的-ipa包名字后面加上日期和时间-时、分" class="headerlink" title="三、给打出来的.ipa包名字后面加上日期和时间(时、分)"></a>三、给打出来的<code>.ipa</code>包名字后面加上日期和时间(时、分)</h3><p>打出<code>ipa</code>包后，可以在后面用终端命令修改<code>.ipa</code>的名字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 修改ipa包的名字</div><div class="line">echo &quot;~~~~~~~~~~~~~~~~修改ipa的名字~~~~~~~~~~~~~~~~~~~&quot;</div><div class="line">mv $&#123;BUILDPATH&#125;/$&#123;TARGET_NAME&#125;.ipa $&#123;BUILDPATH&#125;/$&#123;TARGET_NAME&#125;_$&#123;Date&#125;.ipa</div></pre></td></tr></table></figure>
+<h3 id="四、显示打包花了多少时间"><a href="#四、显示打包花了多少时间" class="headerlink" title="四、显示打包花了多少时间"></a>四、显示打包花了多少时间</h3><p>在第一行获取开始时间：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">beginTime=`date +%s`</div></pre></td></tr></table></figure></p>
+<p>当编译完成时，再获取编译后的当前时间，与开始时间的差值就是build所消耗的时间：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">endTime=`date +%s`</div><div class="line">ArchiveTime=&quot;构建时间$[ endTime - beginTime ]秒&quot;</div><div class="line">#... ...</div><div class="line">echo &quot;$ArchiveTime&quot;</div></pre></td></tr></table></figure>
+<p>在打出ipa包前后，分别获取下当前时间，并计算差值，即打包所需时间：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">beginTime=`date +%s`</div><div class="line">#... ...</div><div class="line">endTime=`date +%s`</div><div class="line">ExportTime=&quot;导出ipa时间$[ endTime - beginTime ]秒&quot;</div><div class="line">#... ...</div><div class="line">echo &quot;$ExportTime&quot;</div></pre></td></tr></table></figure>
+<h3 id="五、修改bundleId、version和build号"><a href="#五、修改bundleId、version和build号" class="headerlink" title="五、修改bundleId、version和build号"></a>五、修改bundleId、version和build号</h3><p>在编译之前，可以修改工程<code>.plist</code>中的verseionhe、build等内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">BundleIdentifier=&quot;com.thinkive.xxxx&quot;</div><div class="line">##版本号</div><div class="line">ShortVersionString=&quot;2.1.6&quot;</div><div class="line">##Build号</div><div class="line">BuildVersion=&quot;1.0.1&quot;</div><div class="line"></div><div class="line">###bundleID：com.thinkive.investxdtx</div><div class="line">$PlistBuddyPath  -c &quot;Set :CFBundleIdentifier $BundleIdentifier&quot; $&#123;ExportOptionsPlist&#125;</div><div class="line">###版本号：2.1.5</div><div class="line">$PlistBuddyPath  -c &quot;Set :CFBundleShortVersionString $ShortVersionString&quot; $&#123;ExportOptionsPlist&#125;</div><div class="line">###Build号：1.0.0</div><div class="line">$PlistBuddyPath  -c &quot;Set :CFBundleVersion $BuildVersion&quot; $&#123;ExportOptionsPlist&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：不建议修改<code>.plist</code>中的BundleIdentifier。原来<code>.plist</code>中的BundleIdentifier的值是<code>$(PRODUCT_BUNDLE_IDENTIFIER)</code>，直接修改为具体的值后会造成与<code>Settings</code>中的bundleID不一致。</p>
+<p>对于不同的BundleIdentifier，可以通过建立不同的target来解决。</p>
+<p>同时，需要声明的是，这里通过终端对<code>.plist</code>的修改，跟在工程中修改是等价的。</p>
+</blockquote>
+<h3 id="六、在打包的时候，修改工程，是否对打包有影响？"><a href="#六、在打包的时候，修改工程，是否对打包有影响？" class="headerlink" title="六、在打包的时候，修改工程，是否对打包有影响？"></a>六、在打包的时候，修改工程，是否对打包有影响？</h3><p>答曰：经过测试，不会有影响。</p>
+<p>我这里只是简单的做了测试：在build的时候，直接去掉一句代码后面的<code>;</code>，观察是否会build失败。</p>
+<h3 id="七、把所有要配置的内容，集中放在一个地方"><a href="#七、把所有要配置的内容，集中放在一个地方" class="headerlink" title="七、把所有要配置的内容，集中放在一个地方"></a>七、把所有要配置的内容，集中放在一个地方</h3><p>下面这段代码，是需要检查(路径是否正确)和配置的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">#************************* 配置项目 ********************************************</div><div class="line">#去到对应的工程目录</div><div class="line">echo &quot;~~~~~~~~~~~~~~~~去到对应的工程目录~~~~~~~~~~~~~~~~~~~&quot;</div><div class="line">cd ~/Desktop/信达IOS_APP_for_2.1.0</div><div class="line"></div><div class="line">#工程路径</div><div class="line">ProjectCurrentPath=`pwd`</div><div class="line"></div><div class="line">#工程名称(Project的名字)</div><div class="line">ProjectName=&quot;TKApp_XDTX&quot;  ###</div><div class="line">#scheme名字 -可以点击Product-&gt;Scheme-&gt;Manager	Schemes...查看</div><div class="line">Scheme=&quot;TKApp_XDTX_invest&quot;  ###</div><div class="line">#需要编译的 targetName</div><div class="line">TARGET_NAME=&quot;TKApp_XDTX_invest&quot;  ###</div><div class="line">#导出ipa 所需plist</div><div class="line">ExportOptionsPlist=$&#123;ProjectCurrentPath&#125;/TKApp/TKApp_XDTX_invest-Info.plist  ###</div><div class="line"># .xcworkspace 的路径</div><div class="line">Workspace=$&#123;ProjectCurrentPath&#125;/$&#123;ProjectName&#125;.xcodeproj/project.xcworkspace  ###</div><div class="line"></div><div class="line"></div><div class="line">BundleIdentifier=&quot;com.thinkive.xxxx&quot;</div><div class="line">##版本号</div><div class="line">ShortVersionString=&quot;2.1.6&quot;</div><div class="line">##Build号</div><div class="line">BuildVersion=&quot;1.0.1&quot;</div><div class="line">#************************* 配置项目 结束 ********************************************</div></pre></td></tr></table></figure>
+<h3 id="八、添加是否上传蒲公英或fir-im"><a href="#八、添加是否上传蒲公英或fir-im" class="headerlink" title="八、添加是否上传蒲公英或fir.im"></a>八、添加是否上传蒲公英或fir.im</h3><p>下面是上传fir.im的一部分实践，后期继续探索：</p>
 <p>构建fir.im的自动上传：</p>
 <p>参考自：<a href="http://blog.csdn.net/wang631106979/article/details/52299083" target="_blank" rel="external">iOS开发进阶 - 使用shell脚本自动打包上传到fir.im上</a></p>
 <p>Mac OS X 10.11 以后的版本, 由于10.11引入了 rootless, 无法直接安装 fir-cli, 有以下三种解决办法:</p>
@@ -113,18 +141,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;gem: --bindir /usr/local/bin&apos; &gt;&gt; ~/.gemrc</div><div class="line">$ gem install fir-cli</div></pre></td></tr></table></figure>
 <p>然后再网页登录你的fir.im账号，拿到API Token（比如：你拿到的token是fa46398ca7dcf2ba25487be28ae68d75），接着在终端登录你的fir.im</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ fir login fa46398ca7dcf2ba25487be28ae68d75</div><div class="line">$ fir me</div></pre></td></tr></table></figure>
-<p>如果出现以下类似的情况，说明鞥路成功了：</p>
+<p>如果出现以下类似的情况，说明登录成功了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">huangsengolndeMacBook-Pro:~ huangaengoln$ fir me</div><div class="line">Ignoring RedCloth-4.2.9 because its extensions are not built.  Try: gem pristine RedCloth --version 4.2.9</div><div class="line">Ignoring fast-stemmer-1.0.2 because its extensions are not built.  Try: gem pristine fast-stemmer --version 1.0.2</div><div class="line">Ignoring ffi-1.9.10 because its extensions are not built.  Try: gem pristine ffi --version 1.9.10</div><div class="line">Ignoring posix-spawn-0.3.11 because its extensions are not built.  Try: gem pristine posix-spawn --version 0.3.11</div><div class="line">Ignoring rdiscount-2.1.8 because its extensions are not built.  Try: gem pristine rdiscount --version 2.1.8</div><div class="line">Ignoring rdiscount-2.1.7 because its extensions are not built.  Try: gem pristine rdiscount --version 2.1.7</div><div class="line">Ignoring redcarpet-3.3.3 because its extensions are not built.  Try: gem pristine redcarpet --version 3.3.3</div><div class="line">Ignoring redcarpet-3.3.2 because its extensions are not built.  Try: gem pristine redcarpet --version 3.3.2</div><div class="line">Ignoring yajl-ruby-1.2.1 because its extensions are not built.  Try: gem pristine yajl-ruby --version 1.2.1</div><div class="line">I, [2017-05-27T11:34:43.203861 #80585]  INFO -- : Login succeed, current user&apos;s email: huangsj@thinkive.com</div><div class="line">I, [2017-05-27T11:34:43.204139 #80585]  INFO -- : Login succeed, current user&apos;s name:  huangsj</div><div class="line">I, [2017-05-27T11:34:43.204221 #80585]  INFO -- : </div><div class="line">huangsengolndeMacBook-Pro:~ huangaengoln$</div></pre></td></tr></table></figure>
-<p>1、<code>.ipa</code>的名字加上日期和时间(时、分)；XX</p>
-<p>2、显示打包花了多少时间；VV</p>
-<p>3、修改bundleId、version和build号；</p>
-<p>4、添加是否上传蒲公英(fir.im);</p>
-<p>5、实验：在打包的时候，修改工程，是否对打包有影响；</p>
-<p>6、把所有要配置的内容，集中放在一个地方；</p>
-<p>7、添加【选择打包方式】(<code>Ad Hoc Delopment</code>/<code>Enterprise Delopment</code>/<code>App Store Delopment</code>)；</p>
-<p>参考资料来自：</p>
-<p><a href="http://www.jianshu.com/p/4cf4e45a4411" target="_blank" rel="external">关于 iOS 批量打包的总结</a></p>
-<p><a href="http://www.jianshu.com/p/5d59966eaecc?from=timeline" target="_blank" rel="external">使用xcodebuild打包 导出ipa 上传蒲公英或者提交AppStore</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -159,6 +177,14 @@
 </div>
 
 
+<div class="next">
+<a href="/2017/06/01/22The-adaptation-problem-of-iOS-10/"  title="读《iOS 10的适配问题》摘录">
+ <strong>下一篇：</strong><br/> 
+ <span>读《iOS 10的适配问题》摘录
+</span>
+</a>
+</div>
+
 </nav>
 
 	
@@ -170,22 +196,22 @@
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
+  <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用终端打包的旧方法"><span class="toc-number">1.</span> <span class="toc-text">使用终端打包的旧方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用终端打包的新方法"><span class="toc-number">2.</span> <span class="toc-text">使用终端打包的新方法</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、使用终端打包的旧方法"><span class="toc-number">1.</span> <span class="toc-text">一、使用终端打包的旧方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、使用终端打包的新方法"><span class="toc-number">2.</span> <span class="toc-text">二、使用终端打包的新方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、给打出来的-ipa包名字后面加上日期和时间-时、分"><span class="toc-number">3.</span> <span class="toc-text">三、给打出来的.ipa包名字后面加上日期和时间(时、分)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、显示打包花了多少时间"><span class="toc-number">4.</span> <span class="toc-text">四、显示打包花了多少时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、修改bundleId、version和build号"><span class="toc-number">5.</span> <span class="toc-text">五、修改bundleId、version和build号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、在打包的时候，修改工程，是否对打包有影响？"><span class="toc-number">6.</span> <span class="toc-text">六、在打包的时候，修改工程，是否对打包有影响？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、把所有要配置的内容，集中放在一个地方"><span class="toc-number">7.</span> <span class="toc-text">七、把所有要配置的内容，集中放在一个地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、添加是否上传蒲公英或fir-im"><span class="toc-number">8.</span> <span class="toc-text">八、添加是否上传蒲公英或fir.im</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
 <div class="github-card">
-<p class="asidetitle">Github Card</p>
+<p class="asidetitle">Github 名片</p>
 <div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
 <script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
 </div>
@@ -195,7 +221,7 @@
 
   
 <div class="categorieslist">
-	<p class="asidetitle">Categories</p>
+	<p class="asidetitle">分类</p>
 		<ul>
 		
 		  
@@ -208,11 +234,11 @@
 
   
 <div class="tagslist">
-	<p class="asidetitle">Tags</p>
+	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>2</sup></a></li>
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>3</sup></a></li>
 			
 		
 		</ul>
@@ -220,7 +246,7 @@
 
 
   <div class="linkslist">
-  <p class="asidetitle">Links</p>
+  <p class="asidetitle">友情链接</p>
     <ul>
         
           <li>
@@ -242,11 +268,11 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
   <div class="weiboshow">
-  <p class="asidetitle">Weibo</p>
+  <p class="asidetitle">新浪微博</p>
     <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
 </div>
 
@@ -497,7 +523,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
