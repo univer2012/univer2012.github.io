@@ -1,0 +1,572 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>30AFNetworking 3.0迁移指南 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="来自：AFNetworking 3.0迁移指南 AFNetworking是一款在OS X和iOS下都令人喜爱的网络库。为了迎合iOS新版本的升级, AFNetworking在3.0版本中删除了基于 NSURLConnection API的所有支持。如果你的项目以前使用过这些API，建议您立即升级到基于 NSURLSession 的API的AFNetworking的版本。本指南将引导您完成这个过程。">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="30AFNetworking 3.0迁移指南">
+<meta property="og:url" content="https://univer2012.github.io/2017/12/05/30AFNetworking-3-0迁移指南/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="来自：AFNetworking 3.0迁移指南 AFNetworking是一款在OS X和iOS下都令人喜爱的网络库。为了迎合iOS新版本的升级, AFNetworking在3.0版本中删除了基于 NSURLConnection API的所有支持。如果你的项目以前使用过这些API，建议您立即升级到基于 NSURLSession 的API的AFNetworking的版本。本指南将引导您完成这个过程。">
+<meta property="og:updated_time" content="2017-12-05T08:02:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="30AFNetworking 3.0迁移指南">
+<meta name="twitter:description" content="来自：AFNetworking 3.0迁移指南 AFNetworking是一款在OS X和iOS下都令人喜爱的网络库。为了迎合iOS新版本的升级, AFNetworking在3.0版本中删除了基于 NSURLConnection API的所有支持。如果你的项目以前使用过这些API，建议您立即升级到基于 NSURLSession 的API的AFNetworking的版本。本指南将引导您完成这个过程。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/05/30AFNetworking-3-0迁移指南/" title="30AFNetworking 3.0迁移指南" itemprop="url">30AFNetworking 3.0迁移指南</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-05T07:32:40.000Z" itemprop="datePublished"> Published 2017-12-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-新设备要求-iOS-7-Mac-OS-X-10-9-watchOS-2-tvOS-9-amp-Xcode-7"><span class="toc-number">1.</span> <span class="toc-text">1.1 新设备要求: iOS 7, Mac OS X 10.9, watchOS 2, tvOS 9, & Xcode 7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-NSURLConnection的API已废弃"><span class="toc-number">2.</span> <span class="toc-text">1.2 NSURLConnection的API已废弃</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-弃用的类"><span class="toc-number">3.</span> <span class="toc-text">1.3 弃用的类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-修改的类"><span class="toc-number">4.</span> <span class="toc-text">1.4 修改的类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-迁移"><span class="toc-number"></span> <span class="toc-text">2 迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-AFHTTPRequestOperationManager-核心代码"><span class="toc-number">1.</span> <span class="toc-text">2.1 AFHTTPRequestOperationManager 核心代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-AFHTTPRequestOperation-核心代码"><span class="toc-number">2.</span> <span class="toc-text">2.2 AFHTTPRequestOperation 核心代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-UIKit的迁移"><span class="toc-number"></span> <span class="toc-text">3 UIKit的迁移</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-UIAlertView的类目被废弃"><span class="toc-number"></span> <span class="toc-text">4 UIAlertView的类目被废弃</span></a>
+		
+		</div>
+		
+		<p>来自：<a href="http://www.cocoachina.com/ios/20151020/13831.html" target="_blank" rel="external">AFNetworking 3.0迁移指南</a></p>
+<p>AFNetworking是一款在OS X和iOS下都令人喜爱的网络库。为了迎合iOS新版本的升级, AFNetworking在3.0版本中删除了基于 NSURLConnection API的所有支持。如果你的项目以前使用过这些API，建议您立即升级到基于 NSURLSession 的API的AFNetworking的版本。本指南将引导您完成这个过程。</p>
+<p>本指南是为了引导使用AFNetworking 2.x升级到最新的版本API，以达到过渡的目的，并且解释了新增和更改的设计结构。</p>
+<h2 id="1-1-新设备要求-iOS-7-Mac-OS-X-10-9-watchOS-2-tvOS-9-amp-Xcode-7"><a href="#1-1-新设备要求-iOS-7-Mac-OS-X-10-9-watchOS-2-tvOS-9-amp-Xcode-7" class="headerlink" title="1.1 新设备要求: iOS 7, Mac OS X 10.9, watchOS 2, tvOS 9, &amp; Xcode 7"></a>1.1 新设备要求: iOS 7, Mac OS X 10.9, watchOS 2, tvOS 9, &amp; Xcode 7</h2><p>AFNetworking 3.0正式支持的iOS 7， Mac OS X的10.9， watchOS 2 ， tvOS 9 和Xcode 7。如果你想使用AFNetworking在针对较旧版本的SDK项目，请检查README的兼容性信息。</p>
+<h2 id="1-2-NSURLConnection的API已废弃"><a href="#1-2-NSURLConnection的API已废弃" class="headerlink" title="1.2 NSURLConnection的API已废弃"></a>1.2 NSURLConnection的API已废弃</h2><ul>
+<li>AFNetworking 1.0建立在NSURLConnection的基础API之上 ，</li>
+<li>AFNetworking 2.0开始使用NSURLConnection的基础API ，以及较新基于NSURLSession的API的选项。</li>
+<li>AFNetworking 3.0现已完全基于NSURLSession的API，这降低了维护的负担，同时支持苹果增强关于NSURLSession提供的任何额外功能。</li>
+</ul>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;由于Xcode 7中，<code>NSURLConnection</code>的API已经正式被苹果弃用。虽然该API将继续运行，但将没有新功能将被添加，并且苹果已经通知所有基于网络的功能，以充分使NSURLSession向前发展。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;AFNetworking 2.X将继续获得关键的隐患和安全补丁，但没有新的功能将被添加。Alamofire(Swift下的网络请求)软件基金会建议，所有的项目迁移到基于<code>NSURLSession</code>的API。</p>
+<h2 id="1-3-弃用的类"><a href="#1-3-弃用的类" class="headerlink" title="1.3 弃用的类"></a>1.3 弃用的类</h2><p>下面的类已从AFNetworking 3.0中废弃：</p>
+<ul>
+<li><code>AFURLConnectionOperation</code></li>
+<li><code>AFHTTPRequestOperation</code></li>
+<li><code>AFHTTPRequestOperationManager</code></li>
+</ul>
+<h2 id="1-4-修改的类"><a href="#1-4-修改的类" class="headerlink" title="1.4 修改的类"></a>1.4 修改的类</h2><p>下面的类包含基于<code>NSURLConnection</code>的API的内部实现。他们已经被使用<code>NSURLSession</code>重构:</p>
+<ul>
+<li><code>UIImageView+AFNetworking</code></li>
+<li><code>UIWebView+AFNetworking</code></li>
+<li><code>UIButton+AFNetworking</code></li>
+</ul>
+<h1 id="2-迁移"><a href="#2-迁移" class="headerlink" title="2 迁移"></a>2 迁移</h1><h2 id="2-1-AFHTTPRequestOperationManager-核心代码"><a href="#2-1-AFHTTPRequestOperationManager-核心代码" class="headerlink" title="2.1 AFHTTPRequestOperationManager 核心代码"></a>2.1 AFHTTPRequestOperationManager 核心代码</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;如果你以前使用 <code>AFHTTPRequestOperationManager</code> ， 你将需要迁移去使用 <code>AFHTTPSessionManager</code>。 以下的类在两者过渡间并没有变化：</p>
+<ul>
+<li>securityPolicy</li>
+<li>requestSerializer</li>
+<li>responseSerializer</li>
+</ul>
+<p>接下来举一个关于<code>AFHTTPSessionManager</code>的简单例子。<strong>注意HTTP网络请求返回的不再是<code>AFHTTPRequestOperation</code>, 修改成为了<code>NSURLSessionTask</code>，并且成功和失败的Block块中的参数也变更为了<code>NSURLSessionTask</code>，而不再是<code>AFHTTPRequestOperation</code></strong>。</p>
+<p>AFNetworking 2.x：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</div><div class="line">[manager GET:@&quot;请求的url&quot; parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) &#123;</div><div class="line">        NSLog(@&quot;成功&quot;);</div><div class="line">&#125; failure:^(AFHTTPRequestOperation *operation, NSError*error) &#123;</div><div class="line">        NSLog(@&quot;失败&quot;);</div><div class="line">&#125;];</div></pre></td></tr></table></figure></p>
+<p>AFNetworking 3.0：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">AFHTTPSessionManager *session = [AFHTTPSessionManager manager];</div><div class="line">[session GET:@&quot;请求的url&quot; parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) &#123;</div><div class="line">        NSLog(@&quot;成功&quot;);</div><div class="line">&#125; failure:^(NSURLSessionDataTask *task, NSError *error) &#123;</div><div class="line">        NSLog(@&quot;失败&quot;);        </div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<h2 id="2-2-AFHTTPRequestOperation-核心代码"><a href="#2-2-AFHTTPRequestOperation-核心代码" class="headerlink" title="2.2 AFHTTPRequestOperation 核心代码"></a>2.2 AFHTTPRequestOperation 核心代码</h2><p>&nbsp; &nbsp; &nbsp; &nbsp;与<code>NSURLConnection</code>对象不同，<strong>每个共享应用范围的设置如会话管理、缓存策略、Cookie存储以及URL协议等，这些<code>NSURLSession</code>对象都可以单独进行配置。使用特定的配置来初始化会话，它可以发送任务来获取数据，并上传或下载文件</strong>。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;在AFNetworking 2.0中，使用<code>AFHTTPRequestOperation</code>，有可能创建一个没有额外开销的独立的网络请求来获取数据。<code>NSURLSession</code>则需要更多的开销，为了获得所要请求的数据。</p>
+<p>接下来，将要通过AFHTTPSessionManager创建一个单例，并创建一个任务和启动它。</p>
+<p>AFNetworking 2.x：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSURL *URL = [NSURL URLWithString:@&quot;&quot;];</div><div class="line">NSURLRequest *request = [NSURLRequest requestWithURL:URL];</div><div class="line">AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];</div><div class="line">op.responseSerializer = [AFJSONResponseSerializer serializer];</div><div class="line">[op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * operation, id responseObject) &#123;</div><div class="line">        NSLog(@&quot;JSON: %@&quot;, responseObject);</div><div class="line">&#125; failure:^(AFHTTPRequestOperation * operation, NSError * error) &#123;</div><div class="line">        NSLog(@&quot;Error: %@&quot;, error);</div><div class="line">&#125;];</div><div class="line">[[NSOperationQueue mainQueue] addOperation:op];</div></pre></td></tr></table></figure></p>
+<p>AFNetworking 3.0：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSURL *URL = [NSURL URLWithString:@&quot;&quot;];</div><div class="line">AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];</div><div class="line">[manager GET:URL.absoluteString parameters:nil success:^(NSURLSessionTask * task, id responseObject) &#123;</div><div class="line">        NSLog(@&quot;JSON: %@&quot;, responseObject);</div><div class="line">&#125; failure:^(NSURLSessionTask * operation, NSError * error) &#123;</div><div class="line">        NSLog(@&quot;Error: %@&quot;, error);</div><div class="line">&#125;];</div></pre></td></tr></table></figure></p>
+<h1 id="3-UIKit的迁移"><a href="#3-UIKit的迁移" class="headerlink" title="3 UIKit的迁移"></a>3 UIKit的迁移</h1><p>&nbsp; &nbsp; &nbsp; &nbsp;图片下载已经被重构，以遵循AlamofireImage架构与新的<code>AFImageDownloader</code>类。这个类的图片下载职责的代理人是UIButton与UIImageView的类目，并且提供了一些方法，在必要时可以自定义。类别中，下载远程图片的实际方法没有改变。</p>
+<p>UIWebView的类目被重构为使用<code>AFHTTPSessionManager</code>作为其网络请求。</p>
+<h1 id="4-UIAlertView的类目被废弃"><a href="#4-UIAlertView的类目被废弃" class="headerlink" title="4 UIAlertView的类目被废弃"></a>4 UIAlertView的类目被废弃</h1><p>从AFNetworking 3.0后UIAlertView的类目因过时而被废弃。并没有提供<code>UIAlertController</code>类目的计划，因为这是应用程序应处理的逻辑，而不是这个库。</p>
+<p>原文链接：<a href="https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-3.0-Migration-Guide#new-requirements-ios-7-mac-os-x-109-watchos-2-tvos-9--xcode-7" target="_blank" rel="external">AFNetworking 3.0</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/12/05/30AFNetworking-3-0迁移指南/" data-title="30AFNetworking 3.0迁移指南 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/12/05/30AFNetworking原理与使用/" title="30AFNetworking原理与使用">
+  <strong>上一篇：</strong><br/>
+  <span>
+  30AFNetworking原理与使用</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/12/05/32关于AFNetworking3-0-的使用/"  title="32关于AFNetworking3.0+的使用">
+ <strong>下一篇：</strong><br/> 
+ <span>32关于AFNetworking3.0+的使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-新设备要求-iOS-7-Mac-OS-X-10-9-watchOS-2-tvOS-9-amp-Xcode-7"><span class="toc-number">1.</span> <span class="toc-text">1.1 新设备要求: iOS 7, Mac OS X 10.9, watchOS 2, tvOS 9, & Xcode 7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-NSURLConnection的API已废弃"><span class="toc-number">2.</span> <span class="toc-text">1.2 NSURLConnection的API已废弃</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-弃用的类"><span class="toc-number">3.</span> <span class="toc-text">1.3 弃用的类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-修改的类"><span class="toc-number">4.</span> <span class="toc-text">1.4 修改的类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-迁移"><span class="toc-number"></span> <span class="toc-text">2 迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-AFHTTPRequestOperationManager-核心代码"><span class="toc-number">1.</span> <span class="toc-text">2.1 AFHTTPRequestOperationManager 核心代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-AFHTTPRequestOperation-核心代码"><span class="toc-number">2.</span> <span class="toc-text">2.2 AFHTTPRequestOperation 核心代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-UIKit的迁移"><span class="toc-number"></span> <span class="toc-text">3 UIKit的迁移</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-UIAlertView的类目被废弃"><span class="toc-number"></span> <span class="toc-text">4 UIAlertView的类目被废弃</span></a>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
