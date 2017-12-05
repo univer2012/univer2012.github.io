@@ -1,0 +1,648 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>34iOS程序执行顺序和UIViewController 的生命周期 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="来自：iOS程序执行顺序和UIViewController 的生命周期(整理)  说明：此文是自己的总结笔记，主要参考:  iOS程序的启动执行顺序 AppDelegate 及 UIViewController 的生命周期UIView的生命周期 一. iOS程序的启动执行顺序1.1 程序启动顺序图 1.2 具体执行流程 程序入口：进入main函数，设置AppDelegate称为函数的代理  程序完">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="34iOS程序执行顺序和UIViewController 的生命周期">
+<meta property="og:url" content="https://univer2012.github.io/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="来自：iOS程序执行顺序和UIViewController 的生命周期(整理)  说明：此文是自己的总结笔记，主要参考:  iOS程序的启动执行顺序 AppDelegate 及 UIViewController 的生命周期UIView的生命周期 一. iOS程序的启动执行顺序1.1 程序启动顺序图 1.2 具体执行流程 程序入口：进入main函数，设置AppDelegate称为函数的代理  程序完">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/2252551-4c489571cabf79b7.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/2252551-d87fdaa6730ba561.png">
+<meta property="og:updated_time" content="2017-12-05T14:47:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="34iOS程序执行顺序和UIViewController 的生命周期">
+<meta name="twitter:description" content="来自：iOS程序执行顺序和UIViewController 的生命周期(整理)  说明：此文是自己的总结笔记，主要参考:  iOS程序的启动执行顺序 AppDelegate 及 UIViewController 的生命周期UIView的生命周期 一. iOS程序的启动执行顺序1.1 程序启动顺序图 1.2 具体执行流程 程序入口：进入main函数，设置AppDelegate称为函数的代理  程序完">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/2252551-4c489571cabf79b7.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/" title="34iOS程序执行顺序和UIViewController 的生命周期" itemprop="url">34iOS程序执行顺序和UIViewController 的生命周期</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-05T10:53:09.000Z" itemprop="datePublished"> Published 2017-12-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-iOS程序的启动执行顺序"><span class="toc-number">1.</span> <span class="toc-text">一. iOS程序的启动执行顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-程序启动顺序图"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 程序启动顺序图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-具体执行流程"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 具体执行流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-分析"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-对于applicationWillResignActive-非活动-与applicationDidEnterBackground-后台-这两个的区别。"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1  对于applicationWillResignActive(非活动)与applicationDidEnterBackground(后台)这两个的区别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-UIApplicationMain-函数解释"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2 UIApplicationMain 函数解释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-1-打印调用顺序"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">1.3.2.1 打印调用顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-2-分析"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">1.3.2.2 分析:</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、UIViewController-的生命周期"><span class="toc-number">2.</span> <span class="toc-text">二、UIViewController 的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-分析："><span class="toc-number">2.1.</span> <span class="toc-text">2.1 分析：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-initWithNibName-bundle"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">1. initWithNibName:bundle:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-initWithCoder"><span class="toc-number">2.1.0.2.</span> <span class="toc-text">2. initWithCoder:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-awakeFromNib"><span class="toc-number">2.1.0.3.</span> <span class="toc-text">3. awakeFromNib</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-loadView"><span class="toc-number">2.1.0.4.</span> <span class="toc-text">4. loadView </span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-viewDidLoad"><span class="toc-number">2.1.0.5.</span> <span class="toc-text">5. viewDidLoad</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-viewWillAppear"><span class="toc-number">2.1.0.6.</span> <span class="toc-text">6. viewWillAppear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-viewWillLayoutSubviews"><span class="toc-number">2.1.0.7.</span> <span class="toc-text">7. viewWillLayoutSubviews</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-viewDidLayoutSubviews"><span class="toc-number">2.1.0.8.</span> <span class="toc-text">8. viewDidLayoutSubviews</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-viewDidAppear"><span class="toc-number">2.1.0.9.</span> <span class="toc-text">9. viewDidAppear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-viewWillDisappear"><span class="toc-number">2.1.0.10.</span> <span class="toc-text">10. viewWillDisappear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-viewDidDisappear"><span class="toc-number">2.1.0.11.</span> <span class="toc-text">11. viewDidDisappear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-dealloc"><span class="toc-number">2.1.0.12.</span> <span class="toc-text">12. dealloc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-didReceiveMemoryWarning"><span class="toc-number">2.1.0.13.</span> <span class="toc-text">13. didReceiveMemoryWarning</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-视图的生命历程"><span class="toc-number">3.</span> <span class="toc-text">三. 视图的生命历程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、总结"><span class="toc-number">4.</span> <span class="toc-text">四、总结</span></a></li></ol>
+		
+		</div>
+		
+		<p>来自：<a href="http://www.jianshu.com/p/d60b388b19f5" target="_blank" rel="external">iOS程序执行顺序和UIViewController 的生命周期(整理)</a></p>
+<blockquote>
+<p>说明：此文是自己的总结笔记，主要参考:</p>
+</blockquote>
+<p><a href="http://www.cnblogs.com/junhuawang/p/5742535.html" target="_blank" rel="external">iOS程序的启动执行顺序 AppDelegate 及 UIViewController 的生命周期</a><br><a href="https://bestswifter.com/uiviewlifetime/" target="_blank" rel="external">UIView的生命周期</a></p>
+<h1 id="一-iOS程序的启动执行顺序"><a href="#一-iOS程序的启动执行顺序" class="headerlink" title="一. iOS程序的启动执行顺序"></a>一. iOS程序的启动执行顺序</h1><h2 id="1-1-程序启动顺序图"><a href="#1-1-程序启动顺序图" class="headerlink" title="1.1 程序启动顺序图"></a>1.1 程序启动顺序图</h2><p><img src="/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/2252551-4c489571cabf79b7.png" alt="iOS启动原理图"></p>
+<h2 id="1-2-具体执行流程"><a href="#1-2-具体执行流程" class="headerlink" title="1.2 具体执行流程"></a>1.2 具体执行流程</h2><ol>
+<li><p>程序入口：进入<code>main</code>函数，设置<code>AppDelegate</code>称为函数的代理</p>
+</li>
+<li><p>程序完成加载：<code>[AppDelegate application:didFinishLaunchingWithOptions:]</code></p>
+</li>
+<li><p>创建window窗口</p>
+</li>
+<li><p>程序被激活：<code>[AppDelegate applicationDidBecomeActive:]</code></p>
+</li>
+<li><p>当点击command+H时(针对模拟器,手机是当点击home键)</p>
+<ul>
+<li>程序取消激活状态<br><code>[AppDelegate applicationWillResignActive:];</code></li>
+<li>程序进入后台<br><code>[AppDelegate applicationDidEnterBackground:];</code></li>
+</ul>
+</li>
+<li><p>点击进入工程</p>
+<ul>
+<li>程序进入前台<br><code>[AppDelegate applicationWillEnterForeground:]</code></li>
+<li>程序被激活<br><code>[AppDelegate applicationDidBecomeActive:];</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="1-3-分析"><a href="#1-3-分析" class="headerlink" title="1.3 分析"></a>1.3 分析</h2><h3 id="1-3-1-对于applicationWillResignActive-非活动-与applicationDidEnterBackground-后台-这两个的区别。"><a href="#1-3-1-对于applicationWillResignActive-非活动-与applicationDidEnterBackground-后台-这两个的区别。" class="headerlink" title="1.3.1  对于applicationWillResignActive(非活动)与applicationDidEnterBackground(后台)这两个的区别。"></a>1.3.1  对于<code>applicationWillResignActive</code>(非活动)<code>与applicationDidEnterBackground</code>(后台)这两个的区别。</h3><ul>
+<li><p><code>applicationWillResignActive</code>(非活动):<br><br>比如当有电话进来或短信进来或锁屏等情况下，这时应用程序挂起进入非活动状态，也就是手机界面还是显示着你当前的应用程序的窗口，只不过被别的任务强制占用了，也可能是即将进入后台状态(因为要先进入非活动状态然后进入后台状态)</p>
+</li>
+<li><p><code>applicationDidEnterBackground</code>(后台):<br><br>指当前窗口不是你的App,大多数程序进入这个后台会在这个状态上停留一会，时间到之后会进入挂起状态(Suspended)。如果你程序特殊处理后可以长期处于后台状态也可以运行。</p>
+</li>
+<li><p><code>Suspended (挂起)</code>: <br><br>程序在后台不能执行代码。系统会自动把程序变成这个状态而且不会发出通知。当挂起时，程序还是停留在内存中的，当系统内存低时，系统就把挂起的程序清除掉，为前台程序提供更多的内存。</p>
+</li>
+</ul>
+<p>如下图所示:<br><img src="/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/2252551-d87fdaa6730ba561.png" alt="活动和非活动"></p>
+<h3 id="1-3-2-UIApplicationMain-函数解释"><a href="#1-3-2-UIApplicationMain-函数解释" class="headerlink" title="1.3.2 UIApplicationMain 函数解释"></a>1.3.2 UIApplicationMain 函数解释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char * argv[]) &#123;  </div><div class="line">      @autoreleasepool &#123;  </div><div class="line">          return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));    </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> UIApplicationMain(int argc, char *argv[], NSString *principalClassName, NSString *delegateClassName);</div></pre></td></tr></table></figure>
+<ol>
+<li><p><code>argc</code>和<code>argv</code> 参数是为了与C语言保持一致。</p>
+</li>
+<li><p><code>principalClassName</code> (主要类名) 和 <code>delegateClassName</code> (委托类名)。</p>
+<p>(1) 如果<code>principalClassName</code>是nil，那么它的值将从<code>Info.plist</code>去获取，如果<code>Info.plist</code>没有，则默认为<code>UIApplication</code>。<code>principalClass</code>这个类除了管理整个程序的生命周期之外什么都不做，它只负责监听事件然后交给<code>delegateClass</code>去做。</p>
+<p>(2) <code>delegateClass</code> 将在工程新建时实例化一个对象。`NSStringFromClass([AppDelegate class])``</p>
+</li>
+<li><p>AppDelegate 类实现文件</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">-(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    NSLog(@&quot;--- %s ---&quot;,__func__);//__func__打印方法名</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">-(void)applicationWillResignActive:(UIApplication *)application &#123;</div><div class="line">     NSLog(@&quot;--- %s ---&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">-(void)applicationDidEnterBackground:(UIApplication *)application &#123;</div><div class="line">   NSLog(@&quot;--- %s ---&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">-(void)applicationWillEnterForeground:(UIApplication *)application &#123;</div><div class="line">   NSLog(@&quot;--- %s ---&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">-(void)applicationDidBecomeActive:(UIApplication *)application &#123;</div><div class="line">  NSLog(@&quot;--- %s ---&quot;,__func__);</div><div class="line">&#125;</div><div class="line">-(void)applicationDidReceiveMemoryWarning:(UIApplication *)application &#123;</div><div class="line">     NSLog(@&quot;--- %s ---&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)applicationWillTerminate:(UIApplication *)application &#123;</div><div class="line">    NSLog(@&quot;--- %s ---&quot;,__func__);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-3-2-1-打印调用顺序"><a href="#1-3-2-1-打印调用顺序" class="headerlink" title="1.3.2.1 打印调用顺序"></a>1.3.2.1 打印调用顺序</h4><ol>
+<li><p>启动程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-[AppDelegate application:didFinishLaunchingWithOptions:]</div><div class="line">-[AppDelegate applicationDidBecomeActive:]</div></pre></td></tr></table></figure>
+</li>
+<li><p>点击home键：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-[AppDelegate applicationWillResignActive:]</div><div class="line">-[AppDelegate applicationDidEnterBackground:]</div></pre></td></tr></table></figure>
+</li>
+<li><p>重新点击 进入程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-[AppDelegate applicationWillEnterForeground:]</div><div class="line">-[AppDelegate applicationDidBecomeActive:]</div></pre></td></tr></table></figure>
+</li>
+<li><p>选择 模拟器的<code>Simulate Memory Warning</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-[AppDelegate applicationDidReceiveMemoryWarning:]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="1-3-2-2-分析"><a href="#1-3-2-2-分析" class="headerlink" title="1.3.2.2 分析:"></a>1.3.2.2 分析:</h4><ol>
+<li><p><code>application:didFinishLaunchingWithOptions:</code><br><br>程序首次已经完成启动时执行，一般在这个函数里创建window对象，将程序内容通过window呈现给用户。</p>
+</li>
+<li><p><code>applicationWillResignActive</code>(非活动)<br><br>程序将要失去Active状态时调用，比如有电话进来或者按下Home键，之后程序进入后台状态，对应的<code>applicationWillEnterForeground</code>(即将进入前台)方法。<br></p>
+<p>该函数里面主要执行操作:<br><br>a. 暂停正在执行的任务<br><br>b. 禁止计时器<br><br>c. 减少OpenGL ES帧率<br><br>d. 若为游戏应暂停游戏<br></p>
+</li>
+<li><p><code>applicationDidEnterBackground</code>(已经进入后台)<br>对应<code>applicationDidBecomeActive</code>(已经变成前台)</p>
+<p>该方法用来:<br><br>a. 释放共享资源<br><br>b. 保存用户数据(写到硬盘)<br><br>c. 作废计时器<br><br>d. 保存足够的程序状态以便下次恢复;<br></p>
+</li>
+<li><p><code>applicationWillEnterForeground</code>(即将进入前台)<br><br>程序即将进入前台时调用，对应<code>applicationWillResignActive</code>(即将进入后台)，<br>这个方法用来: 撤销<code>applicationWillResignActive</code>中做的改变。</p>
+</li>
+<li><p><code>applicationDidBecomeActive</code>(已经进入前台)<br><br>程序已经变为Active(前台)时调用。对应applicationDidEnterBackground(已经进入后台)。<br>注意: 若程序之前在后台，在此方法内刷新用户界面</p>
+</li>
+<li><p><code>applicationWillTerminate</code><br><br>程序即将退出时调用。记得保存数据，如<code>applicationDidEnterBackground</code>方法一样。</p>
+</li>
+</ol>
+<h1 id="二、UIViewController-的生命周期"><a href="#二、UIViewController-的生命周期" class="headerlink" title="二、UIViewController 的生命周期"></a>二、<code>UIViewController</code> 的生命周期</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line">#pragma mark --- life circle</div><div class="line"></div><div class="line">// 非storyBoard(xib或非xib)都走这个方法</div><div class="line">- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 如果连接了串联图storyBoard 走这个方法</div><div class="line">- (instancetype)initWithCoder:(NSCoder *)aDecoder &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    if (self = [super initWithCoder:aDecoder]) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// xib 加载 完成</div><div class="line">- (void)awakeFromNib &#123;</div><div class="line">    [super awakeFromNib];</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 加载视图(默认从nib)</div><div class="line">- (void)loadView &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    self.view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">    self.view.backgroundColor = [UIColor redColor];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//视图控制器中的视图加载完成，viewController自带的view加载完成</div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    [super viewDidLoad];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//视图将要出现</div><div class="line">- (void)viewWillAppear:(BOOL)animated &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    [super viewWillAppear:animated];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// view 即将布局其 Subviews</div><div class="line">- (void)viewWillLayoutSubviews &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    [super viewWillLayoutSubviews];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// view 已经布局其 Subviews</div><div class="line">- (void)viewDidLayoutSubviews &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    [super viewDidLayoutSubviews];</div><div class="line">&#125;</div><div class="line">//视图已经出现</div><div class="line">- (void)viewDidAppear:(BOOL)animated &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    [super viewDidAppear:animated];</div><div class="line">&#125;</div><div class="line">//视图将要消失</div><div class="line">- (void)viewWillDisappear:(BOOL)animated &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    [super viewWillDisappear:animated];</div><div class="line">&#125;</div><div class="line">//视图已经消失</div><div class="line">- (void)viewDidDisappear:(BOOL)animated &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    [super viewDidDisappear:animated];</div><div class="line">&#125;</div><div class="line">//出现内存警告  //模拟内存警告:点击模拟器-&gt;hardware-&gt; Simulate Memory Warning</div><div class="line">- (void)didReceiveMemoryWarning &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">    [super didReceiveMemoryWarning];</div><div class="line">&#125;</div><div class="line">// 视图被销毁</div><div class="line">- (void)dealloc &#123;</div><div class="line">    NSLog(@&quot;%s&quot;, __FUNCTION__);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">//1、加载storyboard的打印：（push操作）</div><div class="line"> -[SGHPushViewController initWithCoder:]</div><div class="line"> -[SGHPushViewController awakeFromNib]</div><div class="line"> -[SGHPushViewController loadView]</div><div class="line"> -[SGHPushViewController viewDidLoad]</div><div class="line"> -[SGHPushViewController viewWillAppear:]</div><div class="line"> -[SGHPushViewController viewWillLayoutSubviews]</div><div class="line"> -[SGHPushViewController viewDidLayoutSubviews]</div><div class="line"> -[SGHPushViewController viewWillLayoutSubviews]</div><div class="line"> -[SGHPushViewController viewDidLayoutSubviews]</div><div class="line"> -[SGHPushViewController viewDidAppear:]</div><div class="line"> //pop操作：</div><div class="line"> -[SGHPushViewController viewWillDisappear:]</div><div class="line"> -[SGHPushViewController viewDidDisappear:]</div><div class="line"> -[SGHPushViewController dealloc]</div><div class="line"></div><div class="line"> //2、加载xib的打印：（push操作）</div><div class="line">  -[SGHPushTwoViewController initWithNibName:bundle:]</div><div class="line"> -[SGHPushTwoViewController loadView]</div><div class="line"> -[SGHPushTwoViewController viewDidLoad]</div><div class="line"> -[SGHPushTwoViewController viewWillAppear:]</div><div class="line"> -[SGHPushTwoViewController viewWillLayoutSubviews]</div><div class="line"> -[SGHPushTwoViewController viewDidLayoutSubviews]</div><div class="line"> -[SGHPushTwoViewController viewWillLayoutSubviews]</div><div class="line"> -[SGHPushTwoViewController viewDidLayoutSubviews]</div><div class="line"> -[SGHPushTwoViewController viewDidAppear:]</div><div class="line"> //pop操作：</div><div class="line">  -[SGHPushTwoViewController viewWillDisappear:]</div><div class="line"> -[SGHPushTwoViewController viewDidDisappear:]</div><div class="line"> -[SGHPushTwoViewController dealloc]</div><div class="line"></div><div class="line"> //3、不加载storyboard和xib的打印：（push操作）</div><div class="line">  -[SGHPushCodeViewController initWithNibName:bundle:]</div><div class="line"> -[SGHPushCodeViewController loadView]</div><div class="line"> -[SGHPushCodeViewController viewDidLoad]</div><div class="line"> -[SGHPushCodeViewController viewWillAppear:]</div><div class="line"> -[SGHPushCodeViewController viewWillLayoutSubviews]</div><div class="line"> -[SGHPushCodeViewController viewDidLayoutSubviews]</div><div class="line"> -[SGHPushCodeViewController viewWillLayoutSubviews]</div><div class="line"> -[SGHPushCodeViewController viewDidLayoutSubviews]</div><div class="line"> -[SGHPushCodeViewController viewDidAppear:]</div><div class="line">  //pop操作：</div><div class="line"> -[SGHPushCodeViewController viewWillDisappear:]</div><div class="line"> -[SGHPushCodeViewController viewDidDisappear:]</div><div class="line"> -[SGHPushCodeViewController dealloc]</div></pre></td></tr></table></figure></p>
+<p>发现：当自定义的UIViewController视图是通过xib加载时，同时这个UIViewController里面又重写了<code>-loadView</code>方法，那么不管有没有调用<code>[super loadView];</code>，都不能加载出xib里面的任何控件，而且整个界面默认是黑色的。所以，使用xib画UIViewController页面时，不能重写<code>-loadView</code>方法。</p>
+<h2 id="2-1-分析："><a href="#2-1-分析：" class="headerlink" title="2.1 分析："></a>2.1 分析：</h2><h4 id="1-initWithNibName-bundle"><a href="#1-initWithNibName-bundle" class="headerlink" title="1. initWithNibName:bundle:"></a>1. <code>initWithNibName:bundle:</code><br></h4><p>初始化UIViewController，执行关键数据初始化操作，<strong>非StoryBoard创建UIViewController都会调用这个方法</strong>。</p>
+<p> <strong>注意: 不要在这里做View相关操作，View在loadView方法中才初始化。</strong></p>
+<h4 id="2-initWithCoder"><a href="#2-initWithCoder" class="headerlink" title="2. initWithCoder:"></a>2. <code>initWithCoder:</code><br></h4><p>如果使用StoryBoard进行视图管理，程序不会直接初始化一个UIViewController，<strong>StoryBoard会自动初始化或在segue被触发时自动初始化</strong>，因此方法<code>initWithNibName:bundle:</code>不会被调用，但是<code>initWithCoder:</code>会被调用。</p>
+<h4 id="3-awakeFromNib"><a href="#3-awakeFromNib" class="headerlink" title="3. awakeFromNib"></a>3. <code>awakeFromNib</code><br></h4><p>当awakeFromNib方法被调用时，所有视图的outlet和action已经连接，但还没有被确定，这个方法可以算作适合视图控制器的实例化配合一起使用的，因为有些需要根据用户喜好来进行设置的内容，无法存在storyBoard或xib中，所以可以在<code>awakeFromNib</code>方法中被加载进来。</p>
+<h4 id="4-loadView"><a href="#4-loadView" class="headerlink" title="4. loadView "></a>4. <code>loadView</code> <br></h4><p>当执行到loadView方法时，如果视图控制器是通过nib创建，那么视图控制器已经从nib文件中被解档并创建好了，接下来任务就是对view进行初始化。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<strong><code>loadView</code>方法在UIViewController对象的view被访问且为空的时候调用。这是它与awakeFromNib方法的一个区别。<br>假设我们在处理内存警告时释放view属性:<code>self.view = nil</code>。因此<code>loadView</code>方法在视图控制器的生命周期内可能被调用多次。<br>loadView方法不应该直接被调用，而是由系统调用。它会加载或创建一个view并把它赋值给UIViewController的view属性</strong>。</p>
+<p>在创建view的过程中，首先会根据<code>nibName</code>去找对应的nib文件然后加载。如果nibName为空或找不到对应的nib文件，则会创建一个空视图(这种情况一般是纯代码)</p>
+<p><strong>注意:在重写<code>loadView</code>方法的时候，不要调用父类的方法</strong>。</p>
+<h4 id="5-viewDidLoad"><a href="#5-viewDidLoad" class="headerlink" title="5. viewDidLoad"></a>5. <code>viewDidLoad</code><br></h4><p>当<code>loadView</code>将view载入内存中，会进一步调用viewDidLoad方法来进行进一步设置。此时，视图层次已经放到内存中，通常，我们对于各种初始化数据的载入，初始设定、修改约束、移除视图等很多操作都可以这个方法中实现。</p>
+<p><strong>视图层次(view hierachy)</strong>:因为每个视图都有自己的子视图，这个视图层次其实也可以理解为一颗树状的数据结构。而树的根节点，也就是根视图(root view),在UIViewController中以view属性。它可以看做是其他所有子视图的容器，也就是根节点。</p>
+<h4 id="6-viewWillAppear"><a href="#6-viewWillAppear" class="headerlink" title="6. viewWillAppear"></a>6. <code>viewWillAppear</code><br></h4><p>系统在载入所有的数据后，将会在屏幕上显示视图，这时会先调用这个方法，通常我们会在这个方法对即将显示的视图做进一步的设置。比如，设置设备不同方向时该如何显示；设置状态栏方向、设置视图显示样式等。</p>
+<p>另一方面，当APP有多个视图时，上下级视图切换是也会调用这个方法，如果在调入视图时，需要对数据做更新，就只能在这个方法内实现。</p>
+<h4 id="7-viewWillLayoutSubviews"><a href="#7-viewWillLayoutSubviews" class="headerlink" title="7. viewWillLayoutSubviews"></a>7. <code>viewWillLayoutSubviews</code><br></h4><p>view 即将布局其Subviews。 比如view的bounds改变了(例如:状态栏从不显示到显示,视图方向变化)，要调整Subviews的位置，在调整之前要做的工作可以放在该方法中实现</p>
+<h4 id="8-viewDidLayoutSubviews"><a href="#8-viewDidLayoutSubviews" class="headerlink" title="8. viewDidLayoutSubviews"></a>8. <code>viewDidLayoutSubviews</code><br></h4><p>view已经布局其Subviews，这里可以放置调整完成之后需要做的工作。</p>
+<h4 id="9-viewDidAppear"><a href="#9-viewDidAppear" class="headerlink" title="9. viewDidAppear"></a>9. <code>viewDidAppear</code><br></h4><p>在view被添加到视图层级中以及多视图，上下级视图切换时调用这个方法，在这里可以对正在显示的视图做进一步的设置。</p>
+<h4 id="10-viewWillDisappear"><a href="#10-viewWillDisappear" class="headerlink" title="10. viewWillDisappear"></a>10. <code>viewWillDisappear</code><br></h4><p>在视图切换时，当前视图在即将被移除、或被覆盖是，会调用该方法，此时还没有调用removeFromSuperview。</p>
+<h4 id="11-viewDidDisappear"><a href="#11-viewDidDisappear" class="headerlink" title="11. viewDidDisappear"></a>11. <code>viewDidDisappear</code><br></h4><p>view已经消失或被覆盖，此时已经调用<code>removeFromSuperView</code>;</p>
+<h4 id="12-dealloc"><a href="#12-dealloc" class="headerlink" title="12. dealloc"></a>12. <code>dealloc</code><br></h4><p>视图被销毁，此次需要对你在init和viewDidLoad中创建的对象进行释放。</p>
+<h4 id="13-didReceiveMemoryWarning"><a href="#13-didReceiveMemoryWarning" class="headerlink" title="13. didReceiveMemoryWarning"></a>13. <code>didReceiveMemoryWarning</code><br></h4><p>在内存足够的情况下，app的视图通常会一直保存在内存中，但是如果内存不够，一些没有正在显示的viewController就会收到内存不足的警告，然后就会释放自己拥有的视图，以达到释放内存的目的。但是系统只会释放内存，并不会释放对象的所有权，所以通常我们需要在这里将不需要显示在内存中保留的对象释放它的所有权，将其指针置nil。</p>
+<h1 id="三-视图的生命历程"><a href="#三-视图的生命历程" class="headerlink" title="三. 视图的生命历程"></a>三. 视图的生命历程</h1><ul>
+<li><p><code>[ViewController initWithCoder:]</code>或<code>[ViewController initWithNibName:Bundle]</code>: 首先从归档文件中加载UIViewController对象。即使是纯代码，也会把nil作为参数传给后者。</p>
+</li>
+<li><p><code>[UIView awakeFromNib]</code>: 作为第一个方法的助手，方法处理一些额外的设置。</p>
+</li>
+<li><code>[ViewController loadView]</code>: 创建或加载一个view并把它赋值给UIViewController的view属性。</li>
+<li><code>[ViewController viewDidLoad]</code>: 此时整个视图层次(view hierarchy)已经放到内存中，可以移除一些视图，修改约束，加载数据等。</li>
+<li><code>[ViewController viewWillAppear:]</code>: 视图加载完成，并即将显示在屏幕上。还没设置动画，可以改变当前屏幕方向或状态栏的风格等。</li>
+<li><code>[ViewController viewWillLayoutSubviews]</code>: 即将开始子视图位置布局</li>
+<li><code>[ViewController viewDidLayoutSubviews]</code>: 用于通知视图的位置布局已经完成</li>
+<li><code>[ViewController viewDidAppear:]</code>: 视图已经展示在屏幕上，可以对视图做一些关于展示效果方面的修改。</li>
+<li><code>[ViewController viewWillDisappear:]</code>: 视图即将消失</li>
+<li><code>[ViewController viewDidDisappear:]</code>: 视图已经消失</li>
+</ul>
+<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><ol>
+<li><p>只有<code>init</code>系列的方法,如<code>initWithNibName</code>需要自己调用，其他方法如<code>loadView</code>和<code>awakeFromNib</code>则是系统自动调用。而<code>viewWill/Did</code>系列的方法则类似于回调和通知，也会被自动调用。</p>
+</li>
+<li><p><strong>纯代码写视图布局时需要注意，要手动调用loadView方法，<u>而且不要调用父类的<code>loadView</code>方法</u></strong>。纯代码和用IB的区别仅存在于loadView方法及其之前，编程时需要注意的也就是loadView方法。</p>
+</li>
+<li><p><strong>除了<code>initWithNibName</code>和<code>awakeFromNib</code>方法是处理视图控制器外，其他方法都是处理视图</strong>。这两个方法在视图控制器的生命周期里只会调用一次。</p>
+</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/" data-title="34iOS程序执行顺序和UIViewController 的生命周期 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/12/05/33FMDB的使用方法/" title="33FMDB的使用方法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  33FMDB的使用方法</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-iOS程序的启动执行顺序"><span class="toc-number">1.</span> <span class="toc-text">一. iOS程序的启动执行顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-程序启动顺序图"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 程序启动顺序图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-具体执行流程"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 具体执行流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-分析"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-对于applicationWillResignActive-非活动-与applicationDidEnterBackground-后台-这两个的区别。"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1  对于applicationWillResignActive(非活动)与applicationDidEnterBackground(后台)这两个的区别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-UIApplicationMain-函数解释"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2 UIApplicationMain 函数解释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-1-打印调用顺序"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">1.3.2.1 打印调用顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-2-分析"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">1.3.2.2 分析:</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、UIViewController-的生命周期"><span class="toc-number">2.</span> <span class="toc-text">二、UIViewController 的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-分析："><span class="toc-number">2.1.</span> <span class="toc-text">2.1 分析：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-initWithNibName-bundle"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">1. initWithNibName:bundle:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-initWithCoder"><span class="toc-number">2.1.0.2.</span> <span class="toc-text">2. initWithCoder:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-awakeFromNib"><span class="toc-number">2.1.0.3.</span> <span class="toc-text">3. awakeFromNib</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-loadView"><span class="toc-number">2.1.0.4.</span> <span class="toc-text">4. loadView </span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-viewDidLoad"><span class="toc-number">2.1.0.5.</span> <span class="toc-text">5. viewDidLoad</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-viewWillAppear"><span class="toc-number">2.1.0.6.</span> <span class="toc-text">6. viewWillAppear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-viewWillLayoutSubviews"><span class="toc-number">2.1.0.7.</span> <span class="toc-text">7. viewWillLayoutSubviews</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-viewDidLayoutSubviews"><span class="toc-number">2.1.0.8.</span> <span class="toc-text">8. viewDidLayoutSubviews</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-viewDidAppear"><span class="toc-number">2.1.0.9.</span> <span class="toc-text">9. viewDidAppear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-viewWillDisappear"><span class="toc-number">2.1.0.10.</span> <span class="toc-text">10. viewWillDisappear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-viewDidDisappear"><span class="toc-number">2.1.0.11.</span> <span class="toc-text">11. viewDidDisappear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-dealloc"><span class="toc-number">2.1.0.12.</span> <span class="toc-text">12. dealloc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-didReceiveMemoryWarning"><span class="toc-number">2.1.0.13.</span> <span class="toc-text">13. didReceiveMemoryWarning</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-视图的生命历程"><span class="toc-number">3.</span> <span class="toc-text">三. 视图的生命历程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、总结"><span class="toc-number">4.</span> <span class="toc-text">四、总结</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
