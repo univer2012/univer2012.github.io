@@ -75,6 +75,70 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2017/05/15/15method-invoke-error-Too-many-arguments-to-function-call-expected0-have2/" title="15method_invoke_error:Too-many-arguments-to-function-call,expected0,have2" itemprop="url">
+  
+    <h1 itemprop="name">15method_invoke_error:Too-many-arguments-to-function-call,expected0,have2</h1>
+    
+     
+           <p itemprop="description" >新建一个工程，输入method_invoke(receiver,method);时报错：
+百度之，找到来原因：
+
+原来在 LLVM 6.0 中增加了一个 OBJC_OLD_DISPATCH_PROTOTYPES，默认配置在 Apple LLVM 6.0 - Preprocessi</p>
+        
+    
+    <time datetime="2017-05-15T14:58:51.000Z" itemprop="datePublished">2017-05-15</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/15/14NSAttributedString-initWithData-blocking-App-problem/" title="NSAttributedString initWithData 阻塞App问题" itemprop="url">
+  
+    <h1 itemprop="name">NSAttributedString initWithData 阻塞App问题</h1>
+    
+     
+           <p itemprop="description" >在上架华安项目前，测试人员反馈，点击app会莫名的闪退。于是查看崩溃手机的View Device Logs，找到对应项目最接近崩溃的时间的日志，发现了这么一段：
+于是把这断复制，百度了下，说NSAttributedString的操作很耗时，需要放在异步线程，于是自己在demo中实</p>
+        
+    
+    <time datetime="2017-05-15T08:17:15.000Z" itemprop="datePublished">2017-05-15</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/15/13Xcode-cleaning-junk-files/" title="清理MacOS中的垃圾文件" itemprop="url">
+  
+    <h1 itemprop="name">清理MacOS中的垃圾文件</h1>
+    
+     
+           <p itemprop="description" >一、Xcode清理垃圾文件1. ~/Library/Developer/Xcode/DerivedData/这个文件夹中保存的是Xcode的缓存文件，曾经在Xcode跑过的所有项目的索引、build的信息等都会保存在这里。删除后在下次打开项目编译的时候将会重新生成。由于这里包含了</p>
+        
+    
+    <time datetime="2017-05-15T07:47:07.000Z" itemprop="datePublished">2017-05-15</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2017/05/15/12Objective-C-Runtime-Six/" title="读《Objective-C Runtime 运行时之六：拾遗》摘录" itemprop="url">
   
     <h1 itemprop="name">读《Objective-C Runtime 运行时之六：拾遗》摘录</h1>
@@ -224,76 +288,9 @@ Objective-C语言是一门动态语言，它将很多静态语言在编译和链
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/05/7_2About-Xcode-error-alert/" title="About_Xcode_error_alert" itemprop="url">
-  
-    <h1 itemprop="name">About_Xcode_error_alert</h1>
-    
-     
-           <p itemprop="description" >1当Signing(Debug)的Provisioning Profile配置成了Signing(Debug)的Provisioning Profile时，跑真机就会出现这个弹框，并且没有连着真机在跑。
-
-2连着真机跑，数据线接触不好，导致连接断开了，就会出现这个提示。
-
-3在T</p>
-        
-    
-    <time datetime="2017-05-05T03:00:21.000Z" itemprop="datePublished">2017-05-05</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/04/29/7如何在xib或者storyboard中设置button的圆角/" title="7如何在xib或者storyboard中设置button的圆角" itemprop="url">
-  
-    <h1 itemprop="name">7如何在xib或者storyboard中设置button的圆角</h1>
-    
-     
-           <p itemprop="description" >在xib或者storyboard中，可以给button设置圆角。具体操作步骤如下：
-1、切换到xib或者storyboard，选中UIButton对象，打开右侧栏Hide or show the Utilities的Show the Identity inspector，在Use</p>
-        
-    
-    <time datetime="2017-04-29T06:27:50.000Z" itemprop="datePublished">2017-04-29</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/04/28/a-problem-using-time-profiler/" title="一个使用Time Profiler的问题" itemprop="url">
-  
-    <h1 itemprop="name">一个使用Time Profiler的问题</h1>
-    
-     
-           <p itemprop="description" >项目经理反馈了个app启动后操作卡顿的问题，首先想到的是主线程卡住了，于是就想用Instruments的Time Profiler来查看下哪个方法把主线程卡住了。
-真机安装上app后，Time Profiler中开始记录，总是如下框：
-百思不得其解。于是百度一下。找到了这篇博客，</p>
-        
-    
-    <time datetime="2017-04-28T12:57:34.000Z" itemprop="datePublished">2017-04-28</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
   </nav>
 
 </div>

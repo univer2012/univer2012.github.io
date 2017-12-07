@@ -1,0 +1,551 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>35实现App消息推送 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="1 苹果的推送机制(APNS)先来看一张苹果官方对其推送做出解释的概要图。  Provider是给你手机应用发出推送消息的服务器，而APNS（Apple Push Notification Service）则是苹果消息推送服务器。 你本地的服务器当需要给应用推送一条消息的时候，先要将消息发出到苹果推送服务器，然后再由苹果推送服务器将消息发到安装了该应用的手机。  解释下上图的逻辑：  你的IOS应">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="35实现App消息推送">
+<meta property="og:url" content="https://univer2012.github.io/2017/12/05/35实现App消息推送/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="1 苹果的推送机制(APNS)先来看一张苹果官方对其推送做出解释的概要图。  Provider是给你手机应用发出推送消息的服务器，而APNS（Apple Push Notification Service）则是苹果消息推送服务器。 你本地的服务器当需要给应用推送一条消息的时候，先要将消息发出到苹果推送服务器，然后再由苹果推送服务器将消息发到安装了该应用的手机。  解释下上图的逻辑：  你的IOS应">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/05/35实现App消息推送/20141114171953345.jpeg">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/05/35实现App消息推送/20141114173252426.jpeg">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/05/35实现App消息推送/钥匙串.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/05/35实现App消息推送/pic2.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/05/35实现App消息推送/20141117095900875.png">
+<meta property="og:updated_time" content="2017-12-05T15:25:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="35实现App消息推送">
+<meta name="twitter:description" content="1 苹果的推送机制(APNS)先来看一张苹果官方对其推送做出解释的概要图。  Provider是给你手机应用发出推送消息的服务器，而APNS（Apple Push Notification Service）则是苹果消息推送服务器。 你本地的服务器当需要给应用推送一条消息的时候，先要将消息发出到苹果推送服务器，然后再由苹果推送服务器将消息发到安装了该应用的手机。  解释下上图的逻辑：  你的IOS应">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/12/05/35实现App消息推送/20141114171953345.jpeg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/05/35实现App消息推送/" title="35实现App消息推送" itemprop="url">35实现App消息推送</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-05T15:12:59.000Z" itemprop="datePublished"> Published 2017-12-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-苹果的推送机制-APNS"><span class="toc-number">1.</span> <span class="toc-text">1 苹果的推送机制(APNS)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-制作CSR证书"><span class="toc-number">2.</span> <span class="toc-text">2 制作CSR证书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-从证书颁发机构颁发证书"><span class="toc-number">2.1.</span> <span class="toc-text">1 从证书颁发机构颁发证书</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="1-苹果的推送机制-APNS"><a href="#1-苹果的推送机制-APNS" class="headerlink" title="1 苹果的推送机制(APNS)"></a>1 苹果的推送机制(APNS)</h1><p>先来看一张苹果官方对其推送做出解释的概要图。</p>
+<p><img src="/2017/12/05/35实现App消息推送/20141114171953345.jpeg" alt=""></p>
+<p>Provider是给你手机应用发出推送消息的服务器，而APNS（Apple Push Notification Service）则是苹果消息推送服务器。</p>
+<p>你本地的服务器当需要给应用推送一条消息的时候，先要将消息发出到苹果推送服务器，然后再由苹果推送服务器将消息发到安装了该应用的手机。</p>
+<p><img src="/2017/12/05/35实现App消息推送/20141114173252426.jpeg" alt=""></p>
+<p>解释下上图的逻辑：</p>
+<ol>
+<li>你的IOS应用需要去注册APNS消息推送功能。</li>
+<li>当苹果APNS推送服收到来自你应用的注册消息就会返回一串device token给你（很重要）</li>
+<li>将应用收到的device Token传给你本地的Push服务器。</li>
+<li>当你需要为应用推送消息的时候，你本地的推送服务器会将消息，以及Device Token打包发送到苹果的APNS服务器。</li>
+<li>APNS再将消息推送给目的iphone。</li>
+</ol>
+<h1 id="2-制作CSR证书"><a href="#2-制作CSR证书" class="headerlink" title="2 制作CSR证书"></a>2 制作CSR证书</h1><h2 id="1-从证书颁发机构颁发证书"><a href="#1-从证书颁发机构颁发证书" class="headerlink" title="1 从证书颁发机构颁发证书"></a>1 从证书颁发机构颁发证书</h2><p>打开你mac的钥匙串访问： <img src="/2017/12/05/35实现App消息推送/钥匙串.png" height="100" alt="钥匙串" align="center"> 然后点击钥匙串访问。<br><img src="/2017/12/05/35实现App消息推送/pic2.png" height="200" alt="钥匙串" align="center"><br><img src="/2017/12/05/35实现App消息推送/20141117095900875.png" height="300" alt="钥匙串" align="center"></p>
+<p>随后它会弹出一个窗口用户电子邮件信息就填写你苹果开发者账号的名称即可（应该是一个邮件名称），点击保存到磁盘的选<br>项，点击继续，显示如下：</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/12/05/35实现App消息推送/" data-title="35实现App消息推送 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/12/05/34iOS程序执行顺序和UIViewController-的生命周期/" title="34iOS程序执行顺序和UIViewController 的生命周期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  34iOS程序执行顺序和UIViewController 的生命周期</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/12/06/36SDWebImage原理和缓存机制/"  title="36SDWebImage原理和缓存机制">
+ <strong>下一篇：</strong><br/> 
+ <span>36SDWebImage原理和缓存机制
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-苹果的推送机制-APNS"><span class="toc-number">1.</span> <span class="toc-text">1 苹果的推送机制(APNS)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-制作CSR证书"><span class="toc-number">2.</span> <span class="toc-text">2 制作CSR证书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-从证书颁发机构颁发证书"><span class="toc-number">2.1.</span> <span class="toc-text">1 从证书颁发机构颁发证书</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
