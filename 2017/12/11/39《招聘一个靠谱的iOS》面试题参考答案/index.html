@@ -1,0 +1,865 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>39《招聘一个靠谱的iOS》面试题参考答案 | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="来自：《招聘一个靠谱的 iOS》—参考答案（上） 说明：面试题来源是微博@我就叫Sunny怎么了的这篇博文：《招聘一个靠谱的 iOS》，其中共55题，除第一题为纠错题外，其他54道均为简答题。 博文中给出了高质量的面试题，但是未给出答案，我尝试着总结了下答案，分两篇发：这是上篇 ，下一篇文章将发布在这里，会把剩余问题总结下，并且进行勘误，欢迎各位指正文中的错误。请持续关注微博@iOS程序犭袁。（答">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="39《招聘一个靠谱的iOS》面试题参考答案">
+<meta property="og:url" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="来自：《招聘一个靠谱的 iOS》—参考答案（上） 说明：面试题来源是微博@我就叫Sunny怎么了的这篇博文：《招聘一个靠谱的 iOS》，其中共55题，除第一题为纠错题外，其他54道均为简答题。 博文中给出了高质量的面试题，但是未给出答案，我尝试着总结了下答案，分两篇发：这是上篇 ，下一篇文章将发布在这里，会把剩余问题总结下，并且进行勘误，欢迎各位指正文中的错误。请持续关注微博@iOS程序犭袁。（答">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/1438582884375682.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171211-161000.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171213-095151.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171213-102531.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171214-100852.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171214-101631.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/1438585302109349.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/1438585375577177.png">
+<meta property="og:updated_time" content="2017-12-14T06:09:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="39《招聘一个靠谱的iOS》面试题参考答案">
+<meta name="twitter:description" content="来自：《招聘一个靠谱的 iOS》—参考答案（上） 说明：面试题来源是微博@我就叫Sunny怎么了的这篇博文：《招聘一个靠谱的 iOS》，其中共55题，除第一题为纠错题外，其他54道均为简答题。 博文中给出了高质量的面试题，但是未给出答案，我尝试着总结了下答案，分两篇发：这是上篇 ，下一篇文章将发布在这里，会把剩余问题总结下，并且进行勘误，欢迎各位指正文中的错误。请持续关注微博@iOS程序犭袁。（答">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/1438582884375682.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/" title="39《招聘一个靠谱的iOS》面试题参考答案" itemprop="url">39《招聘一个靠谱的iOS》面试题参考答案</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-11T07:03:17.000Z" itemprop="datePublished"> Published 2017-12-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-风格纠错题"><span class="toc-number">1.</span> <span class="toc-text">1 风格纠错题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-什么情况使用-weak-关键字，相比-assign-有什么不同？"><span class="toc-number">2.</span> <span class="toc-text">2 什么情况使用 weak 关键字，相比 assign 有什么不同？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-怎么用-copy-关键字？"><span class="toc-number">3.</span> <span class="toc-text">3. 怎么用 copy 关键字？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-这个写法会出什么问题：-property-copy-NSMutableArray-array"><span class="toc-number">4.</span> <span class="toc-text">4 这个写法会出什么问题： @property (copy) NSMutableArray *array;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-如何让自己的类用-copy-修饰符？如何重写带-copy-关键字的-setter？"><span class="toc-number">5.</span> <span class="toc-text">5 如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-property-的本质是什么？ivar、getter、setter-是如何生成并添加到这个类中的。"><span class="toc-number">6.</span> <span class="toc-text">6 @property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-protocol-和-category-中如何使用-property"><span class="toc-number">7.</span> <span class="toc-text">7 @protocol 和 category 中如何使用 @property</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-runtime-如何实现-weak-属性"><span class="toc-number">8.</span> <span class="toc-text">8 runtime 如何实现 weak 属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-property中有哪些属性关键字？-property-后面可以有哪些修饰符？"><span class="toc-number">9.</span> <span class="toc-text">9 @property中有哪些属性关键字？/ @property 后面可以有哪些修饰符？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-weak属性需要在dealloc中置nil么？"><span class="toc-number">10.</span> <span class="toc-text">10 weak属性需要在dealloc中置nil么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-synthesize和-dynamic分别有什么作用？"><span class="toc-number">11.</span> <span class="toc-text">11 @synthesize和@dynamic分别有什么作用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？"><span class="toc-number">12.</span> <span class="toc-text">12 ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-用-property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？"><span class="toc-number">13.</span> <span class="toc-text">13 用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为-foo的实例变量，那么还会自动合成新变量么？"><span class="toc-number">14.</span> <span class="toc-text">14 @synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为_foo的实例变量，那么还会自动合成新变量么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-在有了自动合成属性实例变量之后，-synthesize还有哪些使用场景？"><span class="toc-number">15.</span> <span class="toc-text">15 在有了自动合成属性实例变量之后，@synthesize还有哪些使用场景？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-objc中向一个nil对象发送消息将会发生什么？"><span class="toc-number">16.</span> <span class="toc-text">16 objc中向一个nil对象发送消息将会发生什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#17-objc中向一个对象发送消息-obj-foo-和objc-msgSend-函数之间有什么关系？"><span class="toc-number">17.</span> <span class="toc-text">17 objc中向一个对象发送消息[obj foo]和objc_msgSend()函数之间有什么关系？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#18-什么时候会报unrecognized-selector的异常？"><span class="toc-number">18.</span> <span class="toc-text">18 什么时候会报unrecognized selector的异常？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Method-resolution"><span class="toc-number">18.0.1.</span> <span class="toc-text">1 Method resolution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Fast-forwarding"><span class="toc-number">18.0.2.</span> <span class="toc-text">2 Fast forwarding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Normal-forwarding"><span class="toc-number">18.0.3.</span> <span class="toc-text">3 Normal forwarding</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#19-一个objc对象如何进行内存布局？（考虑有父类的情况）"><span class="toc-number">19.</span> <span class="toc-text">19 一个objc对象如何进行内存布局？（考虑有父类的情况）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#20-一个objc对象的isa的指针指向什么？有什么作用？"><span class="toc-number">20.</span> <span class="toc-text">20 一个objc对象的isa的指针指向什么？有什么作用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#21-下面的代码输出什么？"><span class="toc-number">21.</span> <span class="toc-text">21 下面的代码输出什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#22-runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）"><span class="toc-number">22.</span> <span class="toc-text">22 runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#23-使用runtime-Associate方法关联的对象，需要在主对象dealloc的时候释放么？"><span class="toc-number">23.</span> <span class="toc-text">23 使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#24-objc中的类方法和实例方法有什么本质区别和联系"><span class="toc-number">24.</span> <span class="toc-text">24 objc中的类方法和实例方法有什么本质区别和联系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-类方法："><span class="toc-number">24.0.1.</span> <span class="toc-text">1 类方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-实例方法："><span class="toc-number">24.0.2.</span> <span class="toc-text">2 实例方法：</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<p>来自：<a href="http://www.cocoachina.com/ios/20150803/12872.html" target="_blank" rel="external">《招聘一个靠谱的 iOS》—参考答案（上）</a></p>
+<p>说明：面试题来源是微博<a href="https://weibo.com/u/1364395395" target="_blank" rel="external">@我就叫Sunny怎么了</a>的这篇博文：《<a href="http://blog.sunnyxx.com/2015/07/04/ios-interview/" target="_blank" rel="external">招聘一个靠谱的 iOS</a>》，其中共55题，除第一题为纠错题外，其他54道均为简答题。</p>
+<p>博文中给出了高质量的面试题，但是未给出答案，我尝试着总结了下答案，分两篇发：这是上篇 ，下一篇文章将发布在<a href="https://github.com/ChenYilong/iOSInterviewQuestions/" target="_blank" rel="external">这里</a>，会把剩余问题总结下，并且进行勘误，欢迎各位指正文中的错误。请持续关注微博<a href="https://weibo.com/luohanchenyilong" target="_blank" rel="external">@iOS程序犭袁</a>。（答案未经出题者校对，如有纰漏，请向微博<a href="https://weibo.com/luohanchenyilong" target="_blank" rel="external">@iOS程序犭袁</a>指正。）</p>
+<h1 id="1-风格纠错题"><a href="#1-风格纠错题" class="headerlink" title="1 风格纠错题"></a>1 风格纠错题</h1><p><img src="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/1438582884375682.png" alt=""></p>
+<p>修改方法有很多种，现给出一种做示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//.h文件</div><div class="line">//http://weibo.com/luohanchengyilong/</div><div class="line">//https://github.com/ChenYilong</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">typedef NS_ENUM(NSInteger, CYLSex) &#123;</div><div class="line">    CYLSexMan,</div><div class="line">    CYLSexWoman</div><div class="line">&#125;;</div><div class="line"></div><div class="line">@interface CYLUser : NSObject&lt;NSCopying&gt;</div><div class="line"></div><div class="line">@property(nonatomic,copy,readonly)NSString *name;</div><div class="line">@property(nonatomic,assign, readonly)NSUInteger age;</div><div class="line">@property(nonatomic,assign, readonly)CYLSex sex;</div><div class="line"></div><div class="line">-(instancetype)initWithName:(NSString *)name age:(int)age sex:(CYLSex)sex;</div><div class="line">+(instancetype)userWithName:(NSString *)name age:(int)age sex:(CYLSex)sex;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>下面对具体修改的地方，分两部分做下介绍：硬伤部分和优化部分 。因为硬伤部分没什么技术含量，为了节省大家时间，放在后面讲，大神请直接看优化部分。</p>
+<p><strong>优化部分</strong></p>
+<p>1）enum建议使用 NS_ENUM 和 NS_OPTIONS 宏来定义枚举类型，参见官方的 <a href="https://developer.apple.com/library/content/releasenotes/ObjectiveC/ModernizationObjC/AdoptingModernObjective-C/AdoptingModernObjective-C.html" target="_blank" rel="external">Adopting Modern Objective-C</a> 一文：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//定义一个枚举</div><div class="line">typedef NS_ENUM(NSInteger, CYLSex) &#123;</div><div class="line">    CYLSexMan,</div><div class="line">    CYLSexWoman</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>2）age属性的类型：应避免使用基本类型，建议使Foundation数据类型，对应关系如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int -&gt; NSInteger</div><div class="line">unsigned -&gt; NSUInteger</div><div class="line">float -&gt; CGFloat</div><div class="line">动画时间 -&gt; NSTimeInterval</div></pre></td></tr></table></figure></p>
+<p>同时考虑到age的特点，应使用NSUInteger，而非int。 这样做的是基于64-bit 适配考虑，详情可参考出题者的博文《<a href="http://blog.sunnyxx.com/2014/12/20/64-bit-tips/" target="_blank" rel="external">64-bit Tips</a>》。</p>
+<p>3）如果工程项目非常庞大，需要拆分成不同的模块，可以在类、typedef宏命名的时候使用前缀。</p>
+<p>4）doLogIn方法不应写在该类中：虽然LogIn的命名不太清晰，但笔者猜测是login的意思，而登录操作属于业务逻辑，观察类名UserModel，以及属性的命名方式，应该使用的是MVC模式，并非MVVM，在MVC中业务逻辑不应当写在Model中。（如果是MVVM，抛开命名规范，UserModel这个类可能对应的是用户注册页面，如果有特殊的业务需求，比如：login对应的应当是注册并登录的一个Button，出现login方法也可能是合理的。）</p>
+<p>5）doLogIn方法命名不规范：添加了多余的动词前缀。 请牢记：<br><span style="border-bottom:2px dashed red;"><strong>如果方法表示让对象执行一个动作，使用动词打头来命名，注意不要使用do，does这种多余的关键字，动词本身的暗示就足够了。</strong></span></p>
+<p>6）<code>-(id)initUserModelWithUserName: (NSString*)name withAge:(int)age;</code>方法中不要用with来连接两个参数:<code>withAge:</code>应当换为<code>age:</code>，<code>age:</code>已经足以清晰说明参数的作用，也不建议用<code>andAge:</code>：通常情况下，<strong>即使有类似withA:withB:的命名需求，也通常是使用withA:andB:这种命名，用来表示方法执行了两个相对独立的操作（从设计上来说，这时候也可以拆分成两个独立的方法），它不应该用作阐明有多个参数</strong>，比如下面的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//错误，不要使用&quot;and&quot;来连接参数</div><div class="line">- (int)runModalForDirectory:(NSString *)path andFile:(NSString *)name andTypes:(NSArray *)fileTypes;</div><div class="line">//错误，不要使用&quot;and&quot;来阐明有多个参数</div><div class="line">- (instancetype)initWithName:(CGFloat)width andAge:(CGFloat)height;</div><div class="line">//正确，使用&quot;and&quot;来表示两个相对独立的操作</div><div class="line">- (BOOL)openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;</div></pre></td></tr></table></figure>
+<p>7）由于字符串值可能会改变，所以要把相关属性的“内存管理语义”声明为copy。(原因在下文有详细论述：用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？)</p>
+<p>8）“性别”(sex）属性的：该类中只给出了一种“初始化方法” (initializer)用于设置“姓名”(Name)和“年龄”(Age)的初始值，那如何对“性别”(Sex）初始化？</p>
+<p><strong>Objective-C 有 designated 和 secondary 初始化方法的观念。 designated 初始化方法是提供所有的参数，secondary 初始化方法是一个或多个，并且提供一个或者更多的默认参数来调用 designated 初始化方法的初始化方法</strong>。举例说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">#import &quot;CYLUser.h&quot;</div><div class="line">// .m文件</div><div class="line">// http://weibo.com/luohanchenyilong/</div><div class="line">// https://github.com/ChenYilong</div><div class="line">//</div><div class="line">@implementation CYLUser</div><div class="line">- (instancetype)initWithName:(NSString *)name age:(int)age sex:(CYLSex)sex &#123;</div><div class="line">    if(self = [super init]) &#123;</div><div class="line">        _name = [name copy];</div><div class="line">        _age = age;</div><div class="line">        _sex = sex;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithName:(NSString *)name age:(int)age &#123;</div><div class="line">    return [self initWithName:name age:age sex:nil];</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>上面的代码中<code>initWithName:age:sex:</code> 就是 designated 初始化方法，另外的是 secondary 初始化方法。因为仅仅是调用类实现的 designated 初始化方法。</p>
+<p>因为出题者没有给出.m文件，所以有两种猜测：</p>
+<ol>
+<li>本来打算只设计一个designated 初始化方法，但漏掉了“性别”(sex）属性。那么最终的修改代码就是上文给出的第一种修改方法。</li>
+<li>不打算初始时初始化“性别”(sex）属性，打算后期再修改，如果是这种情况，那么应该把“性别”(sex）属性设为readwrite属性，最终给出的修改代码应该是：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//.h文件</div><div class="line">//http://weibo.com/luohanchengyilong/</div><div class="line">//https://github.com/ChenYilong</div><div class="line">//</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">typedef NS_ENUM(NSInteger, CYLSex) &#123;</div><div class="line">    CYLSexMan,</div><div class="line">    CYLSexWoman</div><div class="line">&#125;;</div><div class="line"></div><div class="line">@interface CYLUser : NSObject&lt;NSCopying&gt;</div><div class="line">@property(nonatomic,copy,readonly)NSString *name;</div><div class="line">@property(nonatomic,assign, readonly)NSUInteger age;</div><div class="line">@property(nonatomic,assign, readwrite)CYLSex sex;</div><div class="line"></div><div class="line">-(instancetype)initWithName:(NSString *)name age:(int)age sex:(CYLSex)sex;</div><div class="line">-(instancetype)initWithName:(NSString *)name age:(int)age;</div><div class="line">+(instancetype)userWithName:(NSString *)name age:(int)age sex:(CYLSex)sex;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>  .h中暴露 designated 初始化方法，是为了方便子类化 （想了解更多，请戳–》 《<a href="https://www.cnblogs.com/mobilefeng/p/4847443.html" target="_blank" rel="external">禅与 Objective-C 编程艺术 （Zen and the Art of the Objective-C Craftsmanship 中文翻译）</a>》。）</p>
+<p>9）按照接口设计的惯例，如果设计了“初始化方法” (initializer)，也应当搭配一个快捷构造方法。而快捷构造方法的返回值，建议为instancetype，为保持一致性，init方法和快捷构造方法的返回类型最好都用instancetype。</p>
+<p>10）如果基于第一种修改方法：既然该类中已经有一个“初始化方法” (initializer)，用于设置“姓名”(Name)、“年龄”(Age)和“性别”(Sex）的初始值: 那么在设计对应@property时就应该尽量使用不可变的对象：其三个属性都应该设为“只读”。用初始化方法设置好属性值之后，就不能再改变了。在本例中，仍需声明属性的“内存管理语义”。于是可以把属性的定义改成这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, copy, readonly) NSString *name;</div><div class="line">@property (nonatomic, assign, readonly) NSUInter age;</div><div class="line">@property (nonatomic, assign, readonly) CYLSex sex;</div></pre></td></tr></table></figure></p>
+<p>由于是只读属性，所以编译器不会为其创建对应的“设置方法”，即便如此，我们还是要写上这些属性的语义，以此表明初始化方法在设置这些属性值时所用的方式。要是不写明语义的话，该类的调用者就不知道初始化方法里会拷贝这些属性，他们有可能会在调用初始化方法之前自行拷贝属性值。这种操作多余而且低效。</p>
+<p>11）<code>initUserModelWithUserName</code>如果改为<code>initWithName</code>会更加简洁，而且足够清晰。</p>
+<p>12）<code>UserModel</code>如果改为User会更加简洁，而且足够清晰。</p>
+<p>13）<code>UserSex</code>如果改为Sex会更加简洁，而且足够清晰。</p>
+<p><strong>硬伤部分</strong></p>
+<p>1）在-和(void)之间应该有一个空格</p>
+<p>2）enum中驼峰命名法和下划线命名法混用错误：枚举类型的命名规则和函数的命名规则相同：<strong>命名时使用驼峰命名法，勿使用下划线命名法</strong>。</p>
+<p>3）enum左括号前加一个空格，或者将左括号换到下一行</p>
+<p>4）enum右括号后加一个空格</p>
+<p>5）UserModel :NSObject 应为UserModel : NSObject，也就是:右侧少了一个空格。</p>
+<p>6）@interface与@property属性声明中间应当间隔一行。</p>
+<p>7）两个方法定义之间不需要换行，有时为了区分方法的功能也可间隔一行，但示例代码中间隔了两行。</p>
+<p>8）<code>-(id)initUserModelWithUserName: (NSString*)name withAge:(int)age;</code> 方法中方法名与参数之间多了空格。而且- 与(id)之间少了空格。</p>
+<p>9）<code>-(id)initUserModelWithUserName: (NSString*)name withAge:(int)age;</code>方法中方法名与参数之间多了空格<code>：(NSString*)name</code>前多了空格。</p>
+<p>10）<code>-(id)initUserModelWithUserName: (NSString*)name withAge:(int)age;</code>方法中<code>(NSString*)name</code>,应为<code>(NSString *)name</code>，少了空格。</p>
+<p>11）<code>doLogIn</code>方法命名不清晰：笔者猜测是login的意思，应该是粗心手误造成的。</p>
+<p>12）第二个@property中assign和nonatomic调换位置。</p>
+<h1 id="2-什么情况使用-weak-关键字，相比-assign-有什么不同？"><a href="#2-什么情况使用-weak-关键字，相比-assign-有什么不同？" class="headerlink" title="2 什么情况使用 weak 关键字，相比 assign 有什么不同？"></a>2 什么情况使用 weak 关键字，相比 assign 有什么不同？</h1><p><strong>什么情况使用 weak 关键字？</strong></p>
+<p>1）在ARC中,在有可能出现循环引用的时候,往往要通过让其中一端使用weak来解决,比如:delegate代理属性</p>
+<p>2）自身已经对它进行一次强引用,没有必要再强引用一次,此时也会使用weak,自定义IBOutlet控件属性一般也使用weak；当然，也可以使用strong。在下文也有论述：《IBOutlet连出来的视图属性为什么可以被设置成weak?》</p>
+<p><strong>不同点：</strong></p>
+<p>1）weak 此特质表明该属性定义了一种“非拥有关系” (nonowning relationship)。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似， 然而在属性所指的对象遭到摧毁时，属性值也会清空(nil out)。 而 assign 的“设置方法”只会执行针对“纯量类型” (scalar type，例如 CGFloat 或 NSlnteger 等)的简单赋值操作。</p>
+<p>2）<code>assigin</code>可以用非OC对象,而<code>weak</code>必须用于OC对象</p>
+<h1 id="3-怎么用-copy-关键字？"><a href="#3-怎么用-copy-关键字？" class="headerlink" title="3. 怎么用 copy 关键字？"></a>3. 怎么用 copy 关键字？</h1><p><strong>用途：</strong></p>
+<p>1）NSString、NSArray、NSDictionary 等等经常使用copy关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary；</p>
+<p>2）block也经常使用copy关键字，具体原因见官方文档：<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/WorkingwithBlocks/WorkingwithBlocks.html#//apple_ref/doc/uid/TP40011210-CH8-SW12" target="_blank" rel="external">Objects Use Properties to Keep Track of Blocks</a>。</p>
+<p>block使用copy是从MRC遗留下来的“传统”,在MRC中,方法内部的block是在栈区的,使用copy可以把它放到堆区.在ARC中写不写都行：对于block使用copy还是strong效果是一样的，但写上copy也无伤大雅，还能时刻提醒我们：编译器自动对block进行了copy操作。<br><img src="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171211-161000.png" alt=""></p>
+<p>下面做下解释： copy此特质所表达的所属关系与strong类似。然而设置方法并不保留新值，而是将其“拷贝” (copy)。</p>
+<p><strong>当属性类型为<code>NSString</code>时，经常用此特质来保护其封装性，因为传递给设置方法的新值有可能指向一个<code>NSMutableString</code>类的实例</strong>。这个类是NSString的子类，表示一种可修改其值的字符串，此时若是不拷贝字符串，那么设置完属性之后，字符串的值就可能会在对象不知情的情况下遭人更改。所以，这时就要拷贝一份“不可变” (immutable)的字符串，确保对象中的字符串值不会无意间变动。只要实现属性所用的对象是“可变的” (mutable)，就应该在设置新属性值时拷贝一份。</p>
+<p><span style="border-bottom:2px dashed red;"><strong>用@property声明 NSString、NSArray、NSDictionary 经常使用copy关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary，他们之间可能进行赋值操作，为确保对象中的字符串值不会无意间变动，应该在设置新属性值时拷贝一份。</strong>&lt;\span&gt;</span></p>
+<p>该问题在下文中也有论述：用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？</p>
+<h1 id="4-这个写法会出什么问题：-property-copy-NSMutableArray-array"><a href="#4-这个写法会出什么问题：-property-copy-NSMutableArray-array" class="headerlink" title="4 这个写法会出什么问题： @property (copy) NSMutableArray *array;"></a>4 这个写法会出什么问题： <code>@property (copy) NSMutableArray *array;</code></h1><p><strong>两个问题：</strong></p>
+<p>1、添加,删除,修改数组内的元素的时候,程序会因为找不到对应的方法而崩溃.因为copy就是复制一个不可变NSArray的对象；<br>2、使用了atomic属性会严重影响性能。</p>
+<p>第1条的相关原因在下文中有论述《用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？》 以及上文《怎么用 copy 关键字？》也有论述。</p>
+<p>第2条原因，如下：</p>
+<p><strong><span style="border-bottom:2px dashed red;">该属性使用了同步锁，会在创建时生成一些额外的代码用于帮助编写多线程程序，这会带来性能问题，通过声明nonatomic可以节省这些虽然很小但是不必要额外开销。</span></strong></p>
+<p><strong><span style="border-bottom:2px dashed red;">在默认情况下，由编译器所合成的方法会通过锁定机制确保其原子性(atomicity)。如果属性具备nonatomic特质，则不使用同步锁。请注意，尽管没有名为“atomic”的特质(如果某属性不具备nonatomic特质，那它就是“原子的”(atomic))。</span></strong></p>
+<p>在iOS开发中，你会发现，几乎所有属性都声明为nonatomic。</p>
+<p>一般情况下并不要求属性必须是“原子的”，因为这并不能保证“线程安全” ( thread safety)，若要实现“线程安全”的操作，还需采用更为深层的锁定机制才行。例如，一个线程在连续多次读取某属性值的过程中有别的线程在同时改写该值，那么即便将属性声明为atomic，也还是会读到不同的属性值。</p>
+<p>因此，开发iOS程序时一般都会使用nonatomic属性。但是在开发Mac OS X程序时，使用 atomic属性通常都不会有性能瓶颈。</p>
+<h1 id="5-如何让自己的类用-copy-修饰符？如何重写带-copy-关键字的-setter？"><a href="#5-如何让自己的类用-copy-修饰符？如何重写带-copy-关键字的-setter？" class="headerlink" title="5 如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？"></a>5 如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？</h1><p>若想令自己所写的对象具有拷贝功能，则需实现NSCopying协议。如果自定义的对象分为可变版本与不可变版本，那么就要同时实现<code>NSCopyiog</code>与<code>NSMutableCopying</code>协议。</p>
+<p>具体步骤：</p>
+<p>1）需声明该类遵从NSCopying协议</p>
+<p>2）实现NSCopying协议。该协议只有一个方法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (id)copyWithZone: (NSZone*) zone;</div></pre></td></tr></table></figure></p>
+<p>注意：一提到让自己的类用 copy 修饰符，我们总是想覆写copy方法，其实真正需要实现的却是“copyWithZone”方法。</p>
+<p>以第一题的代码为例,然后实现协议中规定的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(id)copyWithZone:(NSZone *)zone &#123;</div><div class="line">    CYLUser *copy = [[[self copy] allocWithZone:zone] initWithName:_name age:_age sex:_sex];</div><div class="line">    return copy;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但在实际的项目中，不可能这么简单，遇到更复杂一点，比如类对象中的数据结构可能并未在初始化方法中设置好，需要另行设置。举个例子，假如CYLUser中含有一个数组，与其他CYLUser对象建立或解除朋友关系的那些方法都需要操作这个数组。那么在这种情况下，你得把这个包含朋友对象的数组也一并拷贝过来。下面列出了实现此功能所需的全部代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">//CYLUser.h</div><div class="line">//.h文件</div><div class="line">//http://weibo.com/luohanchengyilong/</div><div class="line">//https://github.com/ChenYilong</div><div class="line">//</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">typedef NS_ENUM(NSInteger, CYLSex) &#123;</div><div class="line">    CYLSexMan,</div><div class="line">    CYLSexWoman</div><div class="line">&#125;;</div><div class="line"></div><div class="line">@interface CYLUser : NSObject&lt;NSCopying,NSMutableCopying&gt;</div><div class="line">@property(nonatomic,copy,readonly)NSString *name;</div><div class="line">@property(nonatomic,assign, readonly)NSUInteger age;</div><div class="line">@property(nonatomic,assign, readonly)CYLSex sex;</div><div class="line"></div><div class="line">- (instancetype)initWithName:(NSString *)name age:(int)age sex:(CYLSex)sex;</div><div class="line">+ (instancetype)userWithName:(NSString *)name age:(int)age sex:(CYLSex)sex;</div><div class="line">- (void)addFriend:(CYLUser *)user;</div><div class="line">- (void)removeFriend:(CYLUser *)user;</div><div class="line">@end</div><div class="line"></div><div class="line"></div><div class="line">//CYLUser.m</div><div class="line">#import &quot;CYLUser.h&quot;</div><div class="line">// .m文件</div><div class="line">// http://weibo.com/luohanchenyilong/</div><div class="line">// https://github.com/ChenYilong</div><div class="line">//</div><div class="line">@implementation CYLUser &#123;</div><div class="line">    NSMutableSet *_friends;</div><div class="line">&#125;</div><div class="line">-(void)setName:(NSString *)name &#123;</div><div class="line">    _name = [name copy];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (instancetype)initWithName:(NSString *)name age:(int)age sex:(CYLSex)sex &#123;</div><div class="line">    if(self = [super init]) &#123;</div><div class="line">        _name = [name copy];</div><div class="line">        _age = age;</div><div class="line">        _sex = sex;</div><div class="line">        _friends = [[NSMutableSet alloc] init];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)addFriend:(CYLUser *)user &#123;</div><div class="line">    [_friends addObject:user];</div><div class="line">&#125;</div><div class="line">-(void)removeFriend:(CYLUser *)user &#123;</div><div class="line">    [_friends removeObject:user];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(id)copyWithZone:(NSZone *)zone &#123;</div><div class="line">    CYLUser *copy = [[[self copy] allocWithZone:zone] initWithName:_name age:_age sex:_sex];</div><div class="line">    copy-&gt;_friends = [_friends mutableCopy];</div><div class="line">    return copy;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (id)mutableCopyWithZone:(nullable NSZone *)zone &#123;</div><div class="line">    CYLUser *copy = [[[self copy]allocWithZone:zone] initWithName:_name age:_age sex:_sex];</div><div class="line">    copy-&gt;_friends = [[NSMutableSet alloc] initWithSet:_friends copyItems:YES];</div><div class="line">    return copy;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>以上做法能满足基本的需求，但是也有缺陷：<strong>如果你所写的对象需要深拷贝，那么可考虑新增一个专门执行深拷贝的方法</strong>。</p>
+<p>【注：深浅拷贝的概念，在下文中有介绍，详见下文的：用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？】</p>
+<p>在例子中，存放朋友对象的set是用“copyWithZooe:”方法来拷贝的，这种浅拷贝方式不会逐个复制set中的元素。若需要深拷贝的话，则可像下面这样，编写一个专供深拷贝所用的方法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (id)mutableCopyWithZone:(nullable NSZone *)zone &#123;</div><div class="line">    CYLUser *copy = [[[self copy]allocWithZone:zone] initWithName:_name age:_age sex:_sex];</div><div class="line">    copy-&gt;_friends = [[NSMutableSet alloc] initWithSet:_friends copyItems:YES];</div><div class="line">    return copy;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>至于如何重写带 copy 关键字的 setter这个问题，</p>
+<p>如果抛开本例来回答的话，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)setName:(NSString *)name &#123;</div><div class="line">    _name = [name copy];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果单单就上文的代码而言，我们不需要也不能重写name的 setter ：由于是name是只读属性，所以编译器不会为其创建对应的“设置方法”，用初始化方法设置好属性值之后，就不能再改变了。（ 在本例中，之所以还要声明属性的“内存管理语义”–copy，是因为：如果不写copy，该类的调用者就不知道初始化方法里会拷贝这些属性，他们有可能会在调用初始化方法之前自行拷贝属性值。这种操作多余而低效。）。</p>
+<p>那如何确保name被copy？在初始化方法(initializer)中做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithName:(NSString *)name</div><div class="line">                             age:(int)age</div><div class="line">                             sex:(CYLSex)sex &#123;</div><div class="line">     if(self = [super init]) &#123;</div><div class="line">        _name = [name copy];</div><div class="line">        _age = age;</div><div class="line">        _sex = sex;</div><div class="line">        _friends = [[NSMutableSet alloc] init];</div><div class="line">     &#125;</div><div class="line">     return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="6-property-的本质是什么？ivar、getter、setter-是如何生成并添加到这个类中的。"><a href="#6-property-的本质是什么？ivar、getter、setter-是如何生成并添加到这个类中的。" class="headerlink" title="6 @property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的。"></a>6 @property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的。</h1><p><strong>@property 的本质是什么？</strong></p>
+<p><span style="border-bottom:2px dashed red;"> <code>@property</code> = ivar + getter + setter;</span></p>
+<p>下面解释下：</p>
+<p><span style="border-bottom:2px dashed red;">“属性” (property)有两大概念：ivar（实例变量）、存取方法（access method ＝ getter + setter）。</span></p>
+<p>“属性” (property)作为 Objective-C 的一项特性，主要的作用就在于封装对象中的数据。 Objective-C 对象通常会把其所需要的数据保存为各种实例变量。实例变量一般通过“存取方法”(access method)来访问。其中，“获取方法” (getter)用于读取变量值，而“设置方法” (setter)用于写入变量值。这个概念已经定型，并且经由“属性”这一特性而成为Objective-C 2.0的一部分。 而在正规的 Objective-C 编码风格中，存取方法有着严格的命名规范。 正因为有了这种严格的命名规范，所以 Objective-C 这门语言才能根据名称自动创建出存取方法。其实也可以把属性当做一种关键字，其表示:</p>
+<p><strong>编译器会自动写出一套存取方法，用以访问给定类型中具有给定名称的变量。 所以你也可以这么说：@property = getter + setter;</strong></p>
+<p>例如下面这个类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@interface Person : NSObject</div><div class="line">@property NSString *firstName;</div><div class="line">@property NSString *lastName;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>上述代码写出来的类与下面这种写法等效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@interface Person : NSObject</div><div class="line">- (NSString *)firstName;</div><div class="line">- (void)setFirstName:(NSString *)firstName;</div><div class="line">- (NSString *)lastName;</div><div class="line">- (void)setLastName:(NSString *)lastName;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p><strong>ivar、getter、setter 是如何生成并添加到这个类中的?</strong></p>
+<font color="brown">“自动合成”( autosynthesis)</font>
+
+<p>完成属性定义后，编译器会自动编写访问这些属性所需的方法，此过程叫做<strong>“自动合成”( autosynthesis)</strong>。需要强调的是，这个过程由编译 器在编译期执行，所以编辑器里看不到这些“合成方法”(synthesized method)的源代码。除了生成方法代码 getter、setter 之外，编译器还要自动向类中添加适当类型的实例变量，并且在属性名前面加下划线，以此作为实例变量的名字。在前例中，会生成两个实例变量，其名称分别为 <code>_firstName</code>与<code>_lastName</code>。也可以在类的实现代码里通过 <code>@synthesize</code>语法来指定实例变量的名字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@implementation Person</div><div class="line">@synthesize firstName = _myFirstName;</div><div class="line">@synthesize lastName = myLastName;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>我为了搞清属性是怎么实现的,曾经反编译过相关的代码,大致生成了五个东西：</p>
+<p>1）OBJC<em>IVAR</em>$类名$属性名称 ：该属性的“偏移量” (offset)，这个偏移量是“硬编码” (hardcode)，表示该变量距离存放对象的内存区域的起始地址有多远。</p>
+<p>2）setter与getter方法对应的实现函数</p>
+<p>3）ivar_list ：成员变量列表</p>
+<p>4）method_list ：方法列表</p>
+<p>5）prop_list ：属性列表</p>
+<p>也就是说我们<strong>每次在增加一个属性,系统都会在ivar_list中添加一个成员变量的描述,在method_list中增加setter与getter方法的描述,在属性列表中增加一个属性的描述,然后计算该属性在对象中的偏移量,然后给出setter与getter方法对应的实现,</strong> 在setter方法中从偏移量的位置开始赋值,在getter方法中从偏移量开始取值,为了能够读取正确字节数,系统对象偏移量的指针类型进行了类型强转。</p>
+<h1 id="7-protocol-和-category-中如何使用-property"><a href="#7-protocol-和-category-中如何使用-property" class="headerlink" title="7 @protocol 和 category 中如何使用 @property"></a>7 @protocol 和 category 中如何使用 @property</h1><p>1）<strong>在protocol中使用property只会生成setter和getter方法声明</strong>,我们使用属性的目的,是希望遵守我协议的对象能实现该属性</p>
+<p>2）<strong>category 使用 @property 也是只会生成setter和getter方法的声明</strong>,如果我们真的需要给category增加属性的实现,需要借助于运行时的两个函数：</p>
+<ul>
+<li><p><code>objc_setAssociatedObject</code></p>
+</li>
+<li><p><code>objc_getAssociatedObject</code></p>
+</li>
+</ul>
+<h1 id="8-runtime-如何实现-weak-属性"><a href="#8-runtime-如何实现-weak-属性" class="headerlink" title="8 runtime 如何实现 weak 属性"></a>8 runtime 如何实现 weak 属性</h1><p>要实现weak属性，首先要搞清楚weak属性的特点：</p>
+<font color="brown"><code>weak</code> 此特质表明该属性定义了一种“非拥有关系” (nonowning relationship)。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似， 然而在属性所指的对象遭到摧毁时，属性值也会清空(nil out)。</font>
+
+<p><br><br>那么runtime如何实现weak变量的自动置nil？</p>
+<font color="brown">runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。</font>
+
+<p><br><br>我们可以设计一个函数（伪代码）来表示上述机制：</p>
+<p><code>objc_storeWeak(&amp;a, b)</code>函数：</p>
+<p><code>objc_storeWeak</code>函数把第二个参数–赋值对象（b）的内存地址作为键值key，将第一个参数–weak修饰的属性变量（a）的内存地址（&amp;a）作为value，注册到 weak 表中。如果第二个参数（b）为0（nil），那么把变量（a）的内存地址（&amp;a）从weak表中删除，</p>
+<p><strong>你可以把<code>objc_storeWeak(&amp;a, b)</code>理解为：<code>objc_storeWeak(value, key)</code>，并且当key变nil，将value置nil。</strong></p>
+<p>在b非nil时，a和b指向同一个内存地址，在b变nil时，a变nil。此时向a发送消息不会崩溃：在Objective-C中向nil发送消息是安全的。</p>
+<p>而<strong>如果a是由assign修饰的，则： 在b非nil时，a和b指向同一个内存地址，在b变nil时，a还是指向该内存地址，变野指针。此时向a发送消息极易崩溃。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 使用伪代码模拟：runtime如何实现weak属性</div><div class="line">// http://weibo.com/luohanchenyilong/</div><div class="line">// https://github.com/ChenYilong</div><div class="line"> id obj1;</div><div class="line"> objc_initWeak(&amp;obj1, obj);</div><div class="line">/*obj引用计数变为0，变量作用域结束*/</div><div class="line"> objc_destroyWeak(&amp;obj1);</div></pre></td></tr></table></figure></p>
+<p>下面对用到的两个方法<code>objc_initWeak</code>和<code>objc_destroyWeak</code>做下解释：</p>
+<p>总体说来，作用是： <strong>通过objc_initWeak函数初始化“附有weak修饰符的变量（obj1）”，在变量作用域结束时通过objc_destoryWeak函数释放该变量（obj1）</strong>。</p>
+<p>下面分别介绍下方法的内部实现：</p>
+<p><code>objc_initWeak</code>函数的实现是这样的：在将“附有weak修饰符的变量（obj1）”初始化为0（nil）后，会将“赋值对象”（obj）作为参数，调用<code>objc_storeWeak</code>函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">obj1 = 0；</div><div class="line">obj_storeWeak(&amp;obj1, obj);</div></pre></td></tr></table></figure></p>
+<p>也就是说：</p>
+<p>weak 修饰的指针默认值是 nil （在Objective-C中向nil发送消息是安全的）</p>
+<p>然后<code>obj_destroyWeak</code>函数将0（nil）作为参数，调用<code>objc_storeWeak</code>函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_storeWeak(&amp;obj1, 0);</div></pre></td></tr></table></figure></p>
+<p>前面的源代码与下列源代码相同。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 使用伪代码模拟：runtime如何实现weak属性</div><div class="line">// http://weibo.com/luohanchenyilong/</div><div class="line">// https://github.com/ChenYilong</div><div class="line">id obj1;</div><div class="line">obj1 = 0;</div><div class="line">objc_storeWeak(&amp;obj1, obj);</div><div class="line">/* ... obj的引用计数变为0，被置nil ... */</div><div class="line">objc_storeWeak(&amp;obj1, 0);</div></pre></td></tr></table></figure></p>
+<p>objc_storeWeak函数把第二个参数–赋值对象（obj）的内存地址作为键值，将第一个参数–weak修饰的属性变量（obj1）的内存地址注册到 weak 表中。如果第二个参数（obj）为0（nil），那么把变量（obj1）的地址从weak表中删除，在后面的相关一题会详解。</p>
+<p>使用伪代码是为了方便理解，下面我们“真枪实弹”地实现下：</p>
+<font color="brown">如何让不使用weak修饰的@property，拥有weak的效果。</font>
+
+<p>我们从setter方法入手：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)setObject:(NSObject * )object</div><div class="line">&#123;</div><div class="line">    objc_setAssociatedObject(self, &quot;object&quot;, object, OBJC_ASSOCIATION_ASSIGN);</div><div class="line">    [object cyl_runAtDealloc:^&#123;</div><div class="line">        _object = nil;</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也就是有两个步骤：</p>
+<p>1）在setter方法中做如下设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_setAssociatedObject(self, &quot;object&quot;, object, OBJC_ASSOCIATION_ASSIGN);</div></pre></td></tr></table></figure></p>
+<p>2）在属性所指的对象遭到摧毁时，属性值也会清空(nil out)。做到这点，同样要借助runtime：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//要销毁的目标对象</div><div class="line">id objectToBeDeallocated;</div><div class="line">//可以理解为一个“事件”：当上面的目标对象销毁时，同时要发生的“事件”。</div><div class="line">id objectWeWantToBeReleasedWhenThatHappens;</div><div class="line">objc_setAssociatedObject(objectToBeDeallocted,</div><div class="line">                     someUniqueKey,</div><div class="line">                     objectWeWantToBeReleasedWhenThatHappens,</div><div class="line">                     OBJC_ASSOCIATION_RETAIN);</div></pre></td></tr></table></figure></p>
+<p>知道了思路，我们就开始实现cyl_runAtDealloc方法，实现过程分两部分：</p>
+<p>第一部分：创建一个类，可以理解为一个“事件”：当目标对象销毁时，同时要发生的“事件”。借助block执行“事件”。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//CYLBlockExecutor.h</div><div class="line">// 这个类，可以理解为一个“事件”：当目标对象销毁时，同时要发生的“事件”。借助block执行“事件”。</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">typedef void (^voidBlock)(void);</div><div class="line">@interface CYLBlockExecutor : NSObject</div><div class="line">- (id)initWithBlock:(voidBlock)aBlock;</div><div class="line">@end</div><div class="line"></div><div class="line">//CYLBlockExecutor.m</div><div class="line">#import &quot;CYLBlockExecutor.h&quot;</div><div class="line">@interface CYLBlockExecutor() &#123;</div><div class="line">    voidBlock _block;</div><div class="line">&#125;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation CYLBlockExecutor</div><div class="line">-(id)initWithBlock:(voidBlock)aBlock &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        _block = [aBlock copy];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">-(void)dealloc &#123;</div><div class="line">    _block ? _block() : nil;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>第二部分：核心代码：利用runtime实现cyl_runAtDealloc方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//NSObject+CYLRunAtDealloc.h</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &quot;CYLBlockExecutor.h&quot;</div><div class="line">@interface NSObject (CYLRunAtDealloc)</div><div class="line">- (void)cyl_runAtDealloc:(voidBlock)block;</div><div class="line">@end</div><div class="line"></div><div class="line">//NSObject+CYLRunAtDealloc.m</div><div class="line">#import &quot;NSObject+CYLRunAtDealloc.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line">const void *runAtDeallocBlockKey = &amp;runAtDeallocBlockKey;</div><div class="line">@implementation NSObject (CYLRunAtDealloc)</div><div class="line">-(void)cyl_runAtDealloc:(voidBlock)block &#123;</div><div class="line">    if (block) &#123;</div><div class="line">        CYLBlockExecutor *executor = [[CYLBlockExecutor alloc] initWithBlock:block];</div><div class="line">        objc_setAssociatedObject(self, runAtDeallocBlockKey, executor, OBJC_ASSOCIATION_RETAIN);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>使用方法： 导入<code>#import &quot;CYLNSObject+RunAtDealloc.h&quot;</code><br>然后就可以使用了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSObject *foo = [[NSObject alloc] init];</div><div class="line">    [foo cyl_runAtDealloc:^&#123;</div><div class="line">        NSLog(@&quot;正在释放foo!&quot;);</div><div class="line">    &#125;];</div></pre></td></tr></table></figure></p>
+<p>如果对cyl_runAtDealloc的实现原理有兴趣，可以看下这篇博文 <a href="https://stackoverflow.com/questions/22809848/objective-c-runtime-run-code-at-deallocation-of-any-object/31560217#31560217" target="_blank" rel="external">Fun With the Objective-C Runtime: Run Code at Deallocation of Any Object</a></p>
+<h1 id="9-property中有哪些属性关键字？-property-后面可以有哪些修饰符？"><a href="#9-property中有哪些属性关键字？-property-后面可以有哪些修饰符？" class="headerlink" title="9 @property中有哪些属性关键字？/ @property 后面可以有哪些修饰符？"></a>9 @property中有哪些属性关键字？/ @property 后面可以有哪些修饰符？</h1><p>属性可以拥有的特质分为四类:</p>
+<ul>
+<li>原子性—nonatomic特质</li>
+</ul>
+<p>在默认情况下，由编译器合成的方法会通过锁定机制确保其原子性(atomicity)。如果属性具备nonatomic特质，则不使用同步锁。请注意，尽管没有名为“atomic”的特质(如果某属性不具备nonatomic特质，那它就是“原子的” ( atomic) )，但是仍然可以在属性特质中写明这一点，编译器不会报错。若是自己定义存取方法，那么就应该遵从与属性特质相符的原子性。</p>
+<ul>
+<li>读/写权限—readwrite(读写)、readooly (只读)</li>
+<li>内存管理语义—assign、strong、 weak、unsafe_unretained、copy</li>
+<li><p>方法名—getter=、setter=<br>getter=的样式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, getter=isOn) BOOL on;</div></pre></td></tr></table></figure>
+<p>setter=这种不常用，也不推荐使用。故不在这里给出写法。）</p>
+<ul>
+<li>不常用的：nonnull,null_resettable,nullable</li>
+</ul>
+</li>
+</ul>
+<h1 id="10-weak属性需要在dealloc中置nil么？"><a href="#10-weak属性需要在dealloc中置nil么？" class="headerlink" title="10 weak属性需要在dealloc中置nil么？"></a>10 weak属性需要在dealloc中置nil么？</h1><p> 不需要。</p>
+<p><font color="brown">在ARC环境无论是强指针还是弱指针都无需在deallco设置为nil，ARC会自动帮我们处理。</font><br></p>
+<p><strong>即便是编译器不帮我们做这些，weak也不需要在dealloc中置nil</strong>：</p>
+<p>正如上文的：runtime 如何实现 weak 属性 中提到的：</p>
+<p>我们模拟下weak的setter方法，应该如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)setObject:(NSObject *)object</div><div class="line">&#123;</div><div class="line">    objc_setAssociatedObject(self, &quot;object&quot;, object, OBJC_ASSOCIATION_ASSIGN);</div><div class="line">    [object cyl_runAtDealloc:^&#123;</div><div class="line">        _object = nil;</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也即: <strong>在属性所指的对象遭到摧毁时，属性值也会清空(nil out)。</strong></p>
+<h1 id="11-synthesize和-dynamic分别有什么作用？"><a href="#11-synthesize和-dynamic分别有什么作用？" class="headerlink" title="11 @synthesize和@dynamic分别有什么作用？"></a>11 <code>@synthesize</code>和<code>@dynamic</code>分别有什么作用？</h1><p>1）<code>@property</code>有两个对应的词，一个是@synthesize，一个是@dynamic。<strong>如果@synthesize和@dynamic都没写，那么默认的就是<code>@syntheszie var = _var;</code></strong></p>
+<p>2）<strong><code>@synthesize</code>的语义是如果你没有手动实现setter方法和getter方法，那么编译器会自动为你加上这两个方法</strong>。</p>
+<p>3）<strong><code>@dynamic</code>告诉编译器：属性的setter与getter方法由用户自己实现，不自动生成</strong>。（当然对于readonly的属性只需提供getter即可）。假如一个属性被声明为<code>@dynamic var</code>，然后你没有提供@setter方法和@getter方法，编译的时候没问题，但是当程序运行到<code>instance.var = someVar</code>，由于缺setter方法会导致程序崩溃；或者当运行到 <code>someVar = var</code>时，由于缺getter方法同样会导致崩溃。<strong>编译时没问题，运行时才执行相应的方法，这就是所谓的动态绑定</strong>。</p>
+<h1 id="12-ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？"><a href="#12-ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？" class="headerlink" title="12 ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？"></a>12 ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？</h1><ol>
+<li><p>对应基本数据类型默认关键字是：<br><br><code>atomic</code>,<code>readwrite</code>,<code>assign</code></p>
+</li>
+<li><p>对于普通的OC对象：<br><br><code>atomic</code>,<code>readwrite</code>,<code>strong</code></p>
+</li>
+</ol>
+<p>参考链接：</p>
+<p>1、<a href="https://stackoverflow.com/questions/8927727/objective-c-arc-strong-vs-retain-and-weak-vs-assign/15541801#15541801" target="_blank" rel="external">Objective-C ARC: strong vs retain and weak vs assign</a><br>2、<a href="http://rdcworld-iphone.blogspot.in/2012/12/variable-property-attributes-or.html" target="_blank" rel="external">Variable property attributes or Modifiers in iOS</a></p>
+<h1 id="13-用-property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？"><a href="#13-用-property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？" class="headerlink" title="13 用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？"></a>13 用<code>@property</code>声明的<code>NSString</code>（或<code>NSArray</code>，<code>NSDictionary</code>）经常使用<code>copy</code>关键字，为什么？如果改用<code>strong</code>关键字，可能造成什么问题？</h1><p>1）<strong>因为父类指针可以指向子类对象,使用copy的目的是为了让本对象的属性不受外界影响,使用copy无论给我传入是一个可变对象还是不可变对象,我本身持有的就是一个不可变的副本</strong>。</p>
+<p>2）<strong>如果我们使用是strong,那么这个属性就有可能指向一个可变对象,如果这个可变对象在外部被修改了,那么会影响该属性</strong>。</p>
+<p><strong>copy此特质所表达的所属关系与strong类似。然而设置方法并不保留新值，而是将其“拷贝” (copy)</strong>。 当属性类型为NSString时，经常用此特质来保护其封装性，因为传递给设置方法的新值有可能指向一个NSMutableString类的实例。这个类是NSString的子类，表示一种可修改其值的字符串，此时若是不拷贝字符串，那么设置完属性之后，字符串的值就可能会在对象不知情的情况下遭人更改。所以，这时就要拷贝一份“不可变” (immutable)的字符串，确保对象中的字符串值不会无意间变动。<strong>只要实现属性所用的对象是“可变的” (mutable)，就应该在设置新属性值时拷贝一份</strong>。</p>
+<p>为了理解这种做法，首先要知道，对非集合类对象的copy操作：</p>
+<p><strong><u>在非集合类对象中：对immutable对象进行copy操作，是指针复制，mutableCopy操作时内容复制；对mutable对象进行copy和mutableCopy都是内容复制。</u></strong>用代码简单表示如下：</p>
+<ul>
+<li>[immutableObject copy] // 浅复制</li>
+<li>[immutableObject mutableCopy] //深复制</li>
+<li>[mutableObject copy] //深复制</li>
+<li>[mutableObject mutableCopy] //深复制</li>
+</ul>
+<p>比如以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSString *string = @&quot;immutableObject&quot;;</div><div class="line">    NSString *stringCopy = [string copy];</div><div class="line">    NSMutableString *stringMutableCopy = [string mutableCopy];</div><div class="line">    NSLog(@&quot;string: %p, stringCopy: %p, stringMutableCopy: %p&quot;, string, stringCopy, stringMutableCopy);</div><div class="line"></div><div class="line">    NSMutableString *mutableString = [NSMutableString stringWithString:@&quot;mutableObject&quot;];</div><div class="line">    NSString *mutableStringCopy = [mutableString copy];</div><div class="line">    NSMutableString *mutableStringMutableCopy = [mutableString mutableCopy];</div><div class="line">NSLog(@&quot;mutableString: %p, mutableStringCopy: %p, mutableStringMutableCopy: %p&quot;, mutableString, mutableStringCopy, mutableStringMutableCopy);</div></pre></td></tr></table></figure></p>
+<p>打印的结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">string: 0x1054ee3b8,</div><div class="line">stringCopy: 0x1054ee3b8,</div><div class="line">stringMutableCopy: 0x604000246090</div><div class="line"></div><div class="line">mutableString: 0x6040002461e0,</div><div class="line">mutableStringCopy: 0x604000237da0,</div><div class="line">mutableStringMutableCopy: 0x604000246390</div></pre></td></tr></table></figure></p>
+<p>查看内存，会发现 mutableString、mutableStringCopy 内存地址都不一样，说明此时都是做内容拷贝、深拷贝。即使你进行如下操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[mutableString appendString:@&quot;origin!&quot;];</div><div class="line">    NSLog(@&quot;\n mutableString: %p,\n mutableStringCopy: %p,\n mutableStringMutableCopy: %p&quot;, mutableString, mutableStringCopy, mutableStringMutableCopy);</div><div class="line">    /*打印如下：</div><div class="line"> mutableString: 0x6040002461e0,</div><div class="line"> mutableStringCopy: 0x604000237da0,</div><div class="line"> mutableStringMutableCopy: 0x604000246390</div><div class="line"> */</div></pre></td></tr></table></figure></p>
+<p><code>mutableStringCopy</code>的值也不会因此改变，但是如果不使用copy，mutableStringCopy的值就会被改变。 集合类对象以此类推。 所以：</p>
+<blockquote>
+<p><strong>用@property声明 NSString、NSArray、NSDictionary 经常使用copy关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary，他们之间可能进行赋值操作，为确保对象中的字符串值不会无意间变动，应该在设置新属性值时拷贝一份。</strong></p>
+</blockquote>
+<p>参考链接：<a href="https://www.zybuluo.com/MicroCai/note/50592" target="_blank" rel="external">iOS 集合的深复制与浅复制</a></p>
+<h1 id="14-synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为-foo的实例变量，那么还会自动合成新变量么？"><a href="#14-synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为-foo的实例变量，那么还会自动合成新变量么？" class="headerlink" title="14 @synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为_foo的实例变量，那么还会自动合成新变量么？"></a>14 <code>@synthesize</code>合成实例变量的规则是什么？假如property名为foo，存在一个名为_foo的实例变量，那么还会自动合成新变量么？</h1><p>在回答之前先说明下一个概念：</p>
+<blockquote>
+<p><strong>实例变量 = 成员变量 ＝ ivar </strong></p>
+</blockquote>
+<p>这些说法，笔者下文中，可能都会用到，指的是一个东西。</p>
+<p>正如 Apple官方文档 <a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/EncapsulatingData/EncapsulatingData.html#//apple_ref/doc/uid/TP40011210-CH5-SW6" target="_blank" rel="external">You Can Customize Synthesized Instance Variable Names</a> 所说：<br><img src="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171213-095151.png" alt=""></p>
+<p>如果使用了属性的话，那么编译器就会自动编写访问属性所需的方法，此过程叫做<strong>“自动合成”( auto synthesis)</strong>。需要强调的是，<strong>这个过程由编译器在编译期执行，所以编辑器里看不到这些“合成方法” (synthesized method)的源代码</strong>。除了生成方法代码之外，编译器还要自动向类中添加适当类型的实例变量，并且在属性名前面加下划线，以此作为实例变量的名字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@interface SGHPerson : NSObject</div><div class="line">@property NSString *firstName;</div><div class="line">@property NSString *lastName;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>在上例中，会生成两个实例变量，其名称分别为 <code>_firstName</code>与<code>_lastName</code>。也可以在类的实现代码里通过@synthesize语法来指定实例变量的名字：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@implementation SGHPerson</div><div class="line">@synthesize firstName = _myFirstName;</div><div class="line">@synthesize lastName = _myLastName;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>上述语法会将生成的实例变量命名为<code>_myFirstName</code>与<code>_myLastName</code>，而不再使用默认的名字。<strong>一般情况下无须修改默认的实例变量名，但是如果你不喜欢以下划线来命名实例变量，那么可以用这个办法将其改为自己想要的名字。笔者还是推荐使用默认的命名方案，因为如果所有人都坚持这套方案，那么写出来的代码大家都能看得懂</strong>。</p>
+<p>总结下<code>@synthesize</code>合成实例变量的规则，有以下几点：</p>
+<p>1）如果指定了成员变量的名称,会生成一个指定的名称的成员变量,</p>
+<p>2）如果这个成员已经存在了就不再生成了.</p>
+<p>3）<strong>如果是 <code>@synthesize foo;</code> 还会生成一个名称为<code>foo</code>的成员变量，也就是说：如果没有指定成员变量的名称会自动生成一个属性同名的成员变量。</strong></p>
+<p>4）<strong>如果是 <code>@synthesize foo = _foo;</code> 就不会生成成员变量了。</strong></p>
+<p><strong>假如property名为foo，存在一个名为_foo的实例变量，那么还会自动合成新变量么？ 不会</strong>。如下图：<br><img src="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171213-102531.png" alt=""></p>
+<h1 id="15-在有了自动合成属性实例变量之后，-synthesize还有哪些使用场景？"><a href="#15-在有了自动合成属性实例变量之后，-synthesize还有哪些使用场景？" class="headerlink" title="15 在有了自动合成属性实例变量之后，@synthesize还有哪些使用场景？"></a>15 在有了自动合成属性实例变量之后，@synthesize还有哪些使用场景？</h1><p>回答这个问题前，我们要搞清楚一个问题，<strong>什么情况下不会autosynthesis（自动合成）？</strong></p>
+<ol>
+<li>同时重写了setter和getter时</li>
+<li>重写了只读属性的getter时</li>
+<li>使用了<code>@dynamic</code>时</li>
+<li>在 <code>@protocol</code> 中定义的所有属性</li>
+<li>在 <code>category</code> 中定义的所有属性</li>
+<li>重载的属性</li>
+</ol>
+<p><strong>当你在子类中重载了父类中的属性，你必须 使用@synthesize来手动合成ivar。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//SGHPerson.h  该文件的m文件忽略</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">@interface SGHPerson : NSObject</div><div class="line">@property(nonatomic,copy) NSString *firstName;</div><div class="line">@property(nonatomic,copy) NSString *lastName;</div><div class="line">@end</div><div class="line"></div><div class="line">//SGHXiaoMing.h</div><div class="line">#import &quot;SGHPerson.h&quot;</div><div class="line">@interface SGHXiaoMing : SGHPerson</div><div class="line">@property(nonatomic,copy) NSString *firstName;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171214-100852.png" alt=""></p>
+<p>除了后三条，对其他几个我们可以总结出一个规律：当你想手动管理<code>@property</code>的所有内容时，你就会尝试通过实现<code>@property</code>的所有“存取方法”（the accessor methods）或者使用<code>@dynamic</code>来达到这个目的，这时编译器就会认为你打算手动管理@property，于是编译器就禁用了autosynthesis（自动合成）。</p>
+<p>因为有了autosynthesis（自动合成），大部分开发者已经习惯不去手动定义ivar，而是依赖于autosynthesis（自动合成），但是一旦你需要使用ivar，而autosynthesis（自动合成）又失效了，如果不去手动定义ivar，那么你就得借助<code>@synthesize</code>来手动合成ivar。</p>
+<p>其实，<strong><code>@synthesize</code>语法还有一个应用场景，但是不太建议大家使用</strong> ：</p>
+<p>可以在类的实现代码里通过@synthesize语法来指定实例变量的名字:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@implementation SGHPerson</div><div class="line">@synthesize firstName = _myFirstName;</div><div class="line">@synthesize lastName = _myLastName;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>上述语法会将生成的实例变量命名为_myFirstName与_myLastName，而不再使用默认的名字。<strong>一般情况下无须修改默认的实例变量名，但是如果你不喜欢以下划线来命名实例变量，那么可以用这个办法将其改为自己想要的名字。笔者还是推荐使用默认的命名案，因为如果所有人都坚持这套方案，那么写出来的代码大家都能看得懂</strong>。</p>
+<p>举例说明：应用场景：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//SGHObject.h</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">@interface SGHObject : NSObject</div><div class="line">@property (nonatomic, copy)NSString *title;</div><div class="line">@end</div><div class="line"></div><div class="line">//SGHObject.m</div><div class="line">#import &quot;SGHObject.h&quot;</div><div class="line">@implementation SGHObject &#123;</div><div class="line">//    NSString *_title;</div><div class="line">&#125;</div><div class="line">//@synthesize title = _title;</div><div class="line">- (instancetype)init &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        _title = @&quot;微博@iOS程序猿&quot;;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (NSString *)title &#123;</div><div class="line">    return _title;</div><div class="line">&#125;</div><div class="line">-(void)setTitle:(NSString *)title &#123;</div><div class="line">    _title = [title copy];</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>结果编译器报错：<br><img src="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/QQ20171214-101631.png" alt=""></p>
+<p>当你同时重写了setter和getter时，系统就不会生成ivar（实例变量/成员变量）。这时候有两种选择：</p>
+<ul>
+<li>要么如第14行：手动创建ivar</li>
+<li>要么如第17行：使用<code>@synthesize foo = _foo;</code> ，关联<code>@property</code>与ivar。</li>
+</ul>
+<p>更多信息，请戳- 》 <a href="https://stackoverflow.com/questions/19784454/when-should-i-use-synthesize-explicitly/19821816#19821816" target="_blank" rel="external">When should I use @synthesize explicitly</a>?</p>
+<h1 id="16-objc中向一个nil对象发送消息将会发生什么？"><a href="#16-objc中向一个nil对象发送消息将会发生什么？" class="headerlink" title="16 objc中向一个nil对象发送消息将会发生什么？"></a>16 objc中向一个nil对象发送消息将会发生什么？</h1><p>在Objective-C中向nil发送消息是完全有效的——只是在运行时不会有任何作用:</p>
+<p><strong>如果一个方法返回值是一个对象，那么发送给nil的消息将返回0(nil)。</strong>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Person * motherInlaw = [[aPerson spouse] mother];</div></pre></td></tr></table></figure></p>
+<p>如果spouse对象为nil，那么发送给nil的消息mother也将返回nil。</p>
+<p>1）如果方法返回值为指针类型，其指针大小为小于或者等于sizeof(void*)，float，double，long double 或者long long的整型标量，发送给nil的消息将返回0。</p>
+<p>2）如果方法返回值为结构体,发送给nil的消息将返回0。结构体中各个字段的值将都是0。</p>
+<p>3）如果方法的返回值不是上述提到的几种情况，那么发送给nil的消息的返回值将是未定义的。</p>
+<p><br><br>&nbsp; &nbsp; &nbsp; &nbsp;具体原因如下：<br></p>
+<p><font color="brown" size="3">objc是动态语言，每个方法在运行时会被动态转为消息发送，即：<code>objc_msgSend(receiver, selector)</code>。<font></font></font></p>
+<p>那么，为了方便理解这个内容，还是贴一个objc的源代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// runtime.h（类在runtime中的定义）</div><div class="line">// http://weibo.com/luohanchenyilong/</div><div class="line">// https://github.com/ChenYilong</div><div class="line">struct objc_class &#123;</div><div class="line">  /*isa指针指向Meta Class，因为Objc的类的本身也是一个Object，</div><div class="line">  为了处理这个关系，runtime就创造了Meta Class，</div><div class="line">  当给类发送[NSObject alloc]这样消息时，实际上是把这个消息发给了Class Object*/</div><div class="line">  Class isa OBJC_ISA_AVAILABILITY;</div><div class="line">  #if !__OBJC2__</div><div class="line">  Class super_class OBJC2_UNAVAILABLE; // 父类</div><div class="line">  const char *name OBJC2_UNAVAILABLE; // 类名</div><div class="line">  long version OBJC2_UNAVAILABLE; // 类的版本信息，默认为0</div><div class="line">  long info OBJC2_UNAVAILABLE; // 类信息，供运行期使用的一些位标识</div><div class="line">  long instance_size OBJC2_UNAVAILABLE; // 该类的实例变量大小</div><div class="line">  struct objc_ivar_list *ivars OBJC2_UNAVAILABLE; // 该类的成员变量链表</div><div class="line">  struct objc_method_list **methodLists OBJC2_UNAVAILABLE; // 方法定义的链表</div><div class="line">  /*方法缓存，对象接到一个消息会根据isa指针查找消息对象，</div><div class="line">  这时会在method Lists中遍历，如果cache了，</div><div class="line">  常用的方法调用时就能够提高调用的效率。*/</div><div class="line">  struct objc_cache *cache OBJC2_UNAVAILABLE;</div><div class="line">  struct objc_protocol_list *protocols OBJC2_UNAVAILABLE; // 协议链表</div><div class="line">  #endif</div><div class="line">  &#125; OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure></p>
+<p>objc在向一个对象发送消息时，runtime库会根据对象的isa指针找到该对象实际所属的类，然后在该类中的方法列表以及其父类方法列表中寻找方法运行，然后在发送消息的时候，<code>objc_msgSend</code>方法不会返回值，所谓的返回内容都是具体调用时执行的。 那么，回到本题，<strong>如果向一个nil对象发送消息，首先在寻找对象的isa指针时就是0地址返回了，所以不会出现任何错误</strong>。</p>
+<h1 id="17-objc中向一个对象发送消息-obj-foo-和objc-msgSend-函数之间有什么关系？"><a href="#17-objc中向一个对象发送消息-obj-foo-和objc-msgSend-函数之间有什么关系？" class="headerlink" title="17 objc中向一个对象发送消息[obj foo]和objc_msgSend()函数之间有什么关系？"></a>17 objc中向一个对象发送消息<code>[obj foo]</code>和<code>objc_msgSend()</code>函数之间有什么关系？</h1><p>具体原因同上题：该方法编译之后就是objc_msgSend()函数调用。大概是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">((void ()(id, SEL))(void )objc_msgSend)((id)obj, sel_registerName(&quot;foo&quot;));</div></pre></td></tr></table></figure></p>
+<p>也就是说：<br><code>[obj foo];</code>在objc动态编译时，会被转意为：<code>objc_msgSend(obj, @selector(foo));</code>。</p>
+<h1 id="18-什么时候会报unrecognized-selector的异常？"><a href="#18-什么时候会报unrecognized-selector的异常？" class="headerlink" title="18 什么时候会报unrecognized selector的异常？"></a>18 什么时候会报unrecognized selector的异常？</h1><p>简单来说：<font color="brown">当对象调用某个方法,而该对象上没有实现这个方法的时候， 可以通过“消息转发”进行解决。<font></font></font></p>
+<p>简单的流程如下，在上一题中也提到过：<font color="brown">objc是动态语言，每个方法在运行时会被动态转为消息发送，即：<code>objc_msgSend(receiver, selector)</code>。<font></font></font></p>
+<p>objc在向一个对象发送消息时，runtime库会根据对象的isa指针找到该对象实际所属的类，然后在该类中的方法列表以及其父类方法列表中寻找方法运行，如果在最顶层的父类中依然找不到相应的方法时，程序在运行时会挂掉并抛出异常<code>unrecognized selector sent to XXX</code>。但是在这之前，objc的运行时会给出三次拯救程序崩溃的机会：</p>
+<h3 id="1-Method-resolution"><a href="#1-Method-resolution" class="headerlink" title="1 Method resolution"></a>1 Method resolution</h3><p>objc运行时会调用<code>+resolveInstanceMethod:</code>或者 <code>+resolveClassMethod:</code>，让你有机会提供一个函数实现。如果你添加了函数并返回 YES，那运行时系统就会重新启动一次消息发送的过程，如果 resolve 方法返回 NO ，运行时就会移到下一步，消息转发（Message Forwarding）。</p>
+<h3 id="2-Fast-forwarding"><a href="#2-Fast-forwarding" class="headerlink" title="2 Fast forwarding"></a>2 Fast forwarding</h3><p>如果目标对象实现了<code>-forwardingTargetForSelector</code>:，Runtime 这时就会调用这个方法，给你把这个消息转发给其他对象的机会。 只要这个方法返回的不是nil和self，整个消息发送的过程就会被重启，当然发送的对象会变成你返回的那个对象。否则，就会继续<code>Normal Fowarding</code>。 这里叫Fast，只是为了区别下一步的转发机制。因为这一步不会创建任何新的对象，但下一步转发会创建一个<code>NSInvocation</code>对象，所以相对更快点。</p>
+<h3 id="3-Normal-forwarding"><a href="#3-Normal-forwarding" class="headerlink" title="3 Normal forwarding"></a>3 Normal forwarding</h3><p>这一步是Runtime最后一次给你挽救的机会。首先它会发送<code>-methodSignatureForSelector:</code>消息获得函数的参数和返回值类型。如果<code>-methodSignatureForSelector:</code>返回nil，Runtime则会发出<code>-doesNotRecognizeSelector:</code>消息，程序这时也就挂掉了。如果返回了一个函数签名，Runtime就会创建一个NSInvocation对象并发送<code>-forwardInvocation:</code>消息给目标对象。</p>
+<h1 id="19-一个objc对象如何进行内存布局？（考虑有父类的情况）"><a href="#19-一个objc对象如何进行内存布局？（考虑有父类的情况）" class="headerlink" title="19 一个objc对象如何进行内存布局？（考虑有父类的情况）"></a>19 一个objc对象如何进行内存布局？（考虑有父类的情况）</h1><ul>
+<li>所有父类的成员变量和自己的成员变量都会存放在该对象所对应的存储空间中.</li>
+<li><p>每一个对象内部都有一个isa指针,指向他的类对象,类对象中存放着本对象的：</p>
+<ol>
+<li>对象方法列表（对象能够接收的消息列表，保存在它所对应的类对象中）</li>
+<li>成员变量的列表</li>
+<li>属性列表</li>
+</ol>
+</li>
+</ul>
+<p>它内部也有一个isa指针指向元对象(meta class),元对象内部存放的是类方法列表,类对象内部还有一个superclass的指针,指向他的父类对象。<br><img src="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/1438585302109349.png" alt=""></p>
+<p>1）<strong>根对象（Root class(class)）就是NSObject，它的superclass指针指向nil</strong>。</p>
+<p>2）类对象（带有(class)）既然称为对象，那它也是一个实例。类对象中也有一个isa指针指向它的元类(meta class)，即类对象是元类的实例。<strong>元类（带有(meta)）内部存放的是类方法列表，根元类（Root class(meta)）的isa指针指向自己，superclass指针指向NSObject类。</strong></p>
+<p>如图:<br><img src="/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/1438585375577177.png" alt=""></p>
+<h1 id="20-一个objc对象的isa的指针指向什么？有什么作用？"><a href="#20-一个objc对象的isa的指针指向什么？有什么作用？" class="headerlink" title="20 一个objc对象的isa的指针指向什么？有什么作用？"></a>20 一个objc对象的isa的指针指向什么？有什么作用？</h1><p>指向他的类对象,从而可以找到对象上的方法。</p>
+<h1 id="21-下面的代码输出什么？"><a href="#21-下面的代码输出什么？" class="headerlink" title="21 下面的代码输出什么？"></a>21 下面的代码输出什么？</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#import &quot;Father.h&quot;</div><div class="line"></div><div class="line">@interface Son : Father</div><div class="line">//...</div><div class="line">@end</div><div class="line">@implementation Son</div><div class="line">- (instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        NSLog(@&quot;%@&quot;, NSStringFromClass([self class]));</div><div class="line">        NSLog(@&quot;%@&quot;, NSStringFromClass([super class]));</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>打印如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Son</div><div class="line">Son</div></pre></td></tr></table></figure></p>
+<p><strong>解惑</strong>：</p>
+<p>（以下解惑部分摘自微博<a href="https://weibo.com/junbbcom" target="_blank" rel="external">@Chun_iOS</a>的博文刨根问底<a href="http://blog.csdn.net/hmxhh/article/details/41281467" target="_blank" rel="external">Objective－C Runtime（1）－ Self &amp; Super）</a></p>
+<p>这个题目主要是考察关于objc中对 self 和 super 的理解。</p>
+<p><strong>self 是类的隐藏参数，指向当前调用方法的这个类的实例。而 super 是一个 Magic Keyword， 它本质是一个编译器标示符，和 self 是指向的同一个消息接受者</strong>。</p>
+<p>上面的例子不管调用<code>[self class]</code>还是<code>[super class]</code>，接受消息的对象都是当前 Son ＊xxx 这个对象。而不同的是，super是告诉编译器，调用 class 这个方法时，要去父类的方法，而不是本类里的。</p>
+<p>当使用 self 调用方法时，会从当前类的方法列表中开始找，如果没有，就从父类中再找；而当使用 super 时，则从父类的方法列表中开始找。然后调用父类的这个方法。</p>
+<p>真的是这样吗？继续看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ clang -rewrite-objc test.m</div></pre></td></tr></table></figure></p>
+<p>发现上述代码被转化为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_tk_hh4jwk2s1_df6sb50yhqx2cw0000gn_T_test_7d64dd_mi_0,</div><div class="line"> NSStringFromClass(((Class (*)(id, SEL))(void *)objc_msgSend)((id)self,</div><div class="line">  sel_registerName(&quot;class&quot;))));</div><div class="line">NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_tk_hh4jwk2s1_df6sb50yhqx2cw0000gn_T_test_7d64dd_mi_1,</div><div class="line"> NSStringFromClass(((Class (*)(__rw_objc_super *, SEL))(void *)objc_msgSendSuper)((__rw_objc_super)&#123;(id)self,</div><div class="line">    (id)class_getSuperclass(objc_getClass(&quot;Son&quot;))&#125;,</div><div class="line">     sel_registerName(&quot;class&quot;))));</div></pre></td></tr></table></figure></p>
+<p>从上面的代码中，我们可以发现在调用 <code>[self class]</code> 时，会转化成 <code>objc_msgSend</code>函数。看下函数定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id objc_msgSend(id self, SEL op, ...)</div></pre></td></tr></table></figure></p>
+<p>我们把 self 做为第一个参数传递进去。</p>
+<p>而在调用 <code>[super class]</code>时，会转化成 <code>objc_msgSendSuper</code>函数。看下函数定义:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id objc_msgSendSuper(struct objc_super *super, SEL op, ...)</div></pre></td></tr></table></figure></p>
+<p>第一个参数是 <code>objc_super</code> 这样一个结构体，其定义如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct objc_super &#123;</div><div class="line">   __unsafe_unretained id receiver;</div><div class="line">   __unsafe_unretained Class super_class;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>结构体有两个成员，第一个成员是 receiver, 类似于上面的 objc_msgSend函数第一个参数self 。第二个成员是记录当前类的父类是什么。</p>
+<p>所以，<strong>当调用 <code>［self class]</code> 时，实际先调用的是 <code>objc_msgSend</code>函数，第一个参数是 Son当前的这个实例，然后在 Son 这个类里面去找 <code>- (Class)class</code>这个方法，没有，去父类 Father里找，也没有，最后在 NSObject类中发现这个方法。而 <code>- (Class)class</code>的实现就是返回self的类别，故上述输出结果为 Son。</strong></p>
+<p><strong>objc Runtime开源代码对<code>- (Class)class</code>方法的实现:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (Class)class &#123;</div><div class="line">    return object_getClass(self);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而当调用 <code>[super class]</code>时，会转换成<code>objc_msgSendSuper</code>函数。</p>
+<ol>
+<li>第一步先构造 <code>objc_super</code> 结构体，结构体第一个成员就是 self 。 第二个成员是 <code>(id)class_getSuperclass(objc_getClass(“Son”))</code>, 实际该函数输出结果为 Father。</li>
+<li>第二步是去 Father这个类里去找 <code>- (Class)class</code>，没有，然后去NSObject类去找，找到了。最后内部是使用 <code>objc_msgSend(objc_super-&gt;receiver, @selector(class))</code>去调用， 此时已经和<code>[self class]</code>调用相同了，故上述输出结果仍然返回 Son。</li>
+</ol>
+<h1 id="22-runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）"><a href="#22-runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）" class="headerlink" title="22 runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）"></a>22 runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）</h1><p><strong>每一个类对象中都一个方法列表,方法列表中记录着方法的名称,方法实现,以及参数类型,其实selector本质就是方法名称,通过这个方法名称就可以在方法列表中找到对应的方法实现。</strong></p>
+<h1 id="23-使用runtime-Associate方法关联的对象，需要在主对象dealloc的时候释放么？"><a href="#23-使用runtime-Associate方法关联的对象，需要在主对象dealloc的时候释放么？" class="headerlink" title="23 使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？"></a>23 使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？</h1><ul>
+<li>在ARC下不需要</li>
+<li><del>在MRC中,对于使用retain或copy策略的需要</del></li>
+</ul>
+<p><font color="brown">无论在MRC下还是ARC下均不需要<font></font></font></p>
+<p>2011年版本的Apple API 官方文档 - Associative References 一节中有一个MRC环境下的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 在MRC下，使用runtime Associate方法关联的对象，不需要在主对象dealloc的时候释放</div><div class="line">// http://weibo.com/luohanchenyilong/ (微博@iOS程序犭袁)</div><div class="line">// https://github.com/ChenYilong</div><div class="line">// 摘自2011年版本的Apple API 官方文档 - Associative References</div><div class="line"></div><div class="line">static char overviewKey;</div><div class="line">NSArray *array =</div><div class="line">    [[NSArray alloc] initWithObjects:@&quot;One&quot;, @&quot;Two&quot;, @&quot;Three&quot;, nil];</div><div class="line">// For the purposes of illustration, use initWithFormat: to ensure</div><div class="line">// the string can be deallocated</div><div class="line">NSString *overview =</div><div class="line">    [[NSString alloc] initWithFormat:@&quot;%@&quot;, @&quot;First three numbers&quot;];</div><div class="line"></div><div class="line">objc_setAssociatedObject (</div><div class="line">    array,</div><div class="line">    &amp;overviewKey,</div><div class="line">    overview,</div><div class="line">    OBJC_ASSOCIATION_RETAIN</div><div class="line">);</div><div class="line"></div><div class="line">[overview release];</div><div class="line">// (1) overview valid</div><div class="line">[array release];</div><div class="line">// (2) overview invalid</div></pre></td></tr></table></figure></p>
+<p>文档指出：</p>
+<blockquote>
+<p>At point 1, the string overview is still valid because the OBJC_ASSOCIATION_RETAIN policy specifies that the array retains the associated object. When the array is deallocated, however (at point 2), overview is released and so in this case also deallocated.</p>
+</blockquote>
+<p>我们可以看到，在<code>[array release];</code>之后，overview就会被release释放掉了。</p>
+<p>既然会被销毁，那么具体在什么时间点？</p>
+<p>根据 <a href="">WWDC 2011, Session 322 (第36分22秒)</a> 中发布的内存销毁时间表，被关联的对象在生命周期内要比对象本身释放的晚很多。它们会在被 NSObject -dealloc 调用的 <code>object_dispose()</code> 方法中释放。</p>
+<p>对象的内存销毁时间表，分四个步骤：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// 对象的内存销毁时间表</div><div class="line">// http://weibo.com/luohanchenyilong/ (微博@iOS程序犭袁)</div><div class="line">// https://github.com/ChenYilong</div><div class="line">// 根据 WWDC 2011, Session 322 (36分22秒)中发布的内存销毁时间表</div><div class="line"></div><div class="line"> 1. 调用 -release ：引用计数变为零</div><div class="line">     * 对象正在被销毁，生命周期即将结束.</div><div class="line">     * 不能再有新的 __weak 弱引用， 否则将指向 nil.</div><div class="line">     * 调用 [self dealloc]</div><div class="line"> 2. 父类 调用 -dealloc</div><div class="line">     * 继承关系中最底层的父类 在调用 -dealloc</div><div class="line">     * 如果是 MRC 代码 则会手动释放实例变量们（iVars）</div><div class="line">     * 继承关系中每一层的父类 都在调用 -dealloc</div><div class="line"> 3. NSObject 调 -dealloc</div><div class="line">     * 只做一件事：调用 Objective-C runtime 中的 object_dispose() 方法</div><div class="line"> 4. 调用 object_dispose()</div><div class="line">     * 为 C++ 的实例变量们（iVars）调用 destructors</div><div class="line">     * 为 ARC 状态下的 实例变量们（iVars） 调用 -release</div><div class="line">     * 解除所有使用 runtime Associate方法关联的对象</div><div class="line">     * 解除所有 __weak 引用</div><div class="line">     * 调用 free()</div></pre></td></tr></table></figure></p>
+<p>对象的内存销毁时间表：<a href="https://stackoverflow.com/questions/10842829/will-an-associated-object-be-released-automatically/10843510#10843510" target="_blank" rel="external">参考链接</a>。</p>
+<h1 id="24-objc中的类方法和实例方法有什么本质区别和联系"><a href="#24-objc中的类方法和实例方法有什么本质区别和联系" class="headerlink" title="24 objc中的类方法和实例方法有什么本质区别和联系"></a>24 objc中的类方法和实例方法有什么本质区别和联系</h1><h3 id="1-类方法："><a href="#1-类方法：" class="headerlink" title="1 类方法："></a>1 类方法：</h3><ol>
+<li>类方法是属于类对象的</li>
+<li>类方法只能通过类对象调用</li>
+<li>类方法中的self是类对象</li>
+<li>类方法可以调用其他的类方法</li>
+<li>类方法中不能访问成员变量</li>
+<li>类方法中不能直接调用对象方法</li>
+</ol>
+<h3 id="2-实例方法："><a href="#2-实例方法：" class="headerlink" title="2 实例方法："></a>2 实例方法：</h3><ol>
+<li>实例方法是属于实例对象的</li>
+<li>实例方法只能通过实例对象调用</li>
+<li>实例方法中的self是实例对象</li>
+<li>实例方法中可以访问成员变量</li>
+<li>实例方法中直接调用实例方法</li>
+<li>实例方法中也可以调用类方法(通过类名)</li>
+</ol>
+<p>未完待续~~~~</p>
+<p>下一篇文章将发布在 <a href="https://github.com/ChenYilong/iOSInterviewQuestions/" target="_blank" rel="external">这里</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/12/11/39《招聘一个靠谱的iOS》面试题参考答案/" data-title="39《招聘一个靠谱的iOS》面试题参考答案 | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/12/11/38iOS面试题最全梳理/" title="38iOS面试题最全梳理">
+  <strong>上一篇：</strong><br/>
+  <span>
+  38iOS面试题最全梳理</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/12/12/40iOS打印对象内存地址的正确姿势/"  title="iOS打印对象内存地址的正确姿势">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS打印对象内存地址的正确姿势
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-风格纠错题"><span class="toc-number">1.</span> <span class="toc-text">1 风格纠错题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-什么情况使用-weak-关键字，相比-assign-有什么不同？"><span class="toc-number">2.</span> <span class="toc-text">2 什么情况使用 weak 关键字，相比 assign 有什么不同？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-怎么用-copy-关键字？"><span class="toc-number">3.</span> <span class="toc-text">3. 怎么用 copy 关键字？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-这个写法会出什么问题：-property-copy-NSMutableArray-array"><span class="toc-number">4.</span> <span class="toc-text">4 这个写法会出什么问题： @property (copy) NSMutableArray *array;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-如何让自己的类用-copy-修饰符？如何重写带-copy-关键字的-setter？"><span class="toc-number">5.</span> <span class="toc-text">5 如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-property-的本质是什么？ivar、getter、setter-是如何生成并添加到这个类中的。"><span class="toc-number">6.</span> <span class="toc-text">6 @property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-protocol-和-category-中如何使用-property"><span class="toc-number">7.</span> <span class="toc-text">7 @protocol 和 category 中如何使用 @property</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-runtime-如何实现-weak-属性"><span class="toc-number">8.</span> <span class="toc-text">8 runtime 如何实现 weak 属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-property中有哪些属性关键字？-property-后面可以有哪些修饰符？"><span class="toc-number">9.</span> <span class="toc-text">9 @property中有哪些属性关键字？/ @property 后面可以有哪些修饰符？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-weak属性需要在dealloc中置nil么？"><span class="toc-number">10.</span> <span class="toc-text">10 weak属性需要在dealloc中置nil么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-synthesize和-dynamic分别有什么作用？"><span class="toc-number">11.</span> <span class="toc-text">11 @synthesize和@dynamic分别有什么作用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？"><span class="toc-number">12.</span> <span class="toc-text">12 ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-用-property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？"><span class="toc-number">13.</span> <span class="toc-text">13 用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为-foo的实例变量，那么还会自动合成新变量么？"><span class="toc-number">14.</span> <span class="toc-text">14 @synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为_foo的实例变量，那么还会自动合成新变量么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-在有了自动合成属性实例变量之后，-synthesize还有哪些使用场景？"><span class="toc-number">15.</span> <span class="toc-text">15 在有了自动合成属性实例变量之后，@synthesize还有哪些使用场景？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-objc中向一个nil对象发送消息将会发生什么？"><span class="toc-number">16.</span> <span class="toc-text">16 objc中向一个nil对象发送消息将会发生什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#17-objc中向一个对象发送消息-obj-foo-和objc-msgSend-函数之间有什么关系？"><span class="toc-number">17.</span> <span class="toc-text">17 objc中向一个对象发送消息[obj foo]和objc_msgSend()函数之间有什么关系？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#18-什么时候会报unrecognized-selector的异常？"><span class="toc-number">18.</span> <span class="toc-text">18 什么时候会报unrecognized selector的异常？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Method-resolution"><span class="toc-number">18.0.1.</span> <span class="toc-text">1 Method resolution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Fast-forwarding"><span class="toc-number">18.0.2.</span> <span class="toc-text">2 Fast forwarding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Normal-forwarding"><span class="toc-number">18.0.3.</span> <span class="toc-text">3 Normal forwarding</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#19-一个objc对象如何进行内存布局？（考虑有父类的情况）"><span class="toc-number">19.</span> <span class="toc-text">19 一个objc对象如何进行内存布局？（考虑有父类的情况）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#20-一个objc对象的isa的指针指向什么？有什么作用？"><span class="toc-number">20.</span> <span class="toc-text">20 一个objc对象的isa的指针指向什么？有什么作用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#21-下面的代码输出什么？"><span class="toc-number">21.</span> <span class="toc-text">21 下面的代码输出什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#22-runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）"><span class="toc-number">22.</span> <span class="toc-text">22 runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#23-使用runtime-Associate方法关联的对象，需要在主对象dealloc的时候释放么？"><span class="toc-number">23.</span> <span class="toc-text">23 使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#24-objc中的类方法和实例方法有什么本质区别和联系"><span class="toc-number">24.</span> <span class="toc-text">24 objc中的类方法和实例方法有什么本质区别和联系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-类方法："><span class="toc-number">24.0.1.</span> <span class="toc-text">1 类方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-实例方法："><span class="toc-number">24.0.2.</span> <span class="toc-text">2 实例方法：</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
