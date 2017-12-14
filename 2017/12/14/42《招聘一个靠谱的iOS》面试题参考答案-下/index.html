@@ -1,0 +1,730 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>42《招聘一个靠谱的iOS》面试题参考答案(下) | SengolnHuang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="黄胜军">
+    
+
+    
+    <meta name="description" content="来自：01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（下） 25 _objc_msgForward函数是做什么的，直接调用它将会发生什么？ _objc_msgForward是 IMP 类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，_objc_msgForward会尝试做消息转发。  我们可以这样创建一个_objc_msgForward对象">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="42《招聘一个靠谱的iOS》面试题参考答案(下)">
+<meta property="og:url" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/index.html">
+<meta property="og:site_name" content="SengolnHuang's blog">
+<meta property="og:description" content="来自：01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（下） 25 _objc_msgForward函数是做什么的，直接调用它将会发生什么？ _objc_msgForward是 IMP 类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，_objc_msgForward会尝试做消息转发。  我们可以这样创建一个_objc_msgForward对象">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f692e696d6775722e636f6d2f72474266616f4c2e706e67.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f692e696d6775722e636f6d2f766354686364412e706e67.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/QQ20171214-161556.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/QQ20171214-161622.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/QQ20171214-162058.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/QQ20171214-162309.png">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f7777312e73696e61696d672e636e2f626d6964646c652f363632383731316267773165656378336a6566323367323036343034746b62692e676966.gif">
+<meta property="og:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f6936312e74696e797069632e636f6d2f32386b6f6477702e6a7067.png">
+<meta property="og:updated_time" content="2017-12-14T10:05:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="42《招聘一个靠谱的iOS》面试题参考答案(下)">
+<meta name="twitter:description" content="来自：01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（下） 25 _objc_msgForward函数是做什么的，直接调用它将会发生什么？ _objc_msgForward是 IMP 类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，_objc_msgForward会尝试做消息转发。  我们可以这样创建一个_objc_msgForward对象">
+<meta name="twitter:image" content="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f692e696d6775722e636f6d2f72474266616f4c2e706e67.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SengolnHuang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SengolnHuang&#39;s blog" title="SengolnHuang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SengolnHuang&#39;s blog">SengolnHuang&#39;s blog</a></h1>
+				<h2 class="blog-motto">关注技术，分享生活</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:univer2012.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/" title="42《招聘一个靠谱的iOS》面试题参考答案(下)" itemprop="url">42《招聘一个靠谱的iOS》面试题参考答案(下)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="黄胜军" target="_blank" itemprop="author">黄胜军</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-14T06:45:59.000Z" itemprop="datePublished"> 发表于 2017-12-14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#25-objc-msgForward函数是做什么的，直接调用它将会发生什么？"><span class="toc-number">1.</span> <span class="toc-text">25 _objc_msgForward函数是做什么的，直接调用它将会发生什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#25-1-下面回答下第二个问题“直接-objc-msgForward调用它将会发生什么？”"><span class="toc-number">1.0.1.</span> <span class="toc-text">25.1 下面回答下第二个问题“直接_objc_msgForward调用它将会发生什么？”</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#26-runtime如何实现weak变量的自动置nil？"><span class="toc-number">2.</span> <span class="toc-text">26 runtime如何实现weak变量的自动置nil？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#27-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"><span class="toc-number">3.</span> <span class="toc-text">27 能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#28-runloop和线程有什么关系？"><span class="toc-number">4.</span> <span class="toc-text">28 runloop和线程有什么关系？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#29-runloop的mode作用是什么？"><span class="toc-number">5.</span> <span class="toc-text">29 runloop的mode作用是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#30-以-scheduledTimerWithTimeInterval-的方式触发的timer，在滑动页面上的列表时，timer会暂定回调，为什么？如何解决？"><span class="toc-number">6.</span> <span class="toc-text">30 以+ scheduledTimerWithTimeInterval:...的方式触发的timer，在滑动页面上的列表时，timer会暂定回调，为什么？如何解决？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#31-猜想runloop内部是如何实现的？"><span class="toc-number">7.</span> <span class="toc-text">31 猜想runloop内部是如何实现的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#32-objc使用什么机制管理对象内存？"><span class="toc-number">8.</span> <span class="toc-text">32 objc使用什么机制管理对象内存？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#33-ARC通过什么方式帮助开发者管理内存？"><span class="toc-number">9.</span> <span class="toc-text">33 ARC通过什么方式帮助开发者管理内存？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#34-不手动指定autoreleasepool的前提下，一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）"><span class="toc-number">10.</span> <span class="toc-text">34 不手动指定autoreleasepool的前提下，一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）</span></a></li></ol>
+		
+		</div>
+		
+		<p>来自：<a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8B%EF%BC%89.md" target="_blank" rel="external">01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（下）</a></p>
+<h1 id="25-objc-msgForward函数是做什么的，直接调用它将会发生什么？"><a href="#25-objc-msgForward函数是做什么的，直接调用它将会发生什么？" class="headerlink" title="25 _objc_msgForward函数是做什么的，直接调用它将会发生什么？"></a>25 <code>_objc_msgForward</code>函数是做什么的，直接调用它将会发生什么？</h1><blockquote>
+<p><code>_objc_msgForward</code>是 IMP 类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，<code>_objc_msgForward</code>会尝试做消息转发。</p>
+</blockquote>
+<p>我们可以这样创建一个<code>_objc_msgForward</code>对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IMP msgForwardIMP = _objc_msgForward;</div></pre></td></tr></table></figure></p>
+<p>在<a href="https://github.com/ChenYilong/iOSInterviewQuestions" target="_blank" rel="external">上篇</a>中的《objc中向一个对象发送消息<code>[obj foo]</code>和<code>objc_msgSend()</code>函数之间有什么关系？》曾提到<code>objc_msgSend</code>在“消息传递”中的作用。在“消息传递”过程中，<code>objc_msgSend</code>的动作比较清晰：首先在 Class 中的缓存查找 IMP （没缓存则初始化缓存），如果没找到，则向父类的 Class 查找。如果一直查找到根类仍旧没有实现，则用<code>_objc_msgForward</code>函数指针代替 IMP 。最后，执行这个 IMP 。</p>
+<p>Objective-C运行时是开源的，所以我们可以看到它的实现。打开 <a href="https://opensource.apple.com/tarballs/objc4/" target="_blank" rel="external">Apple Open Source 里Mac代码里的obj包</a> 下载一个最新版本，找到 <code>objc-runtime-new.mm</code>，进入之后搜索<code>_objc_msgForward</code>。<br><img src="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f692e696d6775722e636f6d2f72474266616f4c2e706e67.png" alt=""></p>
+<p>里面有对<code>_objc_msgForward</code>的功能解释：<br><img src="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f692e696d6775722e636f6d2f766354686364412e706e67.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/***********************************************************************</div><div class="line">* lookUpImpOrForward.</div><div class="line">* The standard IMP lookup.</div><div class="line">* initialize==NO tries to avoid +initialize (but sometimes fails)</div><div class="line">* cache==NO skips optimistic unlocked lookup (but uses cache elsewhere)</div><div class="line">* Most callers should use initialize==YES and cache==YES.</div><div class="line">* inst is an instance of cls or a subclass thereof, or nil if none is known.</div><div class="line">*   If cls is an un-initialized metaclass then a non-nil inst is faster.</div><div class="line">* May return _objc_msgForward_impcache. IMPs destined for external use</div><div class="line">*   must be converted to _objc_msgForward or _objc_msgForward_stret.</div><div class="line">*   If you don&apos;t want forwarding at all, use lookUpImpOrNil() instead.</div><div class="line">**********************************************************************/</div></pre></td></tr></table></figure></p>
+<p>对 <code>objc-runtime-new.mm</code>文件里与<code>_objc_msgForward</code>有关的三个函数使用伪代码展示下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">//  objc-runtime-new.mm 文件里与 _objc_msgForward 有关的三个函数使用伪代码展示</div><div class="line">//  Created by https://github.com/ChenYilong</div><div class="line">//  Copyright (c)  微博@iOS程序犭袁(http://weibo.com/luohanchenyilong/). All rights reserved.</div><div class="line">//  同时，这也是 obj_msgSend 的实现过程</div><div class="line"></div><div class="line">id objc_msgSend(id self, SEL op, ...) &#123;</div><div class="line">    if (!self) return nil;</div><div class="line">	IMP imp = class_getMethodImplementation(self-&gt;isa, SEL op);</div><div class="line">	imp(self, op, ...); //调用这个函数，伪代码...</div><div class="line">&#125;</div><div class="line"></div><div class="line">//查找IMP</div><div class="line">IMP class_getMethodImplementation(Class cls, SEL sel)</div><div class="line">&#123;</div><div class="line">    IMP imp;</div><div class="line"></div><div class="line">    if (!cls  ||  !sel) return nil;</div><div class="line"></div><div class="line">    imp = lookUpImpOrNil(cls, sel, nil,</div><div class="line">                         YES/*initialize*/, YES/*cache*/, YES/*resolver*/);</div><div class="line"></div><div class="line">    // Translate forwarding function to C-callable external version</div><div class="line">    if (!imp) &#123;</div><div class="line">        return _objc_msgForward; //_objc_msgForward 用于消息转发</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return imp;</div><div class="line">&#125;</div><div class="line"></div><div class="line">IMP lookUpImpOrNil(Class cls, SEL sel) &#123;</div><div class="line">    if (!cls-&gt;initialize()) &#123;</div><div class="line">        _class_initialize(cls);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Class curClass = cls;</div><div class="line">    IMP imp = nil;</div><div class="line">    do &#123; //先查缓存,缓存没有时重建,仍旧没有则向父类查询</div><div class="line">        if (!curClass) break;</div><div class="line">        if (!curClass-&gt;cache) fill_cache(cls, curClass);</div><div class="line">        imp = cache_getImp(curClass, sel);</div><div class="line">        if (imp) break;</div><div class="line">    &#125; while (curClass = curClass-&gt;superclass);</div><div class="line"></div><div class="line">    return imp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>虽然Apple没有公开<code>_objc_msgForward</code>的实现源码，但是我们还是能得出结论：</p>
+<blockquote>
+<p><code>_objc_msgForward</code>是一个函数指针（和 IMP 的类型一样），是用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，<code>_objc_msgForward</code>会尝试做消息转发。</p>
+<p>在上篇中的《objc中向一个对象发送消息<code>[obj foo]</code> 和<code>objc_msgSend()</code>函数之间有什么关系？》曾提到<code>objc_msgSend</code>在“消息传递”中的作用。在“消息传递”过程中，<code>objc_msgSend</code>的动作比较清晰：首先在 Class 中的缓存查找 IMP （没缓存则初始化缓存），如果没找到，则向父类的 Class 查找。如果一直查找到根类仍旧没有实现，则用<code>_objc_msgForward</code>函数指针代替 IMP 。最后，执行这个 IMP 。</p>
+</blockquote>
+<p>为了展示消息转发的具体动作，这里尝试向一个对象发送一条错误的消息，并查看一下<code>_objc_msgForward</code>是如何进行转发的。</p>
+<p>首先开启调试模式、打印出所有运行时发送的消息： 可以在代码里执行下面的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(void)instrumentObjcMessageSends(YES);</div></pre></td></tr></table></figure></p>
+<p>或者断点暂停程序运行，并在 gdb 中输入下面的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">call (void)instrumentObjcMessageSends(YES)</div></pre></td></tr></table></figure></p>
+<p>以第二种为例，操作如下所示：<br><img src="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/QQ20171214-161556.png" alt=""><br>之后，运行时发送的所有消息都会打印到 <code>/tmp/msgSend-xxxx</code> 文件里了。</p>
+<p>终端中输入命令前往：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ open /private/tmp</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/QQ20171214-161622.png" alt=""><br>可能看到有多条，找到最新生成的，双击打开</p>
+<p>在模拟器上执行执行以下语句（这一套调试方案仅适用于模拟器，真机不可用，关于该调试方案的拓展链接： <a href="http://stackoverflow.com/a/10750398/3395008" target="_blank" rel="external">Can the messages sent to an object in Objective-C be monitored or printed out?</a> ），向一个对象发送一条错误的消息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line">#import &quot;AppDelegate.h&quot;</div><div class="line">#import &quot;SGHTest.h&quot;</div><div class="line"></div><div class="line">int main(int argc, char * argv[]) &#123;</div><div class="line">    NSLog(@&quot;%s&quot;,__func__);</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        SGHTest *test = [[SGHTest alloc] init];</div><div class="line">        [test performSelector:@selector(p_test)];</div><div class="line">        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/QQ20171214-162058.png" alt=""></p>
+<p>你可以在<code>/tmp/msgSend-xxxx</code>（我这一次是<code>/tmp/msgSends-47869</code>）文件里，看到打印出来：<br><img src="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/QQ20171214-162309.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- SGHTest NSObject performSelector:</div><div class="line">+ SGHTest NSObject resolveInstanceMethod:</div><div class="line">+ SGHTest NSObject resolveInstanceMethod:</div><div class="line">- SGHTest NSObject forwardingTargetForSelector:</div><div class="line">- SGHTest NSObject forwardingTargetForSelector:</div><div class="line">- SGHTest NSObject methodSignatureForSelector:</div><div class="line">- SGHTest NSObject methodSignatureForSelector:</div><div class="line">- SGHTest NSObject class</div><div class="line">- SGHTest NSObject doesNotRecognizeSelector:</div><div class="line">- SGHTest NSObject doesNotRecognizeSelector:</div><div class="line">- SGHTest NSObject class</div></pre></td></tr></table></figure></p>
+<p>结合<a href="https://developer.apple.com/library/prerelease/watchos/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/#//apple_ref/doc/uid/20000050-SW11" target="_blank" rel="external">《NSObject官方文档》</a>，排除掉 NSObject 做的事，剩下的就是<code>_objc_msgForward</code>消息转发做的几件事：</p>
+<ol>
+<li><p>调用<code>resolveInstanceMethod:</code>方法 (或 <code>resolveClassMethod:</code>)。允许用户在此时为该 Class 动态添加实现。如果有实现了，则调用并返回YES，那么重新开始<code>objc_msgSend</code>流程。这一次对象会响应这个选择器，一般是因为它已经调用过<code>class_addMethod</code>。如果仍没实现，继续下面的动作。</p>
+</li>
+<li><p>调用<code>forwardingTargetForSelector:</code>方法，尝试找到一个能响应该消息的对象。如果获取到，则直接把消息转发给它，返回非 nil 对象。否则返回 nil ，继续下面的动作。注意，这里不要返回 self ，否则会形成死循环。</p>
+</li>
+<li><p>调用<code>methodSignatureForSelector:</code>方法，尝试获得一个方法签名。如果获取不到，则直接调用<code>doesNotRecognizeSelector</code>抛出异常。如果能获取，则返回非nil：创建一个 <code>NSlnvocation</code> 并传给<code>forwardInvocation:</code>。</p>
+</li>
+<li><p>调用<code>forwardInvocation:</code>方法，将第3步获取到的方法签名包装成 Invocation 传入，如何处理就在这里面了，并返回非nil。</p>
+</li>
+<li><p>调用<code>doesNotRecognizeSelector:</code> ，默认的实现是抛出异常。如果第3步没能获得一个方法签名，执行该步骤。</p>
+</li>
+</ol>
+<p><strong>上面前4个方法均是模板方法，开发者可以override，由 runtime 来调用。最常见的实现消息转发：就是重写方法3和4，吞掉一个消息或者代理给其他对象都是没问题的。</strong></p>
+<p>也就是说<code>_objc_msgForward</code>在进行消息转发的过程中会涉及以下这几个方法：</p>
+<ol>
+<li><code>resolveInstanceMethod:</code>方法 (或 <code>resolveClassMethod:</code>)。</li>
+<li><code>forwardingTargetForSelector:</code>方法</li>
+<li><code>methodSignatureForSelector:</code>方法</li>
+<li><code>forwardInvocation:</code>方法</li>
+<li><code>doesNotRecognizeSelector:</code> 方法</li>
+</ol>
+<p>为了能更清晰地理解这些方法的作用，git仓库里也给出了一个Demo，名称叫 <a href="https://github.com/ChenYilong/iOSInterviewQuestions" target="_blank" rel="external">_objc_msgForward_demo</a>,可运行起来看看。</p>
+<h3 id="25-1-下面回答下第二个问题“直接-objc-msgForward调用它将会发生什么？”"><a href="#25-1-下面回答下第二个问题“直接-objc-msgForward调用它将会发生什么？”" class="headerlink" title="25.1 下面回答下第二个问题“直接_objc_msgForward调用它将会发生什么？”"></a>25.1 下面回答下第二个问题“直接<code>_objc_msgForward</code>调用它将会发生什么？”</h3><p>直接调用<code>_objc_msgForward</code>是非常危险的事，如果用不好会直接导致程序Crash，但是如果用得好，能做很多非常酷的事。</p>
+<p>就好像跑酷，干得好，叫“耍酷”，干不好就叫“作死”。</p>
+<p>正如前文所说：</p>
+<blockquote>
+<p><code>_objc_msgForward</code>是 IMP 类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，<code>_objc_msgForward</code>会尝试做消息转发。</p>
+</blockquote>
+<p>如何调用<code>_objc_msgForward</code>？ <code>_objc_msgForward</code>隶属 C 语言，有三个参数 ：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>_objc_msgForward</code>参数</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>所属对象</td>
+<td>id类型</td>
+</tr>
+<tr>
+<td>2</td>
+<td>方法名</td>
+<td>SEL类型</td>
+</tr>
+<tr>
+<td>3</td>
+<td>可变参数</td>
+<td>可变参数类型</td>
+</tr>
+</tbody>
+</table>
+<p>首先了解下如何调用 IMP 类型的方法，IMP类型是如下格式：</p>
+<p>为了直观，我们可以通过如下方式定义一个 IMP类型 ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef void (*voidIMP)(id, SEL, ...)</div></pre></td></tr></table></figure></p>
+<p><strong>一旦调用<code>_objc_msgForward</code>，将跳过查找 IMP 的过程，直接触发“消息转发”，</strong> 如果调用了<code>_objc_msgForward</code>，即使这个对象确实已经实现了这个方法，你也会告诉<code>objc_msgSend</code>：</p>
+<blockquote>
+<p>“我没有在这个对象里找到这个方法的实现”</p>
+</blockquote>
+<p>想象下<code>objc_msgSend</code>会怎么做？通常情况下，下面这张图就是你正常走<code>objc_msgSend</code>过程，和直接调用<code>_objc_msgForward</code>的前后差别：<br><img src="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f7777312e73696e61696d672e636e2f626d6964646c652f363632383731316267773165656378336a6566323367323036343034746b62692e676966.gif" alt=""></p>
+<p>有哪些场景需要直接调用<code>_objc_msgForward</code>？最常见的场景是：你想获取某方法所对应的 <code>NSInvocation</code> 对象。举例说明：</p>
+<p><a href="https://github.com/bang590/JSPatch" target="_blank" rel="external">JSPatch （Github 链接）</a>就是直接调用<code>_objc_msgForward</code>来实现其核心功能的：</p>
+<blockquote>
+<p>JSPatch 以小巧的体积做到了让JS调用/替换任意OC方法，让iOS APP具备热更新的能力。</p>
+</blockquote>
+<p>作者的博文<a href="http://blog.cnbang.net/tech/2808/" target="_blank" rel="external">《JSPatch实现原理详解》</a>详细记录了实现原理，有兴趣可以看下。</p>
+<p>同时 <a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">RAC(ReactiveCocoa)</a> 源码中也用到了该方法。</p>
+<h1 id="26-runtime如何实现weak变量的自动置nil？"><a href="#26-runtime如何实现weak变量的自动置nil？" class="headerlink" title="26 runtime如何实现weak变量的自动置nil？"></a>26 runtime如何实现weak变量的自动置nil？</h1><blockquote>
+<p>runtime 对注册的类，会进行布局，<strong>对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 <code>dealloc</code></strong>。假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。</p>
+</blockquote>
+<p>在<a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8A%EF%BC%89.md" target="_blank" rel="external">上篇</a>中的《runtime 如何实现 weak 属性》有论述。（注：在<a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8A%EF%BC%89.md" target="_blank" rel="external">上篇</a>的《使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？》里给出的“对象的内存销毁时间表”也提到<code>__weak</code>引用的解除时间。）</p>
+<p>我们可以设计一个函数（伪代码）来表示上述机制：</p>
+<p><code>objc_storeWeak(&amp;a, b)</code>函数：</p>
+<p><strong><code>objc_storeWeak</code>函数把第二个参数–赋值对象（b）的内存地址作为键值key，将第一个参数–weak修饰的属性变量（a）的内存地址（&amp;a）作为value，注册到 weak 表中。如果第二个参数（b）为0（nil），那么把变量（a）的内存地址（&amp;a）从weak表中删除，</strong> 你可以把<code>objc_storeWeak(&amp;a, b)</code>理解为：<code>objc_storeWeak(value, key)</code>，并且当key变nil，将value置nil。</p>
+<ol>
+<li><p>在b非nil时，a和b指向同一个内存地址，在b变nil时，a变nil。此时向a发送消息不会崩溃：在Objective-C中向nil发送消息是安全的。</p>
+</li>
+<li><p>而如果a是由assign修饰的，则： 在b非nil时，a和b指向同一个内存地址，在b变nil时，a还是指向该内存地址，变野指针。此时向a发送消息极易崩溃。</p>
+</li>
+</ol>
+<p>下面我们将基于<code>objc_storeWeak(&amp;a, b)</code>函数，使用伪代码模拟“runtime如何实现weak属性”：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 使用伪代码模拟：runtime如何实现weak属性</div><div class="line"> id obj1;</div><div class="line"> objc_initWeak(&amp;obj1, obj);</div><div class="line">/*obj引用计数变为0，变量作用域结束*/</div><div class="line"> objc_destroyWeak(&amp;obj1);</div></pre></td></tr></table></figure></p>
+<p>下面对用到的两个方法<code>objc_initWeak</code>和<code>objc_destroyWeak</code>做下解释：</p>
+<p>总体说来，作用是： 通过<code>objc_initWeak</code>函数初始化“附有weak修饰符的变量（obj1）”，在变量作用域结束时通过<code>objc_destoryWeak</code>函数释放该变量（obj1）。</p>
+<p>下面分别介绍下方法的内部实现：</p>
+<p><code>objc_initWeak</code>函数的实现是这样的：在将“附有weak修饰符的变量（obj1）”初始化为0（nil）后，会将“赋值对象”（obj）作为参数，调用<code>objc_storeWeak</code>函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">obj1 = 0；</div><div class="line">obj_storeWeak(&amp;obj1, obj);</div></pre></td></tr></table></figure></p>
+<p>也就是说：</p>
+<blockquote>
+<p>weak 修饰的指针默认值是 nil （在Objective-C中向nil发送消息是安全的）</p>
+</blockquote>
+<p>然后<code>obj_destroyWeak</code>函数将0（nil）作为参数，调用<code>objc_storeWeak</code>函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_storeWeak(&amp;obj1, 0);</div></pre></td></tr></table></figure></p>
+<p>前面的源代码与下列源代码相同。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 使用伪代码模拟：runtime如何实现weak属性</div><div class="line"></div><div class="line">id obj1;</div><div class="line">obj1 = 0;</div><div class="line">objc_storeWeak(&amp;obj1, obj);</div><div class="line">/* ... obj的引用计数变为0，被置nil ... */</div><div class="line">objc_storeWeak(&amp;obj1, 0);</div></pre></td></tr></table></figure></p>
+<p><strong><code>objc_storeWeak</code>函数把第二个参数–赋值对象（obj）的内存地址作为键值，将第一个参数–weak修饰的属性变量（obj1）的内存地址注册到 weak 表中。如果第二个参数（obj）为0（nil），那么把变量（obj1）的地址从weak表中删除。</strong></p>
+<h1 id="27-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"><a href="#27-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？" class="headerlink" title="27 能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"></a>27 能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</h1><ol>
+<li>不能向编译后得到的类中增加实例变量；</li>
+<li>能向运行时创建的类中添加实例变量；</li>
+</ol>
+<p>解释下：</p>
+<ol>
+<li><p>因为编译后的类已经注册在 runtime 中，类结构体中的 <code>objc_ivar_list</code> 实例变量的链表 和 <code>instance_size</code> 实例变量的内存大小已经确定，同时runtime 会调用 <code>class_setIvarLayout</code> 或 <code>class_setWeakIvarLayout</code> 来处理 strong、 weak 引用。所以不能向存在的类中添加实例变量；</p>
+</li>
+<li><p>运行时创建的类是可以添加实例变量，调用 <code>class_addIvar</code> 函数。但是得在调用 <code>objc_allocateClassPair</code> 之后，<code>objc_registerClassPair</code> 之前，原因同上。<br>即在运行时创建的类添加实例变量的代码格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">objc_allocateClassPair</div><div class="line">//class_addIvar</div><div class="line">objc_registerClassPair</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="28-runloop和线程有什么关系？"><a href="#28-runloop和线程有什么关系？" class="headerlink" title="28 runloop和线程有什么关系？"></a>28 runloop和线程有什么关系？</h1><p>总的说来，Run loop，正如其名，loop表示某种循环，和run放在一起就表示一直在运行着的循环。实际上，run loop和线程是紧密相连的，可以这样说run loop是为了线程而生，没有线程，它就没有存在的必要。<strong>Run loops是线程的基础架构部分， Cocoa 和 CoreFundation 都提供了 run loop 对象方便配置和管理线程的 run loop</strong>（以下都以 Cocoa 为例）。每个线程，包括程序的主线程（ main thread ）都有与之相应的 run loop 对象。</p>
+<p><strong>runloop 和线程的关系：</strong></p>
+<ul>
+<li>1、 主线程的run loop默认是启动的。<br>iOS的应用程序里面，程序启动后会有一个如下的main()函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char * argv[]) &#123;</div><div class="line">   @autoreleasepool &#123;</div><div class="line">       return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>重点是<code>UIApplicationMain()</code>函数，这个方法会为main thread设置一个<code>NSRunLoop</code>对象</strong>，这就解释了：为什么我们的应用可以在无人操作的时候休息，需要让它干活的时候又能立马响应。</p>
+<ul>
+<li><p>2、对其它线程来说，run loop默认是没有启动的，如果你需要更多的线程交互则可以手动配置和启动，如果线程只是去执行一个长时间的已确定的任务则不需要。</p>
+</li>
+<li><p>3、在任何一个 Cocoa 程序的线程中，都可以通过以下代码来获取到当前线程的 run loop 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSRunLoop *runloop = [NSRunLoop currentRunLoop];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参考链接：<a href="http://blog.csdn.net/wzzvictory/article/details/9237973" target="_blank" rel="external">《Objective-C之run loop详解》</a>。</p>
+<h1 id="29-runloop的mode作用是什么？"><a href="#29-runloop的mode作用是什么？" class="headerlink" title="29 runloop的mode作用是什么？"></a>29 runloop的mode作用是什么？</h1><p>mode 主要是用来指定事件在运行循环中的优先级的，分为：</p>
+<ol>
+<li><code>NSDefaultRunLoopMode</code>（<code>kCFRunLoopDefaultMode</code>）：默认，空闲状态</li>
+<li><code>UITrackingRunLoopMode</code>：ScrollView滑动时</li>
+<li><code>UIInitializationRunLoopMode</code>：启动时</li>
+<li><code>NSRunLoopCommonModes</code>（<code>kCFRunLoopCommonModes</code>）：Mode集合</li>
+</ol>
+<p>苹果公开提供的 Mode 有两个：</p>
+<ol>
+<li><code>NSDefaultRunLoopMode</code>（<code>kCFRunLoopDefaultMode</code>）</li>
+<li><code>NSRunLoopCommonModes</code>（<code>kCFRunLoopCommonModes</code>）</li>
+</ol>
+<h1 id="30-以-scheduledTimerWithTimeInterval-的方式触发的timer，在滑动页面上的列表时，timer会暂定回调，为什么？如何解决？"><a href="#30-以-scheduledTimerWithTimeInterval-的方式触发的timer，在滑动页面上的列表时，timer会暂定回调，为什么？如何解决？" class="headerlink" title="30 以+ scheduledTimerWithTimeInterval:...的方式触发的timer，在滑动页面上的列表时，timer会暂定回调，为什么？如何解决？"></a>30 以<code>+ scheduledTimerWithTimeInterval:...</code>的方式触发的timer，在滑动页面上的列表时，timer会暂定回调，为什么？如何解决？</h1><p><strong>RunLoop只能运行在一种mode下，如果要换mode，当前的loop也需要停下重启成新的。利用这个机制，ScrollView滚动过程中<code>NSDefaultRunLoopMode</code>（<code>kCFRunLoopDefaultMode</code>）的mode会切换到<code>UITrackingRunLoopMode</code>来保证ScrollView的流畅滑动</strong>：只能在<code>NSDefaultRunLoopMode</code>模式下处理的事件会影响ScrollView的滑动。</p>
+<p><strong>如果我们把一个<code>NSTimer</code>对象以<code>NSDefaultRunLoopMode</code>（<code>kCFRunLoopDefaultMode</code>）添加到主运行循环中的时候, ScrollView滚动过程中会因为mode的切换，而导致<code>NSTimer</code>将不再被调度。</strong></p>
+<p>同时因为mode还是可定制的，所以：</p>
+<p><strong>Timer计时会被scrollView的滑动影响的问题可以通过将timer添加到<code>NSRunLoopCommonModes</code>（<code>kCFRunLoopCommonModes</code>）来解决。</strong> 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//将timer添加到NSDefaultRunLoopMode中</div><div class="line">NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0</div><div class="line">                                                      target:self</div><div class="line">                                                    selector:@selector(timerTick:)</div><div class="line">                                                    userInfo:nil</div><div class="line">                                                     repeats:YES];</div><div class="line">                                                     //然后再添加到NSRunLoopCommonModes里</div><div class="line">[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];</div></pre></td></tr></table></figure></p>
+<h1 id="31-猜想runloop内部是如何实现的？"><a href="#31-猜想runloop内部是如何实现的？" class="headerlink" title="31 猜想runloop内部是如何实现的？"></a>31 猜想runloop内部是如何实现的？</h1><blockquote>
+<p>一般来讲，一个线程一次只能执行一个任务，执行完成后线程就会退出。如果我们需要一个机制，让线程能随时处理事件但并不退出，通常的代码逻辑 是这样的：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function loop() &#123;</div><div class="line">    initialize();</div><div class="line">    do &#123;</div><div class="line">        var message = get_next_message();</div><div class="line">        process_message(message);</div><div class="line">    &#125; while (message != quit);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>或使用伪代码来展示下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char * argv[]) &#123;</div><div class="line"> //程序一直运行状态</div><div class="line"> while (AppIsRunning) &#123;</div><div class="line">      //睡眠状态，等待唤醒事件</div><div class="line">      id whoWakesMe = SleepForWakingUp();</div><div class="line">      //得到唤醒事件</div><div class="line">      id event = GetEvent(whoWakesMe);</div><div class="line">      //开始处理事件</div><div class="line">      HandleEvent(event);</div><div class="line"> &#125;</div><div class="line"> return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>参考链接：</p>
+<ol>
+<li><a href="http://blog.ibireme.com/2015/05/18/runloop/#base" target="_blank" rel="external">《深入理解RunLoop》</a></li>
+<li>摘自博文<a href="https://github.com/ming1016/study/wiki/CFRunLoop" target="_blank" rel="external">CFRunLoop</a>，原作者是<a href="http://weibo.com/u/1364395395" target="_blank" rel="external">微博@我就叫Sunny怎么了</a></li>
+</ol>
+<h1 id="32-objc使用什么机制管理对象内存？"><a href="#32-objc使用什么机制管理对象内存？" class="headerlink" title="32 objc使用什么机制管理对象内存？"></a>32 objc使用什么机制管理对象内存？</h1><p>通过 retainCount 的机制来决定对象是否需要释放。 每次 runloop 的时候，都会检查对象的 retainCount，如果retainCount 为 0，说明该对象没有地方需要继续使用了，可以释放掉了。</p>
+<h1 id="33-ARC通过什么方式帮助开发者管理内存？"><a href="#33-ARC通过什么方式帮助开发者管理内存？" class="headerlink" title="33 ARC通过什么方式帮助开发者管理内存？"></a>33 ARC通过什么方式帮助开发者管理内存？</h1><p>ARC相对于MRC，不是在编译时添加retain/release/autorelease这么简单。应该是编译期和运行期两部分共同帮助开发者管理内存。</p>
+<p>在编译期，ARC用的是更底层的C接口实现的retain/release/autorelease，这样做性能更好，也是为什么不能在ARC环境下手动retain/release/autorelease，同时对同一上下文的同一对象的成对retain/release操作进行优化（即忽略掉不必要的操作）；ARC也包含运行期组件，这个地方做的优化比较复杂，但也不能被忽略。【TODO:后续更新会详细描述下】</p>
+<h1 id="34-不手动指定autoreleasepool的前提下，一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）"><a href="#34-不手动指定autoreleasepool的前提下，一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）" class="headerlink" title="34 不手动指定autoreleasepool的前提下，一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）"></a>34 不手动指定<code>autoreleasepool</code>的前提下，一个<code>autorealese</code>对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）</h1><p>分两种情况：手动干预释放时机、系统自动去释放。</p>
+<ol>
+<li>手动干预释放时机–指定autoreleasepool 就是所谓的：当前作用域大括号结束时释放。</li>
+<li>系统自动去释放–<strong>不手动指定autoreleasepool<br>Autorelease对象出了作用域之后，会被添加到最近一次创建的自动释放池中，并会在当前的 runloop 迭代结束时释放</strong>。</li>
+</ol>
+<p>释放的时机总结起来，可以用下图来表示：<br><img src="/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/687474703a2f2f6936312e74696e797069632e636f6d2f32386b6f6477702e6a7067.png" alt=""></p>
+<p>下面对这张图进行详细的解释：</p>
+<p>从程序启动到加载完成是一个完整的运行循环，然后会停下来，等待用户交互，用户的每一次交互都会启动一次运行循环，来处理用户所有的点击事件、触摸事件。</p>
+<p>我们都知道： <strong>所有 autorelease 的对象，在出了作用域之后，会被自动添加到最近创建的自动释放池中。</strong></p>
+<p>但是如果每次都放进应用程序的 <code>main.m</code> 中的 autoreleasepool 中，迟早有被撑满的一刻。这个过程中必定有一个释放的动作。何时？<strong>在一次完整的运行循环结束之前，会被销毁。</strong></p>
+<p>那什么时间会创建自动释放池？<strong>运行循环检测到事件并启动后，就会创建自动释放池。</strong></p>
+<p><font color="brown">子线程的 runloop 默认是不工作，无法主动创建，必须手动创建。<font></font></font></p>
+<p><font color="brown">自定义的 <code>NSOperation</code> 和 <code>NSThread</code> 需要手动创建自动释放池<font>。比如： <strong><u>自定义的 NSOperation 类中的 main 方法里就必须添加自动释放池。否则出了作用域后，自动释放对象会因为没有自动释放池去处理它，而造成内存泄露。</u></strong></font></font></p>
+<p><strong>但对于 blockOperation 和 invocationOperation 这种默认的Operation ，系统已经帮我们封装好了，不需要手动创建自动释放池。</strong></p>
+<p><code>@autoreleasepool</code> 当自动释放池被销毁或者耗尽时，会向自动释放池中的所有对象发送 <code>release</code> 消息，释放自动释放池中的所有对象。</p>
+<p>如果在一个vc的viewDidLoad中创建一个 Autorelease对象，那么该对象会在 viewDidAppear 方法执行前就被销毁了。</p>
+<p>参考链接：《黑幕背后的Autorelease》</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://univer2012.github.io/2017/12/14/42《招聘一个靠谱的iOS》面试题参考答案-下/" data-title="42《招聘一个靠谱的iOS》面试题参考答案(下) | SengolnHuang&#39;s blog" data-tsina="2669931682" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/12/14/41Clang编译器编译运行Objective-C代码/" title="41Clang编译器编译运行OC代码和重写观察Runtime源码">
+  <strong>上一篇：</strong><br/>
+  <span>
+  41Clang编译器编译运行OC代码和重写观察Runtime源码</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/12/14/43iOS全局禁止横屏-但UIWebView全屏横屏播放视频的解决方法/"  title="43iOS全局禁止横屏,但UIWebView全屏横屏播放视频的解决方法">
+ <strong>下一篇：</strong><br/> 
+ <span>43iOS全局禁止横屏,但UIWebView全屏横屏播放视频的解决方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#25-objc-msgForward函数是做什么的，直接调用它将会发生什么？"><span class="toc-number">1.</span> <span class="toc-text">25 _objc_msgForward函数是做什么的，直接调用它将会发生什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#25-1-下面回答下第二个问题“直接-objc-msgForward调用它将会发生什么？”"><span class="toc-number">1.0.1.</span> <span class="toc-text">25.1 下面回答下第二个问题“直接_objc_msgForward调用它将会发生什么？”</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#26-runtime如何实现weak变量的自动置nil？"><span class="toc-number">2.</span> <span class="toc-text">26 runtime如何实现weak变量的自动置nil？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#27-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"><span class="toc-number">3.</span> <span class="toc-text">27 能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#28-runloop和线程有什么关系？"><span class="toc-number">4.</span> <span class="toc-text">28 runloop和线程有什么关系？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#29-runloop的mode作用是什么？"><span class="toc-number">5.</span> <span class="toc-text">29 runloop的mode作用是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#30-以-scheduledTimerWithTimeInterval-的方式触发的timer，在滑动页面上的列表时，timer会暂定回调，为什么？如何解决？"><span class="toc-number">6.</span> <span class="toc-text">30 以+ scheduledTimerWithTimeInterval:...的方式触发的timer，在滑动页面上的列表时，timer会暂定回调，为什么？如何解决？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#31-猜想runloop内部是如何实现的？"><span class="toc-number">7.</span> <span class="toc-text">31 猜想runloop内部是如何实现的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#32-objc使用什么机制管理对象内存？"><span class="toc-number">8.</span> <span class="toc-text">32 objc使用什么机制管理对象内存？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#33-ARC通过什么方式帮助开发者管理内存？"><span class="toc-number">9.</span> <span class="toc-text">33 ARC通过什么方式帮助开发者管理内存？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#34-不手动指定autoreleasepool的前提下，一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）"><span class="toc-number">10.</span> <span class="toc-text">34 不手动指定autoreleasepool的前提下，一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="univer2012" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/如何搭建个人博客/" title="如何搭建个人博客">如何搭建个人博客<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/thinkive/" title="thinkive">thinkive<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2669931682&verifier=d0f169f2&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,我是黄胜军(@Univer-V)，一名来自中国深圳的iOS开发者。就职于思迪。 <br/>
+			正在通往自由的路上。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2669931682" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/univer2012" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1054880335@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="黄胜军">黄胜军</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'sengoln';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?62f484087b8a447efc5e7dbbc18aff7d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
